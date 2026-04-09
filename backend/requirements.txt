@@ -1,0 +1,24 @@
+asgiref==3.11.0
+Django==6.0.1
+djangorestframework==3.16.1
+djangorestframework_simplejwt==5.5.1
+numpy==2.4.1
+pandas==2.3.3
+PyJWT==2.12.1
+python-dateutil==2.9.0.post0
+python-dotenv==1.2.1
+pytz==2025.2
+six==1.17.0
+sqlparse==0.5.5
+tzdata==2025.3
+scikit-learn==1.6.1
+Faker==25.8.0
+
+# Allow front-end dev server to call the API
+django-cors-headers==4.0.0
+
+# For Argon2 password hashing support
+argon2-cffi==23.1.0
+
+# PostgreSQL database adapter
+psycopg2-binary==2.9.10
