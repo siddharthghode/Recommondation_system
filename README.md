@@ -44,7 +44,9 @@ npm run dev
 Open `http://localhost:5173`
 
 ---
-
+## one file start(backend+frontend) //important do this setup after both backend/frontend setup 
+chmod +x start.sh
+./start.sh
 ## Demo Credentials
 
 | Role | Username | Password |
