@@ -1,2 +1,1 @@
-import LibrarianDashboard from '../components/dashboard/LibrarianDashboard.jsx';
-export default LibrarianDashboard;
+export { default } from '../components/dashboard/LibrarianDashboard.jsx';

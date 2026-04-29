@@ -72,15 +72,37 @@ class MeView(APIView):
         return Response(serializer.data)
 
     def put(self, request):
-        # allow students to update profile fields such as preferred_categories
         user = request.user
-        if not hasattr(user, 'profile'):
-            return Response({'detail': 'Profile not found'}, status=404)
 
-        preferred = request.data.get('preferred_categories')
-        if preferred is not None:
-            user.profile.preferred_categories = preferred
-            user.profile.save()
+        # Update User model fields
+        for field in ('first_name', 'last_name', 'email'):
+            if field in request.data:
+                setattr(user, field, request.data[field])
+        user.save()
+
+        # Update UserProfile fields
+        if hasattr(user, 'profile'):
+            profile = user.profile
+            if 'preferred_categories' in request.data:
+                profile.preferred_categories = request.data['preferred_categories']
+            if 'department' in request.data:
+                from .models import Department
+                dept_name = request.data['department']
+                if dept_name:
+                    dept, _ = Department.objects.get_or_create(name=dept_name)
+                    profile.department = dept
+                else:
+                    profile.department = None
+            if 'year' in request.data:
+                profile.year = request.data['year'] or None
+            if 'student_id' in request.data:
+                profile.student_id = request.data['student_id']
+            profile.save()
+
+        # Re-fetch from DB so serializer reflects saved state
+        user.refresh_from_db()
+        if hasattr(user, 'profile'):
+            user.profile.refresh_from_db()
 
         serializer = UserSerializer(user)
         return Response(serializer.data)

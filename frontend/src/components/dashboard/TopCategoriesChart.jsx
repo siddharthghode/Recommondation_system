@@ -31,6 +31,12 @@ const CustomTooltip = ({
   ] });
 };
 function TopCategoriesChart({ data }) {
+  // API returns {category, count} — map to chart keys
+  const chartData = (data || []).map(d => ({
+    category_name: d.category ?? d.category_name ?? "",
+    borrow_count: d.count ?? d.borrow_count ?? 0,
+    available_count: d.available_count ?? 0,
+  }));
   return /* @__PURE__ */ jsxs("div", { className: "bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col h-full", children: [
     /* @__PURE__ */ jsxs("div", { className: "mb-5", children: [
       /* @__PURE__ */ jsx("h2", { className: "text-sm font-bold text-slate-800", children: "Top Categories" }),
@@ -39,7 +45,7 @@ function TopCategoriesChart({ data }) {
     /* @__PURE__ */ jsx("div", { className: "flex-1 min-h-0", children: /* @__PURE__ */ jsx(ResponsiveContainer, { width: "100%", height: "100%", children: /* @__PURE__ */ jsxs(
       BarChart,
       {
-        data,
+        data: chartData,
         margin: { top: 4, right: 4, left: -20, bottom: 0 },
         barCategoryGap: "30%",
         barGap: 3,

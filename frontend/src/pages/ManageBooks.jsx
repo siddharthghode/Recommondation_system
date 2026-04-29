@@ -41,21 +41,19 @@ export default function ManageBooks() {
   const loadBooks = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${BASE_URL}/books/`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (!res.ok) throw new Error('Failed to load books');
-      const data = await res.json();
-      let filteredBooks = Array.isArray(data) ? data : (data.results || []);
-      
-      // Apply filter
-      if (filter === 'in_stock') {
-        filteredBooks = filteredBooks.filter(b => (b.quantity || 0) > 0);
-      } else if (filter === 'out_of_stock') {
-        filteredBooks = filteredBooks.filter(b => (b.quantity || 0) === 0);
+      let allBooks = [];
+      let url = `${BASE_URL}/books/?page_size=100`;
+      while (url) {
+        const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+        if (!res.ok) throw new Error('Failed to load books');
+        const data = await res.json();
+        const results = Array.isArray(data) ? data : (data.results || []);
+        allBooks = [...allBooks, ...results];
+        url = data.next || null;
       }
-      
-      setBooks(filteredBooks);
+      if (filter === 'in_stock') allBooks = allBooks.filter(b => (b.quantity || 0) > 0);
+      else if (filter === 'out_of_stock') allBooks = allBooks.filter(b => (b.quantity || 0) === 0);
+      setBooks(allBooks);
     } catch (err) {
       console.error(err);
       setToast({ open: true, message: 'Failed to load books', type: 'error' });

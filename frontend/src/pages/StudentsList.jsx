@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 import { getStudents, getStudentBorrows, getStudentAnalytics } from "../services/api";
-import { getConversation, sendMessage } from "../services/messaging";
 import Toast from "../components/Toast";
 
 export default function StudentsList() {
@@ -16,11 +15,6 @@ export default function StudentsList() {
   const [activeTab, setActiveTab] = useState('borrows'); // 'borrows', 'analytics', or 'messages'
   const [toast, setToast] = useState({ open: false, message: '', type: 'info' });
   const [searchQuery, setSearchQuery] = useState('');
-  const [conversationMessages, setConversationMessages] = useState([]);
-  const [conversationLoading, setConversationLoading] = useState(false);
-  const [messageSubject, setMessageSubject] = useState('');
-  const [messageBody, setMessageBody] = useState('');
-  const [sending, setSending] = useState(false);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -77,46 +71,8 @@ export default function StudentsList() {
     setActiveTab('borrows');
     loadStudentBorrows(student.id);
     loadStudentAnalytics(student.id);
-    loadStudentConversation(student.id);
-    setMessageSubject('');
-    setMessageBody('');
   };
 
-  const loadStudentConversation = async (studentId) => {
-    try {
-      setConversationLoading(true);
-      const data = await getConversation(token, studentId);
-      setConversationMessages(Array.isArray(data) ? data : []);
-    } catch (err) {
-      console.error('Failed to load conversation:', err);
-      setConversationMessages([]);
-      setToast({ open: true, message: 'Failed to load conversation', type: 'error' });
-    } finally {
-      setConversationLoading(false);
-    }
-  };
-
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (!selectedStudent?.id || !messageBody.trim()) {
-      setToast({ open: true, message: 'Please enter a message', type: 'error' });
-      return;
-    }
-
-    try {
-      setSending(true);
-      await sendMessage(token, selectedStudent.id, messageSubject, messageBody.trim());
-      setMessageSubject('');
-      setMessageBody('');
-      await loadStudentConversation(selectedStudent.id);
-      setToast({ open: true, message: 'Message sent', type: 'success' });
-    } catch (err) {
-      console.error('Failed to send message:', err);
-      setToast({ open: true, message: 'Failed to send message', type: 'error' });
-    } finally {
-      setSending(false);
-    }
-  };
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -302,16 +258,6 @@ export default function StudentsList() {
                       }`}
                     >
                       📊 Analytics
-                    </button>
-                    <button
-                      onClick={() => setActiveTab('messages')}
-                      className={`px-4 py-2 font-semibold transition-colors ${
-                        activeTab === 'messages'
-                          ? 'text-blue-600 border-b-2 border-blue-600 -mb-0.5'
-                          : 'text-gray-600 hover:text-gray-800'
-                      }`}
-                    >
-                      💬 Messages
                     </button>
                   </div>
 
@@ -548,86 +494,6 @@ export default function StudentsList() {
                   <p className="text-gray-600">Failed to load analytics</p>
                 </div>
               )
-            ) : activeTab === 'messages' ? (
-              <div className="space-y-6">
-                {/* Conversation */}
-                <div className="border-2 border-gray-100 rounded-lg">
-                  <div className="px-4 py-3 border-b border-gray-100 bg-gray-50">
-                    <h4 className="font-semibold text-gray-800">Conversation</h4>
-                  </div>
-                  {conversationLoading ? (
-                    <div className="flex items-center justify-center py-10">
-                      <div className="text-center">
-                        <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
-                        <p className="mt-3 text-gray-600">Loading conversation...</p>
-                      </div>
-                    </div>
-                  ) : conversationMessages.length === 0 ? (
-                    <div className="text-center py-10">
-                      <p className="text-gray-600">No messages yet</p>
-                      <p className="text-gray-500 text-sm mt-1">Start a conversation with this student</p>
-                    </div>
-                  ) : (
-                    <div className="p-4 max-h-[420px] overflow-y-auto space-y-3">
-                      {conversationMessages.map((msg) => {
-                        const isStudent = msg.sender === selectedStudent?.id;
-                        return (
-                          <div key={msg.id} className={`flex ${isStudent ? 'justify-start' : 'justify-end'}`}>
-                            <div className={`max-w-[70%] rounded-lg px-4 py-3 ${
-                              isStudent ? 'bg-gray-100 text-gray-900' : 'bg-blue-600 text-white'
-                            }`}>
-                              {msg.subject && (
-                                <p className="font-semibold mb-1">{msg.subject}</p>
-                              )}
-                              <p className="whitespace-pre-wrap">{msg.body}</p>
-                              <p className={`text-xs mt-2 ${isStudent ? 'text-gray-500' : 'text-blue-100'}`}>
-                                {formatDate(msg.created_at)}
-                              </p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-
-                {/* Send Message */}
-                <div className="border-2 border-gray-100 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-800 mb-3">Send Message</h4>
-                  <form onSubmit={handleSendMessage} className="space-y-3">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Subject (optional)</label>
-                      <input
-                        type="text"
-                        value={messageSubject}
-                        onChange={(e) => setMessageSubject(e.target.value)}
-                        placeholder="Enter subject..."
-                        className="w-full border-2 border-gray-200 rounded-lg px-3 py-2 text-sm text-black focus:border-blue-500 focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
-                      <textarea
-                        value={messageBody}
-                        onChange={(e) => setMessageBody(e.target.value)}
-                        rows={4}
-                        placeholder="Type your message..."
-                        className="w-full border-2 border-gray-200 rounded-lg px-3 py-2 text-sm text-black focus:border-blue-500 focus:outline-none resize-none"
-                        required
-                      />
-                    </div>
-                    <div className="flex justify-end">
-                      <button
-                        type="submit"
-                        disabled={sending}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-                      >
-                        {sending ? 'Sending...' : 'Send'}
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
             ) : null}
           </div>
         )}

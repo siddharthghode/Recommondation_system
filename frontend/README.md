@@ -43,7 +43,7 @@ Change this for staging or production deployments.
 
 | Role | Username | Password |
 |------|----------|----------|
-| Student | `student1` | `test1234` |
+| Student | `aarav_sharma` | `test1234` |
 | Librarian | `librarian_cs` | `test1234` |
 | Admin | `admin` | `admin123` |
 
@@ -61,7 +61,6 @@ Change this for staging or production deployments.
 | `/account` | `AccountDetails` | authenticated |
 | `/recommendations` | `Recommendations` | authenticated |
 | `/my-borrows` | `MyBorrows` | student only |
-| `/messages` | `Messages` | authenticated |
 | `/librarian` | `LibrarianDashboard` | librarian only |
 | `/librarian/books` | `ManageBooks` | librarian only |
 | `/librarian/students` | `StudentsList` | librarian only |
@@ -69,7 +68,7 @@ Change this for staging or production deployments.
 | `/admin/books` | `AdminBooks` | admin only |
 | `/admin/students` | `AdminStudents` | admin only |
 
-Route access is enforced by `ProtectedRoute`, which accepts an optional `role` prop (`"student"`, `"librarian"`, `"admin"`). All route transitions are animated via `PageTransition` (Framer Motion).
+Route access is enforced by `ProtectedRoute`. Admins bypass all role checks and can access every route. Authenticated users hitting an unauthorised route are redirected to their own home (`ROLE_HOME`) rather than `/login`.
 
 ---
 
@@ -77,16 +76,16 @@ Route access is enforced by `ProtectedRoute`, which accepts an optional `role` p
 
 | Page | Description |
 |------|-------------|
-| `Home` | Landing page with dynamic CMS content (`/api/pages/home/`) |
+| `Home` | Landing page |
 | `AboutUs` | Static about page |
-| `Gallery` | Image gallery with lightbox |
-| `Books` | Book catalogue with search, category filter, and pagination |
-| `Login` | JWT login (username trimmed automatically before submit) |
-| `AccountDetails` | View and update profile, preferred categories |
-| `Recommendations` | Personalised recommendations (hybrid/content/interaction) |
-| `MyBorrows` | Student's borrow history with status tracking |
-| `Messages` | In-app messaging |
-| `LibrarianDashboard` | Department-scoped stats, pending borrows, approve/reject |
+| `Gallery` | Image gallery |
+| `Books` | Book catalogue — search, category filter, pagination (20/page, 6k+ books) |
+| `Login` | JWT login + student registration; loading spinner on submit; role-based redirect |
+| `AccountDetails` | View/edit profile (name, email, dept dropdown, year, student ID); borrow stats; hybrid recommendations |
+| `Recommendations` | Personalised recommendations (hybrid/content/interaction tabs) |
+| `MyBorrows` | Student borrow history with status badges |
+| `Messages` | ~~Removed~~ | ~~authenticated~~ | Removed |
+| `LibrarianDashboard` | Action-first: pending requests table with inline approve/reject, stat cards, borrow trend chart, top books, students list |
 | `ManageBooks` | Librarian book management (create, update, delete) |
 | `StudentsList` | Librarian view of department students |
 | `AdminDashboard` | Global borrow management and system stats |
@@ -95,48 +94,47 @@ Route access is enforced by `ProtectedRoute`, which accepts an optional `role` p
 
 ---
 
-## Components
+## Key Components
 
 | Component | Description |
 |-----------|-------------|
-| `Navbar` | Top navigation bar with user menu and notification bell |
-| `Sidebar` | Side navigation (role-aware links) |
-| `ProtectedRoute` | Auth + role guard; redirects to `/login` if unauthorised |
+| `ProtectedRoute` | Auth + role guard. Uses `useState` + `storage` event listener for cross-tab logout sync. Admins bypass all role checks. |
 | `PageTransition` | Framer Motion wrapper for animated route transitions |
 | `BookCard` | Book thumbnail card used in catalogue and recommendation lists |
-| `BookDetail` | Modal showing full book info + "Because You Read…" similar books |
-| `BooksList` | Virtualised list of books (react-window) |
-| `BookListItem` | Single row in the virtualised list |
-| `InterestSelector` | Onboarding modal for new students to pick preferred categories |
+| `BookDetail` | Side-panel / modal with full book info, borrow button, and dwell-time tracking |
+| `BooksList` | Paginated book list with `loading: true` initial state (prevents flash of empty content) |
+| `Navbar` | Top navigation with user menu and notification bell |
 | `Notifications` | Dropdown notification panel with mark-read support |
-| `Layout` | Shared page wrapper (Navbar + content area) |
-| `Lightbox` | Full-screen image viewer for the gallery |
-| `ConfirmModal` | Generic confirmation dialog |
+| `InterestSelector` | Onboarding modal for new students to pick preferred categories |
 | `Loading` | Spinner / skeleton loader |
 | `ErrorMessage` | Inline error display |
-| `Toast` | Transient success/error notification |
+| `Toast` | Transient success/error notification (used in LibrarianDashboard) |
+| `LibrarianDashboard` | Single-file action-first dashboard. Real API data only — no fake fallback for requests. |
 
 ---
 
 ## Service Layer (`src/services/api.js`)
 
-All backend communication is centralised here. Key utilities:
+All backend communication is centralised here.
 
-- `authenticatedFetch(url, options)` — wraps `fetch` with automatic JWT refresh on 401; redirects to `/login` on refresh failure
-- `refreshToken()` — exchanges the stored refresh token for a new access token; clears `localStorage` on failure
+### Key utilities
 
-Function groups:
+- `authenticatedFetch(url, options)` — flat two-step pattern: one initial fetch, one conditional retry after token refresh. Never recurses. Redirects to `/login` on refresh failure.
+- `refreshToken()` — exchanges stored refresh token for new access token; clears `localStorage` on failure.
+- `fetchBooks(params)` — accepts query params, defaults to `page_size=100`.
+
+### Function groups
 
 | Group | Functions |
 |-------|-----------|
 | Auth | `login`, `register`, `refreshToken` |
 | Books | `fetchBooks`, `getSimilarBooks` |
 | Recommendations | `fetchRecommendations` |
-| Interactions | `trackInteraction` |
+| Interactions | `trackInteraction`, `trackDwellTime` |
 | Borrowing | `requestBorrow`, `returnBook`, `getMyBorrows`, `approveBorrow`, `rejectBorrow`, `getBorrowRequests` |
 | Analytics | `fetchLibrarianDashboard`, `getStudents`, `getStudentBorrows`, `getStudentAnalytics` |
 | Notifications | `getNotifications`, `markNotificationRead`, `markAllNotificationsRead` |
-| Messaging | via `authenticatedFetch` to `/api/messages/` |
+| Admin | `getAdminStats`, `getAdminStudents`, `getAdminBooks`, `createBook`, `updateBook`, `deleteBook` |
 
 ---
 
@@ -144,42 +142,63 @@ Function groups:
 
 | Concern | Mechanism |
 |---------|-----------|
-| Auth state | React Context API |
-| Token persistence | `localStorage` (`token`, `refreshToken`, `role`) |
-| Local UI state | `useState` / `useEffect` hooks |
-| URL-driven state | Query params (search, category, page) |
+| Auth state | `localStorage` (`token`, `refreshToken`, `role`) |
+| Cross-tab logout | `window.addEventListener('storage', ...)` in `ProtectedRoute` |
+| Local UI state | `useState` / `useEffect` / `useCallback` hooks |
+| Form pre-fill | Three-layer sync: `loadProfile` → `useEffect([profile])` → `handleReset` |
+| URL-driven state | Query params (search, category, page) in `Books.jsx` |
+
+---
+
+## Known Patterns & Bug Fixes
+
+### `loading: true` initial state (BooksList)
+All list components initialise `loading` as `true` to prevent a flash of "No books found" before the first fetch completes.
+
+### Form state sync (AccountDetails)
+`formData` is populated in three places to handle all edge cases:
+1. Inside `loadProfile()` immediately after the API response
+2. A `useEffect` watching `[profile]` for external profile changes
+3. `handleReset` (Cancel button) restores last-fetched server state
+
+### Department field
+The department input is a `<select>` dropdown (not free text) to ensure only valid `Department` FK values are submitted.
+
+### Token refresh (api.js)
+`authenticatedFetch` uses a flat two-step pattern — never recursive — to prevent infinite refresh loops on persistent 401s.
 
 ---
 
 ## Dependencies
 
 | Package | Version | Purpose |
-|---------|---------|---------|
+|---------|---------|---------| 
 | react | 19.2.0 | UI library |
 | react-dom | 19.2.0 | DOM rendering |
 | react-router-dom | 7.11.0 | Client-side routing |
 | tailwindcss | 4.1.18 | Utility-first CSS |
 | framer-motion | 12.24.10 | Page and component animations |
-| recharts | 3.6.0 | Dashboard charts |
-| lucide-react | 0.562.0 | Icon set |
-| react-window | 2.2.4 | Virtualised list rendering |
-| papaparse | 5.5.3 | CSV parsing (client-side) |
+| recharts | 3.6.0 | Dashboard charts (AreaChart, BarChart) |
+| lucide-react | latest | Icon set |
 
 ---
 
 ## Troubleshooting
 
 **Frontend can't reach the backend**
-- Ensure the backend is running on `http://localhost:8000`
-- Check that `CORS_ALLOWED_ORIGINS` in `backend/book_recommondation/settings.py` includes `http://localhost:5173`
+- Ensure backend is running on `http://localhost:8000`
+- Check `CORS_ALLOWED_ORIGINS` in `settings.py` includes `http://localhost:5173`
 
 **Books page is empty**
-- Confirm books have been imported: `python manage.py import_books`
-- Check the browser network tab for API errors
+- Run: `python manage.py import_books`
+- Check browser network tab for API errors
+
+**Librarian dashboard shows no data**
+- Run: `python manage.py seed_demo` (requires books to be imported first)
 
 **Stale auth / login loop**
 ```js
-// Run in browser console to clear stored tokens
+// Run in browser console
 localStorage.clear()
 ```
 

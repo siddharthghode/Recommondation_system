@@ -6,6 +6,31 @@ import { BASE_URL, getMyBorrows, fetchRecommendations } from "../services/api";
 import BookCard from "../components/BookCard";
 import BookDetail from "../components/BookDetail";
 
+const DEPARTMENTS = [
+  "Electronic Science","Instrumentation Science (USIC)","Mathematics",
+  "Environmental Science","Department of Technology","Zoology","Biotechnology",
+  "Geography","Geology","Physics","Chemistry","Botany",
+  "Atmospheric & Space Sciences","Statistics","Computer Science",
+  "Media & Communication Studies","Microbiology","School of Health Sciences",
+  "School of Energy Studies","Interdisciplinary School of Scientific Computing",
+  "Institute of Bioinformatics & Biotechnology (IBB)","Bioinformatics Center",
+  "Centre for Modeling & Simulation","School of Basic Medical Sciences (SBMS)",
+  "Commerce","Management Science (PUMBA)","Marathi","Hindi","English",
+  "Sanskrit & Prakrit Languages","Pali & Buddhist Studies",
+  "Dr. Babasaheb Ambedkar Studies","Foreign Languages",
+  "Centre for Advanced Study in Sanskrit","Economics","History","Philosophy",
+  "Anthropology","Psychology","Political Science","Sociology",
+  "Defence & Strategic Studies",
+  "Interdisciplinary School (Humanities & Social Sciences)",
+  "Women's Studies Centre","Lifelong Learning & Extension",
+  "Buddhist Studies & Dr. Ambedkar Thoughts","Law",
+  "National Centre of International Security & Defence Analysis (NISDA)",
+  "Centre for Social Science & Humanities (CSSH)","Education & Extension",
+  "Physical Education","Centre for Performing Arts",
+  "Library & Information Science","Communication & Journalism",
+  "Skill Development Center (SDC)",
+];
+
 export default function AccountDetails() {
   const [profile, setProfile] = useState(null);
   const [borrowStats, setBorrowStats] = useState({
@@ -20,6 +45,8 @@ export default function AccountDetails() {
   const [error, setError] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({});
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -45,7 +72,7 @@ export default function AccountDetails() {
         first_name: data.first_name || "",
         last_name: data.last_name || "",
         email: data.email || "",
-        department: data.profile?.department || "",
+        department: data.profile?.department ?? data.department ?? "",
         year: data.profile?.year || "",
         student_id: data.profile?.student_id || "",
       });
@@ -103,7 +130,7 @@ export default function AccountDetails() {
         first_name: profile.first_name || "",
         last_name: profile.last_name || "",
         email: profile.email || "",
-        department: profile.profile?.department || "",
+        department: profile.profile?.department ?? profile.department ?? "",
         year: profile.profile?.year || "",
         student_id: profile.profile?.student_id || "",
       });
@@ -125,15 +152,20 @@ export default function AccountDetails() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    setSaveLoading(true);
+    setSaveSuccess("");
     try {
       setError("");
-      const res = await fetch(`${BASE_URL}/profile/`, {
+      const res = await fetch(`${BASE_URL}/auth/me/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+          email: formData.email,
           department: formData.department,
           year: formData.year ? parseInt(formData.year) : null,
           student_id: formData.student_id,
@@ -145,13 +177,14 @@ export default function AccountDetails() {
         throw new Error(errData.error || errData.detail || "Update failed");
       }
 
-      // Reload profile to reflect changes
       await loadProfile();
-
       setEditMode(false);
-      alert("Profile updated successfully!");
+      setSaveSuccess("Profile updated successfully!");
+      setTimeout(() => setSaveSuccess(""), 3000);
     } catch (err) {
       setError(err.message || "Failed to update profile");
+    } finally {
+      setSaveLoading(false);
     }
   };
 
@@ -207,6 +240,12 @@ export default function AccountDetails() {
             </button>
           )}
         </div>
+
+        {saveSuccess && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {saveSuccess}
+          </div>
+        )}
 
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -273,7 +312,7 @@ export default function AccountDetails() {
                     type="text"
                     value={formData.first_name}
                     onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900"
                   />
                 </div>
                 <div>
@@ -282,7 +321,7 @@ export default function AccountDetails() {
                     type="text"
                     value={formData.last_name}
                     onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
-                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900"
                   />
                 </div>
               </div>
@@ -293,7 +332,7 @@ export default function AccountDetails() {
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                  className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900"
                 />
               </div>
               
@@ -304,17 +343,21 @@ export default function AccountDetails() {
                     type="text"
                     value={formData.student_id}
                     onChange={(e) => setFormData({ ...formData, student_id: e.target.value })}
-                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Department</label>
-                  <input
-                    type="text"
-                    value={formData.department}
+                  <select
+                    value={formData.department || ""}
                     onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
-                  />
+                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900 bg-white"
+                  >
+                    <option value="">Select Department</option>
+                    {DEPARTMENTS.map((dept) => (
+                      <option key={dept} value={dept}>{dept}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
               
@@ -326,24 +369,32 @@ export default function AccountDetails() {
                   max="10"
                   value={formData.year}
                   onChange={(e) => setFormData({ ...formData, year: e.target.value })}
-                  className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                  className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900"
                 />
               </div>
               
               <div className="flex gap-4 pt-4">
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                  disabled={saveLoading}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
-                  Save Changes
+                  {saveLoading && (
+                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                    </svg>
+                  )}
+                  {saveLoading ? "Saving..." : "Save Changes"}
                 </button>
                 <button
                   type="button"
+                  disabled={saveLoading}
                   onClick={() => {
                     handleReset();
                     setEditMode(false);
                   }}
-                  className="bg-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors font-semibold"
+                  className="bg-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors font-semibold disabled:opacity-50"
                 >
                   Cancel
                 </button>

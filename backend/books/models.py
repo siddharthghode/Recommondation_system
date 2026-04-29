@@ -2,21 +2,16 @@ from django.db import models
 from django.conf import settings
 import uuid
 
-try:
-    from django.contrib.postgres.fields import ArrayField
-except Exception:  # pragma: no cover - optional on non-PostgreSQL dev setups
-    ArrayField = None
-
 from accounts.models import Department
 
 User = settings.AUTH_USER_MODEL
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=900,db_index=True)
+    title = models.CharField(max_length=900, db_index=True)
     subtitle = models.CharField(max_length=900, blank=True, null=True)
     authors = models.CharField(max_length=900)
-    categories = models.CharField(max_length=900, blank=True,db_index=True)
+    categories = models.CharField(max_length=900, blank=True, db_index=True)
     description = models.TextField(blank=True)
     published_year = models.IntegerField(null=True, blank=True)
     num_pages = models.IntegerField(null=True, blank=True)
@@ -31,11 +26,7 @@ class Book(models.Model):
         blank=True,
         related_name="books",
     )
-    embedding = (
-        ArrayField(models.FloatField(), null=True, blank=True)
-        if ArrayField
-        else models.JSONField(default=list, blank=True)
-    )
+    embedding = models.JSONField(default=list, blank=True)
 
     def __str__(self):
         return self.title

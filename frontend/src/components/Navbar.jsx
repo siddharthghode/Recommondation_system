@@ -58,18 +58,10 @@ export default function Navbar() {
               <Link to="/my-borrows" className="hover:text-yellow-400 transition-colors">
                 My Borrows
               </Link>
-              <Link to="/messages" className="hover:text-yellow-400 transition-colors">
-                Messages
-              </Link>
               <Link to="/account" className="hover:text-yellow-400 transition-colors">
                 Account
               </Link>
             </>
-          )}
-          {token && role === "librarian" && (
-            <Link to="/messages" className="hover:text-yellow-400 transition-colors">
-              Messages
-            </Link>
           )}
           {token && role === "admin" && (
             <Link to="/admin" className="hover:text-yellow-400 transition-colors">
@@ -158,13 +150,6 @@ export default function Navbar() {
                   My Borrows
                 </Link>
                 <Link 
-                  to="/messages" 
-                  className="px-6 py-3 hover:bg-gray-800 transition-colors min-h-[44px] flex items-center"
-                  onClick={closeMobileMenu}
-                >
-                  Messages
-                </Link>
-                <Link 
                   to="/account" 
                   className="px-6 py-3 hover:bg-gray-800 transition-colors min-h-[44px] flex items-center"
                   onClick={closeMobileMenu}
@@ -172,15 +157,6 @@ export default function Navbar() {
                   Account
                 </Link>
               </>
-            )}
-            {token && role === "librarian" && (
-              <Link 
-                to="/messages" 
-                className="px-6 py-3 hover:bg-gray-800 transition-colors min-h-[44px] flex items-center"
-                onClick={closeMobileMenu}
-              >
-                Messages
-              </Link>
             )}
             {token && role === "admin" && (
               <Link 

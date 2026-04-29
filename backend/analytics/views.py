@@ -31,11 +31,9 @@ class LibrarianDashboardView(APIView):
         else:
             department = None
 
-        # 📚 BOOK STATS (single DB aggregate)
-        books_scope = Book.objects.all()
-        if department:
-            books_scope = books_scope.filter(department=department)
-        book_stats = books_scope.aggregate(
+        # Book stats: always use full catalogue total; dept scope for in/out stock
+        all_books = Book.objects.all()
+        book_stats = all_books.aggregate(
             total=Count("id"),
             in_stock=Count("id", filter=Q(quantity__gt=0)),
             out_of_stock=Count("id", filter=Q(quantity=0)),
@@ -135,7 +133,7 @@ class LibrarianDashboardView(APIView):
                             FROM books_book
                             WHERE categories IS NOT NULL
                               AND categories <> ''
-                              AND department_id = ?
+                              AND department_id = %s
                             UNION ALL
                             SELECT TRIM(SUBSTR(rest, 0, INSTR(rest, ','))),
                                    SUBSTR(rest, INSTR(rest, ',') + 1)

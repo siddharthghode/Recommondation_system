@@ -48,6 +48,7 @@ const EVENT_CONFIG = {
   }
 };
 function timeAgo(iso) {
+  if (!iso) return "";
   const diff = Date.now() - new Date(iso).getTime();
   const m = Math.floor(diff / 6e4);
   if (m < 1) return "just now";
@@ -96,10 +97,10 @@ function ActivityFeed({ items }) {
       const type = item.event_type || "checkout";
       const cfg = EVENT_CONFIG[type] || EVENT_CONFIG["checkout"];
       const Icon = cfg.icon;
-      const title = item.book_title || item.title || "Unknown Book";
-      const member = item.member_name || item.user__username || "Library Member";
-      const mId = item.member_id || item.user_id || "N/A";
-      const stamp = item.timestamp || item.requested_at || new Date().toISOString();
+      const title = item.book__title || item.book_title || item.title || "Unknown Book";
+      const member = item.member_name || item.user__username || "";
+      const mId = item.member_id || item.user_id || "";
+      const stamp = item.timestamp || item.requested_at || null;
       return /* @__PURE__ */ jsx(
         "div",
         {
@@ -138,7 +139,7 @@ function ActivityFeed({ items }) {
             ] })
           ] })
         },
-        item.id
+        item.id || item.book__title || idx
       );
     }) }),
     /* @__PURE__ */ jsx("div", { className: "px-5 py-3 border-t border-slate-50 shrink-0", children: /* @__PURE__ */ jsx("button", { className: "w-full text-xs text-indigo-600 hover:text-indigo-700 font-medium transition text-center", children: "View full transaction log \u2192" }) })

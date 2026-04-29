@@ -3,36 +3,7 @@
 ## Requirements
 
 - Python 3.11+ (developed on 3.13)
-- PostgreSQL 12+ (production database)
-- Virtualenv recommended
-
----
-
-## Database Setup (PostgreSQL)
-
-Before running Django, ensure PostgreSQL is installed and running:
-
-```bash
-# macOS (via Homebrew)
-brew install postgresql@15
-brew services start postgresql@15
-
-# Ubuntu/Debian
-sudo apt-get install postgresql postgresql-contrib
-sudo systemctl start postgresql
-
-# Windows
-# Download and install from https://www.postgresql.org/download/windows/
-```
-
-Create a database and user:
-
-```bash
-createdb library_erp
-createuser library_user
-psql -c "ALTER USER library_user WITH PASSWORD 'StrongPass@123';"
-psql -c "GRANT ALL PRIVILEGES ON DATABASE library_erp TO library_user;"
-```
+- SQLite (built-in, no setup required)
 
 ---
 
@@ -48,21 +19,16 @@ source bookenv/bin/activate          # Windows: bookenv\Scripts\activate
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Configure environment variables
-# Copy/create .env file with PostgreSQL credentials (see Environment Variables section)
-
-# 4. Apply migrations and import books 
+# 3. Apply migrations
 python manage.py migrate
-python manage.py import_books        # imports ~6k books from data/books_6k.csv
 
-# 5. Seed demo data
-python manage.py seed_demo           # creates demo users
-python manage.py ensure_profiles     # creates UserProfile for all students
+# 4. Import book catalogue (~6k books)
+python manage.py import_books        # reads data/books_6k.csv
 
-# 6. (Optional) Generate fake interactions for testing recommendations
-python manage.py seed_interactions   # default: 500 interactions
+# 5. Seed demo data (users + borrow history + interactions)
+python manage.py seed_demo
 
-# 7. Start server
+# 6. Start server
 python manage.py runserver 0.0.0.0:8000
 ```
 
@@ -74,7 +40,16 @@ python manage.py runserver 0.0.0.0:8000
 |----------|----------|------|
 | `admin` | `admin123` | Admin / Superuser |
 | `librarian_cs` | `test1234` | Librarian (CS dept) |
-| `student1` | `test1234` | Student |
+| `aarav_sharma` | `test1234` | Student |
+| `priya_patil` | `test1234` | Student |
+| `rohan_desai` | `test1234` | Student |
+| `sneha_kulkarni` | `test1234` | Student |
+| `vikram_joshi` | `test1234` | Student |
+| `ananya_mehta` | `test1234` | Student |
+| `karan_singh` | `test1234` | Student |
+| `pooja_nair` | `test1234` | Student |
+| `arjun_rao` | `test1234` | Student |
+| `divya_iyer` | `test1234` | Student |
 
 Django admin panel: `http://localhost:8000/admin`
 
@@ -84,39 +59,35 @@ Django admin panel: `http://localhost:8000/admin`
 
 | Command | Description |
 |---------|-------------|
-| `seed_demo` | Creates demo users (admin, librarian, student) |
-| `ensure_profiles` | Creates missing `UserProfile` for all student accounts |
+| `seed_demo` | Creates all demo users, assigns 200 books to CS dept, seeds borrow history (45 records), 5 pending requests, 200 ML interactions |
 | `import_books [path]` | Imports books from CSV; defaults to `data/books_6k.csv` |
-| `seed_interactions [--count N]` | Generates N fake `BookInteraction` records (default: 500) |
+| `seed_interactions [--count N]` | Generates N additional `BookInteraction` records (default: 500) |
+
+### What `seed_demo` creates
+
+- 1 admin, 1 librarian (CS dept), 10 students with real Indian names
+- All students assigned to Computer Science department with student IDs `CS2021001–CS2021010`
+- 200 random books from the catalogue assigned to CS department
+- 45 borrow history records (70% returned, 30% active) spread over last 60 days
+- 5 pending borrow requests (10–300 minutes old) for the librarian dashboard
+- 200 ML interactions (view/like/borrow weighted 65/25/10) for recommendation engine
 
 ---
 
 ## Environment Variables
 
-Create a `.env` file in the `backend/` directory with the following PostgreSQL configuration:
+Create a `.env` file in the `backend/` directory:
 
 ```env
-# Database configuration (required)
-POSTGRES_DB=library_erp
-POSTGRES_USER=library_user
-POSTGRES_PASSWORD=StrongPass@123
-POSTGRES_HOST=127.0.0.1
-POSTGRES_PORT=5432
-
-# Security (required in production)
+# Django security (required in production)
 DJANGO_SECRET_KEY=your-secret-key-here
-JWT_SIGNING_KEY=your-jwt-key-here
+JWT_SIGNING_KEY=your-jwt-signing-key-here
 ```
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `POSTGRES_DB` | library_erp | Database name |
-| `POSTGRES_USER` | library_user | PostgreSQL user |
-| `POSTGRES_PASSWORD` | *(required)* | PostgreSQL password (must be set) |
-| `POSTGRES_HOST` | 127.0.0.1 | PostgreSQL host |
-| `POSTGRES_PORT` | 5432 | PostgreSQL port |
 | `DJANGO_SECRET_KEY` | insecure dev key | **Must be set in production** |
-| `JWT_SIGNING_KEY` | falls back to `SECRET_KEY` | Separate JWT signing key |
+| `JWT_SIGNING_KEY` | falls back to `SECRET_KEY` | Separate JWT signing key (recommended) |
 
 `python-dotenv` loads this file automatically via `load_dotenv()` in `settings.py`.
 
@@ -127,10 +98,10 @@ JWT_SIGNING_KEY=your-jwt-key-here
 | App | Responsibility |
 |-----|---------------|
 | `accounts` | Custom `User` model (student/librarian/admin), `UserProfile`, `Department`, `Notification`; JWT login & register |
-| `books` | Book CRUD, search/filter/pagination, interaction tracking (view/like/borrow), dwell-time recording, recommendation engine |
+| `books` | Book CRUD, search/filter/pagination, interaction tracking (view/like/borrow), dwell-time, TF-IDF recommendation engine |
 | `borrows` | Borrow lifecycle: request → approve/reject → return; atomic stock management with `select_for_update()` |
 | `analytics` | Librarian/admin dashboard stats, per-student borrows and analytics |
-| `messaging` | Inter-user messaging via DRF `ModelViewSet` |
+| `messaging` | ~~Removed~~ — messaging feature has been removed from the project |
 
 ---
 
@@ -144,7 +115,8 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 |--------|----------|------|-------------|
 | `POST` | `/api/auth/register/` | public | Register new student |
 | `POST` | `/api/auth/login/` | public | Login; returns `access`, `refresh`, `role` |
-| `GET/PUT` | `/api/auth/me/` | required | Get or update current user profile |
+| `GET` | `/api/auth/me/` | required | Get current user profile |
+| `PUT` | `/api/auth/me/` | required | Update profile (first_name, last_name, email, department, year, student_id, preferred_categories) |
 | `POST` | `/api/auth/refresh/` | public | Refresh access token |
 | `GET` | `/api/auth/notifications/` | required | List notifications (`?is_read=true/false`) |
 | `POST` | `/api/auth/notifications/mark-read/` | required | Mark one notification read |
@@ -159,16 +131,16 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 | `GET` | `/api/books/<id>/similar/` | public | TF-IDF similar books (cached 10 min) |
 | `GET` | `/api/books/recommendations/` | required | Personalised recommendations (`?type=hybrid\|content\|interaction&limit=N`) |
 | `POST` | `/api/books/track/<id>/` | required | Record a view interaction |
-| `POST` | `/api/books/manage/` | admin/librarian | Create book |
-| `PUT` | `/api/books/manage/<id>/` | admin/librarian | Update book |
-| `DELETE` | `/api/books/manage/<id>/` | admin/librarian | Delete book |
+| `POST` | `/api/books/manage/` | librarian/admin | Create book |
+| `PUT` | `/api/books/manage/<id>/` | librarian/admin | Update book |
+| `DELETE` | `/api/books/manage/<id>/` | librarian/admin | Delete book |
 
 ### Interactions & Dwell-Time
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
 | `POST` | `/api/interactions/` | required | Create `BookInteraction` (`view`, `like`, `borrow`) |
-| `POST` | `/api/dwell-time/` | required | Record time spent on a book page |
+| `POST` | `/api/dwell-time/` | required | Record time spent on a book page (seconds) |
 
 ### Borrows — `/api/borrows/`
 
@@ -177,8 +149,9 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 | `POST` | `/api/borrows/request/` | student | Request to borrow a book |
 | `GET` | `/api/borrows/my/` | required | Current user's borrow history (`?status=`) |
 | `GET` | `/api/borrows/pending/` | librarian/admin | Pending requests (dept-scoped for librarians) |
-| `POST` | `/api/borrows/approve/<id>/` | librarian/admin | Approve; atomically decrements stock |
-| `POST` | `/api/borrows/reject/<id>/` | librarian/admin | Reject with optional reason |
+| `POST` | `/api/borrows/approve/<id>/` | librarian/admin | Approve; atomically decrements stock via `select_for_update()` |
+| `POST` | `/api/borrows/reject/<id>/` | librarian/admin | Reject with optional reason; notifies student |
+| `POST` | `/api/borrows/return/` | student | Return a borrowed book |
 
 ### Analytics — `/api/analytics/`
 
@@ -190,20 +163,13 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 | `GET` | `/api/analytics/students/<id>/borrows/` | librarian/admin | Borrow history for a student |
 | `GET` | `/api/analytics/students/<id>/analytics/` | librarian/admin | Interaction analytics for a student |
 
-### Messaging — `/api/messages/`
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET/POST` | `/api/messages/` | List or send messages |
-| `GET/PUT/DELETE` | `/api/messages/<id>/` | Retrieve, update, or delete a message |
-
----
 
 ## Key Settings (`book_recommondation/settings.py`)
 
 | Setting | Value |
 |---------|-------|
 | `AUTH_USER_MODEL` | `accounts.User` |
+| `DATABASE ENGINE` | `django.db.backends.sqlite3` → `db.sqlite3` |
 | `DEFAULT_AUTHENTICATION_CLASSES` | `JWTAuthentication` |
 | `DEFAULT_PERMISSION_CLASSES` | `IsAuthenticated` |
 | `ACCESS_TOKEN_LIFETIME` | 60 minutes |
@@ -213,28 +179,15 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 
 ---
 
-## Migrations
+## Database Reset
 
-If migration files are missing (fresh clone or reset):
-
-```bash
-python manage.py makemigrations accounts books borrows messaging
-python manage.py migrate
-```
-
-To fully reset the database (PostgreSQL):
+To fully reset and reseed:
 
 ```bash
-# Drop and recreate the database
-dropdb -U library_user library_erp
-createdb -U library_user library_erp
-
-# Reapply all migrations
+rm db.sqlite3
 python manage.py migrate
-
-# Seed with demo data
-python manage.py seed_demo && python manage.py ensure_profiles
 python manage.py import_books
+python manage.py seed_demo
 ```
 
 ---
@@ -242,7 +195,7 @@ python manage.py import_books
 ## Tech Stack
 
 | Package | Version | Purpose |
-|---------|---------|---------|
+|---------|---------|---------| 
 | Django | 6.0.1 | Web framework |
 | djangorestframework | 3.16.1 | REST API |
 | djangorestframework-simplejwt | 5.5.1 | JWT authentication |
@@ -258,12 +211,12 @@ python manage.py import_books
 
 ## Production Checklist
 
-- [ ] Set `DJANGO_SECRET_KEY` to a secure random value in environment
+- [ ] Set `DJANGO_SECRET_KEY` to a secure random value
 - [ ] Set `DEBUG = False`
 - [ ] Set `ALLOWED_HOSTS` to your production domain
 - [ ] Update `CORS_ALLOWED_ORIGINS` to production frontend URL
-- [ ] Switch database to PostgreSQL
+- [ ] Switch `DATABASE` to PostgreSQL + install `psycopg2-binary`
 - [ ] Run `python manage.py collectstatic`
 - [ ] Serve with Gunicorn behind Nginx
 - [ ] Enable HTTPS and set `SECURE_SSL_REDIRECT = True`
-- [ ] Optionally set `JWT_SIGNING_KEY` separately from `SECRET_KEY`
+- [ ] Set `JWT_SIGNING_KEY` separately from `SECRET_KEY`

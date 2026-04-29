@@ -34,7 +34,17 @@ const CustomTooltip = ({
 };
 function BorrowingTrendsChart({ data }) {
   const [view, setView] = useState("area");
-  const avg = Math.round(data.reduce((s, d) => s + d.checkouts, 0) / data.length);
+  // API returns {day, total, returned} — map to chart keys
+  const chartData = (data || []).map(d => ({
+    date: d.day ? String(d.day).slice(5) : "",
+    checkouts: d.total ?? 0,
+    returns: d.returned ?? 0,
+    renewals: 0,
+  }));
+  const safeData = chartData.length > 0 ? chartData : [{ date: "-", checkouts: 0, returns: 0, renewals: 0 }];
+  const avg = Math.round(safeData.reduce((s, d) => s + d.checkouts, 0) / safeData.length);
+  const peak = Math.max(...safeData.map(d => d.checkouts));
+  const totalReturns = safeData.reduce((s, d) => s + d.returns, 0);
   const ChartComponent = view === "area" ? AreaChart : LineChart;
   return /* @__PURE__ */ jsxs("div", { className: "bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col h-full", children: [
     /* @__PURE__ */ jsxs("div", { className: "flex items-start justify-between mb-5", children: [
@@ -55,13 +65,13 @@ function BorrowingTrendsChart({ data }) {
     ] }),
     /* @__PURE__ */ jsx("div", { className: "flex items-center gap-3 mb-4 flex-wrap", children: [
       { label: "Avg Checkouts/day", value: avg, color: "text-indigo-600", bg: "bg-indigo-50" },
-      { label: "Peak", value: Math.max(...data.map((d) => d.checkouts)), color: "text-violet-600", bg: "bg-violet-50" },
-      { label: "Total Returns", value: data.reduce((s, d) => s + d.returns, 0), color: "text-emerald-600", bg: "bg-emerald-50" }
+      { label: "Peak", value: peak, color: "text-violet-600", bg: "bg-violet-50" },
+      { label: "Total Returns", value: totalReturns, color: "text-emerald-600", bg: "bg-emerald-50" }
     ].map((pill) => /* @__PURE__ */ jsxs("div", { className: `flex items-center gap-2 px-3 py-1.5 rounded-full ${pill.bg}`, children: [
       /* @__PURE__ */ jsx("span", { className: `text-sm font-bold ${pill.color}`, children: pill.value }),
       /* @__PURE__ */ jsx("span", { className: "text-[11px] text-slate-500", children: pill.label })
     ] }, pill.label)) }),
-    /* @__PURE__ */ jsx("div", { className: "flex-1 min-h-0", children: /* @__PURE__ */ jsx(ResponsiveContainer, { width: "100%", height: "100%", children: /* @__PURE__ */ jsxs(ChartComponent, { data, margin: { top: 4, right: 4, left: -20, bottom: 0 }, children: [
+    /* @__PURE__ */ jsx("div", { className: "flex-1 min-h-0", children: /* @__PURE__ */ jsx(ResponsiveContainer, { width: "100%", height: "100%", children: /* @__PURE__ */ jsxs(ChartComponent, { data: safeData, margin: { top: 4, right: 4, left: -20, bottom: 0 }, children: [
       /* @__PURE__ */ jsxs("defs", { children: [
         /* @__PURE__ */ jsxs("linearGradient", { id: "gradCheckouts", x1: "0", y1: "0", x2: "0", y2: "1", children: [
           /* @__PURE__ */ jsx("stop", { offset: "5%", stopColor: "#6366f1", stopOpacity: 0.18 }),

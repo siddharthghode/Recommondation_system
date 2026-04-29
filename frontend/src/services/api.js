@@ -35,8 +35,13 @@ export const login = (username, password) =>
     return data;
   });
 
-export const fetchBooks = () =>
-  fetch(`${BASE_URL}/books/`).then(res => res.json());
+export const fetchBooks = (params = {}) => {
+  const query = new URLSearchParams({
+    page_size: 100,
+    ...params,
+  }).toString();
+  return fetch(`${BASE_URL}/books/?${query}`).then(res => res.json());
+};
 
 export const fetchRecommendations = async (token, n = 10, method = "hybrid") => {
   // Add timeout to prevent hanging

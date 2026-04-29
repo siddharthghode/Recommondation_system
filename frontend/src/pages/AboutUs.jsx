@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { getPageContent } from "../services/api";
 import Footer from "../components/Footer";
+import heroBg from "../assets/hero-bg.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
@@ -72,7 +73,7 @@ export default function AboutUs() {
     <>
       {/* Header */}
       <section className="relative pt-32 pb-20 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-400 rounded-full translate-y-1/2 -translate-x-1/2" />
         </div>

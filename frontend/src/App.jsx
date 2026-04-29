@@ -12,7 +12,6 @@ import Login from "./pages/Login";
 import Recommendations from "./pages/Recommendations";
 import MyBorrows from "./pages/MyBorrows";
 import AccountDetails from "./pages/AccountDetails";
-import Messages from "./pages/Messages";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminBooks from "./pages/admin/AdminBooks";
@@ -80,10 +79,6 @@ function RoutesWithAnimation() {
           element={<PageTransition><ProtectedRoute role="student"><MyBorrows /></ProtectedRoute></PageTransition>}
         />
         
-        <Route
-          path="/messages"
-          element={<PageTransition><ProtectedRoute><Messages /></ProtectedRoute></PageTransition>}
-        />
       </Routes>
     </AnimatePresence>
   );

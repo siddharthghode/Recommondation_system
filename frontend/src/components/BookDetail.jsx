@@ -1,9 +1,8 @@
 /* eslint-disable-next-line no-unused-vars */
 import { motion } from 'framer-motion';
-import { trackDwellTime, trackInteraction, requestBorrow, getSimilarBooks } from '../services/api';
+import { trackDwellTime, trackInteraction, requestBorrow } from '../services/api';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BookCard from './BookCard';
 
 const PLACEHOLDER = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=560&fit=crop';
 
@@ -17,7 +16,6 @@ const PLACEHOLDER = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w
 export default function BookDetail({ book, onClose, onSelectBook, variant = "overlay" }) {
   const [borrowing, setBorrowing] = useState(false);
   const [borrowError, setBorrowError] = useState('');
-  const [similarBooks, setSimilarBooks] = useState([]);
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
   const navigate = useNavigate();
@@ -36,7 +34,6 @@ export default function BookDetail({ book, onClose, onSelectBook, variant = "ove
   useEffect(() => {
     if (!book?.id) return;
     if (token) trackInteraction(token, book.id, 'view').catch(() => {});
-    getSimilarBooks(book.id).then(setSimilarBooks).catch(() => {});
   }, [book?.id, token]);
 
   useEffect(() => {
@@ -255,33 +252,6 @@ export default function BookDetail({ book, onClose, onSelectBook, variant = "ove
               </div>
             </div>
 
-            {/* Similar Books */}
-            {similarBooks.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-8 pt-8 border-t border-slate-100 w-full"
-              >
-                <div className="space-y-4 w-full">
-                  <h3 className="text-lg font-extrabold text-slate-900 mb-0 whitespace-normal break-words max-w-full leading-tight">
-                    Because you viewed "{book.title}"…
-                  </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-auto">
-                    {similarBooks.slice(0, 4).map((b) => (
-                      <BookCard
-                        key={b.id}
-                        book={b}
-                        onClick={(nb) => {
-                          onSelectBook?.(nb);
-                        }}
-                        trackView
-                      />
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
           </div>
         </motion.div>
       </div>
