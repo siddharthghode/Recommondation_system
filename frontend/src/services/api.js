@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8000/api";
+export const BASE_URL = "/api";
 
 export const register = (userData) =>
   fetch(`${BASE_URL}/auth/register/`, {

@@ -6,19 +6,92 @@ Complete guide for deploying the Library Management System to production.
 
 ## Table of Contents
 
-1. [Pre-Deployment Checklist](#1-pre-deployment-checklist)
-2. [Backend Deployment](#2-backend-deployment)
-3. [Frontend Deployment](#3-frontend-deployment)
-4. [Database Setup](#4-database-setup)
-5. [Environment Configuration](#5-environment-configuration)
-6. [Security Hardening](#6-security-hardening)
-7. [Monitoring & Logging](#7-monitoring--logging)
-8. [Backup Strategy](#8-backup-strategy)
-9. [Troubleshooting](#9-troubleshooting)
+1. [Docker Deployment](#1-docker-deployment)
+2. [Pre-Deployment Checklist](#2-pre-deployment-checklist)
+3. [Backend Deployment](#3-backend-deployment)
+4. [Frontend Deployment](#4-frontend-deployment)
+5. [Database Setup](#5-database-setup)
+6. [Environment Configuration](#6-environment-configuration)
+7. [Security Hardening](#7-security-hardening)
+8. [Monitoring & Logging](#8-monitoring--logging)
+9. [Backup Strategy](#9-backup-strategy)
+10. [Troubleshooting](#10-troubleshooting)
 
 ---
 
-## 1. Pre-Deployment Checklist
+## 1. Docker Deployment
+
+The fastest way to run the full stack locally or on any server with Docker installed.
+
+### Requirements
+- Docker 24+
+- Docker Compose v2
+
+### Run
+
+```bash
+docker compose up --build
+```
+
+This will:
+1. Start a PostgreSQL 16 container
+2. Build and start the Django backend (auto-runs `migrate`, `import_books`, `seed_demo`)
+3. Build the React frontend and serve it via nginx on port 80
+
+Open `http://localhost`
+
+### Environment variables
+
+All defaults are set in `docker-compose.yml`. Override by creating a `.env` file at the project root:
+
+```env
+DJANGO_SECRET_KEY=your-secret-key
+POSTGRES_DB=library_erp
+POSTGRES_USER=library_user
+POSTGRES_PASSWORD=StrongPass@123
+```
+
+### After first run
+
+Remove the seed commands from `docker-compose.yml` to speed up restarts:
+
+```yaml
+command: >-
+  sh -c "python manage.py migrate &&
+         gunicorn book_recommondation.wsgi:application --bind 0.0.0.0:8000 --workers 2"
+```
+
+### Useful commands
+
+```bash
+# Run in background
+docker compose up -d --build
+
+# View backend logs
+docker compose logs -f backend
+
+# Open Django shell
+docker compose exec backend python manage.py shell
+
+# Stop and remove containers
+docker compose down
+
+# Stop and also delete the database volume
+docker compose down -v
+```
+
+### Container architecture
+
+```
+Browser :80  →  nginx (frontend)
+                  ├── /        → React SPA
+                  └── /api/    → proxy → backend:8000 (gunicorn)
+                                            └── db:5432 (postgres)
+```
+
+---
+
+## 2. Pre-Deployment Checklist
 
 ### Required Infrastructure
 
@@ -38,7 +111,7 @@ Complete guide for deploying the Library Management System to production.
 
 ---
 
-## 2. Backend Deployment
+## 3. Backend Deployment
 
 ### 2.1 Server Setup
 
@@ -305,7 +378,7 @@ sudo certbot renew --dry-run
 
 ---
 
-## 3. Frontend Deployment
+## 4. Frontend Deployment
 
 ### 3.1 Build Configuration
 
@@ -381,7 +454,7 @@ chmod +x /home/library/deploy.sh
 
 ---
 
-## 4. Database Setup
+## 5. Database Setup
 
 ### 4.1 PostgreSQL Configuration
 
@@ -434,7 +507,7 @@ POSTGRES_PORT=6432  # Use PgBouncer port
 
 ---
 
-## 5. Environment Configuration
+## 6. Environment Configuration
 
 ### 5.1 Django Settings for Production
 
@@ -523,7 +596,7 @@ LOGGING = {
 
 ---
 
-## 6. Security Hardening
+## 7. Security Hardening
 
 ### 6.1 Firewall Configuration
 
@@ -595,7 +668,7 @@ grep -n "messaging" backend/book_recommondation/urls.py
 
 ---
 
-## 7. Monitoring & Logging
+## 8. Monitoring & Logging
 
 ### 7.1 Log Rotation
 
@@ -668,7 +741,7 @@ crontab -e
 
 ---
 
-## 8. Backup Strategy
+## 9. Backup Strategy
 
 ### 8.1 Database Backup
 
@@ -711,9 +784,9 @@ gunzip -c /home/library/backups/library_db_YYYYMMDD_HHMMSS.sql.gz | \
 
 ---
 
-## 9. Troubleshooting
+## 10. Troubleshooting
 
-### 9.1 Backend Not Starting
+### 10.1 Backend Not Starting
 
 ```bash
 # Check logs
@@ -728,7 +801,7 @@ source venv/bin/activate
 python manage.py runserver 0.0.0.0:8000
 ```
 
-### 9.2 Database Connection Issues
+### 10.2 Database Connection Issues
 
 ```bash
 # Test connection
@@ -741,7 +814,7 @@ sudo systemctl status postgresql
 sudo tail -f /var/log/postgresql/postgresql-14-main.log
 ```
 
-### 9.3 Static Files Not Loading
+### 10.3 Static Files Not Loading
 
 ```bash
 # Recollect static files
@@ -753,7 +826,7 @@ python manage.py collectstatic --noinput
 sudo chown -R library:library /home/library/app/backend/staticfiles
 ```
 
-### 9.4 CORS Errors
+### 10.4 CORS Errors
 
 Verify in `backend/.env`:
 
@@ -767,7 +840,7 @@ Restart backend:
 sudo systemctl restart library-backend
 ```
 
-### 9.5 SSL Certificate Issues
+### 10.5 SSL Certificate Issues
 
 ```bash
 # Renew certificate
@@ -777,7 +850,7 @@ sudo certbot renew
 sudo certbot certificates
 ```
 
-### 9.6 High Memory Usage
+### 10.6 High Memory Usage
 
 ```bash
 # Check processes
