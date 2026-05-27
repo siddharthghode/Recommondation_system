@@ -11,7 +11,7 @@ A full-stack university library management web app with an intelligent book reco
 | Backend | Django 6.0.1 + Django REST Framework 3.16.1 |
 | Auth | JWT via djangorestframework-simplejwt 5.5.1 |
 | ML | scikit-learn 1.6.1, NumPy 2.4.1, Pandas 2.3.3 |
-| Database | SQLite |
+| Database | PostgreSQL |
 | Frontend | React 19.2.0 + Vite |
 | Routing | React Router 7.11.0 |
 | Styling | Tailwind CSS 4.1.18 |
@@ -21,16 +21,11 @@ A full-stack university library management web app with an intelligent book reco
 ---
 
 ## Quick Start
-
-### Backend
+#### Backend
 ```bash
 cd backend
-python -m venv bookenv && source bookenv/bin/activate   # Windows: bookenv\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py import_books          # imports ~6k books from data/books_6k.csv
-python manage.py seed_demo             # creates users, assigns books to dept, seeds borrows
-python manage.py runserver 0.0.0.0:8000
+chmod +x setup.sh && ./setup.sh
+#this ./setup.sh does all the remaining commands..
 ```
 
 #### Frontend
