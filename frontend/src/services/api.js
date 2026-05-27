@@ -26,9 +26,13 @@ export const login = (username, password) =>
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
   }).then(async res => {
+    const contentType = res.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error(`Server error: ${res.status} ${res.statusText}`);
+    }
     const data = await res.json();
     if (!res.ok) {
-      const error = new Error(data.error || data.detail || "Login failed");
+      const error = new Error(data.detail || data.error || data.non_field_errors?.[0] || "Login failed");
       error.data = data;
       throw error;
     }

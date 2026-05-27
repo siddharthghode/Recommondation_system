@@ -40,12 +40,10 @@
 │   django-cors-headers 4.0.0                                     │
 │   Root URL: /api/...                                            │
 └────────────────────────┬────────────────────────────────────────┘
-                         │  Django ORM (psycopg2-binary)
+                         │  Django ORM (sqlite3)
 ┌────────────────────────▼────────────────────────────────────────┐
 │                      DATA LAYER                                 │
-│   PostgreSQL (ERP-scale)                                        │
-│   django.contrib.postgres enabled (ArrayField, full-text)       │
-│   SQLite used only for local unit tests (testserver)            │
+│   SQLite (db.sqlite3)                                           │
 └─────────────────────────────────────────────────────────────────┘
                          │
 ┌────────────────────────▼────────────────────────────────────────┐
@@ -80,11 +78,11 @@ Browser                  React (Vite)              Django (DRF)           Postgr
 | `messaging` | DRF ViewSet for inter-user messaging |
 | `book_recommondation` | Django project settings, root URL conf |
 
-### Why PostgreSQL for ERP Scale
+### Why SQLite
 
-- `django.contrib.postgres` is explicitly installed, enabling `ArrayField` (used for `Book.embedding`) and PostgreSQL-native full-text search.
-- `select_for_update()` (row-level locking) is a PostgreSQL/MySQL feature — it is **not available on SQLite**, making PostgreSQL a hard architectural requirement for the borrow approval flow.
-- The `ALLOWED_HOSTS` list includes `testserver` (Django test client), which allows SQLite to be used in automated tests while production runs PostgreSQL.
+SQLite is used as the database for this project. It is built into Python and requires no setup. The `db.sqlite3` file is created automatically on first `migrate`.
+
+> For production deployments requiring concurrent writes or horizontal scaling, PostgreSQL is recommended. The codebase supports it via `django.db.backends.postgresql` — install `psycopg2-binary` and update the `DATABASES` setting.
 
 ---
 
@@ -569,20 +567,7 @@ DJANGO_SECRET_KEY=<generate with: python -c "from django.core.management.utils i
 
 # JWT (optional — falls back to DJANGO_SECRET_KEY if not set)
 JWT_SIGNING_KEY=<separate strong random string for JWT signing>
-
-# PostgreSQL
-POSTGRES_DB=library_erp
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=<your_db_password>
-POSTGRES_HOST=127.0.0.1
-POSTGRES_PORT=5432
 ```
-
-### Why `psycopg2-binary`
-
-`psycopg2-binary` is the Python adapter that bridges Django's ORM to PostgreSQL. It is a self-contained binary wheel — no system-level `libpq-dev` installation required. This is the correct choice for development and containerized deployments. For bare-metal production, `psycopg2` (compiled from source against the system's libpq) is preferred for performance and security patch control.
-
-Without this package, `django.db.backends.postgresql` raises `ImproperlyConfigured` on startup.
 
 ### Password Hashing
 
@@ -616,7 +601,7 @@ CORS_ALLOW_CREDENTIALS = True
 | `SECRET_KEY` | Insecure default in code | Always override via `DJANGO_SECRET_KEY` env var |
 | `ALLOWED_HOSTS` | `localhost`, `127.0.0.1` | Add production domain |
 | `CORS_ALLOWED_ORIGINS` | Vite dev server | Replace with production frontend URL |
-| Database | PostgreSQL (already correct) | Add connection pooling (pgBouncer) |
+| Database | SQLite | Switch to PostgreSQL for production |
 | Static files | `STATIC_URL = 'static/'` | Configure `STATIC_ROOT` + run `collectstatic` + serve via nginx/S3 |
 | JWT signing key | Falls back to `SECRET_KEY` | Set dedicated `JWT_SIGNING_KEY` |
 

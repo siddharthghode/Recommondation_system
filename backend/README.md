@@ -4,7 +4,6 @@
 
 - Python 3.11+ (developed on 3.13)
 - SQLite (built-in, no setup required)
-
 ---
 
 ## Setup
@@ -169,8 +168,7 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 | Setting | Value |
 |---------|-------|
 | `AUTH_USER_MODEL` | `accounts.User` |
-| `DATABASE ENGINE` | `django.db.backends.sqlite3` → `db.sqlite3` |
-| `DEFAULT_AUTHENTICATION_CLASSES` | `JWTAuthentication` |
+| `DATABASE ENGINE` | `django.db.backends.sqlite3` → `db.sqlite3` || `DEFAULT_AUTHENTICATION_CLASSES` | `JWTAuthentication` |
 | `DEFAULT_PERMISSION_CLASSES` | `IsAuthenticated` |
 | `ACCESS_TOKEN_LIFETIME` | 60 minutes |
 | `REFRESH_TOKEN_LIFETIME` | 1 day |

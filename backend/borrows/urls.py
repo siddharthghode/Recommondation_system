@@ -5,6 +5,7 @@ from .views import (
     PendingBorrowsView,
     ApproveBorrowView,
     RejectBorrowView,
+    ReturnBookView,
 )
 
 urlpatterns = [
@@ -13,4 +14,5 @@ urlpatterns = [
     path('pending/', PendingBorrowsView.as_view()),
     path('approve/<int:borrow_id>/', ApproveBorrowView.as_view()),
     path('reject/<int:borrow_id>/', RejectBorrowView.as_view()),
+    path('return/', ReturnBookView.as_view()),
 ]

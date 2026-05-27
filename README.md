@@ -11,8 +11,7 @@ A full-stack university library management web app with an intelligent book reco
 | Backend | Django 6.0.1 + Django REST Framework 3.16.1 |
 | Auth | JWT via djangorestframework-simplejwt 5.5.1 |
 | ML | scikit-learn 1.6.1, NumPy 2.4.1, Pandas 2.3.3 |
-| Database | SQLite (dev) / PostgreSQL (Docker & prod) |
-| Containerisation | Docker + Docker Compose |
+| Database | SQLite |
 | Frontend | React 19.2.0 + Vite |
 | Routing | React Router 7.11.0 |
 | Styling | Tailwind CSS 4.1.18 |
@@ -23,17 +22,7 @@ A full-stack university library management web app with an intelligent book reco
 
 ## Quick Start
 
-### Docker (recommended)
-```bash
-docker compose up --build
-```
-Open `http://localhost` — migrations, book import, and demo seed run automatically on first start.
-
-> After the first run, remove `import_books` and `seed_demo` from the `command` in `docker-compose.yml` to speed up restarts.
-
-
-### Local (without Docker)
-#### Backend
+### Backend
 ```bash
 cd backend
 python -m venv bookenv && source bookenv/bin/activate   # Windows: bookenv\Scripts\activate
@@ -123,10 +112,6 @@ Book_Recommondation_System/
 │       │                   # Notifications, InterestSelector, Toast…
 │       │   └── dashboard/  # LibrarianDashboard (action-first, real data)
 │       └── services/api.js # All API calls + auto token-refresh
-├── docker-compose.yml
-├── backend/Dockerfile
-├── frontend/Dockerfile
-├── frontend/nginx.conf
 ├── database/ER_DIAGRAM.md
 ├── BLUEPRINT_REPORT.md     # Full technical architecture reference
 ├── backend/README.md       # Backend setup, API reference, env vars
@@ -139,7 +124,6 @@ Book_Recommondation_System/
 
 | File | Description |
 |------|-------------|
-| [DEPLOYMENT.md](./DEPLOYMENT.md) | Docker setup + production deployment guide (Nginx, Gunicorn, PostgreSQL, SSL) |
 | [BLUEPRINT_REPORT.md](./BLUEPRINT_REPORT.md) | Full technical architecture, algorithm deep-dives, deployment guide |
 | [database/ER_DIAGRAM.md](./database/ER_DIAGRAM.md) | Entity relationships, constraints, cardinality |
 | [backend/README.md](./backend/README.md) | Backend setup, API reference, management commands |

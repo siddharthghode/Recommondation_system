@@ -137,6 +137,27 @@ class ApproveBorrowView(APIView):
         return Response({"message": "Approved"})
 
 
+class ReturnBookView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        borrow_id = request.data.get('borrow_id')
+        borrow = get_object_or_404(Borrow, id=borrow_id, user=request.user)
+
+        if borrow.status != 'approved':
+            return Response({"error": "Only approved borrows can be returned"}, status=400)
+
+        with transaction.atomic():
+            book = Book.objects.select_for_update().get(id=borrow.book.id)
+            borrow.status = 'returned'
+            borrow.return_date = now()
+            book.quantity += 1
+            book.save()
+            borrow.save()
+
+        return Response({"message": "Book returned successfully"})
+
+
 class RejectBorrowView(APIView):
     permission_classes = [IsAuthenticated]
 
