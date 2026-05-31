@@ -23,20 +23,21 @@ A full-stack university library management web app with an intelligent book reco
 ## Quick Start
 #### Backend
 ```bash
+Fresh Start
 cd backend
-chmod +x setup.sh && ./setup.sh
-#this ./setup.sh does all the remaining commands..
+chmod +x back_start.sh 
+./back_start.sh      
+this makes all tables and user in psql 
+
 ```
 
 #### Frontend
 ```bash
-# in a new terminal
-cd frontend
-npm install
-npm run dev
+chmod +x full_start.sh
+./full_start.sh
+this start backend and frontend
 ```
-
-Open `http://localhost:5173`
+Open `http://localhost:5173` for backend
 
 ---
 
@@ -53,67 +54,6 @@ Open `http://localhost:5173`
 
 Django admin panel: `http://localhost:8000/admin`
 
----
-
-## Features
-
-### Students
-- Register and log in with JWT authentication
-- Browse, search, filter, and paginate the book catalogue (6k+ books)
-- View book details with "Because You Read…" TF-IDF similar-book suggestions
-- Get personalised recommendations (content-based, collaborative, hybrid)
-- Request and return books; track borrow history with status
-- Edit account details and preferred categories
-- In-app notifications
-
-### Librarians
-- Action-first dashboard: pending borrow requests with inline approve/reject
-- Department-scoped stats (books, students, active borrows, borrow trends)
-- Approve requests with atomic stock decrement (`select_for_update`)
-- Reject requests with optional reason (student notified automatically)
-- Manage books (create, update, delete)
-- View students in their department
-
-### Admins
-- Full system access across all departments
-- Admin dashboard, book management, and student management
-- Global analytics
-
----
-
-## Project Structure
-
-```
-Book_Recommondation_System/
-├── backend/
-│   ├── accounts/           # User, UserProfile, Department, Notification; JWT auth
-│   │   └── management/commands/seed_demo.py
-│   ├── books/              # Book CRUD, interactions, dwell-time, recommender
-│   │   ├── services/recommender.py   # TF-IDF, cosine similarity, hybrid engine
-│   │   └── management/commands/import_books.py
-│   ├── borrows/            # Borrow lifecycle: requested → approved → returned/rejected
-│   ├── analytics/          # Librarian/admin dashboard stats
-│   ├── messaging/          # Inter-user messaging (DRF ViewSet)
-│   ├── book_recommondation/ # Django project settings & root URLs
-│   ├── qa_tests/           # E2E test scripts
-│   ├── data/books_6k.csv
-│   ├── db.sqlite3
-│   └── requirements.txt
-├── frontend/
-│   └── src/
-│       ├── pages/          # Home, Books, Recommendations, MyBorrows,
-│       │                   # LibrarianDashboard, AdminDashboard…
-│       ├── components/     # BookCard, BookDetail, Navbar, ProtectedRoute,
-│       │                   # Notifications, InterestSelector, Toast…
-│       │   └── dashboard/  # LibrarianDashboard (action-first, real data)
-│       └── services/api.js # All API calls + auto token-refresh
-├── database/ER_DIAGRAM.md
-├── BLUEPRINT_REPORT.md     # Full technical architecture reference
-├── backend/README.md       # Backend setup, API reference, env vars
-└── frontend/README.md      # Frontend setup, routes, components
-```
-
----
 
 ## Documentation
 
