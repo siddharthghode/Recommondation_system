@@ -41,19 +41,38 @@ Open `http://localhost:5173` for backend
 
 ---
 
-## Demo Credentials
-
+## Demo Credentials   [these are the demo users]
 | Role | Username | Password |
 |------|----------|----------|
+| Admin | `admin` | `admin123` |
+| Librarian | `librarian_cs` | `test1234` |
 | Student | `aarav_sharma` | `test1234` |
 | Student | `priya_patil` | `test1234` |
-| Librarian | `librarian_cs` | `test1234` |
-| Admin | `admin` | `admin123` |
 
-> All 10 seeded students use password `test1234`. See `seed_demo` output for full list.
+## Fresh Setup (remove demo users)
 
-Django admin panel: `http://localhost:8000/admin`
+**Step 1 — Clear demo data**
+```bash
+cd backend
+source bookenv/bin/activate
+python manage.py clear_users          # removes only demo users
+# or: python manage.py clear_users --all   # removes every user
+```
 
+**Step 2 — Create your superuser (admin)**
+```bash
+python manage.py createsuperuser
+# enter username, email, password when prompted
+```
+Then open `http://localhost:8000/admin`, find the new user → set `role = admin`.
+
+**Step 3 — Create a Librarian**
+In Django admin → Users → Add User:
+- Set `role = librarian`
+- Assign a `department`
+
+**Step 4 — Students**
+Students can self-register via the frontend login page, or you can create them in Django admin with `role = student`.
 
 ## Documentation
 
