@@ -36,6 +36,11 @@ class User(AbstractUser):
         blank=True
     )
 
+    def save(self, *args, **kwargs):
+        if self.is_superuser and self.role == 'student':
+            self.role = 'admin'
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.username} ({self.role})"
 
