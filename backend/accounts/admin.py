@@ -40,6 +40,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ("user", "student_id", "department", "year")
     search_fields = ("student_id", "user__username")
     list_filter = ("department", "year")
+    list_select_related = ("user", "department")
 
 
 # --------------------
