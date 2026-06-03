@@ -26,10 +26,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Prefer reading the secret from the environment in production
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-$=#g)6fcewk3g1r^kf2i(ud-74u#gjj_9q5g4r0#+x0bnc$a(@')
+_secret_key = os.getenv('DJANGO_SECRET_KEY')
+if not _secret_key:
+    import sys
+    if os.getenv('DJANGO_ENV') == 'production':
+        raise RuntimeError('DJANGO_SECRET_KEY environment variable is not set!')
+    _secret_key = 'django-insecure-$=#g)6fcewk3g1r^kf2i(ud-74u#gjj_9q5g4r0#+x0bnc$a(@'
+SECRET_KEY = _secret_key
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'testserver,localhost,127.0.0.1').split(',')
 
@@ -122,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -133,6 +138,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -171,4 +179,13 @@ CORS_ALLOWED_ORIGINS = _cors_env.split(',') if _cors_env else [
     'http://127.0.0.1:5173',
 ]
 
+# Only allow credentials in development; in production set CORS_ALLOWED_ORIGINS via env
 CORS_ALLOW_CREDENTIALS = True
+
+# Security headers — active only when DEBUG=False
+if not DEBUG:
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
