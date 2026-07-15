@@ -6,8 +6,10 @@
 │   │   ├── __init__.py
 │   │   ├── management
 │   │   │   ├── commands
+│   │   │   │   ├── clear_users.py
 │   │   │   │   ├── __init__.py
 │   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── clear_users.cpython-313.pyc
 │   │   │   │   │   ├── ensure_profiles.cpython-313.pyc
 │   │   │   │   │   ├── __init__.cpython-312.pyc
 │   │   │   │   │   ├── __init__.cpython-313.pyc
@@ -79,8 +81,148 @@
 │   │   ├── tests.py
 │   │   ├── urls.py
 │   │   └── views.py
-│   ├── back_start.sh
-│   ├── bookenv
+│   ├── book_recommondation
+│   │   ├── asgi.py
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── settings.cpython-312.pyc
+│   │   │   ├── settings.cpython-313.pyc
+│   │   │   ├── urls.cpython-312.pyc
+│   │   │   ├── urls.cpython-313.pyc
+│   │   │   ├── wsgi.cpython-312.pyc
+│   │   │   └── wsgi.cpython-313.pyc
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── books
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── __init__.py
+│   │   ├── management
+│   │   │   ├── commands
+│   │   │   │   ├── import_books.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── import_books.cpython-312.pyc
+│   │   │   │   │   ├── import_books.cpython-313.pyc
+│   │   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   │   ├── __init__.cpython-313.pyc
+│   │   │   │   │   └── seed_interactions.cpython-313.pyc
+│   │   │   │   └── seed_interactions.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── __init__.cpython-312.pyc
+│   │   │       └── __init__.cpython-313.pyc
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── 0001_initial.cpython-312.pyc
+│   │   │       ├── 0001_initial.cpython-313.pyc
+│   │   │       ├── 0002_bookdwelltime_searchhistory.cpython-313.pyc
+│   │   │       ├── 0003_book_department_book_embedding_and_more.cpython-313.pyc
+│   │   │       ├── 0004_alter_book_embedding.cpython-313.pyc
+│   │   │       ├── 0005_alter_book_authors_alter_book_categories_and_more.cpython-313.pyc
+│   │   │       ├── 0006_alter_book_categories_alter_book_title.cpython-313.pyc
+│   │   │       ├── __init__.cpython-312.pyc
+│   │   │       └── __init__.cpython-313.pyc
+│   │   ├── models.py
+│   │   ├── __pycache__
+│   │   │   ├── admin.cpython-312.pyc
+│   │   │   ├── admin.cpython-313.pyc
+│   │   │   ├── apps.cpython-312.pyc
+│   │   │   ├── apps.cpython-313.pyc
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── models.cpython-312.pyc
+│   │   │   ├── models.cpython-313.pyc
+│   │   │   ├── serializers.cpython-312.pyc
+│   │   │   ├── serializers.cpython-313.pyc
+│   │   │   ├── urls.cpython-312.pyc
+│   │   │   ├── urls.cpython-313.pyc
+│   │   │   ├── views.cpython-312.pyc
+│   │   │   └── views.cpython-313.pyc
+│   │   ├── serializers.py
+│   │   ├── services
+│   │   │   ├── ml_engine.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── recommender.cpython-312.pyc
+│   │   │   │   └── recommender.cpython-313.pyc
+│   │   │   └── recommender.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── borrows
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── __init__.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── 0001_initial.cpython-312.pyc
+│   │   │       ├── 0001_initial.cpython-313.pyc
+│   │   │       ├── 0002_borrow_rejection_reason_alter_borrow_status.cpython-313.pyc
+│   │   │       ├── 0003_borrow_borrow_date_borrow_due_date_and_more.cpython-313.pyc
+│   │   │       ├── __init__.cpython-312.pyc
+│   │   │       └── __init__.cpython-313.pyc
+│   │   ├── models.py
+│   │   ├── __pycache__
+│   │   │   ├── admin.cpython-312.pyc
+│   │   │   ├── admin.cpython-313.pyc
+│   │   │   ├── apps.cpython-312.pyc
+│   │   │   ├── apps.cpython-313.pyc
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── models.cpython-312.pyc
+│   │   │   ├── models.cpython-313.pyc
+│   │   │   ├── serializers.cpython-312.pyc
+│   │   │   ├── serializers.cpython-313.pyc
+│   │   │   ├── urls.cpython-312.pyc
+│   │   │   ├── urls.cpython-313.pyc
+│   │   │   ├── views.cpython-312.pyc
+│   │   │   └── views.cpython-313.pyc
+│   │   ├── serializers.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── data
+│   │   └── books_6k.csv
+│   ├── manage.py
+│   ├── messaging
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── __init__.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── 0001_initial.cpython-312.pyc
+│   │   │       ├── 0001_initial.cpython-313.pyc
+│   │   │       ├── __init__.cpython-312.pyc
+│   │   │       └── __init__.cpython-313.pyc
+│   │   ├── models.py
+│   │   ├── __pycache__
+│   │   │   ├── admin.cpython-312.pyc
+│   │   │   ├── admin.cpython-313.pyc
+│   │   │   ├── apps.cpython-312.pyc
+│   │   │   ├── apps.cpython-313.pyc
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── models.cpython-312.pyc
+│   │   │   ├── models.cpython-313.pyc
+│   │   │   ├── serializers.cpython-312.pyc
+│   │   │   ├── serializers.cpython-313.pyc
+│   │   │   ├── urls.cpython-312.pyc
+│   │   │   ├── urls.cpython-313.pyc
+│   │   │   ├── views.cpython-312.pyc
+│   │   │   └── views.cpython-313.pyc
+│   │   ├── serializers.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── proenv
 │   │   ├── bin
 │   │   │   ├── activate
 │   │   │   ├── activate.csh
@@ -15041,28 +15183,40 @@
 │   │   │           │   └── libgomp-a34b3233.so.1.0.0
 │   │   │           ├── scipy
 │   │   │           │   ├── cluster
-│   │   │           │   │   ├── _hierarchy.cpython-313-x86_64-linux-gnu.so
-│   │   │           │   │   ├── hierarchy.py
-│   │   │           │   │   ├── __init__.py
-│   │   │           │   │   ├── _optimal_leaf_ordering.cpython-313-x86_64-linux-gnu.so
-│   │   │           │   │   ├── __pycache__
-│   │   │           │   │   │   ├── hierarchy.cpython-313.pyc
-│   │   │           │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   └── vq.cpython-313.pyc
-│   │   │           │   │   ├── tests
-│   │   │           │   │   │   ├── hierarchy_test_data.py
+│   │   │           │   │   ├── hierarchy
+│   │   │           │   │   │   ├── _hierarchy.cpython-313-x86_64-linux-gnu.so
+│   │   │           │   │   │   ├── _hierarchy_impl.py
 │   │   │           │   │   │   ├── __init__.py
+│   │   │           │   │   │   ├── _optimal_leaf_ordering.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   ├── hierarchy_test_data.cpython-313.pyc
-│   │   │           │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   ├── test_disjoint_set.cpython-313.pyc
-│   │   │           │   │   │   │   ├── test_hierarchy.cpython-313.pyc
-│   │   │           │   │   │   │   └── test_vq.cpython-313.pyc
-│   │   │           │   │   │   ├── test_disjoint_set.py
-│   │   │           │   │   │   ├── test_hierarchy.py
-│   │   │           │   │   │   └── test_vq.py
-│   │   │           │   │   ├── _vq.cpython-313-x86_64-linux-gnu.so
-│   │   │           │   │   └── vq.py
+│   │   │           │   │   │   │   ├── _hierarchy_impl.cpython-313.pyc
+│   │   │           │   │   │   │   └── __init__.cpython-313.pyc
+│   │   │           │   │   │   └── tests
+│   │   │           │   │   │       ├── hierarchy_test_data.py
+│   │   │           │   │   │       ├── __init__.py
+│   │   │           │   │   │       ├── __pycache__
+│   │   │           │   │   │       │   ├── hierarchy_test_data.cpython-313.pyc
+│   │   │           │   │   │       │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │       │   ├── test_disjoint_set.cpython-313.pyc
+│   │   │           │   │   │       │   └── test_hierarchy.cpython-313.pyc
+│   │   │           │   │   │       ├── test_disjoint_set.py
+│   │   │           │   │   │       └── test_hierarchy.py
+│   │   │           │   │   ├── __init__.py
+│   │   │           │   │   ├── __pycache__
+│   │   │           │   │   │   └── __init__.cpython-313.pyc
+│   │   │           │   │   └── vq
+│   │   │           │   │       ├── __init__.py
+│   │   │           │   │       ├── __pycache__
+│   │   │           │   │       │   ├── __init__.cpython-313.pyc
+│   │   │           │   │       │   └── _vq_impl.cpython-313.pyc
+│   │   │           │   │       ├── tests
+│   │   │           │   │       │   ├── __init__.py
+│   │   │           │   │       │   ├── __pycache__
+│   │   │           │   │       │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │       │   │   └── test_vq.cpython-313.pyc
+│   │   │           │   │       │   └── test_vq.py
+│   │   │           │   │       ├── _vq.cpython-313-x86_64-linux-gnu.so
+│   │   │           │   │       └── _vq_impl.py
 │   │   │           │   ├── __config__.py
 │   │   │           │   ├── conftest.py
 │   │   │           │   ├── constants
@@ -15117,16 +15271,224 @@
 │   │   │           │   │       │   └── test_differentiate.cpython-313.pyc
 │   │   │           │   │       └── test_differentiate.py
 │   │   │           │   ├── _distributor_init.py
+│   │   │           │   ├── _external
+│   │   │           │   │   ├── array_api_compat
+│   │   │           │   │   │   ├── common
+│   │   │           │   │   │   │   ├── _aliases.py
+│   │   │           │   │   │   │   ├── _fft.py
+│   │   │           │   │   │   │   ├── _helpers.py
+│   │   │           │   │   │   │   ├── __init__.py
+│   │   │           │   │   │   │   ├── _linalg.py
+│   │   │           │   │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   │   ├── _aliases.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── _fft.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── _helpers.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── _linalg.cpython-313.pyc
+│   │   │           │   │   │   │   │   └── _typing.cpython-313.pyc
+│   │   │           │   │   │   │   └── _typing.py
+│   │   │           │   │   │   ├── cupy
+│   │   │           │   │   │   │   ├── _aliases.py
+│   │   │           │   │   │   │   ├── fft.py
+│   │   │           │   │   │   │   ├── _info.py
+│   │   │           │   │   │   │   ├── __init__.py
+│   │   │           │   │   │   │   ├── linalg.py
+│   │   │           │   │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   │   ├── _aliases.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── fft.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── _info.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── linalg.cpython-313.pyc
+│   │   │           │   │   │   │   │   └── _typing.cpython-313.pyc
+│   │   │           │   │   │   │   └── _typing.py
+│   │   │           │   │   │   ├── dask
+│   │   │           │   │   │   │   ├── array
+│   │   │           │   │   │   │   │   ├── _aliases.py
+│   │   │           │   │   │   │   │   ├── fft.py
+│   │   │           │   │   │   │   │   ├── _info.py
+│   │   │           │   │   │   │   │   ├── __init__.py
+│   │   │           │   │   │   │   │   ├── linalg.py
+│   │   │           │   │   │   │   │   └── __pycache__
+│   │   │           │   │   │   │   │       ├── _aliases.cpython-313.pyc
+│   │   │           │   │   │   │   │       ├── fft.cpython-313.pyc
+│   │   │           │   │   │   │   │       ├── _info.cpython-313.pyc
+│   │   │           │   │   │   │   │       ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │   │       └── linalg.cpython-313.pyc
+│   │   │           │   │   │   │   ├── __init__.py
+│   │   │           │   │   │   │   └── __pycache__
+│   │   │           │   │   │   │       └── __init__.cpython-313.pyc
+│   │   │           │   │   │   ├── __init__.py
+│   │   │           │   │   │   ├── _internal.py
+│   │   │           │   │   │   ├── numpy
+│   │   │           │   │   │   │   ├── _aliases.py
+│   │   │           │   │   │   │   ├── fft.py
+│   │   │           │   │   │   │   ├── _info.py
+│   │   │           │   │   │   │   ├── __init__.py
+│   │   │           │   │   │   │   ├── linalg.py
+│   │   │           │   │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   │   ├── _aliases.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── fft.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── _info.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── linalg.cpython-313.pyc
+│   │   │           │   │   │   │   │   └── _typing.cpython-313.pyc
+│   │   │           │   │   │   │   └── _typing.py
+│   │   │           │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │   └── _internal.cpython-313.pyc
+│   │   │           │   │   │   └── torch
+│   │   │           │   │   │       ├── _aliases.py
+│   │   │           │   │   │       ├── fft.py
+│   │   │           │   │   │       ├── _info.py
+│   │   │           │   │   │       ├── __init__.py
+│   │   │           │   │   │       ├── linalg.py
+│   │   │           │   │   │       ├── __pycache__
+│   │   │           │   │   │       │   ├── _aliases.cpython-313.pyc
+│   │   │           │   │   │       │   ├── fft.cpython-313.pyc
+│   │   │           │   │   │       │   ├── _info.cpython-313.pyc
+│   │   │           │   │   │       │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │       │   ├── linalg.cpython-313.pyc
+│   │   │           │   │   │       │   └── _typing.cpython-313.pyc
+│   │   │           │   │   │       └── _typing.py
+│   │   │           │   │   ├── _array_api_compat_vendor.py
+│   │   │           │   │   ├── array_api_extra
+│   │   │           │   │   │   ├── _delegation.py
+│   │   │           │   │   │   ├── __init__.py
+│   │   │           │   │   │   ├── _lib
+│   │   │           │   │   │   │   ├── _at.py
+│   │   │           │   │   │   │   ├── _backends.py
+│   │   │           │   │   │   │   ├── _funcs.py
+│   │   │           │   │   │   │   ├── __init__.py
+│   │   │           │   │   │   │   ├── _lazy.py
+│   │   │           │   │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   │   ├── _at.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── _backends.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── _funcs.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── _lazy.cpython-313.pyc
+│   │   │           │   │   │   │   │   └── _testing.cpython-313.pyc
+│   │   │           │   │   │   │   ├── _testing.py
+│   │   │           │   │   │   │   └── _utils
+│   │   │           │   │   │   │       ├── _compat.py
+│   │   │           │   │   │   │       ├── _compat.pyi
+│   │   │           │   │   │   │       ├── _helpers.py
+│   │   │           │   │   │   │       ├── __init__.py
+│   │   │           │   │   │   │       ├── __pycache__
+│   │   │           │   │   │   │       │   ├── _compat.cpython-313.pyc
+│   │   │           │   │   │   │       │   ├── _helpers.cpython-313.pyc
+│   │   │           │   │   │   │       │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │       │   └── _typing.cpython-313.pyc
+│   │   │           │   │   │   │       ├── _typing.py
+│   │   │           │   │   │   │       └── _typing.pyi
+│   │   │           │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   ├── _delegation.cpython-313.pyc
+│   │   │           │   │   │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │   └── testing.cpython-313.pyc
+│   │   │           │   │   │   └── testing.py
+│   │   │           │   │   ├── cobyqa
+│   │   │           │   │   │   ├── framework.py
+│   │   │           │   │   │   ├── __init__.py
+│   │   │           │   │   │   ├── main.py
+│   │   │           │   │   │   ├── models.py
+│   │   │           │   │   │   ├── problem.py
+│   │   │           │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   ├── framework.cpython-313.pyc
+│   │   │           │   │   │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │   ├── main.cpython-313.pyc
+│   │   │           │   │   │   │   ├── models.cpython-313.pyc
+│   │   │           │   │   │   │   ├── problem.cpython-313.pyc
+│   │   │           │   │   │   │   └── settings.cpython-313.pyc
+│   │   │           │   │   │   ├── settings.py
+│   │   │           │   │   │   ├── subsolvers
+│   │   │           │   │   │   │   ├── geometry.py
+│   │   │           │   │   │   │   ├── __init__.py
+│   │   │           │   │   │   │   ├── optim.py
+│   │   │           │   │   │   │   └── __pycache__
+│   │   │           │   │   │   │       ├── geometry.cpython-313.pyc
+│   │   │           │   │   │   │       ├── __init__.cpython-313.pyc
+│   │   │           │   │   │   │       └── optim.cpython-313.pyc
+│   │   │           │   │   │   └── utils
+│   │   │           │   │   │       ├── exceptions.py
+│   │   │           │   │   │       ├── __init__.py
+│   │   │           │   │   │       ├── math.py
+│   │   │           │   │   │       ├── __pycache__
+│   │   │           │   │   │       │   ├── exceptions.cpython-313.pyc
+│   │   │           │   │   │       │   ├── __init__.cpython-313.pyc
+│   │   │           │   │   │       │   ├── math.cpython-313.pyc
+│   │   │           │   │   │       │   └── versions.cpython-313.pyc
+│   │   │           │   │   │       └── versions.py
+│   │   │           │   │   ├── packaging_version
+│   │   │           │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   ├── _structures.cpython-313.pyc
+│   │   │           │   │   │   │   └── version.cpython-313.pyc
+│   │   │           │   │   │   ├── _structures.py
+│   │   │           │   │   │   └── version.py
+│   │   │           │   │   ├── __pycache__
+│   │   │           │   │   │   └── _array_api_compat_vendor.cpython-313.pyc
+│   │   │           │   │   └── pyprima
+│   │   │           │   │       ├── cobyla
+│   │   │           │   │       │   ├── cobyla.py
+│   │   │           │   │       │   ├── cobylb.py
+│   │   │           │   │       │   ├── geometry.py
+│   │   │           │   │       │   ├── initialize.py
+│   │   │           │   │       │   ├── __init__.py
+│   │   │           │   │       │   ├── __pycache__
+│   │   │           │   │       │   │   ├── cobyla.cpython-313.pyc
+│   │   │           │   │       │   │   ├── cobylb.cpython-313.pyc
+│   │   │           │   │       │   │   ├── geometry.cpython-313.pyc
+│   │   │           │   │       │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │       │   │   ├── initialize.cpython-313.pyc
+│   │   │           │   │       │   │   ├── trustregion.cpython-313.pyc
+│   │   │           │   │       │   │   └── update.cpython-313.pyc
+│   │   │           │   │       │   ├── trustregion.py
+│   │   │           │   │       │   └── update.py
+│   │   │           │   │       ├── common
+│   │   │           │   │       │   ├── _bounds.py
+│   │   │           │   │       │   ├── checkbreak.py
+│   │   │           │   │       │   ├── consts.py
+│   │   │           │   │       │   ├── evaluate.py
+│   │   │           │   │       │   ├── history.py
+│   │   │           │   │       │   ├── infos.py
+│   │   │           │   │       │   ├── __init__.py
+│   │   │           │   │       │   ├── linalg.py
+│   │   │           │   │       │   ├── _linear_constraints.py
+│   │   │           │   │       │   ├── message.py
+│   │   │           │   │       │   ├── _nonlinear_constraints.py
+│   │   │           │   │       │   ├── powalg.py
+│   │   │           │   │       │   ├── preproc.py
+│   │   │           │   │       │   ├── present.py
+│   │   │           │   │       │   ├── _project.py
+│   │   │           │   │       │   ├── __pycache__
+│   │   │           │   │       │   │   ├── _bounds.cpython-313.pyc
+│   │   │           │   │       │   │   ├── checkbreak.cpython-313.pyc
+│   │   │           │   │       │   │   ├── consts.cpython-313.pyc
+│   │   │           │   │       │   │   ├── evaluate.cpython-313.pyc
+│   │   │           │   │       │   │   ├── history.cpython-313.pyc
+│   │   │           │   │       │   │   ├── infos.cpython-313.pyc
+│   │   │           │   │       │   │   ├── __init__.cpython-313.pyc
+│   │   │           │   │       │   │   ├── linalg.cpython-313.pyc
+│   │   │           │   │       │   │   ├── _linear_constraints.cpython-313.pyc
+│   │   │           │   │       │   │   ├── message.cpython-313.pyc
+│   │   │           │   │       │   │   ├── _nonlinear_constraints.cpython-313.pyc
+│   │   │           │   │       │   │   ├── powalg.cpython-313.pyc
+│   │   │           │   │       │   │   ├── preproc.cpython-313.pyc
+│   │   │           │   │       │   │   ├── present.cpython-313.pyc
+│   │   │           │   │       │   │   ├── _project.cpython-313.pyc
+│   │   │           │   │       │   │   ├── ratio.cpython-313.pyc
+│   │   │           │   │       │   │   ├── redrho.cpython-313.pyc
+│   │   │           │   │       │   │   └── selectx.cpython-313.pyc
+│   │   │           │   │       │   ├── ratio.py
+│   │   │           │   │       │   ├── redrho.py
+│   │   │           │   │       │   └── selectx.py
+│   │   │           │   │       ├── __init__.py
+│   │   │           │   │       └── __pycache__
+│   │   │           │   │           └── __init__.cpython-313.pyc
 │   │   │           │   ├── fft
 │   │   │           │   │   ├── _backend.py
 │   │   │           │   │   ├── _basic_backend.py
 │   │   │           │   │   ├── _basic.py
 │   │   │           │   │   ├── _debug_backends.py
-│   │   │           │   │   ├── _fftlog_backend.py
-│   │   │           │   │   ├── _fftlog.py
-│   │   │           │   │   ├── _helper.py
-│   │   │           │   │   ├── __init__.py
-│   │   │           │   │   ├── _pocketfft
+│   │   │           │   │   ├── _duccfft
 │   │   │           │   │   │   ├── basic.py
 │   │   │           │   │   │   ├── helper.py
 │   │   │           │   │   │   ├── __init__.py
@@ -15136,7 +15498,7 @@
 │   │   │           │   │   │   │   ├── helper.cpython-313.pyc
 │   │   │           │   │   │   │   ├── __init__.cpython-313.pyc
 │   │   │           │   │   │   │   └── realtransforms.cpython-313.pyc
-│   │   │           │   │   │   ├── pypocketfft.cpython-313-x86_64-linux-gnu.so
+│   │   │           │   │   │   ├── pyduccfft.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   │   ├── realtransforms.py
 │   │   │           │   │   │   └── tests
 │   │   │           │   │   │       ├── __init__.py
@@ -15146,6 +15508,10 @@
 │   │   │           │   │   │       │   └── test_real_transforms.cpython-313.pyc
 │   │   │           │   │   │       ├── test_basic.py
 │   │   │           │   │   │       └── test_real_transforms.py
+│   │   │           │   │   ├── _fftlog_backend.py
+│   │   │           │   │   ├── _fftlog.py
+│   │   │           │   │   ├── _helper.py
+│   │   │           │   │   ├── __init__.py
 │   │   │           │   │   ├── __pycache__
 │   │   │           │   │   │   ├── _backend.cpython-313.pyc
 │   │   │           │   │   │   ├── _basic_backend.cpython-313.pyc
@@ -15319,7 +15685,6 @@
 │   │   │           │   │   ├── _bary_rational.py
 │   │   │           │   │   ├── _bsplines.py
 │   │   │           │   │   ├── _cubic.py
-│   │   │           │   │   ├── _dfitpack.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── dfitpack.py
 │   │   │           │   │   ├── _dierckx.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _fitpack2.py
@@ -15368,6 +15733,7 @@
 │   │   │           │   │   │   ├── _rbfinterp.cpython-313.pyc
 │   │   │           │   │   │   ├── _rbfinterp_np.cpython-313.pyc
 │   │   │           │   │   │   ├── _rbfinterp_xp.cpython-313.pyc
+│   │   │           │   │   │   ├── _regrid.cpython-313.pyc
 │   │   │           │   │   │   └── _rgi.cpython-313.pyc
 │   │   │           │   │   ├── _rbfinterp_common.py
 │   │   │           │   │   ├── _rbfinterp_np.py
@@ -15376,6 +15742,7 @@
 │   │   │           │   │   ├── _rbfinterp_xp.py
 │   │   │           │   │   ├── _rbf.py
 │   │   │           │   │   ├── rbf.py
+│   │   │           │   │   ├── _regrid.py
 │   │   │           │   │   ├── _rgi_cython.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _rgi.py
 │   │   │           │   │   └── tests
@@ -15559,6 +15926,7 @@
 │   │   │           │   │   │       │   ├── testfunc_7.4_GLNX86.mat
 │   │   │           │   │   │       │   ├── testhdf5_7.4_GLNX86.mat
 │   │   │           │   │   │       │   ├── test_mat4_le_floats.mat
+│   │   │           │   │   │       │   ├── testmatlabstring_7_WIN64.mat
 │   │   │           │   │   │       │   ├── testmatrix_4.2c_SOL2.mat
 │   │   │           │   │   │       │   ├── testmatrix_6.1_SOL2.mat
 │   │   │           │   │   │       │   ├── testmatrix_6.5.1_GLNX86.mat
@@ -15689,6 +16057,7 @@
 │   │   │           │   │   │   │   ├── fortran-si4-1x1x5.dat
 │   │   │           │   │   │   │   ├── fortran-si4-1x1x7.dat
 │   │   │           │   │   │   │   ├── fortran-si4-1x3x5.dat
+│   │   │           │   │   │   │   ├── identification.sav
 │   │   │           │   │   │   │   ├── invalid_pointer.sav
 │   │   │           │   │   │   │   ├── null_pointer.sav
 │   │   │           │   │   │   │   ├── scalar_byte_descr.sav
@@ -15760,158 +16129,13 @@
 │   │   │           │   │   │   └── test_wavfile.py
 │   │   │           │   │   └── wavfile.py
 │   │   │           │   ├── _lib
-│   │   │           │   │   ├── array_api_compat
-│   │   │           │   │   │   ├── common
-│   │   │           │   │   │   │   ├── _aliases.py
-│   │   │           │   │   │   │   ├── _fft.py
-│   │   │           │   │   │   │   ├── _helpers.py
-│   │   │           │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   ├── _linalg.py
-│   │   │           │   │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   │   ├── _aliases.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _fft.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _helpers.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _linalg.cpython-313.pyc
-│   │   │           │   │   │   │   │   └── _typing.cpython-313.pyc
-│   │   │           │   │   │   │   └── _typing.py
-│   │   │           │   │   │   ├── cupy
-│   │   │           │   │   │   │   ├── _aliases.py
-│   │   │           │   │   │   │   ├── fft.py
-│   │   │           │   │   │   │   ├── _info.py
-│   │   │           │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   ├── linalg.py
-│   │   │           │   │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   │   ├── _aliases.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── fft.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _info.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── linalg.cpython-313.pyc
-│   │   │           │   │   │   │   │   └── _typing.cpython-313.pyc
-│   │   │           │   │   │   │   └── _typing.py
-│   │   │           │   │   │   ├── dask
-│   │   │           │   │   │   │   ├── array
-│   │   │           │   │   │   │   │   ├── _aliases.py
-│   │   │           │   │   │   │   │   ├── fft.py
-│   │   │           │   │   │   │   │   ├── _info.py
-│   │   │           │   │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   │   ├── linalg.py
-│   │   │           │   │   │   │   │   └── __pycache__
-│   │   │           │   │   │   │   │       ├── _aliases.cpython-313.pyc
-│   │   │           │   │   │   │   │       ├── fft.cpython-313.pyc
-│   │   │           │   │   │   │   │       ├── _info.cpython-313.pyc
-│   │   │           │   │   │   │   │       ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   │       └── linalg.cpython-313.pyc
-│   │   │           │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   └── __pycache__
-│   │   │           │   │   │   │       └── __init__.cpython-313.pyc
-│   │   │           │   │   │   ├── __init__.py
-│   │   │           │   │   │   ├── _internal.py
-│   │   │           │   │   │   ├── numpy
-│   │   │           │   │   │   │   ├── _aliases.py
-│   │   │           │   │   │   │   ├── fft.py
-│   │   │           │   │   │   │   ├── _info.py
-│   │   │           │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   ├── linalg.py
-│   │   │           │   │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   │   ├── _aliases.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── fft.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _info.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── linalg.cpython-313.pyc
-│   │   │           │   │   │   │   │   └── _typing.cpython-313.pyc
-│   │   │           │   │   │   │   └── _typing.py
-│   │   │           │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   └── _internal.cpython-313.pyc
-│   │   │           │   │   │   └── torch
-│   │   │           │   │   │       ├── _aliases.py
-│   │   │           │   │   │       ├── fft.py
-│   │   │           │   │   │       ├── _info.py
-│   │   │           │   │   │       ├── __init__.py
-│   │   │           │   │   │       ├── linalg.py
-│   │   │           │   │   │       ├── __pycache__
-│   │   │           │   │   │       │   ├── _aliases.cpython-313.pyc
-│   │   │           │   │   │       │   ├── fft.cpython-313.pyc
-│   │   │           │   │   │       │   ├── _info.cpython-313.pyc
-│   │   │           │   │   │       │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │       │   ├── linalg.cpython-313.pyc
-│   │   │           │   │   │       │   └── _typing.cpython-313.pyc
-│   │   │           │   │   │       └── _typing.py
-│   │   │           │   │   ├── _array_api_compat_vendor.py
 │   │   │           │   │   ├── _array_api_docs_tables.py
-│   │   │           │   │   ├── array_api_extra
-│   │   │           │   │   │   ├── _delegation.py
-│   │   │           │   │   │   ├── __init__.py
-│   │   │           │   │   │   ├── _lib
-│   │   │           │   │   │   │   ├── _at.py
-│   │   │           │   │   │   │   ├── _backends.py
-│   │   │           │   │   │   │   ├── _funcs.py
-│   │   │           │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   ├── _lazy.py
-│   │   │           │   │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   │   ├── _at.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _backends.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _funcs.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _lazy.cpython-313.pyc
-│   │   │           │   │   │   │   │   └── _testing.cpython-313.pyc
-│   │   │           │   │   │   │   ├── _testing.py
-│   │   │           │   │   │   │   └── _utils
-│   │   │           │   │   │   │       ├── _compat.py
-│   │   │           │   │   │   │       ├── _compat.pyi
-│   │   │           │   │   │   │       ├── _helpers.py
-│   │   │           │   │   │   │       ├── __init__.py
-│   │   │           │   │   │   │       ├── __pycache__
-│   │   │           │   │   │   │       │   ├── _compat.cpython-313.pyc
-│   │   │           │   │   │   │       │   ├── _helpers.cpython-313.pyc
-│   │   │           │   │   │   │       │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │       │   └── _typing.cpython-313.pyc
-│   │   │           │   │   │   │       ├── _typing.py
-│   │   │           │   │   │   │       └── _typing.pyi
-│   │   │           │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   ├── _delegation.cpython-313.pyc
-│   │   │           │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   └── testing.cpython-313.pyc
-│   │   │           │   │   │   └── testing.py
 │   │   │           │   │   ├── _array_api_no_0d.py
 │   │   │           │   │   ├── _array_api_override.py
 │   │   │           │   │   ├── _array_api.py
 │   │   │           │   │   ├── _bunch.py
 │   │   │           │   │   ├── _ccallback_c.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _ccallback.py
-│   │   │           │   │   ├── cobyqa
-│   │   │           │   │   │   ├── framework.py
-│   │   │           │   │   │   ├── __init__.py
-│   │   │           │   │   │   ├── main.py
-│   │   │           │   │   │   ├── models.py
-│   │   │           │   │   │   ├── problem.py
-│   │   │           │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   ├── framework.cpython-313.pyc
-│   │   │           │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   ├── main.cpython-313.pyc
-│   │   │           │   │   │   │   ├── models.cpython-313.pyc
-│   │   │           │   │   │   │   ├── problem.cpython-313.pyc
-│   │   │           │   │   │   │   └── settings.cpython-313.pyc
-│   │   │           │   │   │   ├── settings.py
-│   │   │           │   │   │   ├── subsolvers
-│   │   │           │   │   │   │   ├── geometry.py
-│   │   │           │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   ├── optim.py
-│   │   │           │   │   │   │   └── __pycache__
-│   │   │           │   │   │   │       ├── geometry.cpython-313.pyc
-│   │   │           │   │   │   │       ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │       └── optim.cpython-313.pyc
-│   │   │           │   │   │   └── utils
-│   │   │           │   │   │       ├── exceptions.py
-│   │   │           │   │   │       ├── __init__.py
-│   │   │           │   │   │       ├── math.py
-│   │   │           │   │   │       ├── __pycache__
-│   │   │           │   │   │       │   ├── exceptions.cpython-313.pyc
-│   │   │           │   │   │       │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │       │   ├── math.cpython-313.pyc
-│   │   │           │   │   │       │   └── versions.cpython-313.pyc
-│   │   │           │   │   │       └── versions.py
 │   │   │           │   │   ├── deprecation.py
 │   │   │           │   │   ├── _disjoint_set.py
 │   │   │           │   │   ├── doccer.py
@@ -15921,10 +16145,8 @@
 │   │   │           │   │   ├── _gcutils.py
 │   │   │           │   │   ├── __init__.py
 │   │   │           │   │   ├── messagestream.cpython-313-x86_64-linux-gnu.so
-│   │   │           │   │   ├── _pep440.py
 │   │   │           │   │   ├── _public_api.py
 │   │   │           │   │   ├── __pycache__
-│   │   │           │   │   │   ├── _array_api_compat_vendor.cpython-313.pyc
 │   │   │           │   │   │   ├── _array_api.cpython-313.pyc
 │   │   │           │   │   │   ├── _array_api_docs_tables.cpython-313.pyc
 │   │   │           │   │   │   ├── _array_api_no_0d.cpython-313.pyc
@@ -15938,71 +16160,11 @@
 │   │   │           │   │   │   ├── _elementwise_iterative_method.cpython-313.pyc
 │   │   │           │   │   │   ├── _gcutils.cpython-313.pyc
 │   │   │           │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   ├── _pep440.cpython-313.pyc
 │   │   │           │   │   │   ├── _public_api.cpython-313.pyc
 │   │   │           │   │   │   ├── _sparse.cpython-313.pyc
 │   │   │           │   │   │   ├── _testutils.cpython-313.pyc
-│   │   │           │   │   │   ├── _tmpdirs.cpython-313.pyc
 │   │   │           │   │   │   ├── uarray.cpython-313.pyc
 │   │   │           │   │   │   └── _util.cpython-313.pyc
-│   │   │           │   │   ├── pyprima
-│   │   │           │   │   │   ├── cobyla
-│   │   │           │   │   │   │   ├── cobyla.py
-│   │   │           │   │   │   │   ├── cobylb.py
-│   │   │           │   │   │   │   ├── geometry.py
-│   │   │           │   │   │   │   ├── initialize.py
-│   │   │           │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   │   ├── cobyla.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── cobylb.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── geometry.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── initialize.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── trustregion.cpython-313.pyc
-│   │   │           │   │   │   │   │   └── update.cpython-313.pyc
-│   │   │           │   │   │   │   ├── trustregion.py
-│   │   │           │   │   │   │   └── update.py
-│   │   │           │   │   │   ├── common
-│   │   │           │   │   │   │   ├── _bounds.py
-│   │   │           │   │   │   │   ├── checkbreak.py
-│   │   │           │   │   │   │   ├── consts.py
-│   │   │           │   │   │   │   ├── evaluate.py
-│   │   │           │   │   │   │   ├── history.py
-│   │   │           │   │   │   │   ├── infos.py
-│   │   │           │   │   │   │   ├── __init__.py
-│   │   │           │   │   │   │   ├── linalg.py
-│   │   │           │   │   │   │   ├── _linear_constraints.py
-│   │   │           │   │   │   │   ├── message.py
-│   │   │           │   │   │   │   ├── _nonlinear_constraints.py
-│   │   │           │   │   │   │   ├── powalg.py
-│   │   │           │   │   │   │   ├── preproc.py
-│   │   │           │   │   │   │   ├── present.py
-│   │   │           │   │   │   │   ├── _project.py
-│   │   │           │   │   │   │   ├── __pycache__
-│   │   │           │   │   │   │   │   ├── _bounds.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── checkbreak.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── consts.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── evaluate.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── history.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── infos.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── linalg.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _linear_constraints.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── message.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _nonlinear_constraints.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── powalg.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── preproc.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── present.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── _project.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── ratio.cpython-313.pyc
-│   │   │           │   │   │   │   │   ├── redrho.cpython-313.pyc
-│   │   │           │   │   │   │   │   └── selectx.cpython-313.pyc
-│   │   │           │   │   │   │   ├── ratio.py
-│   │   │           │   │   │   │   ├── redrho.py
-│   │   │           │   │   │   │   └── selectx.py
-│   │   │           │   │   │   ├── __init__.py
-│   │   │           │   │   │   └── __pycache__
-│   │   │           │   │   │       └── __init__.cpython-313.pyc
 │   │   │           │   │   ├── _sparse.py
 │   │   │           │   │   ├── _test_ccallback.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _test_deprecation_call.cpython-313-x86_64-linux-gnu.so
@@ -16019,13 +16181,12 @@
 │   │   │           │   │   │   │   ├── test_doccer.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test__gcutils.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_import_cycles.cpython-313.pyc
-│   │   │           │   │   │   │   ├── test__pep440.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_public_api.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_scipy_version.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test__testutils.cpython-313.pyc
-│   │   │           │   │   │   │   ├── test_tmpdirs.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test__util.cpython-313.pyc
-│   │   │           │   │   │   │   └── test_warnings.cpython-313.pyc
+│   │   │           │   │   │   │   ├── test_warnings.cpython-313.pyc
+│   │   │           │   │   │   │   └── test_xp_capabilities.cpython-313.pyc
 │   │   │           │   │   │   ├── test_array_api.py
 │   │   │           │   │   │   ├── test_bunch.py
 │   │   │           │   │   │   ├── test_ccallback.py
@@ -16034,15 +16195,13 @@
 │   │   │           │   │   │   ├── test_doccer.py
 │   │   │           │   │   │   ├── test__gcutils.py
 │   │   │           │   │   │   ├── test_import_cycles.py
-│   │   │           │   │   │   ├── test__pep440.py
 │   │   │           │   │   │   ├── test_public_api.py
 │   │   │           │   │   │   ├── test_scipy_version.py
 │   │   │           │   │   │   ├── test__testutils.py
-│   │   │           │   │   │   ├── test_tmpdirs.py
 │   │   │           │   │   │   ├── test__util.py
-│   │   │           │   │   │   └── test_warnings.py
+│   │   │           │   │   │   ├── test_warnings.py
+│   │   │           │   │   │   └── test_xp_capabilities.py
 │   │   │           │   │   ├── _testutils.py
-│   │   │           │   │   ├── _tmpdirs.py
 │   │   │           │   │   ├── _uarray
 │   │   │           │   │   │   ├── _backend.py
 │   │   │           │   │   │   ├── __init__.py
@@ -16058,23 +16217,18 @@
 │   │   │           │   │   ├── basic.py
 │   │   │           │   │   ├── _batched_linalg.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── blas.py
-│   │   │           │   │   ├── _blas_subroutines.h
 │   │   │           │   │   ├── cython_blas.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── cython_blas.pxd
-│   │   │           │   │   ├── cython_blas.pyx
 │   │   │           │   │   ├── _cythonized_array_utils.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _cythonized_array_utils.pxd
 │   │   │           │   │   ├── _cythonized_array_utils.pyi
 │   │   │           │   │   ├── cython_lapack.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── cython_lapack.pxd
-│   │   │           │   │   ├── cython_lapack.pyx
 │   │   │           │   │   ├── _decomp_cholesky.py
 │   │   │           │   │   ├── decomp_cholesky.py
 │   │   │           │   │   ├── _decomp_cossin.py
 │   │   │           │   │   ├── _decomp_interpolative.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _decomp_ldl.py
-│   │   │           │   │   ├── _decomp_lu_cython.cpython-313-x86_64-linux-gnu.so
-│   │   │           │   │   ├── _decomp_lu_cython.pyi
 │   │   │           │   │   ├── _decomp_lu.py
 │   │   │           │   │   ├── decomp_lu.py
 │   │   │           │   │   ├── _decomp_polar.py
@@ -16093,16 +16247,13 @@
 │   │   │           │   │   ├── _flapack.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── __init__.pxd
 │   │   │           │   │   ├── __init__.py
+│   │   │           │   │   ├── _internal_matfuncs.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── interpolative.py
 │   │   │           │   │   ├── lapack.py
-│   │   │           │   │   ├── _lapack_subroutines.h
 │   │   │           │   │   ├── _linalg_pythran.cpython-313-x86_64-linux-gnu.so
-│   │   │           │   │   ├── _matfuncs_expm.cpython-313-x86_64-linux-gnu.so
-│   │   │           │   │   ├── _matfuncs_expm.pyi
 │   │   │           │   │   ├── _matfuncs_inv_ssq.py
 │   │   │           │   │   ├── _matfuncs.py
 │   │   │           │   │   ├── matfuncs.py
-│   │   │           │   │   ├── _matfuncs_schur_sqrtm.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _matfuncs_sqrtm.py
 │   │   │           │   │   ├── _matfuncs_sqrtm_triu.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _misc.py
@@ -16150,6 +16301,7 @@
 │   │   │           │   │   ├── _special_matrices.py
 │   │   │           │   │   ├── special_matrices.py
 │   │   │           │   │   ├── tests
+│   │   │           │   │   │   ├── cython_abi_signatures.json
 │   │   │           │   │   │   ├── _cython_examples
 │   │   │           │   │   │   │   ├── extending.pyx
 │   │   │           │   │   │   │   └── meson.build
@@ -16166,6 +16318,7 @@
 │   │   │           │   │   │   │   ├── test_basic.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_batch.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_blas.cpython-313.pyc
+│   │   │           │   │   │   │   ├── test_cython_abi.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_cython_blas.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_cythonized_array_utils.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_cython_lapack.cpython-313.pyc
@@ -16176,6 +16329,7 @@
 │   │   │           │   │   │   │   ├── test_decomp_lu.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_decomp_polar.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_decomp_update.cpython-313.pyc
+│   │   │           │   │   │   │   ├── test_deprecations.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_extending.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_fblas.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_interpolative.cpython-313.pyc
@@ -16190,6 +16344,7 @@
 │   │   │           │   │   │   ├── test_basic.py
 │   │   │           │   │   │   ├── test_batch.py
 │   │   │           │   │   │   ├── test_blas.py
+│   │   │           │   │   │   ├── test_cython_abi.py
 │   │   │           │   │   │   ├── test_cython_blas.py
 │   │   │           │   │   │   ├── test_cythonized_array_utils.py
 │   │   │           │   │   │   ├── test_cython_lapack.py
@@ -16200,6 +16355,7 @@
 │   │   │           │   │   │   ├── test_decomp_polar.py
 │   │   │           │   │   │   ├── test_decomp.py
 │   │   │           │   │   │   ├── test_decomp_update.py
+│   │   │           │   │   │   ├── test_deprecations.py
 │   │   │           │   │   │   ├── test_extending.py
 │   │   │           │   │   │   ├── test_fblas.py
 │   │   │           │   │   │   ├── test_interpolative.py
@@ -16469,6 +16625,7 @@
 │   │   │           │   │   ├── _slsqp_py.py
 │   │   │           │   │   ├── _spectral.py
 │   │   │           │   │   ├── tests
+│   │   │           │   │   │   ├── cython_abi_signatures.json
 │   │   │           │   │   │   ├── _cython_examples
 │   │   │           │   │   │   │   ├── extending.pyx
 │   │   │           │   │   │   │   └── meson.build
@@ -16482,6 +16639,7 @@
 │   │   │           │   │   │   │   ├── test_cobyqa.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_constraint_conversion.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_constraints.cpython-313.pyc
+│   │   │           │   │   │   │   ├── test_cython_abi.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_cython_optimize.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_differentiable_functions.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test__differential_evolution.cpython-313.pyc
@@ -16525,6 +16683,7 @@
 │   │   │           │   │   │   ├── test_cobyqa.py
 │   │   │           │   │   │   ├── test_constraint_conversion.py
 │   │   │           │   │   │   ├── test_constraints.py
+│   │   │           │   │   │   ├── test_cython_abi.py
 │   │   │           │   │   │   ├── test_cython_optimize.py
 │   │   │           │   │   │   ├── test_differentiable_functions.py
 │   │   │           │   │   │   ├── test__differential_evolution.py
@@ -16665,7 +16824,8 @@
 │   │   │           │   │   │   ├── _waveforms.cpython-313.pyc
 │   │   │           │   │   │   ├── waveforms.cpython-313.pyc
 │   │   │           │   │   │   ├── _wavelets.cpython-313.pyc
-│   │   │           │   │   │   └── wavelets.cpython-313.pyc
+│   │   │           │   │   │   ├── wavelets.cpython-313.pyc
+│   │   │           │   │   │   └── _whittaker.cpython-313.pyc
 │   │   │           │   │   ├── _savitzky_golay.py
 │   │   │           │   │   ├── _short_time_fft.py
 │   │   │           │   │   ├── _signal_api.py
@@ -16681,6 +16841,8 @@
 │   │   │           │   │   ├── _spline.pyi
 │   │   │           │   │   ├── _support_alternative_backends.py
 │   │   │           │   │   ├── tests
+│   │   │           │   │   │   ├── data
+│   │   │           │   │   │   │   └── GLB.Ts+dSST.csv
 │   │   │           │   │   │   ├── __init__.py
 │   │   │           │   │   │   ├── mpsig.py
 │   │   │           │   │   │   ├── __pycache__
@@ -16706,6 +16868,7 @@
 │   │   │           │   │   │   │   ├── test_upfirdn.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_waveforms.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_wavelets.cpython-313.pyc
+│   │   │           │   │   │   │   ├── test_whittaker.cpython-313.pyc
 │   │   │           │   │   │   │   └── test_windows.cpython-313.pyc
 │   │   │           │   │   │   ├── _scipy_spectral_test_shim.py
 │   │   │           │   │   │   ├── test_array_tools.py
@@ -16727,6 +16890,7 @@
 │   │   │           │   │   │   ├── test_upfirdn.py
 │   │   │           │   │   │   ├── test_waveforms.py
 │   │   │           │   │   │   ├── test_wavelets.py
+│   │   │           │   │   │   ├── test_whittaker.py
 │   │   │           │   │   │   └── test_windows.py
 │   │   │           │   │   ├── _upfirdn_apply.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _upfirdn.py
@@ -16734,6 +16898,7 @@
 │   │   │           │   │   ├── waveforms.py
 │   │   │           │   │   ├── _wavelets.py
 │   │   │           │   │   ├── wavelets.py
+│   │   │           │   │   ├── _whittaker.py
 │   │   │           │   │   └── windows
 │   │   │           │   │       ├── __init__.py
 │   │   │           │   │       ├── __pycache__
@@ -16775,6 +16940,7 @@
 │   │   │           │   │   │   │   │   ├── test_conversions.cpython-313.pyc
 │   │   │           │   │   │   │   │   ├── test_flow.cpython-313.pyc
 │   │   │           │   │   │   │   │   ├── test_graph_laplacian.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── test_index_arrays_dtype.cpython-313.pyc
 │   │   │           │   │   │   │   │   ├── test_matching.cpython-313.pyc
 │   │   │           │   │   │   │   │   ├── test_pydata_sparse.cpython-313.pyc
 │   │   │           │   │   │   │   │   ├── test_reordering.cpython-313.pyc
@@ -16785,6 +16951,7 @@
 │   │   │           │   │   │   │   ├── test_conversions.py
 │   │   │           │   │   │   │   ├── test_flow.py
 │   │   │           │   │   │   │   ├── test_graph_laplacian.py
+│   │   │           │   │   │   │   ├── test_index_arrays_dtype.py
 │   │   │           │   │   │   │   ├── test_matching.py
 │   │   │           │   │   │   │   ├── test_pydata_sparse.py
 │   │   │           │   │   │   │   ├── test_reordering.py
@@ -16998,9 +17165,6 @@
 │   │   │           │   │   ├── _sputils.py
 │   │   │           │   │   ├── sputils.py
 │   │   │           │   │   └── tests
-│   │   │           │   │       ├── data
-│   │   │           │   │       │   ├── csc_py2.npz
-│   │   │           │   │       │   └── csc_py3.npz
 │   │   │           │   │       ├── __init__.py
 │   │   │           │   │       ├── __pycache__
 │   │   │           │   │       │   ├── __init__.cpython-313.pyc
@@ -17228,7 +17392,8 @@
 │   │   │           │   │   │   ├── spfun_stats.cpython-313.pyc
 │   │   │           │   │   │   ├── _spherical_bessel.cpython-313.pyc
 │   │   │           │   │   │   ├── _support_alternative_backends.cpython-313.pyc
-│   │   │           │   │   │   └── _testutils.cpython-313.pyc
+│   │   │           │   │   │   ├── _testutils.cpython-313.pyc
+│   │   │           │   │   │   └── _ufunc_tools.cpython-313.pyc
 │   │   │           │   │   ├── _sf_error.py
 │   │   │           │   │   ├── sf_error.py
 │   │   │           │   │   ├── _specfun.cpython-313-x86_64-linux-gnu.so
@@ -17241,6 +17406,7 @@
 │   │   │           │   │   ├── _test_internal.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _test_internal.pyi
 │   │   │           │   │   ├── tests
+│   │   │           │   │   │   ├── cython_abi_signatures.json
 │   │   │           │   │   │   ├── _cython_examples
 │   │   │           │   │   │   │   ├── extending.pyx
 │   │   │           │   │   │   │   └── meson.build
@@ -17262,6 +17428,7 @@
 │   │   │           │   │   │   │   ├── test_cdft_asymptotic.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_cephes_intp_cast.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_cosine_distr.cpython-313.pyc
+│   │   │           │   │   │   │   ├── test_cython_abi.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_cython_special.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_data.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_dd.cpython-313.pyc
@@ -17307,6 +17474,7 @@
 │   │   │           │   │   │   │   ├── test_sph_harm.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_support_alternative_backends.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_trig.cpython-313.pyc
+│   │   │           │   │   │   │   ├── test_ufunc_infra.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_ufunc_signatures.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_wright_bessel.cpython-313.pyc
 │   │   │           │   │   │   │   ├── test_wrightomega.cpython-313.pyc
@@ -17319,6 +17487,7 @@
 │   │   │           │   │   │   ├── test_cdft_asymptotic.py
 │   │   │           │   │   │   ├── test_cephes_intp_cast.py
 │   │   │           │   │   │   ├── test_cosine_distr.py
+│   │   │           │   │   │   ├── test_cython_abi.py
 │   │   │           │   │   │   ├── test_cython_special.py
 │   │   │           │   │   │   ├── test_data.py
 │   │   │           │   │   │   ├── test_dd.py
@@ -17364,6 +17533,7 @@
 │   │   │           │   │   │   ├── test_sph_harm.py
 │   │   │           │   │   │   ├── test_support_alternative_backends.py
 │   │   │           │   │   │   ├── test_trig.py
+│   │   │           │   │   │   ├── test_ufunc_infra.py
 │   │   │           │   │   │   ├── test_ufunc_signatures.py
 │   │   │           │   │   │   ├── test_wright_bessel.py
 │   │   │           │   │   │   ├── test_wrightomega.py
@@ -17371,12 +17541,8 @@
 │   │   │           │   │   ├── _testutils.py
 │   │   │           │   │   ├── _ufuncs.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _ufuncs_cxx.cpython-313-x86_64-linux-gnu.so
-│   │   │           │   │   ├── _ufuncs_cxx_defs.h
-│   │   │           │   │   ├── _ufuncs_cxx.pxd
-│   │   │           │   │   ├── _ufuncs_cxx.pyx
-│   │   │           │   │   ├── _ufuncs_defs.h
 │   │   │           │   │   ├── _ufuncs.pyi
-│   │   │           │   │   └── _ufuncs.pyx
+│   │   │           │   │   └── _ufunc_tools.py
 │   │   │           │   ├── stats
 │   │   │           │   │   ├── _ansari_swilk_statistics.cpython-313-x86_64-linux-gnu.so
 │   │   │           │   │   ├── _axis_nan_policy.py
@@ -17608,6 +17774,15 @@
 │   │   │           │   │   │   ├── test_entropy.py
 │   │   │           │   │   │   ├── test_fast_gen_inversion.py
 │   │   │           │   │   │   ├── test_fit.py
+│   │   │           │   │   │   ├── test_generation
+│   │   │           │   │   │   │   ├── generate_fisher_exact_results_from_r.R
+│   │   │           │   │   │   │   ├── __pycache__
+│   │   │           │   │   │   │   │   ├── reference_distribution_infrastructure_tests.cpython-313.pyc
+│   │   │           │   │   │   │   │   ├── reference_distributions.cpython-313.pyc
+│   │   │           │   │   │   │   │   └── studentized_range_mpmath_ref.cpython-313.pyc
+│   │   │           │   │   │   │   ├── reference_distribution_infrastructure_tests.py
+│   │   │           │   │   │   │   ├── reference_distributions.py
+│   │   │           │   │   │   │   └── studentized_range_mpmath_ref.py
 │   │   │           │   │   │   ├── test_hypotests.py
 │   │   │           │   │   │   ├── test_kdeoth.py
 │   │   │           │   │   │   ├── test_marray.py
@@ -17641,18 +17816,20 @@
 │   │   │           │   │   ├── _warnings_errors.py
 │   │   │           │   │   └── _wilcoxon.py
 │   │   │           │   └── version.py
-│   │   │           ├── scipy-1.17.1.dist-info
+│   │   │           ├── scipy-1.18.0.dist-info
 │   │   │           │   ├── INSTALLER
 │   │   │           │   ├── LICENSE.txt
 │   │   │           │   ├── METADATA
 │   │   │           │   ├── RECORD
+│   │   │           │   ├── sboms
+│   │   │           │   │   └── auditwheel.cdx.json
 │   │   │           │   └── WHEEL
 │   │   │           ├── scipy.libs
 │   │   │           │   ├── libgfortran-040039e1-0352e75f.so.5.0.0
-│   │   │           │   ├── libgfortran-8f1e9814.so.5.0.0
-│   │   │           │   ├── libquadmath-828275a7.so.0.0.0
+│   │   │           │   ├── libgfortran-83c28eba.so.5.0.0
+│   │   │           │   ├── libquadmath-2284e583.so.0.0.0
 │   │   │           │   ├── libquadmath-96973f99-934c22de.so.0.0.0
-│   │   │           │   └── libscipy_openblas-6cdc3b4a.so
+│   │   │           │   └── libscipy_openblas-5f890258.so
 │   │   │           ├── six-1.17.0.dist-info
 │   │   │           │   ├── INSTALLER
 │   │   │           │   ├── LICENSE
@@ -20090,154 +20267,199 @@
 │   │   │               └── WHEEL
 │   │   ├── lib64 -> lib
 │   │   └── pyvenv.cfg
-│   ├── book_recommondation
-│   │   ├── asgi.py
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-312.pyc
-│   │   │   ├── __init__.cpython-313.pyc
-│   │   │   ├── settings.cpython-312.pyc
-│   │   │   ├── settings.cpython-313.pyc
-│   │   │   ├── urls.cpython-312.pyc
-│   │   │   ├── urls.cpython-313.pyc
-│   │   │   ├── wsgi.cpython-312.pyc
-│   │   │   └── wsgi.cpython-313.pyc
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   └── wsgi.py
-│   ├── books
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── __init__.py
-│   │   ├── management
-│   │   │   ├── commands
-│   │   │   │   ├── import_books.py
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── __pycache__
-│   │   │   │   │   ├── import_books.cpython-312.pyc
-│   │   │   │   │   ├── import_books.cpython-313.pyc
-│   │   │   │   │   ├── __init__.cpython-312.pyc
-│   │   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │   │   │   └── seed_interactions.cpython-313.pyc
-│   │   │   │   └── seed_interactions.py
-│   │   │   ├── __init__.py
-│   │   │   └── __pycache__
-│   │   │       ├── __init__.cpython-312.pyc
-│   │   │       └── __init__.cpython-313.pyc
-│   │   ├── migrations
-│   │   │   ├── 0001_initial.py
-│   │   │   ├── __init__.py
-│   │   │   └── __pycache__
-│   │   │       ├── 0001_initial.cpython-312.pyc
-│   │   │       ├── 0001_initial.cpython-313.pyc
-│   │   │       ├── 0002_bookdwelltime_searchhistory.cpython-313.pyc
-│   │   │       ├── 0003_book_department_book_embedding_and_more.cpython-313.pyc
-│   │   │       ├── 0004_alter_book_embedding.cpython-313.pyc
-│   │   │       ├── 0005_alter_book_authors_alter_book_categories_and_more.cpython-313.pyc
-│   │   │       ├── 0006_alter_book_categories_alter_book_title.cpython-313.pyc
-│   │   │       ├── __init__.cpython-312.pyc
-│   │   │       └── __init__.cpython-313.pyc
-│   │   ├── models.py
-│   │   ├── __pycache__
-│   │   │   ├── admin.cpython-312.pyc
-│   │   │   ├── admin.cpython-313.pyc
-│   │   │   ├── apps.cpython-312.pyc
-│   │   │   ├── apps.cpython-313.pyc
-│   │   │   ├── __init__.cpython-312.pyc
-│   │   │   ├── __init__.cpython-313.pyc
-│   │   │   ├── models.cpython-312.pyc
-│   │   │   ├── models.cpython-313.pyc
-│   │   │   ├── serializers.cpython-312.pyc
-│   │   │   ├── serializers.cpython-313.pyc
-│   │   │   ├── urls.cpython-312.pyc
-│   │   │   ├── urls.cpython-313.pyc
-│   │   │   ├── views.cpython-312.pyc
-│   │   │   └── views.cpython-313.pyc
-│   │   ├── serializers.py
-│   │   ├── services
-│   │   │   ├── ml_engine.py
-│   │   │   ├── __pycache__
-│   │   │   │   ├── recommender.cpython-312.pyc
-│   │   │   │   └── recommender.cpython-313.pyc
-│   │   │   └── recommender.py
-│   │   ├── tests.py
-│   │   ├── urls.py
-│   │   └── views.py
-│   ├── borrows
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── __init__.py
-│   │   ├── migrations
-│   │   │   ├── 0001_initial.py
-│   │   │   ├── __init__.py
-│   │   │   └── __pycache__
-│   │   │       ├── 0001_initial.cpython-312.pyc
-│   │   │       ├── 0001_initial.cpython-313.pyc
-│   │   │       ├── 0002_borrow_rejection_reason_alter_borrow_status.cpython-313.pyc
-│   │   │       ├── 0003_borrow_borrow_date_borrow_due_date_and_more.cpython-313.pyc
-│   │   │       ├── __init__.cpython-312.pyc
-│   │   │       └── __init__.cpython-313.pyc
-│   │   ├── models.py
-│   │   ├── __pycache__
-│   │   │   ├── admin.cpython-312.pyc
-│   │   │   ├── admin.cpython-313.pyc
-│   │   │   ├── apps.cpython-312.pyc
-│   │   │   ├── apps.cpython-313.pyc
-│   │   │   ├── __init__.cpython-312.pyc
-│   │   │   ├── __init__.cpython-313.pyc
-│   │   │   ├── models.cpython-312.pyc
-│   │   │   ├── models.cpython-313.pyc
-│   │   │   ├── serializers.cpython-312.pyc
-│   │   │   ├── serializers.cpython-313.pyc
-│   │   │   ├── urls.cpython-312.pyc
-│   │   │   ├── urls.cpython-313.pyc
-│   │   │   ├── views.cpython-312.pyc
-│   │   │   └── views.cpython-313.pyc
-│   │   ├── serializers.py
-│   │   ├── tests.py
-│   │   ├── urls.py
-│   │   └── views.py
-│   ├── data
-│   │   └── books_6k.csv
-│   ├── manage.py
-│   ├── messaging
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── __init__.py
-│   │   ├── migrations
-│   │   │   ├── 0001_initial.py
-│   │   │   ├── __init__.py
-│   │   │   └── __pycache__
-│   │   │       ├── 0001_initial.cpython-312.pyc
-│   │   │       ├── 0001_initial.cpython-313.pyc
-│   │   │       ├── __init__.cpython-312.pyc
-│   │   │       └── __init__.cpython-313.pyc
-│   │   ├── models.py
-│   │   ├── __pycache__
-│   │   │   ├── admin.cpython-312.pyc
-│   │   │   ├── admin.cpython-313.pyc
-│   │   │   ├── apps.cpython-312.pyc
-│   │   │   ├── apps.cpython-313.pyc
-│   │   │   ├── __init__.cpython-312.pyc
-│   │   │   ├── __init__.cpython-313.pyc
-│   │   │   ├── models.cpython-312.pyc
-│   │   │   ├── models.cpython-313.pyc
-│   │   │   ├── serializers.cpython-312.pyc
-│   │   │   ├── serializers.cpython-313.pyc
-│   │   │   ├── urls.cpython-312.pyc
-│   │   │   ├── urls.cpython-313.pyc
-│   │   │   ├── views.cpython-312.pyc
-│   │   │   └── views.cpython-313.pyc
-│   │   ├── serializers.py
-│   │   ├── urls.py
-│   │   └── views.py
-│   ├── migrations
 │   ├── qa_tests
 │   │   ├── e2e_student_flow.py
 │   │   └── librarian_e2e.py
 │   ├── README.md
-│   └── requirements.txt
-├── BLUEPRINT_REPORT.md
+│   ├── requirements.txt
+│   └── staticfiles
+│       ├── admin
+│       │   ├── css
+│       │   │   ├── autocomplete.css
+│       │   │   ├── base.css
+│       │   │   ├── changelists.css
+│       │   │   ├── dark_mode.css
+│       │   │   ├── dashboard.css
+│       │   │   ├── forms.css
+│       │   │   ├── login.css
+│       │   │   ├── nav_sidebar.css
+│       │   │   ├── responsive.css
+│       │   │   ├── responsive_rtl.css
+│       │   │   ├── rtl.css
+│       │   │   ├── unusable_password_field.css
+│       │   │   ├── vendor
+│       │   │   │   └── select2
+│       │   │   │       ├── LICENSE-SELECT2.md
+│       │   │   │       ├── select2.css
+│       │   │   │       └── select2.min.css
+│       │   │   └── widgets.css
+│       │   ├── img
+│       │   │   ├── calendar-icons.svg
+│       │   │   ├── icon-addlink.svg
+│       │   │   ├── icon-alert-dark.svg
+│       │   │   ├── icon-alert.svg
+│       │   │   ├── icon-calendar.svg
+│       │   │   ├── icon-changelink.svg
+│       │   │   ├── icon-clock.svg
+│       │   │   ├── icon-debug-dark.svg
+│       │   │   ├── icon-debug.svg
+│       │   │   ├── icon-deletelink.svg
+│       │   │   ├── icon-hidelink.svg
+│       │   │   ├── icon-info-dark.svg
+│       │   │   ├── icon-info.svg
+│       │   │   ├── icon-no-dark.svg
+│       │   │   ├── icon-no.svg
+│       │   │   ├── icon-unknown-alt.svg
+│       │   │   ├── icon-unknown.svg
+│       │   │   ├── icon-viewlink.svg
+│       │   │   ├── icon-yes-dark.svg
+│       │   │   ├── icon-yes.svg
+│       │   │   ├── inline-delete.svg
+│       │   │   ├── README.md
+│       │   │   ├── search.svg
+│       │   │   ├── selector-icons.svg
+│       │   │   ├── sorting-icons.svg
+│       │   │   ├── tooltag-add.svg
+│       │   │   └── tooltag-arrowright.svg
+│       │   └── js
+│       │       ├── actions.js
+│       │       ├── admin
+│       │       │   ├── DateTimeShortcuts.js
+│       │       │   └── RelatedObjectLookups.js
+│       │       ├── autocomplete.js
+│       │       ├── calendar.js
+│       │       ├── cancel.js
+│       │       ├── change_form.js
+│       │       ├── core.js
+│       │       ├── filters.js
+│       │       ├── inlines.js
+│       │       ├── jquery.init.js
+│       │       ├── nav_sidebar.js
+│       │       ├── popup_response.js
+│       │       ├── prepopulate_init.js
+│       │       ├── prepopulate.js
+│       │       ├── SelectBox.js
+│       │       ├── SelectFilter2.js
+│       │       ├── theme.js
+│       │       ├── urlify.js
+│       │       └── vendor
+│       │           ├── jquery
+│       │           │   ├── jquery.js
+│       │           │   ├── jquery.min.js
+│       │           │   └── LICENSE.txt
+│       │           ├── select2
+│       │           │   ├── i18n
+│       │           │   │   ├── af.js
+│       │           │   │   ├── ar.js
+│       │           │   │   ├── az.js
+│       │           │   │   ├── bg.js
+│       │           │   │   ├── bn.js
+│       │           │   │   ├── bs.js
+│       │           │   │   ├── ca.js
+│       │           │   │   ├── cs.js
+│       │           │   │   ├── da.js
+│       │           │   │   ├── de.js
+│       │           │   │   ├── dsb.js
+│       │           │   │   ├── el.js
+│       │           │   │   ├── en.js
+│       │           │   │   ├── es.js
+│       │           │   │   ├── et.js
+│       │           │   │   ├── eu.js
+│       │           │   │   ├── fa.js
+│       │           │   │   ├── fi.js
+│       │           │   │   ├── fr.js
+│       │           │   │   ├── gl.js
+│       │           │   │   ├── he.js
+│       │           │   │   ├── hi.js
+│       │           │   │   ├── hr.js
+│       │           │   │   ├── hsb.js
+│       │           │   │   ├── hu.js
+│       │           │   │   ├── hy.js
+│       │           │   │   ├── id.js
+│       │           │   │   ├── is.js
+│       │           │   │   ├── it.js
+│       │           │   │   ├── ja.js
+│       │           │   │   ├── ka.js
+│       │           │   │   ├── km.js
+│       │           │   │   ├── ko.js
+│       │           │   │   ├── lt.js
+│       │           │   │   ├── lv.js
+│       │           │   │   ├── mk.js
+│       │           │   │   ├── ms.js
+│       │           │   │   ├── nb.js
+│       │           │   │   ├── ne.js
+│       │           │   │   ├── nl.js
+│       │           │   │   ├── pl.js
+│       │           │   │   ├── ps.js
+│       │           │   │   ├── pt-BR.js
+│       │           │   │   ├── pt.js
+│       │           │   │   ├── ro.js
+│       │           │   │   ├── ru.js
+│       │           │   │   ├── sk.js
+│       │           │   │   ├── sl.js
+│       │           │   │   ├── sq.js
+│       │           │   │   ├── sr-Cyrl.js
+│       │           │   │   ├── sr.js
+│       │           │   │   ├── sv.js
+│       │           │   │   ├── th.js
+│       │           │   │   ├── tk.js
+│       │           │   │   ├── tr.js
+│       │           │   │   ├── uk.js
+│       │           │   │   ├── vi.js
+│       │           │   │   ├── zh-CN.js
+│       │           │   │   └── zh-TW.js
+│       │           │   ├── LICENSE.md
+│       │           │   ├── select2.full.js
+│       │           │   └── select2.full.min.js
+│       │           └── xregexp
+│       │               ├── LICENSE.txt
+│       │               ├── xregexp.js
+│       │               └── xregexp.min.js
+│       └── rest_framework
+│           ├── css
+│           │   ├── bootstrap.min.css
+│           │   ├── bootstrap.min.css.map
+│           │   ├── bootstrap-theme.min.css
+│           │   ├── bootstrap-theme.min.css.map
+│           │   ├── bootstrap-tweaks.css
+│           │   ├── default.css
+│           │   ├── font-awesome-4.0.3.css
+│           │   └── prettify.css
+│           ├── docs
+│           │   ├── css
+│           │   │   ├── base.css
+│           │   │   ├── highlight.css
+│           │   │   └── jquery.json-view.min.css
+│           │   ├── img
+│           │   │   ├── favicon.ico
+│           │   │   └── grid.png
+│           │   └── js
+│           │       ├── api.js
+│           │       ├── highlight.pack.js
+│           │       └── jquery.json-view.min.js
+│           ├── fonts
+│           │   ├── fontawesome-webfont.eot
+│           │   ├── fontawesome-webfont.svg
+│           │   ├── fontawesome-webfont.ttf
+│           │   ├── fontawesome-webfont.woff
+│           │   ├── glyphicons-halflings-regular.eot
+│           │   ├── glyphicons-halflings-regular.svg
+│           │   ├── glyphicons-halflings-regular.ttf
+│           │   ├── glyphicons-halflings-regular.woff
+│           │   └── glyphicons-halflings-regular.woff2
+│           ├── img
+│           │   ├── glyphicons-halflings.png
+│           │   ├── glyphicons-halflings-white.png
+│           │   └── grid.png
+│           └── js
+│               ├── ajax-form.js
+│               ├── bootstrap.min.js
+│               ├── coreapi-0.1.1.js
+│               ├── csrf.js
+│               ├── default.js
+│               ├── jquery-3.7.1.min.js
+│               ├── load-ajax-form.js
+│               └── prettify-min.js
 ├── database
 │   └── ER_DIAGRAM.md
 ├── frontend
@@ -20245,7 +20467,6 @@
 │   │   ├── assets
 │   │   │   ├── index-C0h9dhIA.css
 │   │   │   └── index-DXQh3fl8.js
-│   │   ├── data
 │   │   ├── images
 │   │   │   ├── bookshelf.jpeg
 │   │   │   ├── calm_reading.jpeg
@@ -35064,7 +35285,6 @@
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── public
-│   │   ├── data
 │   │   ├── images
 │   │   │   ├── bookshelf.jpeg
 │   │   │   ├── calm_reading.jpeg
@@ -35109,7 +35329,6 @@
 │   │   │   ├── Sidebar.jsx
 │   │   │   └── Toast.jsx
 │   │   ├── index.css
-│   │   ├── lib
 │   │   ├── main.jsx
 │   │   ├── pages
 │   │   │   ├── AboutUs.jsx
@@ -35135,4 +35354,4 @@
 ├── README.md
 └── structure.txt
 
-5073 directories, 30063 files
+5104 directories, 30251 files
