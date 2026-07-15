@@ -82,7 +82,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const ROLE_DESTINATIONS = { admin: "/admin", librarian: "/librarian", student: "/account" };
+  const ROLE_DESTINATIONS = { admin: "/admin", librarian: "/librarian", student: "/books" };
 
   const handleLogin = async e => {
     e.preventDefault();
@@ -133,7 +133,7 @@ export default function Login() {
 
       localStorage.setItem("role", userRole);
       setSuccess("Login successful! Redirecting...");
-      navigate(ROLE_DESTINATIONS[userRole] ?? "/account", { replace: true });
+      navigate(ROLE_DESTINATIONS[userRole] ?? "/Books", { replace: true });
     } catch (err) {
       const errorMsg =
         err.message || err.detail || err.error || err.non_field_errors?.[0] ||
