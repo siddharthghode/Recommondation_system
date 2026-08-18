@@ -26,13 +26,28 @@ class LibrarianDashboardView(APIView):
             return Response({"error": "Forbidden"}, status=403)
 
         # Librarians see department-scoped stats; admins see global stats
-        if request.user.role == "librarian":
+        if request.user.role == "librarian" and not request.user.is_superuser:
             department = request.user.department
+            if not department:
+                return Response({
+                    "books": {"total": 0, "in_stock": 0, "out_of_stock": 0},
+                    "students": 0,
+                    "borrows": {"requested": 0, "approved": 0, "returned": 0, "total": 0},
+                    "most_viewed_books": [],
+                    "most_borrowed_books": [],
+                    "active_students": {"total": 0, "last_30_days": 0},
+                    "top_categories": [],
+                    "borrow_trends": [],
+                })
         else:
             department = None
 
-        # Book stats: always use full catalogue total; dept scope for in/out stock
-        all_books = Book.objects.all()
+        # 📚 BOOK STATS (Strictly department-scoped for librarians)
+        if department:
+            all_books = Book.objects.filter(department=department)
+        else:
+            all_books = Book.objects.all()
+
         book_stats = all_books.aggregate(
             total=Count("id"),
             in_stock=Count("id", filter=Q(quantity__gt=0)),
@@ -41,17 +56,17 @@ class LibrarianDashboardView(APIView):
 
         # 👩‍🎓 STUDENT STATS
         if department:
-            students = User.objects.select_related("department").filter(
+            students = User.objects.filter(
                 role="student",
                 profile__department=department
             ).count()
         else:
-            students = User.objects.select_related("department").filter(role="student").count()
+            students = User.objects.filter(role="student").count()
 
         # 📦 BORROW STATS
         if department:
             borrows = Borrow.objects.select_related("user", "book", "user__profile").filter(
-                user__profile__department=department
+                book__department=department
             )
         else:
             borrows = Borrow.objects.select_related("user", "book", "user__profile").all()
@@ -78,12 +93,15 @@ class LibrarianDashboardView(APIView):
         active_students_30d = borrows.filter(requested_at__gte=since).values("user").distinct().count()
 
         # 👁️ MOST VIEWED BOOKS
-        # 👁️ MOST VIEWED BOOKS
-        mv_qs = BookInteraction.objects.select_related("book", "user", "user__profile").filter(
-            interaction_type="view"
-        )
         if department:
-            mv_qs = mv_qs.filter(user__profile__department=department)
+            mv_qs = BookInteraction.objects.select_related("book", "user").filter(
+                interaction_type="view",
+                book__department=department
+            )
+        else:
+            mv_qs = BookInteraction.objects.select_related("book", "user").filter(
+                interaction_type="view"
+            )
 
         most_viewed = (
             mv_qs
@@ -92,38 +110,48 @@ class LibrarianDashboardView(APIView):
             .order_by("-count")[:5]
         )
 
-        # 📊 TOP CATEGORIES (DB-side split + count)
+        # 📊 TOP CATEGORIES (DB-side split + count on PostgreSQL; fallback in test runner)
         top_categories = []
-        with connection.cursor() as cursor:
-            if department:
-                cursor.execute(
-                    """
-                    SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
-                           COUNT(*) AS count
-                    FROM books_book b
-                    WHERE b.categories IS NOT NULL
-                      AND b.categories <> ''
-                      AND b.department_id = %s
-                    GROUP BY category
-                    ORDER BY count DESC
-                    LIMIT 5;
-                    """,
-                    [department.id],
-                )
-            else:
-                cursor.execute(
-                    """
-                    SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
-                           COUNT(*) AS count
-                    FROM books_book b
-                    WHERE b.categories IS NOT NULL
-                      AND b.categories <> ''
-                    GROUP BY category
-                    ORDER BY count DESC
-                    LIMIT 5;
-                    """
-                )
-            top_categories = [{"category": row[0], "count": row[1]} for row in cursor.fetchall()]
+        if connection.vendor == "postgresql":
+            with connection.cursor() as cursor:
+                if department:
+                    cursor.execute(
+                        """
+                        SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
+                               COUNT(*) AS count
+                        FROM books_book b
+                        WHERE b.categories IS NOT NULL
+                          AND b.categories <> ''
+                          AND b.department_id = %s
+                        GROUP BY category
+                        ORDER BY count DESC
+                        LIMIT 5;
+                        """,
+                        [department.id],
+                    )
+                else:
+                    cursor.execute(
+                        """
+                        SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
+                               COUNT(*) AS count
+                        FROM books_book b
+                        WHERE b.categories IS NOT NULL
+                          AND b.categories <> ''
+                        GROUP BY category
+                        ORDER BY count DESC
+                        LIMIT 5;
+                        """
+                    )
+                top_categories = [{"category": row[0], "count": row[1]} for row in cursor.fetchall()]
+        else:
+            cat_counts = {}
+            for cats in all_books.exclude(categories__isnull=True).exclude(categories="").values_list("categories", flat=True):
+                for cat in cats.split(","):
+                    c_clean = cat.strip()
+                    if c_clean:
+                        cat_counts[c_clean] = cat_counts.get(c_clean, 0) + 1
+            sorted_cats = sorted(cat_counts.items(), key=lambda x: x[1], reverse=True)[:5]
+            top_categories = [{"category": c, "count": cnt} for c, cnt in sorted_cats]
 
         # 📈 BORROW TRENDS (DB-side date buckets + counts)
         borrow_trends = list(
@@ -168,7 +196,9 @@ class StudentsListView(APIView):
         if request.user.role not in ("librarian", "admin"):
             return Response({"error": "Forbidden"}, status=403)
 
-        if request.user.role == 'librarian':
+        if request.user.role == 'librarian' and not request.user.is_superuser:
+            if not request.user.department:
+                return Response([])
             qs = User.objects.select_related("profile", "profile__department").filter(
                 role='student',
                 profile__department=request.user.department,
@@ -189,8 +219,8 @@ class StudentRecommendationsView(APIView):
         student = get_object_or_404(User, id=user_id, role='student')
 
         # librarians may only view students from their department
-        if request.user.role == 'librarian':
-            if not getattr(student, 'profile', None) or student.profile.department != request.user.department:
+        if request.user.role == 'librarian' and not request.user.is_superuser:
+            if not request.user.department or not getattr(student, 'profile', None) or student.profile.department != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
 
         limit = int(request.GET.get('limit', 6))
@@ -215,8 +245,8 @@ class StudentBorrowsView(APIView):
 
         student = get_object_or_404(User, id=user_id, role='student')
 
-        if request.user.role == 'librarian':
-            if not getattr(student, 'profile', None) or student.profile.department != request.user.department:
+        if request.user.role == 'librarian' and not request.user.is_superuser:
+            if not request.user.department or not getattr(student, 'profile', None) or student.profile.department != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
 
         borrows = Borrow.objects.select_related("book", "user").filter(user=student)
@@ -232,8 +262,8 @@ class StudentAnalyticsView(APIView):
 
         student = get_object_or_404(User, id=user_id, role='student')
 
-        if request.user.role == 'librarian':
-            if not getattr(student, 'profile', None) or student.profile.department != request.user.department:
+        if request.user.role == 'librarian' and not request.user.is_superuser:
+            if not request.user.department or not getattr(student, 'profile', None) or student.profile.department != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
 
         # Get interactions

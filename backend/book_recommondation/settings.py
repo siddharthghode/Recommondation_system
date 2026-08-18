@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 from dotenv import load_dotenv
 
 # Load environment variables from a .env file when present
@@ -101,6 +102,12 @@ DATABASES = {
         "PORT": os.getenv('POSTGRES_PORT', '5432'),
     }
 }
+
+if 'test' in sys.argv or os.getenv('DJANGO_TESTING') == 'true':
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
 
 
 # Password validation
