@@ -41,9 +41,9 @@ def request_otp(email: str) -> tuple[bool, str]:
     """
     email = email.strip().lower()
 
-    # Check if user already exists (enumeration-safe response)
+    # Check if user already exists
     if User.objects.filter(email__iexact=email).exists():
-        return True, "If this email is eligible for registration, a verification code has been sent."
+        return False, "An account with this email already exists. Please log in instead."
 
     # Resend protection: 60-second cooldown
     last_otp = EmailOTP.objects.filter(email=email).order_by('-created_at').first()

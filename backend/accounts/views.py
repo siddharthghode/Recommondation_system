@@ -176,6 +176,13 @@ class GoogleLoginView(APIView):
         if not google_user_info or not google_user_info.get('email'):
             return Response({'error': 'Invalid or expired Google token. Please try again.'}, status=400)
 
+        # Validate token audience matches our client ID
+        expected_client_id = settings.GOOGLE_CLIENT_ID
+        if expected_client_id:
+            aud = google_user_info.get('aud') or google_user_info.get('azp')
+            if aud != expected_client_id:
+                return Response({'error': 'Google token audience mismatch.'}, status=400)
+
         email = google_user_info.get('email', '').lower().strip()
         first_name = google_user_info.get('given_name') or google_user_info.get('name', '').split(' ')[0] or ''
         last_name = google_user_info.get('family_name') or (google_user_info.get('name', '').split(' ')[-1] if ' ' in google_user_info.get('name', '') else '')
