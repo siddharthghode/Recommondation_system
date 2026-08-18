@@ -39,6 +39,27 @@ export const login = (username, password) =>
     return data;
   });
 
+export const googleLogin = (payload) =>
+  fetch(`${BASE_URL}/auth/google/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(typeof payload === "string" ? { credential: payload } : payload),
+  }).then(async res => {
+    const contentType = res.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      const text = await res.text();
+      throw new Error(`Server error: ${res.status} ${res.statusText}`);
+    }
+    const data = await res.json();
+    if (!res.ok) {
+      const error = new Error(data.error || data.detail || "Google authentication failed");
+      error.data = data;
+      throw error;
+    }
+    return data;
+  });
+
+
 export const fetchBooks = (params = {}) => {
   const query = new URLSearchParams({
     page_size: 100,

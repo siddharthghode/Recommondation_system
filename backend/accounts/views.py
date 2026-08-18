@@ -62,6 +62,136 @@ class LoginView(APIView):
 
 
 # --------------------
+# Google OAuth Login & Registration
+# --------------------
+class GoogleLoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        import json
+        import urllib.request
+        from django.conf import settings
+        from django.utils.crypto import get_random_string
+        from .models import User, Department
+
+        token = request.data.get('credential') or request.data.get('id_token') or request.data.get('access_token')
+        if not token:
+            return Response({'error': 'Google credential or token is required'}, status=400)
+
+        # Extra registration metadata if provided by frontend
+        req_department = request.data.get('department')
+        req_year = request.data.get('year')
+        req_role = request.data.get('role', 'student')
+
+        google_user_info = None
+
+        # 1. Try Google ID Token verification endpoint
+        try:
+            req_url = f"https://oauth2.googleapis.com/tokeninfo?id_token={token}"
+            req = urllib.request.Request(req_url, headers={'User-Agent': 'Django-Backend'})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                if resp.status == 200:
+                    data = json.loads(resp.read().decode('utf-8'))
+                    if 'email' in data:
+                        google_user_info = data
+        except Exception:
+            pass
+
+        # 2. Fallback: Try Google Access Token userinfo endpoint
+        if not google_user_info:
+            try:
+                req_url = "https://www.googleapis.com/oauth2/v3/userinfo"
+                req = urllib.request.Request(req_url, headers={'Authorization': f'Bearer {token}', 'User-Agent': 'Django-Backend'})
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    if resp.status == 200:
+                        data = json.loads(resp.read().decode('utf-8'))
+                        if 'email' in data:
+                            google_user_info = data
+            except Exception:
+                pass
+
+        if not google_user_info or not google_user_info.get('email'):
+            return Response({'error': 'Invalid or expired Google token. Please try again.'}, status=400)
+
+        email = google_user_info.get('email', '').lower().strip()
+        first_name = google_user_info.get('given_name') or google_user_info.get('name', '').split(' ')[0] or ''
+        last_name = google_user_info.get('family_name') or (google_user_info.get('name', '').split(' ')[-1] if ' ' in google_user_info.get('name', '') else '')
+
+        # Check if user with this email already exists
+        user = User.objects.filter(email=email).first()
+
+        if not user:
+            # Check if user exists by username derived from email
+            base_username = email.split('@')[0]
+            username = base_username
+            counter = 1
+            while User.objects.filter(username=username).exists():
+                username = f"{base_username}_{counter}"
+                counter += 1
+
+            # Only allow student role creation via public Google OAuth
+            role = 'student' if req_role not in ['librarian', 'admin'] else 'student'
+
+            user = User.objects.create(
+                username=username,
+                email=email,
+                first_name=first_name,
+                last_name=last_name,
+                role=role
+            )
+            user.set_unusable_password()
+            user.save()
+
+            # Configure student profile
+            if hasattr(user, 'profile'):
+                profile = user.profile
+                # Set a friendly student ID based on username if default
+                if not profile.student_id or profile.student_id == username:
+                    profile.student_id = f"G-{username}"
+                
+                if req_department:
+                    dept_obj, _ = Department.objects.get_or_create(name=req_department)
+                    profile.department = dept_obj
+
+                if req_year:
+                    try:
+                        profile.year = int(req_year)
+                    except (ValueError, TypeError):
+                        pass
+
+                profile.save()
+        else:
+            # Optionally update profile details if provided
+            if hasattr(user, 'profile') and (req_department or req_year):
+                profile = user.profile
+                if req_department:
+                    dept_obj, _ = Department.objects.get_or_create(name=req_department)
+                    profile.department = dept_obj
+                if req_year:
+                    try:
+                        profile.year = int(req_year)
+                    except (ValueError, TypeError):
+                        pass
+                profile.save()
+
+        # Create JWT tokens
+        refresh = RefreshToken.for_user(user)
+        access = refresh.access_token
+        access['user_id'] = user.id
+        access['email'] = user.email
+        access['role'] = user.role
+
+        return Response({
+            "access": str(access),
+            "refresh": str(refresh),
+            "role": user.role,
+            "username": user.username,
+            "email": user.email,
+        })
+
+
+
+# --------------------
 # Current User Info
 # --------------------
 class MeView(APIView):

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BASE_URL, authenticatedFetch, login, register } from "../services/api";
+import GoogleAuthButton from "../components/GoogleAuthButton";
+
 
 const DEPARTMENTS = [
   "Electronic Science",
@@ -83,6 +85,22 @@ export default function Login() {
   const navigate = useNavigate();
 
   const ROLE_DESTINATIONS = { admin: "/admin", librarian: "/librarian", student: "/books" };
+
+  const handleGoogleSuccess = (data) => {
+    localStorage.setItem("token", data.access);
+    localStorage.setItem("refreshToken", data.refresh);
+    const userRole = data.role || "student";
+    localStorage.setItem("role", userRole);
+    setSuccess("Google Authentication successful! Redirecting...");
+    setTimeout(() => {
+      navigate(ROLE_DESTINATIONS[userRole] ?? "/books", { replace: true });
+    }, 1000);
+  };
+
+  const handleGoogleError = (errMsg) => {
+    setError(errMsg);
+  };
+
 
   const handleLogin = async e => {
     e.preventDefault();
@@ -549,6 +567,24 @@ export default function Login() {
                     </>
                   )}
                 </button>
+
+                <div className="my-5 flex items-center gap-3">
+                  <div className="h-px bg-slate-200 flex-1" />
+                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">or sign up with</span>
+                  <div className="h-px bg-slate-200 flex-1" />
+                </div>
+
+                <GoogleAuthButton
+                  isRegister={true}
+                  extraData={{
+                    department: department || undefined,
+                    year: year || undefined,
+                    role: "student",
+                  }}
+                  onSuccess={handleGoogleSuccess}
+                  onError={handleGoogleError}
+                  disabled={loading}
+                />
               </form>
             ) : (
               <form onSubmit={handleLogin} className="space-y-5">
@@ -623,10 +659,27 @@ export default function Login() {
                   )}
                 </button>
 
-                <p className="text-center text-slate-400 text-xs mt-2">
+                <div className="my-5 flex items-center gap-3">
+                  <div className="h-px bg-slate-200 flex-1" />
+                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">or sign in with</span>
+                  <div className="h-px bg-slate-200 flex-1" />
+                </div>
+
+                <GoogleAuthButton
+                  isRegister={false}
+                  extraData={{
+                    role: loginRole,
+                  }}
+                  onSuccess={handleGoogleSuccess}
+                  onError={handleGoogleError}
+                  disabled={loading}
+                />
+
+                <p className="text-center text-slate-400 text-xs mt-4">
                   Department Library System · Secure Student Portal
                 </p>
               </form>
+
             )}
           </div>
         </motion.div>

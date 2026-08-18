@@ -3,8 +3,7 @@
 ## Requirements
 
 - Python 3.11+ (developed on 3.13)
-- SQLite (built-in, no setup required)
----
+- PostgreSQL 14+
 
 ## Setup
 
@@ -166,9 +165,10 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 ## Key Settings (`book_recommondation/settings.py`)
 
 | Setting | Value |
-|---------|-------|
+|---|---|
 | `AUTH_USER_MODEL` | `accounts.User` |
-| `DATABASE ENGINE` | `django.db.backends.sqlite3` → `db.sqlite3` || `DEFAULT_AUTHENTICATION_CLASSES` | `JWTAuthentication` |
+| `DATABASE ENGINE` | `django.db.backends.postgresql` → `library_db` |
+| `DEFAULT_AUTHENTICATION_CLASSES` | `JWTAuthentication` |
 | `DEFAULT_PERMISSION_CLASSES` | `IsAuthenticated` |
 | `ACCESS_TOKEN_LIFETIME` | 60 minutes |
 | `REFRESH_TOKEN_LIFETIME` | 1 day |
@@ -177,12 +177,17 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 
 ---
 
-## Database Reset
+## Database Setup & Reset
 
-To fully reset and reseed:
+To initialize or fully reset and reseed PostgreSQL:
 
 ```bash
-rm db.sqlite3
+# Automated (creates user, db, grants permissions, migrates & seeds)
+./back_start.sh
+
+# Or manual reset:
+sudo -u postgres psql -c "DROP DATABASE IF EXISTS library_db;"
+sudo -u postgres psql -c "CREATE DATABASE library_db OWNER library_user;"
 python manage.py migrate
 python manage.py import_books
 python manage.py seed_demo

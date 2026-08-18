@@ -94,10 +94,10 @@ WSGI_APPLICATION = 'book_recommondation.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv('POSTGRES_DB'),
-        "USER": os.getenv('POSTGRES_USER'),
-        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
-        "HOST": os.getenv('POSTGRES_HOST'),
+        "NAME": os.getenv('POSTGRES_DB', 'library_db'),
+        "USER": os.getenv('POSTGRES_USER', 'library_user'),
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD', 'StrongPass@123'),
+        "HOST": os.getenv('POSTGRES_HOST', '127.0.0.1'),
         "PORT": os.getenv('POSTGRES_PORT', '5432'),
     }
 }

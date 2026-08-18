@@ -340,7 +340,7 @@ Generated: January 22, 2026
 
 1. **Date Fields**: All timestamps use Django's DateTimeField with timezone support
 2. **Soft Deletes**: Not implemented; uses CASCADE/SET_NULL for integrity
-3. **Database Engine**: SQLite (development), PostgreSQL recommended for production
+3. **Database Engine**: PostgreSQL (`library_db`)
 4. **ORM**: Django ORM with automatic migrations
 5. **Indexing**: Automatic on PKs and FKs; consider adding indexes on frequently queried fields (status, created_at)
 
@@ -348,4 +348,4 @@ Generated: January 22, 2026
 
 *Generated on January 22, 2026*
 *Django Version: 6.0.1*
-*Database: SQLite (db.sqlite3)*
+*Database: PostgreSQL (library_db)*
