@@ -1,4 +1,3 @@
-/* eslint-disable-next-line no-unused-vars */
 import { motion } from 'framer-motion';
 import { trackDwellTime, trackInteraction, requestBorrow } from '../services/api';
 import { useEffect, useRef, useState } from 'react';
@@ -13,7 +12,7 @@ const PLACEHOLDER = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w
  *   book.quantity, book.description
  * No isbn13/isbn10 — not in the Book model.
  */
-export default function BookDetail({ book, onClose, onSelectBook, variant = "overlay" }) {
+export default function BookDetail({ book, onClose, variant = "overlay" }) {
   const [borrowing, setBorrowing] = useState(false);
   const [borrowError, setBorrowError] = useState('');
   const token = localStorage.getItem('token');

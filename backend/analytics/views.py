@@ -95,82 +95,34 @@ class LibrarianDashboardView(APIView):
         # 📊 TOP CATEGORIES (DB-side split + count)
         top_categories = []
         with connection.cursor() as cursor:
-            if connection.vendor == "postgresql":
-                if department:
-                    cursor.execute(
-                        """
-                        SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
-                               COUNT(*) AS count
-                        FROM books_book b
-                        WHERE b.categories IS NOT NULL
-                          AND b.categories <> ''
-                          AND b.department_id = %s
-                        GROUP BY category
-                        ORDER BY count DESC
-                        LIMIT 5;
-                        """,
-                        [department.id],
-                    )
-                else:
-                    cursor.execute(
-                        """
-                        SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
-                               COUNT(*) AS count
-                        FROM books_book b
-                        WHERE b.categories IS NOT NULL
-                          AND b.categories <> ''
-                        GROUP BY category
-                        ORDER BY count DESC
-                        LIMIT 5;
-                        """
-                    )
+            if department:
+                cursor.execute(
+                    """
+                    SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
+                           COUNT(*) AS count
+                    FROM books_book b
+                    WHERE b.categories IS NOT NULL
+                      AND b.categories <> ''
+                      AND b.department_id = %s
+                    GROUP BY category
+                    ORDER BY count DESC
+                    LIMIT 5;
+                    """,
+                    [department.id],
+                )
             else:
-                if department:
-                    cursor.execute(
-                        """
-                        WITH RECURSIVE split(category, rest) AS (
-                            SELECT '', categories || ','
-                            FROM books_book
-                            WHERE categories IS NOT NULL
-                              AND categories <> ''
-                              AND department_id = %s
-                            UNION ALL
-                            SELECT TRIM(SUBSTR(rest, 0, INSTR(rest, ','))),
-                                   SUBSTR(rest, INSTR(rest, ',') + 1)
-                            FROM split
-                            WHERE rest <> ''
-                        )
-                        SELECT category, COUNT(*) AS count
-                        FROM split
-                        WHERE category <> ''
-                        GROUP BY category
-                        ORDER BY count DESC
-                        LIMIT 5;
-                        """,
-                        [department.id],
-                    )
-                else:
-                    cursor.execute(
-                        """
-                        WITH RECURSIVE split(category, rest) AS (
-                            SELECT '', categories || ','
-                            FROM books_book
-                            WHERE categories IS NOT NULL
-                              AND categories <> ''
-                            UNION ALL
-                            SELECT TRIM(SUBSTR(rest, 0, INSTR(rest, ','))),
-                                   SUBSTR(rest, INSTR(rest, ',') + 1)
-                            FROM split
-                            WHERE rest <> ''
-                        )
-                        SELECT category, COUNT(*) AS count
-                        FROM split
-                        WHERE category <> ''
-                        GROUP BY category
-                        ORDER BY count DESC
-                        LIMIT 5;
-                        """
-                    )
+                cursor.execute(
+                    """
+                    SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
+                           COUNT(*) AS count
+                    FROM books_book b
+                    WHERE b.categories IS NOT NULL
+                      AND b.categories <> ''
+                    GROUP BY category
+                    ORDER BY count DESC
+                    LIMIT 5;
+                    """
+                )
             top_categories = [{"category": row[0], "count": row[1]} for row in cursor.fetchall()]
 
         # 📈 BORROW TRENDS (DB-side date buckets + counts)

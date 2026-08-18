@@ -89,9 +89,6 @@ function StatCard({ label, value, color, icon }) {
 export default function LibrarianDashboard() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const username = localStorage.getItem("role") === "librarian"
-    ? (localStorage.getItem("username") || "Librarian")
-    : "Librarian";
 
   const [stats, setStats] = useState(null);
   const [requests, setRequests] = useState([]);
@@ -129,7 +126,7 @@ export default function LibrarianDashboard() {
       });
       setRequests(reqData);
       setStudents(stuData.length ? stuData : FAKE_STUDENTS);
-    } catch (e) {
+    } catch {
       setError("Failed to load dashboard data.");
     } finally {
       setLoadingStats(false);
@@ -185,10 +182,6 @@ export default function LibrarianDashboard() {
         returned: d.returned ?? 0,
       }))
     : FAKE_TREND;
-
-  const department = stats
-    ? (requests[0]?.user_details?.department || "Department")
-    : "Loading...";
 
   if (loadingStats && loadingRequests) {
     return (

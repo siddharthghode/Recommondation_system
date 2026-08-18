@@ -77,7 +77,7 @@ export default function Login() {
   const [regUsername, setRegUsername] = useState("");
   const [department, setDepartment] = useState("");
   const [year, setYear] = useState("");
-  const [role, setRole] = useState("student");
+  const role = "student";
   const [loginRole, setLoginRole] = useState("student");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -257,7 +257,7 @@ export default function Login() {
         if (contentType && contentType.includes("application/json")) {
           throw await res.json();
         } else {
-          const text = await res.text();
+          await res.text();
           throw new Error(`Failed to fetch profile: ${res.status} ${res.statusText}`);
         }
       }

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-/* eslint-disable-next-line no-unused-vars */
 import { motion } from 'framer-motion';
 import { trackInteraction } from '../services/api';
 

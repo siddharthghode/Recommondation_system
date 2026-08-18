@@ -22,6 +22,7 @@ export default function Notifications() {
 
   useEffect(() => {
     if (token) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       loadNotifications();
       // Refresh notifications every 30 seconds
       const interval = setInterval(loadNotifications, 30000);

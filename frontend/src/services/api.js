@@ -47,7 +47,7 @@ export const googleLogin = (payload) =>
   }).then(async res => {
     const contentType = res.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
-      const text = await res.text();
+      await res.text();
       throw new Error(`Server error: ${res.status} ${res.statusText}`);
     }
     const data = await res.json();
@@ -250,7 +250,7 @@ export const getMyBorrows = async (token, status = null) => {
 };
 
 // Admin APIs (borrow management)
-export const getBorrowRequests = (token, status = 'pending') =>
+export const getBorrowRequests = (token) =>
   fetch(`${BASE_URL}/borrows/pending/`, {
     headers: { 
       'Authorization': `Bearer ${token}`,
