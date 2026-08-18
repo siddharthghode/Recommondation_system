@@ -20,9 +20,14 @@ class BorrowRequestView(APIView):
             return Response({"error": "book_id is required"}, status=400)
 
         user = request.user
-        # Department check for students and librarians
+        # Department and approval check for students and librarians
         if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
-            dept = getattr(user, 'department', None) if user.role == 'librarian' else (user.profile.department if hasattr(user, 'profile') and user.profile.department else getattr(user, 'department', None))
+            if user.role == 'student':
+                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
+                    return Response({"error": "Your registration is pending approval from your department librarian"}, status=403)
+                dept = user.profile.department
+            else:
+                dept = getattr(user, 'department', None)
             if not dept:
                 return Response({"error": "You must be assigned to a department to borrow books"}, status=403)
             book = get_object_or_404(Book, id=book_id, department=dept)
@@ -49,6 +54,10 @@ class MyBorrowsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        user = request.user
+        if user.role == 'student' and (not hasattr(user, 'profile') or user.profile.approval_status != 'approved'):
+            return Response([])
+
         borrows = Borrow.objects.select_related('book', 'user').filter(user=request.user)
         
         status = request.query_params.get('status')

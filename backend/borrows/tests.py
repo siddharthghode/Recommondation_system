@@ -48,6 +48,7 @@ class BorrowsDepartmentAuthorizationTests(TestCase):
             role="student"
         )
         self.student_a.profile.department = self.dept_a
+        self.student_a.profile.approval_status = "approved"
         self.student_a.profile.student_id = "CS-001"
         self.student_a.profile.save()
 
@@ -59,6 +60,7 @@ class BorrowsDepartmentAuthorizationTests(TestCase):
             role="student"
         )
         self.student_b.profile.department = self.dept_b
+        self.student_b.profile.approval_status = "approved"
         self.student_b.profile.student_id = "ME-001"
         self.student_b.profile.save()
 

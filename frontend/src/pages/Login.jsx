@@ -178,7 +178,10 @@ export default function Login() {
       return;
     }
     
-    // Department and year are now optional
+    if (!department || department.trim() === "") {
+      setError("Please select your department");
+      return;
+    }
 
     if (!firstName || firstName.trim() === "") {
       setError("First name is required");
@@ -214,7 +217,6 @@ export default function Login() {
 
     setLoading(true);
     try {
-      // Prepare user data - department and year are optional
         const userData = {
           role: 'student',
           password,
@@ -222,6 +224,7 @@ export default function Login() {
           email: email.trim().toLowerCase(),
           first_name: firstName.trim(),
           last_name: lastName.trim(),
+          department: department.trim(),
         };
         // username depends on role
         if (role === 'student') {
@@ -231,10 +234,6 @@ export default function Login() {
           userData.username = regUsername.trim();
         }
       
-      // Only add department and year if provided
-      if (department && department !== "") {
-        userData.department = department;
-      }
       if (year && year !== "") {
         userData.year = parseInt(year, 10);
       }
@@ -281,8 +280,15 @@ export default function Login() {
         userRole = "admin";
       }
       
+      const approvalStatus = data.approval_status || profile.profile?.approval_status || profile.approval_status || "approved";
       localStorage.setItem("role", userRole);
-      setSuccess("Registration successful! Redirecting...");
+      localStorage.setItem("approval_status", approvalStatus);
+
+      if (approvalStatus === "pending") {
+        setSuccess("Registration submitted! Your account is pending approval from your department librarian.");
+      } else {
+        setSuccess("Registration successful! Redirecting...");
+      }
       
       setTimeout(() => {
         if (userRole === "admin") {
@@ -507,9 +513,10 @@ export default function Login() {
                   <select
                     value={department}
                     onChange={(e) => setDepartment(e.target.value)}
+                    required
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
                   >
-                    <option value="">Select Department (Optional)</option>
+                    <option value="">Select Department (Required)</option>
                     {DEPARTMENTS.map((dept) => (
                       <option key={dept} value={dept}>{dept}</option>
                     ))}

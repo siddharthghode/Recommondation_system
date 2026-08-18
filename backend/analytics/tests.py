@@ -48,6 +48,7 @@ class AnalyticsDepartmentAuthorizationTests(TestCase):
             role="student"
         )
         self.student_a.profile.department = self.dept_a
+        self.student_a.profile.approval_status = "approved"
         self.student_a.profile.student_id = "CS-001"
         self.student_a.profile.save()
 
@@ -59,6 +60,7 @@ class AnalyticsDepartmentAuthorizationTests(TestCase):
             role="student"
         )
         self.student_b.profile.department = self.dept_b
+        self.student_b.profile.approval_status = "approved"
         self.student_b.profile.student_id = "ME-001"
         self.student_b.profile.save()
 
@@ -151,3 +153,94 @@ class AnalyticsDepartmentAuthorizationTests(TestCase):
         self._authenticate(self.student_a)
         response = self.client.get("/api/analytics/librarian-dashboard/")
         self.assertEqual(response.status_code, 403)
+
+    # --- Phase 3 Student Approval Workflow Tests ---
+    def test_librarian_a_can_view_only_department_a_pending_students(self):
+        pending_a = User.objects.create_user(username="pending_cs", email="cs@test.com", password="P1", role="student")
+        pending_a.profile.department = self.dept_a
+        pending_a.profile.approval_status = "pending"
+        pending_a.profile.save()
+
+        pending_b = User.objects.create_user(username="pending_me", email="me@test.com", password="P2", role="student")
+        pending_b.profile.department = self.dept_b
+        pending_b.profile.approval_status = "pending"
+        pending_b.profile.save()
+
+        self._authenticate(self.lib_a)
+        response = self.client.get("/api/analytics/students/pending/")
+        self.assertEqual(response.status_code, 200)
+        pending_ids = [s["id"] for s in response.data]
+        self.assertIn(pending_a.id, pending_ids)
+        self.assertNotIn(pending_b.id, pending_ids)
+
+    def test_librarian_a_can_approve_department_a_student(self):
+        pending_a = User.objects.create_user(username="pending_cs_2", email="cs2@test.com", password="P1", role="student")
+        pending_a.profile.department = self.dept_a
+        pending_a.profile.approval_status = "pending"
+        pending_a.profile.save()
+
+        self._authenticate(self.lib_a)
+        response = self.client.post(f"/api/analytics/students/{pending_a.id}/approve/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["approval_status"], "approved")
+
+        pending_a.profile.refresh_from_db()
+        self.assertEqual(pending_a.profile.approval_status, "approved")
+
+    def test_librarian_a_cannot_approve_department_b_student(self):
+        pending_b = User.objects.create_user(username="pending_me_2", email="me2@test.com", password="P2", role="student")
+        pending_b.profile.department = self.dept_b
+        pending_b.profile.approval_status = "pending"
+        pending_b.profile.save()
+
+        self._authenticate(self.lib_a)
+        response = self.client.post(f"/api/analytics/students/{pending_b.id}/approve/")
+        self.assertEqual(response.status_code, 403)
+
+        pending_b.profile.refresh_from_db()
+        self.assertEqual(pending_b.profile.approval_status, "pending")
+
+    def test_librarian_a_can_reject_department_a_student(self):
+        pending_a = User.objects.create_user(username="pending_cs_rej", email="csrej@test.com", password="P1", role="student")
+        pending_a.profile.department = self.dept_a
+        pending_a.profile.approval_status = "pending"
+        pending_a.profile.save()
+
+        self._authenticate(self.lib_a)
+        response = self.client.post(f"/api/analytics/students/{pending_a.id}/reject/", {"reason": "Incomplete profile"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["approval_status"], "rejected")
+
+        pending_a.profile.refresh_from_db()
+        self.assertEqual(pending_a.profile.approval_status, "rejected")
+
+    def test_librarian_a_cannot_reject_department_b_student(self):
+        pending_b = User.objects.create_user(username="pending_me_rej", email="merej@test.com", password="P2", role="student")
+        pending_b.profile.department = self.dept_b
+        pending_b.profile.approval_status = "pending"
+        pending_b.profile.save()
+
+        self._authenticate(self.lib_a)
+        response = self.client.post(f"/api/analytics/students/{pending_b.id}/reject/")
+        self.assertEqual(response.status_code, 403)
+
+        pending_b.profile.refresh_from_db()
+        self.assertEqual(pending_b.profile.approval_status, "pending")
+
+    def test_admin_can_view_and_approve_across_departments(self):
+        pending_b = User.objects.create_user(username="pending_me_admin", email="meadmin@test.com", password="P2", role="student")
+        pending_b.profile.department = self.dept_b
+        pending_b.profile.approval_status = "pending"
+        pending_b.profile.save()
+
+        self._authenticate(self.admin)
+        resp_list = self.client.get("/api/analytics/students/pending/")
+        self.assertEqual(resp_list.status_code, 200)
+        pending_ids = [s["id"] for s in resp_list.data]
+        self.assertIn(pending_b.id, pending_ids)
+
+        resp_approve = self.client.post(f"/api/analytics/students/{pending_b.id}/approve/")
+        self.assertEqual(resp_approve.status_code, 200)
+
+        pending_b.profile.refresh_from_db()
+        self.assertEqual(pending_b.profile.approval_status, "approved")

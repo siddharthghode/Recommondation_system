@@ -10,7 +10,7 @@ from datetime import timedelta
 
 from books.models import Book, BookInteraction
 from borrows.models import Borrow
-from accounts.models import User
+from accounts.models import User, Notification
 from books.serializers import BookSerializer
 from accounts.serializers import UserSerializer
 from borrows.serializers import BorrowSerializer
@@ -206,7 +206,106 @@ class StudentsListView(APIView):
         else:
             qs = User.objects.select_related("profile", "profile__department").filter(role='student')
 
+        # Filter by approval_status if specified (e.g., ?status=pending, ?status=approved)
+        status = request.query_params.get('status')
+        if status and status != 'all':
+            qs = qs.filter(profile__approval_status=status)
+
         return Response(UserSerializer(qs, many=True).data)
+
+
+class PendingStudentsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        if request.user.role not in ("librarian", "admin"):
+            return Response({"error": "Forbidden"}, status=403)
+
+        if request.user.role == 'librarian' and not request.user.is_superuser:
+            if not request.user.department:
+                return Response([])
+            qs = User.objects.select_related("profile", "profile__department").filter(
+                role='student',
+                profile__department=request.user.department,
+                profile__approval_status='pending'
+            )
+        else:
+            qs = User.objects.select_related("profile", "profile__department").filter(
+                role='student',
+                profile__approval_status='pending'
+            )
+
+        return Response(UserSerializer(qs, many=True).data)
+
+
+class ApproveStudentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, user_id):
+        if request.user.role not in ("librarian", "admin"):
+            return Response({"error": "Forbidden"}, status=403)
+
+        student = get_object_or_404(User.objects.select_related("profile", "profile__department"), id=user_id, role='student')
+
+        # Librarians can only approve students from their own department
+        if request.user.role == 'librarian' and not request.user.is_superuser:
+            if not request.user.department or not hasattr(student, 'profile') or student.profile.department != request.user.department:
+                return Response({"error": "Forbidden: You can only approve students in your department"}, status=403)
+
+        if not hasattr(student, 'profile'):
+            return Response({"error": "Student has no profile"}, status=400)
+
+        student.profile.approval_status = 'approved'
+        student.profile.save()
+
+        dept_name = student.profile.department.name if student.profile.department else "the library"
+        Notification.objects.create(
+            user=student,
+            message=f"Your library registration for {dept_name} has been approved! You now have full access to browse and borrow books."
+        )
+
+        return Response({
+            "message": "Student registration approved successfully",
+            "approval_status": "approved",
+            "student_id": student.id
+        })
+
+
+class RejectStudentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, user_id):
+        if request.user.role not in ("librarian", "admin"):
+            return Response({"error": "Forbidden"}, status=403)
+
+        student = get_object_or_404(User.objects.select_related("profile", "profile__department"), id=user_id, role='student')
+
+        # Librarians can only reject students from their own department
+        if request.user.role == 'librarian' and not request.user.is_superuser:
+            if not request.user.department or not hasattr(student, 'profile') or student.profile.department != request.user.department:
+                return Response({"error": "Forbidden: You can only reject students in your department"}, status=403)
+
+        if not hasattr(student, 'profile'):
+            return Response({"error": "Student has no profile"}, status=400)
+
+        student.profile.approval_status = 'rejected'
+        student.profile.save()
+
+        reason = request.data.get('reason', '')
+        rejection_msg = "Your library registration has been rejected."
+        if reason:
+            rejection_msg += f" Reason: {reason}"
+
+        Notification.objects.create(
+            user=student,
+            message=rejection_msg
+        )
+
+        return Response({
+            "message": "Student registration rejected",
+            "approval_status": "rejected",
+            "student_id": student.id
+        })
 
 
 class StudentRecommendationsView(APIView):

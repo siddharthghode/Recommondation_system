@@ -7,5 +7,8 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created and instance.role == "student":
         UserProfile.objects.get_or_create(
             user=instance,
-            defaults={"student_id": instance.username}
+            defaults={
+                "student_id": instance.username,
+                "approval_status": "pending",
+            }
         )

@@ -12,15 +12,15 @@ logger = logging.getLogger(__name__)
 
 
 def _get_department_for_user(user):
-    """Return the Department instance for a scoped user, or None for admin/superuser."""
+    """Return the Department instance for a scoped user, or None for admin/superuser or unapproved students."""
     if not user or not getattr(user, 'is_authenticated', False):
         return None
     if getattr(user, 'is_superuser', False) or getattr(user, 'role', '') == 'admin':
         return None
     if getattr(user, 'role', '') == 'student':
-        if hasattr(user, 'profile') and user.profile.department:
+        if hasattr(user, 'profile') and user.profile.approval_status == 'approved' and user.profile.department:
             return user.profile.department
-        return getattr(user, 'department', None)
+        return None
     if getattr(user, 'role', '') == 'librarian':
         return getattr(user, 'department', None)
     return getattr(user, 'department', None)

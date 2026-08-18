@@ -22,15 +22,15 @@ class BookPagination(PageNumberPagination):
 
 
 def _get_user_department(user):
-    """Helper to return department instance for student or librarian."""
+    """Helper to return department instance for approved student or librarian."""
     if not user or not user.is_authenticated:
         return None
     if user.is_superuser or getattr(user, 'role', '') == 'admin':
         return None
     if getattr(user, 'role', '') == 'student':
-        if hasattr(user, 'profile') and user.profile.department:
+        if hasattr(user, 'profile') and user.profile.approval_status == 'approved' and user.profile.department:
             return user.profile.department
-        return getattr(user, 'department', None)
+        return None
     if getattr(user, 'role', '') == 'librarian':
         return getattr(user, 'department', None)
     return getattr(user, 'department', None)
@@ -55,11 +55,14 @@ class BookListView(generics.ListAPIView):
                 else:
                     qs = Book.objects.none()
             elif getattr(user, 'role', '') == 'student':
-                dept = user.profile.department if hasattr(user, 'profile') and user.profile.department else getattr(user, 'department', None)
-                if dept:
-                    qs = Book.objects.select_related('department').filter(department=dept)
-                else:
+                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
                     qs = Book.objects.none()
+                else:
+                    dept = user.profile.department
+                    if dept:
+                        qs = Book.objects.select_related('department').filter(department=dept)
+                    else:
+                        qs = Book.objects.none()
             else:
                 qs = Book.objects.none()
         else:
@@ -98,7 +101,9 @@ class BookDetailView(generics.RetrieveAPIView):
                     return Book.objects.select_related('department').filter(department=dept)
                 return Book.objects.none()
             elif getattr(user, 'role', '') == 'student':
-                dept = user.profile.department if hasattr(user, 'profile') and user.profile.department else getattr(user, 'department', None)
+                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
+                    return Book.objects.none()
+                dept = user.profile.department
                 if dept:
                     return Book.objects.select_related('department').filter(department=dept)
                 return Book.objects.none()
@@ -111,7 +116,12 @@ class TrackBookView(APIView):
     def post(self, request, book_id):
         user = request.user
         if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
-            dept = getattr(user, 'department', None) if user.role == 'librarian' else (user.profile.department if hasattr(user, 'profile') and user.profile.department else getattr(user, 'department', None))
+            if user.role == 'student':
+                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
+                    return Response({"error": "Account pending approval"}, status=403)
+                dept = user.profile.department
+            else:
+                dept = getattr(user, 'department', None)
             if not dept:
                 return Response({"error": "Forbidden"}, status=403)
             book = get_object_or_404(Book, id=book_id, department=dept)
@@ -139,7 +149,12 @@ class InteractionCreateView(APIView):
 
         user = request.user
         if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
-            dept = getattr(user, 'department', None) if user.role == 'librarian' else (user.profile.department if hasattr(user, 'profile') and user.profile.department else getattr(user, 'department', None))
+            if user.role == 'student':
+                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
+                    return Response({"error": "Account pending approval"}, status=403)
+                dept = user.profile.department
+            else:
+                dept = getattr(user, 'department', None)
             if not dept:
                 return Response({"error": "Forbidden"}, status=403)
             book = get_object_or_404(Book, id=book_id, department=dept)
@@ -178,7 +193,12 @@ class BookDwellTimeView(APIView):
 
         user = request.user
         if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
-            dept = getattr(user, 'department', None) if user.role == 'librarian' else (user.profile.department if hasattr(user, 'profile') and user.profile.department else getattr(user, 'department', None))
+            if user.role == 'student':
+                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
+                    return Response({"error": "Account pending approval"}, status=403)
+                dept = user.profile.department
+            else:
+                dept = getattr(user, 'department', None)
             if not dept:
                 return Response({"error": "Forbidden"}, status=403)
             book = get_object_or_404(Book, id=book_id, department=dept)
@@ -311,13 +331,17 @@ class SimilarBooksView(APIView):
     def get(self, request, book_id):
         user = request.user
         if user.is_authenticated and not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
-            dept = getattr(user, 'department', None) if user.role == 'librarian' else (user.profile.department if hasattr(user, 'profile') and user.profile.department else getattr(user, 'department', None))
+            if getattr(user, 'role', '') == 'student':
+                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
+                    return Response([])
+                dept = user.profile.department
+            else:
+                dept = getattr(user, 'department', None)
             if not dept:
                 return Response([])
             book = get_object_or_404(Book, id=book_id, department=dept)
         else:
             book = get_object_or_404(Book, id=book_id)
 
-        limit = int(request.GET.get('limit', 6))
-        similar = get_similar_books(book.id, limit)
-        return Response(BookSerializer(similar, many=True).data)
+        similar_books = get_similar_books(book.id, int(request.GET.get('limit', 6)))
+        return Response(BookSerializer(similar_books, many=True).data)

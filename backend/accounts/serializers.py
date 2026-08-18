@@ -34,6 +34,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, attrs):
+        role = attrs.get('role', 'student')
+        if role in ['librarian', 'admin']:
+            request = self.context.get('request') if hasattr(self, 'context') else None
+            user_making_request = getattr(request, 'user', None)
+            if not (user_making_request and (user_making_request.is_staff or user_making_request.is_superuser)):
+                raise serializers.ValidationError({'role': f'Public registration is only allowed for students. Cannot register as {role}.'})
+
         # If password_confirm provided, ensure it matches
         pw = attrs.get('password')
         pwc = attrs.get('password_confirm')
@@ -55,13 +62,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             return None
 
     def create(self, validated_data):
-        # Only allow creating librarian accounts when request is from a staff/superuser
-        request = self.context.get('request') if hasattr(self, 'context') else None
         role = validated_data.pop('role', 'student')
-        if role == 'librarian':
-            user_making_request = getattr(request, 'user', None)
-            if not (user_making_request and (user_making_request.is_staff or user_making_request.is_superuser)):
-                raise serializers.ValidationError({'role': 'Only admin users can create librarian accounts'})
         # optional student_id
         student_id = validated_data.pop('student_id', None)
         department_val = validated_data.pop('department', None)
@@ -96,12 +97,15 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         # if student, ensure profile fields are set
         if role == 'student':
+            if not department_obj:
+                raise serializers.ValidationError({'department': 'A valid department is required for student registration'})
             # profile created by signal
             profile = user.profile
             # prefer explicit student_id, otherwise use username
             profile.student_id = student_id or username
             profile.department = department_obj
             profile.year = year
+            profile.approval_status = 'pending'
             profile.save()
 
         return user
@@ -131,6 +135,7 @@ class LoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     profile = serializers.SerializerMethodField()
     department = serializers.SerializerMethodField()
+    approval_status = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -142,6 +147,7 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'role',
             'department',
+            'approval_status',
             'is_staff',
             'profile',
         )
@@ -151,13 +157,20 @@ class UserSerializer(serializers.ModelSerializer):
             return {
                 "student_id": obj.profile.student_id,
                 "department": obj.profile.department.name if obj.profile.department else None,
+                "department_id": obj.profile.department.id if obj.profile.department else None,
                 "year": obj.profile.year,
                 "preferred_categories": obj.profile.preferred_categories,
+                "approval_status": obj.profile.approval_status,
             }
         return None
 
     def get_department(self, obj):
         return obj.department.name if obj.department else None
+
+    def get_approval_status(self, obj):
+        if obj.role == "student" and hasattr(obj, 'profile'):
+            return obj.profile.approval_status
+        return "approved"
 
 
 # --------------------

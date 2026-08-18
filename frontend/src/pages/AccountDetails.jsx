@@ -252,6 +252,44 @@ export default function AccountDetails() {
           </div>
         )}
 
+        {/* Approval Status Banner */}
+        {profile.role === "student" && (
+          (profile.profile?.approval_status === "pending" || profile.approval_status === "pending") ? (
+            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-sm mb-6">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">⏳</span>
+                <div>
+                  <h4 className="font-bold text-amber-800">Registration Pending Approval</h4>
+                  <p className="text-sm text-amber-700">
+                    Your account is currently awaiting approval from the <strong>{profile.profile?.department || profile.department || "department"}</strong> librarian.
+                    Full access to search, browse, and borrow books will be unlocked once approved.
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (profile.profile?.approval_status === "rejected" || profile.approval_status === "rejected") ? (
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl shadow-sm mb-6">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">❌</span>
+                <div>
+                  <h4 className="font-bold text-red-800">Registration Rejected</h4>
+                  <p className="text-sm text-red-700">
+                    Your library registration was rejected. Please contact your department librarian for assistance.
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-emerald-50 border-l-4 border-emerald-500 p-3 rounded-r-xl shadow-sm mb-6 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">✅</span>
+                <span className="text-sm font-semibold text-emerald-800">Approved Library Member · {profile.profile?.department || profile.department}</span>
+              </div>
+              <span className="text-xs bg-emerald-200 text-emerald-800 font-bold px-2.5 py-1 rounded-full uppercase">Active</span>
+            </div>
+          )
+        )}
+
         {/* Statistics Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <motion.div

@@ -37,9 +37,9 @@ class UserAdmin(DjangoUserAdmin):
 # --------------------
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "student_id", "department", "year")
+    list_display = ("user", "student_id", "department", "year", "approval_status")
     search_fields = ("student_id", "user__username")
-    list_filter = ("department", "year")
+    list_filter = ("approval_status", "department", "year")
     list_select_related = ("user", "department")
 
 

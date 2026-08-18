@@ -574,10 +574,52 @@ export async function fetchLibrarianDashboard(token) {
   return res.json();
 }
 
+// Department List
+export const getDepartments = () =>
+  fetch(`${BASE_URL}/auth/departments/`).then(async res => {
+    const data = await res.json();
+    if (!res.ok) throw data;
+    return data;
+  });
+
 // Students API for librarian
-export const getStudents = (token) =>
-  fetch(`${BASE_URL}/analytics/students/`, {
+export const getStudents = (token, status = null) => {
+  const url = status && status !== 'all'
+    ? `${BASE_URL}/analytics/students/?status=${status}`
+    : `${BASE_URL}/analytics/students/`;
+  return fetch(url, {
     headers: { Authorization: `Bearer ${token}` }
+  }).then(async res => {
+    const data = await res.json();
+    if (!res.ok) throw data;
+    return data;
+  });
+};
+
+export const getPendingStudents = (token) =>
+  fetch(`${BASE_URL}/analytics/students/pending/`, {
+    headers: { Authorization: `Bearer ${token}` }
+  }).then(async res => {
+    const data = await res.json();
+    if (!res.ok) throw data;
+    return data;
+  });
+
+export const approveStudent = (token, studentId) =>
+  fetch(`${BASE_URL}/analytics/students/${studentId}/approve/`, {
+    method: 'POST',
+    headers: getAuthHeaders(token),
+  }).then(async res => {
+    const data = await res.json();
+    if (!res.ok) throw data;
+    return data;
+  });
+
+export const rejectStudent = (token, studentId, reason = '') =>
+  fetch(`${BASE_URL}/analytics/students/${studentId}/reject/`, {
+    method: 'POST',
+    headers: getAuthHeaders(token),
+    body: JSON.stringify({ reason })
   }).then(async res => {
     const data = await res.json();
     if (!res.ok) throw data;

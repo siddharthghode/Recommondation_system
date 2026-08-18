@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
-import { getStudents, getStudentBorrows, getStudentAnalytics } from "../services/api";
+import { getStudents, getStudentBorrows, getStudentAnalytics, approveStudent, rejectStudent } from "../services/api";
 import Toast from "../components/Toast";
 
 export default function StudentsList() {
@@ -12,7 +12,9 @@ export default function StudentsList() {
   const [analytics, setAnalytics] = useState(null);
   const [borrowsLoading, setBorrowsLoading] = useState(false);
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('borrows'); // 'borrows', 'analytics', or 'messages'
+  const [activeTab, setActiveTab] = useState('borrows'); // 'borrows', 'analytics'
+  const [statusFilter, setStatusFilter] = useState('all'); // 'all', 'pending', 'approved', 'rejected'
+  const [actionLoading, setActionLoading] = useState(false);
   const [toast, setToast] = useState({ open: false, message: '', type: 'info' });
   const [searchQuery, setSearchQuery] = useState('');
   const token = localStorage.getItem("token");
@@ -35,6 +37,43 @@ export default function StudentsList() {
       setToast({ open: true, message: 'Failed to load students', type: 'error' });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleApprove = async (studentId, e) => {
+    if (e) e.stopPropagation();
+    try {
+      setActionLoading(true);
+      await approveStudent(token, studentId);
+      setToast({ open: true, message: 'Student approved successfully!', type: 'success' });
+      setStudents(prev => prev.map(s => s.id === studentId ? { ...s, approval_status: 'approved', profile: { ...s.profile, approval_status: 'approved' } } : s));
+      if (selectedStudent?.id === studentId) {
+        setSelectedStudent(prev => ({ ...prev, approval_status: 'approved', profile: { ...prev.profile, approval_status: 'approved' } }));
+      }
+    } catch (err) {
+      console.error('Failed to approve student:', err);
+      setToast({ open: true, message: err.error || err.detail || 'Failed to approve student', type: 'error' });
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleReject = async (studentId, e) => {
+    if (e) e.stopPropagation();
+    const reason = window.prompt("Enter rejection reason (optional):") || "";
+    try {
+      setActionLoading(true);
+      await rejectStudent(token, studentId, reason);
+      setToast({ open: true, message: 'Student registration rejected', type: 'info' });
+      setStudents(prev => prev.map(s => s.id === studentId ? { ...s, approval_status: 'rejected', profile: { ...s.profile, approval_status: 'rejected' } } : s));
+      if (selectedStudent?.id === studentId) {
+        setSelectedStudent(prev => ({ ...prev, approval_status: 'rejected', profile: { ...prev.profile, approval_status: 'rejected' } }));
+      }
+    } catch (err) {
+      console.error('Failed to reject student:', err);
+      setToast({ open: true, message: err.error || err.detail || 'Failed to reject student', type: 'error' });
+    } finally {
+      setActionLoading(false);
     }
   };
 
@@ -111,7 +150,16 @@ export default function StudentsList() {
     return stats;
   };
 
+  const pendingCount = students.filter(s => (s.approval_status === 'pending' || s.profile?.approval_status === 'pending')).length;
+  const approvedCount = students.filter(s => (s.approval_status === 'approved' || s.profile?.approval_status === 'approved')).length;
+  const rejectedCount = students.filter(s => (s.approval_status === 'rejected' || s.profile?.approval_status === 'rejected')).length;
+
   const filteredStudents = students.filter(student => {
+    const sStatus = student.approval_status || student.profile?.approval_status || 'approved';
+    if (statusFilter !== 'all' && sStatus !== statusFilter) {
+      return false;
+    }
+
     const q = searchQuery.toLowerCase().trim();
     if (!q) return true;
     
@@ -146,9 +194,53 @@ export default function StudentsList() {
         >
           <div className="mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              🎓 Student Borrow Records
+              🎓 Department Students & Registrations
             </h2>
-            <p className="text-gray-600">View and manage student borrowing history</p>
+            <p className="text-gray-600">Manage student approvals and view borrowing history</p>
+          </div>
+
+          {/* Status Filter Tabs */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            <button
+              onClick={() => setStatusFilter('all')}
+              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                statusFilter === 'all'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+              }`}
+            >
+              All Students ({students.length})
+            </button>
+            <button
+              onClick={() => setStatusFilter('pending')}
+              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-1.5 ${
+                statusFilter === 'pending'
+                  ? 'bg-amber-500 text-white shadow-md'
+                  : 'bg-white text-amber-700 hover:bg-amber-50 border border-amber-200'
+              }`}
+            >
+              <span>⏳</span> Pending Approval ({pendingCount})
+            </button>
+            <button
+              onClick={() => setStatusFilter('approved')}
+              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                statusFilter === 'approved'
+                  ? 'bg-emerald-600 text-white shadow-md'
+                  : 'bg-white text-emerald-700 hover:bg-emerald-50 border border-emerald-200'
+              }`}
+            >
+              Approved ({approvedCount})
+            </button>
+            <button
+              onClick={() => setStatusFilter('rejected')}
+              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                statusFilter === 'rejected'
+                  ? 'bg-red-600 text-white shadow-md'
+                  : 'bg-white text-red-700 hover:bg-red-50 border border-red-200'
+              }`}
+            >
+              Rejected ({rejectedCount})
+            </button>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -165,40 +257,78 @@ export default function StudentsList() {
                 />
               </div>
 
-              <div className="space-y-2 max-h-[600px] overflow-y-auto">
+              <div className="space-y-3 max-h-[600px] overflow-y-auto">
                 {filteredStudents.length === 0 ? (
-                  <p className="text-gray-500 text-center py-8">No students found</p>
+                  <p className="text-gray-500 text-center py-8">No students found in this category</p>
                 ) : (
-                  filteredStudents.map((student) => (
-                    <div
-                      key={student.id}
-                      onClick={() => handleStudentClick(student)}
-                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                        selectedStudent?.id === student.id
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
-                          {(student.first_name?.[0] || student.username?.[0] || '?').toUpperCase()}
-                        </div>
-                        <div className="flex-1">
-                          <p className="font-semibold text-gray-800">
-                            {student.first_name && student.last_name
-                              ? `${student.first_name} ${student.last_name}`
-                              : student.username}
-                          </p>
-                          <p className="text-xs text-gray-500">{student.email}</p>
-                          {(student.department || student.profile?.department) && (
-                            <p className="text-xs text-blue-600 mt-1">
-                              📚 {student.department || student.profile?.department}
-                            </p>
-                          )}
+                  filteredStudents.map((student) => {
+                    const sStatus = student.approval_status || student.profile?.approval_status || 'approved';
+                    return (
+                      <div
+                        key={student.id}
+                        onClick={() => handleStudentClick(student)}
+                        className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                          selectedStudent?.id === student.id
+                            ? 'border-blue-500 bg-blue-50'
+                            : sStatus === 'pending'
+                            ? 'border-amber-300 bg-amber-50/50 hover:bg-amber-50'
+                            : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${
+                            sStatus === 'pending' ? 'bg-amber-500' : sStatus === 'rejected' ? 'bg-red-500' : 'bg-gradient-to-br from-blue-500 to-purple-500'
+                          }`}>
+                            {(student.first_name?.[0] || student.username?.[0] || '?').toUpperCase()}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-1">
+                              <p className="font-semibold text-gray-800 truncate">
+                                {student.first_name && student.last_name
+                                  ? `${student.first_name} ${student.last_name}`
+                                  : student.username}
+                              </p>
+                              <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
+                                sStatus === 'pending'
+                                  ? 'bg-amber-200 text-amber-900'
+                                  : sStatus === 'rejected'
+                                  ? 'bg-red-100 text-red-700'
+                                  : 'bg-emerald-100 text-emerald-800'
+                              }`}>
+                                {sStatus}
+                              </span>
+                            </div>
+                            <p className="text-xs text-gray-500 truncate">{student.email}</p>
+                            {(student.department || student.profile?.department) && (
+                              <p className="text-xs text-blue-600 mt-1 truncate">
+                                📚 {student.department || student.profile?.department}
+                              </p>
+                            )}
+
+                            {/* Quick Action buttons for pending students */}
+                            {sStatus === 'pending' && (
+                              <div className="flex gap-2 mt-2.5 pt-2 border-t border-amber-200/60">
+                                <button
+                                  disabled={actionLoading}
+                                  onClick={(e) => handleApprove(student.id, e)}
+                                  className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-1 px-2 rounded-md transition-colors disabled:opacity-50"
+                                >
+                                  ✓ Approve
+                                </button>
+                                <button
+                                  disabled={actionLoading}
+                                  onClick={(e) => handleReject(student.id, e)}
+                                  className="flex-1 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-1 px-2 rounded-md transition-colors disabled:opacity-50"
+                                >
+                                  ✕ Reject
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </div>
@@ -218,23 +348,61 @@ export default function StudentsList() {
               ) : (
                 <div>
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-gray-100">
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-800">
-                        {selectedStudent.first_name && selectedStudent.last_name
-                          ? `${selectedStudent.first_name} ${selectedStudent.last_name}`
-                          : selectedStudent.username}
-                      </h3>
-                      <p className="text-sm text-gray-600">{selectedStudent.email}</p>
+                      <div className="flex items-center gap-3">
+                        <h3 className="text-2xl font-bold text-gray-800">
+                          {selectedStudent.first_name && selectedStudent.last_name
+                            ? `${selectedStudent.first_name} ${selectedStudent.last_name}`
+                            : selectedStudent.username}
+                        </h3>
+                        <span className={`text-xs uppercase font-bold px-2.5 py-1 rounded-full ${
+                          (selectedStudent.approval_status || selectedStudent.profile?.approval_status) === 'pending'
+                            ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                            : (selectedStudent.approval_status || selectedStudent.profile?.approval_status) === 'rejected'
+                            ? 'bg-red-100 text-red-700 border border-red-300'
+                            : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                        }`}>
+                          {selectedStudent.approval_status || selectedStudent.profile?.approval_status || 'approved'}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 mt-0.5">{selectedStudent.email}</p>
+                      {(selectedStudent.department || selectedStudent.profile?.department) && (
+                        <p className="text-xs text-blue-600 mt-1">
+                          📚 Department: <strong>{selectedStudent.department || selectedStudent.profile?.department}</strong>
+                        </p>
+                      )}
                     </div>
-                    <button
-                      onClick={() => setSelectedStudent(null)}
-                      className="text-gray-500 hover:text-gray-700"
-                    >
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
+
+                    <div className="flex items-center gap-2">
+                      {(selectedStudent.approval_status || selectedStudent.profile?.approval_status) === 'pending' && (
+                        <>
+                          <button
+                            disabled={actionLoading}
+                            onClick={(e) => handleApprove(selectedStudent.id, e)}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold py-1.5 px-4 rounded-lg shadow-sm transition-colors disabled:opacity-50"
+                          >
+                            ✓ Approve Registration
+                          </button>
+                          <button
+                            disabled={actionLoading}
+                            onClick={(e) => handleReject(selectedStudent.id, e)}
+                            className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-1.5 px-4 rounded-lg shadow-sm transition-colors disabled:opacity-50"
+                          >
+                            ✕ Reject
+                          </button>
+                        </>
+                      )}
+                      <button
+                        onClick={() => setSelectedStudent(null)}
+                        className="text-gray-400 hover:text-gray-700 p-1"
+                        title="Close details"
+                      >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
 
                   {/* Tabs */}

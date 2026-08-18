@@ -49,6 +49,12 @@ class User(AbstractUser):
 # User Profile (Student)
 # --------------------
 class UserProfile(models.Model):
+    APPROVAL_CHOICES = (
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    )
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -64,9 +70,14 @@ class UserProfile(models.Model):
     )
     year = models.IntegerField(null=True, blank=True)
     preferred_categories = models.TextField(blank=True)
+    approval_status = models.CharField(
+        max_length=20,
+        choices=APPROVAL_CHOICES,
+        default='approved'
+    )
 
     def __str__(self):
-        return f"Profile of {self.user.username}"
+        return f"Profile of {self.user.username} ({self.approval_status})"
 
 
 # --------------------

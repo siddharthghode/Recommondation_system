@@ -47,6 +47,7 @@ class BooksDepartmentAuthorizationTests(TestCase):
             role="student"
         )
         self.student_a.profile.department = self.dept_a
+        self.student_a.profile.approval_status = "approved"
         self.student_a.profile.preferred_categories = "Algorithms, AI"
         self.student_a.profile.save()
 
@@ -58,6 +59,7 @@ class BooksDepartmentAuthorizationTests(TestCase):
             role="student"
         )
         self.student_b.profile.department = self.dept_b
+        self.student_b.profile.approval_status = "approved"
         self.student_b.profile.preferred_categories = "Thermodynamics"
         self.student_b.profile.save()
 
@@ -214,3 +216,95 @@ class BooksDepartmentAuthorizationTests(TestCase):
         self._authenticate(self.student_a)
         resp_post = self.client.post("/api/books/manage/", {"title": "Student Book", "quantity": 1})
         self.assertEqual(resp_post.status_code, 403)
+
+    # --- Phase 3 Approval Access Control Tests ---
+    def test_pending_student_cannot_list_books(self):
+        pending_user = User.objects.create_user(
+            username="pending_student_access",
+            email="paccess@test.com",
+            password="Password123!",
+            role="student"
+        )
+        pending_user.profile.department = self.dept_a
+        pending_user.profile.approval_status = "pending"
+        pending_user.profile.save()
+
+        self._authenticate(pending_user)
+        response = self.client.get("/api/books/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data["results"]), 0)
+
+    def test_pending_student_cannot_retrieve_book_detail(self):
+        pending_user = User.objects.create_user(
+            username="pending_student_detail",
+            email="pdetail@test.com",
+            password="Password123!",
+            role="student"
+        )
+        pending_user.profile.department = self.dept_a
+        pending_user.profile.approval_status = "pending"
+        pending_user.profile.save()
+
+        self._authenticate(pending_user)
+        response = self.client.get(f"/api/books/{self.book_a1.id}/")
+        self.assertEqual(response.status_code, 404)
+
+    def test_pending_student_cannot_interact_or_dwell(self):
+        pending_user = User.objects.create_user(
+            username="pending_student_interact",
+            email="pinteract@test.com",
+            password="Password123!",
+            role="student"
+        )
+        pending_user.profile.department = self.dept_a
+        pending_user.profile.approval_status = "pending"
+        pending_user.profile.save()
+
+        self._authenticate(pending_user)
+        resp_track = self.client.post(f"/api/books/track/{self.book_a1.id}/")
+        self.assertEqual(resp_track.status_code, 403)
+
+        resp_interact = self.client.post("/api/interactions/", {"book_id": self.book_a1.id, "interaction_type": "like"})
+        self.assertEqual(resp_interact.status_code, 403)
+
+        resp_dwell = self.client.post("/api/dwell-time/", {"book_id": self.book_a1.id, "duration": 10.0})
+        self.assertEqual(resp_dwell.status_code, 403)
+
+    def test_pending_student_cannot_receive_recommendations(self):
+        pending_user = User.objects.create_user(
+            username="pending_student_recs",
+            email="precs@test.com",
+            password="Password123!",
+            role="student"
+        )
+        pending_user.profile.department = self.dept_a
+        pending_user.profile.approval_status = "pending"
+        pending_user.profile.save()
+
+        self._authenticate(pending_user)
+        response = self.client.get("/api/books/recommendations/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data), 0)
+
+    def test_rejected_student_cannot_list_or_access_books(self):
+        rejected_user = User.objects.create_user(
+            username="rejected_student",
+            email="prej@test.com",
+            password="Password123!",
+            role="student"
+        )
+        rejected_user.profile.department = self.dept_a
+        rejected_user.profile.approval_status = "rejected"
+        rejected_user.profile.save()
+
+        self._authenticate(rejected_user)
+        resp_list = self.client.get("/api/books/")
+        self.assertEqual(resp_list.status_code, 200)
+        self.assertEqual(len(resp_list.data["results"]), 0)
+
+        resp_detail = self.client.get(f"/api/books/{self.book_a1.id}/")
+        self.assertEqual(resp_detail.status_code, 404)
+
+        resp_recs = self.client.get("/api/books/recommendations/")
+        self.assertEqual(resp_recs.status_code, 200)
+        self.assertEqual(len(resp_recs.data), 0)

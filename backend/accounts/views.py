@@ -13,6 +13,17 @@ from .models import Notification
 
 
 # --------------------
+# Department List (Public for Registration)
+# --------------------
+class DepartmentListView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        departments = Department.objects.all().order_by('name')
+        return Response([{"id": d.id, "name": d.name} for d in departments])
+
+
+# --------------------
 # Student Registration
 # --------------------
 class RegisterView(APIView):
@@ -29,11 +40,16 @@ class RegisterView(APIView):
         access['user_id'] = user.id
         access['email'] = user.email
         access['role'] = user.role
+        approval_status = user.profile.approval_status if user.role == 'student' and hasattr(user, 'profile') else 'approved'
+        access['approval_status'] = approval_status
 
         return Response({
             "access": str(access),
             "refresh": str(refresh),
-        })
+            "role": user.role,
+            "approval_status": approval_status,
+            "message": "Registration submitted. Pending approval from department librarian." if approval_status == "pending" else "Registration successful.",
+        }, status=201)
 
 
 # --------------------
@@ -53,11 +69,14 @@ class LoginView(APIView):
         access['user_id'] = user.id
         access['email'] = user.email
         access['role'] = user.role
+        approval_status = user.profile.approval_status if user.role == 'student' and hasattr(user, 'profile') else 'approved'
+        access['approval_status'] = approval_status
 
         return Response({
             "access": str(access),
             "refresh": str(refresh),
             "role": user.role,
+            "approval_status": approval_status,
         })
 
 
@@ -180,6 +199,8 @@ class GoogleLoginView(APIView):
         access['user_id'] = user.id
         access['email'] = user.email
         access['role'] = user.role
+        approval_status = user.profile.approval_status if user.role == 'student' and hasattr(user, 'profile') else 'approved'
+        access['approval_status'] = approval_status
 
         return Response({
             "access": str(access),
@@ -187,6 +208,7 @@ class GoogleLoginView(APIView):
             "role": user.role,
             "username": user.username,
             "email": user.email,
+            "approval_status": approval_status,
         })
 
 
@@ -215,7 +237,7 @@ class MeView(APIView):
             profile = user.profile
             if 'preferred_categories' in request.data:
                 profile.preferred_categories = request.data['preferred_categories']
-            if 'department' in request.data:
+            if 'department' in request.data and (user.is_staff or user.is_superuser):
                 from .models import Department
                 dept_name = request.data['department']
                 if dept_name:
