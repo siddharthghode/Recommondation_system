@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.cache import cache
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.models import User, Department
@@ -8,6 +9,7 @@ from books.models import Book, BookInteraction, BookDwellTime
 
 class BooksDepartmentAuthorizationTests(TestCase):
     def setUp(self):
+        cache.clear()
         self.client = APIClient()
 
         # Departments
@@ -454,4 +456,190 @@ class BooksDepartmentAuthorizationTests(TestCase):
         self.assertTrue(Book.objects.filter(id=self.book_a1.id).exists())
         self.assertTrue(Book.objects.filter(id=self.book_a2.id).exists())
         self.assertEqual(Book.objects.filter(department=self.dept_a).count(), 3)
+
+    # --- Phase 6 Recommendation Engine & Student Experience Tests ---
+    def test_content_based_recommendations_preferred_categories(self):
+        self._authenticate(self.student_a)
+        response = self.client.get("/api/books/recommendations/?type=content&limit=5")
+        self.assertEqual(response.status_code, 200)
+        book_ids = [b["id"] for b in response.data]
+        # Student A preferred categories include Algorithms, AI -> Book A1, A2
+        self.assertIn(self.book_a1.id, book_ids)
+        self.assertIn(self.book_a2.id, book_ids)
+        self.assertNotIn(self.book_b1.id, book_ids)
+
+    def test_content_based_recommendations_exclude_interacted(self):
+        self._authenticate(self.student_a)
+        # Student A interacts with Book A1
+        BookInteraction.objects.create(user=self.student_a, book=self.book_a1, interaction_type='like')
+        response = self.client.get("/api/books/recommendations/?type=content&limit=5")
+        self.assertEqual(response.status_code, 200)
+        book_ids = [b["id"] for b in response.data]
+        self.assertNotIn(self.book_a1.id, book_ids)
+        self.assertIn(self.book_a2.id, book_ids)
+
+    def test_collaborative_filtering_recommendations_with_similar_users(self):
+        # Create Student A2 in Dept A
+        student_a2 = User.objects.create_user(
+            username="student_a2",
+            email="sa2@test.com",
+            password="Password123!",
+            role="student"
+        )
+        student_a2.profile.department = self.dept_a
+        student_a2.profile.approval_status = "approved"
+        student_a2.profile.save()
+
+        # Extra Book in Dept A
+        book_a3 = Book.objects.create(
+            title="Database Systems Design",
+            authors="Silberschatz",
+            categories="Databases, CS",
+            department=self.dept_a,
+            quantity=5,
+            average_rating=4.7,
+            ratings_count=80
+        )
+
+        # Student A interacts with A1
+        BookInteraction.objects.create(user=self.student_a, book=self.book_a1, interaction_type='view')
+        # Student A2 also interacts with A1 (overlap) and borrows A3
+        BookInteraction.objects.create(user=student_a2, book=self.book_a1, interaction_type='view')
+        BookInteraction.objects.create(user=student_a2, book=book_a3, interaction_type='borrow')
+
+        self._authenticate(self.student_a)
+        response = self.client.get("/api/books/recommendations/?type=collaborative&limit=5")
+        self.assertEqual(response.status_code, 200)
+        book_ids = [b["id"] for b in response.data]
+        # A3 should be recommended because similar user A2 borrowed it
+        self.assertIn(book_a3.id, book_ids)
+        # Should not contain Dept B books
+        self.assertNotIn(self.book_b1.id, book_ids)
+
+    def test_collaborative_filtering_cold_start_fallback(self):
+        # New student in Dept A with zero interactions
+        cold_student = User.objects.create_user(
+            username="cold_student",
+            email="cold@test.com",
+            password="Password123!",
+            role="student"
+        )
+        cold_student.profile.department = self.dept_a
+        cold_student.profile.approval_status = "approved"
+        cold_student.profile.save()
+
+        self._authenticate(cold_student)
+        response = self.client.get("/api/books/recommendations/?type=collaborative&limit=5")
+        self.assertEqual(response.status_code, 200)
+        book_ids = [b["id"] for b in response.data]
+        self.assertTrue(len(book_ids) > 0)
+        for bid in book_ids:
+            book = Book.objects.get(id=bid)
+            self.assertEqual(book.department, self.dept_a)
+
+    def test_hybrid_recommendations_combines_signals(self):
+        self._authenticate(self.student_a)
+        response = self.client.get("/api/books/recommendations/?type=hybrid&limit=5")
+        self.assertEqual(response.status_code, 200)
+        book_ids = [b["id"] for b in response.data]
+        self.assertTrue(len(book_ids) > 0)
+        self.assertIn(self.book_a1.id, book_ids)
+        self.assertNotIn(self.book_b1.id, book_ids)
+
+    def test_hybrid_deduplicates_books(self):
+        self._authenticate(self.student_a)
+        response = self.client.get("/api/books/recommendations/?type=hybrid&limit=10")
+        self.assertEqual(response.status_code, 200)
+        book_ids = [b["id"] for b in response.data]
+        self.assertEqual(len(book_ids), len(set(book_ids)), "Duplicate book IDs returned in recommendations")
+
+    def test_similar_books_tfidf_ranking_and_self_exclusion(self):
+        # Create two related books in Dept A
+        book_algo1 = Book.objects.create(
+            title="Advanced Algorithms and Data Structures",
+            authors="Cormen et al.",
+            categories="Algorithms, Computer Science",
+            description="In-depth analysis of sorting, graphs, dynamic programming.",
+            department=self.dept_a,
+            quantity=3,
+            average_rating=4.9,
+            ratings_count=120
+        )
+        response = self.client.get(f"/api/books/{self.book_a1.id}/similar/?limit=5")
+        self.assertEqual(response.status_code, 200)
+        similar_ids = [b["id"] for b in response.data]
+        # Target book self-exclusion
+        self.assertNotIn(self.book_a1.id, similar_ids)
+        # Similar book should be returned
+        self.assertIn(book_algo1.id, similar_ids)
+
+    def test_similar_books_missing_metadata_safety(self):
+        # Book with empty categories and description
+        sparse_book = Book.objects.create(
+            title="Sparse Book No Metadata",
+            authors="Anonymous",
+            categories="",
+            description="",
+            department=self.dept_a,
+            quantity=2
+        )
+        response = self.client.get(f"/api/books/{sparse_book.id}/similar/?limit=5")
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.data, list)
+        self.assertNotIn(sparse_book.id, [b["id"] for b in response.data])
+
+    def test_similar_books_single_book_department_returns_empty(self):
+        # Isolated department with exactly 1 book
+        isolated_dept = Department.objects.create(name="Isolated Dept")
+        lone_book = Book.objects.create(
+            title="Lone Book",
+            authors="Lone Author",
+            categories="Solo",
+            department=isolated_dept,
+            quantity=1
+        )
+        response = self.client.get(f"/api/books/{lone_book.id}/similar/?limit=5")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data), 0)
+
+    def test_similar_books_cannot_access_other_department_book_id(self):
+        # Student A (Dept A) tries to access similar books for Book B1 (Dept B)
+        self._authenticate(self.student_a)
+        response = self.client.get(f"/api/books/{self.book_b1.id}/similar/")
+        self.assertEqual(response.status_code, 404)
+
+    def test_recommendations_cache_invalidation_on_interaction(self):
+        self._authenticate(self.student_a)
+        # 1. First fetch recommendations
+        res1 = self.client.get("/api/books/recommendations/?type=hybrid&limit=5")
+        self.assertEqual(res1.status_code, 200)
+
+        # 2. Track view or like on book A1
+        resp_interact = self.client.post("/api/interactions/", {"book_id": self.book_a1.id, "interaction_type": "like"})
+        self.assertEqual(resp_interact.status_code, 201)
+
+        # 3. Fetch again -> content_based excludes A1
+        res2 = self.client.get("/api/books/recommendations/?type=content&limit=5")
+        self.assertEqual(res2.status_code, 200)
+        book_ids = [b["id"] for b in res2.data]
+        self.assertNotIn(self.book_a1.id, book_ids)
+
+    def test_zero_books_department_recommendations_safe(self):
+        empty_dept = Department.objects.create(name="Empty Dept")
+        empty_student = User.objects.create_user(
+            username="empty_student",
+            email="empty_student@test.com",
+            password="Password123!",
+            role="student"
+        )
+        empty_student.profile.department = empty_dept
+        empty_student.profile.approval_status = "approved"
+        empty_student.profile.save()
+
+        self._authenticate(empty_student)
+        for rec_type in ("hybrid", "content", "collaborative"):
+            resp = self.client.get(f"/api/books/recommendations/?type={rec_type}&limit=5")
+            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.data, [])
+
 

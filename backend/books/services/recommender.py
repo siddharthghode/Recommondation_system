@@ -31,6 +31,21 @@ def _get_cache_key(prefix, user_id, limit, dept_id='all'):
     return f"{prefix}:user:{user_id}:dept:{dept_id}:limit:{limit}"
 
 
+def invalidate_user_recommendations(user_id, dept_id='all'):
+    """Invalidate recommendation caches for a specific user."""
+    for prefix in ("content_rec", "interaction_rec", "hybrid_rec"):
+        for limit in (5, 6, 10, 15, 20):
+            cache.delete(_get_cache_key(prefix, user_id, limit, dept_id))
+            cache.delete(_get_cache_key(prefix, user_id, limit, 'all'))
+
+
+def invalidate_book_similar_cache(book_id, dept_id='none'):
+    """Invalidate cached similar books for a specific book."""
+    for limit in (5, 6, 10, 15, 20):
+        cache.delete(f"similar_books:{book_id}:dept:{dept_id}:limit:{limit}")
+        cache.delete(f"similar_books:{book_id}:dept:none:limit:{limit}")
+
+
 def content_based(user, limit=6):
     """
     Recommend based on preferred categories and book similarity using TF-IDF.
@@ -133,7 +148,7 @@ def interaction_based(user, limit=6):
         trending_query = BookInteraction.objects.all()
         if dept:
             trending_query = trending_query.filter(book__department=dept)
-        trending_ids = (
+        trending_ids = list(
             trending_query
             .values('book_id')
             .annotate(c=Count('id'))
@@ -141,6 +156,12 @@ def interaction_based(user, limit=6):
             .values_list('book_id', flat=True)[:limit]
         )
         books = list(base_books.filter(id__in=trending_ids, quantity__gt=0))
+        if not books:
+            books = list(
+                base_books
+                .filter(quantity__gt=0)
+                .order_by('-average_rating', '-ratings_count')[:limit]
+            )
         cache.set(cache_key, books, 300)
         return books
 

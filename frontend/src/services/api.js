@@ -597,12 +597,15 @@ export const getAdminBooks = (token) =>
   });
 
 // Similar Books API
-export const getSimilarBooks = (bookId) =>
-  fetch(`${BASE_URL}/books/${bookId}/similar/`).then(async res => {
-    const data = await res.json();
+export const getSimilarBooks = (bookId) => {
+  const token = localStorage.getItem('token');
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  return fetch(`${BASE_URL}/books/${bookId}/similar/`, { headers }).then(async res => {
+    const data = await res.json().catch(() => ({}));
     if (!res.ok) throw data;
     return data;
   });
+};
 
 //fetchLibrarianDashboar
 export async function fetchLibrarianDashboard(token) {

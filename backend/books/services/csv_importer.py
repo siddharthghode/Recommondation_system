@@ -1,6 +1,7 @@
 import csv
 import io
 from django.db import transaction
+from django.core.cache import cache
 from books.models import Book
 from accounts.models import Department
 
@@ -269,6 +270,9 @@ def import_books_from_csv(file_obj, department: Department) -> dict:
                 'average_rating', 'ratings_count', 'thumbnail'
             ]
             Book.objects.bulk_update(books_to_update, fields_to_update, batch_size=500)
+
+    if created_count > 0 or updated_count > 0:
+        cache.clear()
 
     error_count = len(row_errors)
     return {

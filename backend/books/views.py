@@ -10,7 +10,14 @@ from django.db.models import Q
 from accounts.models import Department
 from books.models import Book, BookInteraction, SearchHistory, BookDwellTime
 from books.serializers import BookSerializer, BookInteractionSerializer, BookDwellTimeSerializer
-from books.services.recommender import hybrid, content_based, interaction_based, get_similar_books
+from books.services.recommender import (
+    hybrid,
+    content_based,
+    interaction_based,
+    get_similar_books,
+    invalidate_user_recommendations,
+    invalidate_book_similar_cache,
+)
 from books.services.csv_importer import import_books_from_csv
 
 
@@ -118,6 +125,7 @@ class TrackBookView(APIView):
 
     def post(self, request, book_id):
         user = request.user
+        dept = None
         if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
             if user.role == 'student':
                 if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
@@ -137,6 +145,7 @@ class TrackBookView(APIView):
             interaction_type='view'
         )
 
+        invalidate_user_recommendations(user.id, getattr(dept, 'id', 'all'))
         return Response({"message": "View tracked"})
 
 
@@ -151,6 +160,7 @@ class InteractionCreateView(APIView):
             return Response({"error": "book_id is required"}, status=400)
 
         user = request.user
+        dept = None
         if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
             if user.role == 'student':
                 if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
@@ -173,6 +183,7 @@ class InteractionCreateView(APIView):
             interaction_type=interaction_type
         )
 
+        invalidate_user_recommendations(user.id, getattr(dept, 'id', 'all'))
         return Response(BookInteractionSerializer(interaction).data, status=201)
 
 
@@ -195,6 +206,7 @@ class BookDwellTimeView(APIView):
             return Response({"error": "duration must be non-negative"}, status=400)
 
         user = request.user
+        dept = None
         if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
             if user.role == 'student':
                 if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
@@ -214,53 +226,24 @@ class BookDwellTimeView(APIView):
             duration_seconds=duration_value
         )
 
+        invalidate_user_recommendations(user.id, getattr(dept, 'id', 'all'))
         return Response(BookDwellTimeSerializer(dwell).data, status=201)
-
-
-class RecommendBooksView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user = request.user
-        dept = _get_user_department(user)
-        if getattr(user, 'role', '') in ('student', 'librarian') and not user.is_superuser and not dept:
-            return Response([])
-
-        base_books = Book.objects.all()
-        if dept:
-            base_books = base_books.filter(department=dept)
-
-        viewed_categories = (
-            BookInteraction.objects
-            .filter(user=user, interaction_type='view')
-            .values_list('book__categories', flat=True)
-        )
-
-        query = Q()
-        for cats in viewed_categories:
-            for c in cats.split(','):
-                query |= Q(categories__icontains=c.strip())
-
-        books = (
-            base_books
-            .filter(query)
-            .exclude(bookinteraction__user=user)
-            .distinct()[:10]
-        )
-
-        return Response(BookSerializer(books, many=True).data)
 
 
 class RecommendationView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        limit = int(request.GET.get('limit', 6))
-        rec_type = request.GET.get('type', 'hybrid')
+        try:
+            limit = max(1, min(int(request.GET.get('limit', 6)), 50))
+        except (ValueError, TypeError):
+            limit = 6
+
+        rec_type = (request.GET.get('type') or 'hybrid').lower()
 
         if rec_type == 'content':
             books = content_based(request.user, limit)
-        elif rec_type == 'interaction':
+        elif rec_type in ('interaction', 'collaborative'):
             books = interaction_based(request.user, limit)
         else:
             books = hybrid(request.user, limit)
@@ -306,7 +289,8 @@ class BookManageView(APIView):
 
         serializer = BookSerializer(book, data=data)
         if serializer.is_valid():
-            serializer.save()
+            saved_book = serializer.save()
+            invalidate_book_similar_cache(saved_book.id, getattr(saved_book.department, 'id', 'none'))
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
@@ -320,7 +304,9 @@ class BookManageView(APIView):
         else:
             book = get_object_or_404(Book, pk=pk)
 
+        dept_id = getattr(book.department, 'id', 'none')
         book.delete()
+        invalidate_book_similar_cache(pk, dept_id)
         return Response({"message": "Book deleted successfully"}, status=200)
 
 
@@ -332,6 +318,11 @@ class SimilarBooksView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request, book_id):
+        try:
+            limit = max(1, min(int(request.GET.get('limit', 6)), 50))
+        except (ValueError, TypeError):
+            limit = 6
+
         user = request.user
         if user.is_authenticated and not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
             if getattr(user, 'role', '') == 'student':
@@ -346,7 +337,7 @@ class SimilarBooksView(APIView):
         else:
             book = get_object_or_404(Book, id=book_id)
 
-        similar_books = get_similar_books(book.id, int(request.GET.get('limit', 6)))
+        similar_books = get_similar_books(book.id, limit)
         return Response(BookSerializer(similar_books, many=True).data)
 
 
