@@ -4,12 +4,15 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import (
+    RequestOTPSerializer,
+    VerifyOTPSerializer,
     RegisterSerializer,
     LoginSerializer,
     UserSerializer,
     NotificationSerializer
 )
-from .models import Notification
+from .models import Notification, Department
+from .services.otp import request_otp, verify_otp
 
 
 # --------------------
@@ -21,6 +24,47 @@ class DepartmentListView(APIView):
     def get(self, request):
         departments = Department.objects.all().order_by('name')
         return Response([{"id": d.id, "name": d.name} for d in departments])
+
+
+# --------------------
+# Request OTP
+# --------------------
+class RequestOTPView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = RequestOTPSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+
+        success, message = request_otp(email)
+        if not success:
+            return Response({'error': message}, status=400)
+
+        return Response({'message': message})
+
+
+# --------------------
+# Verify OTP
+# --------------------
+class VerifyOTPView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = VerifyOTPSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+        otp = serializer.validated_data['otp']
+
+        success, message, token = verify_otp(email, otp)
+        if not success:
+            return Response({'error': message}, status=400)
+
+        return Response({
+            'message': message,
+            'verification_token': token,
+            'email': email
+        })
 
 
 # --------------------

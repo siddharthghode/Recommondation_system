@@ -1,5 +1,31 @@
 export const BASE_URL = "/api";
 
+export const requestOTP = (email) =>
+  fetch(`${BASE_URL}/auth/otp/request/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  }).then(async res => {
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || data.detail || data.email?.[0] || "Failed to send verification code");
+    }
+    return data;
+  });
+
+export const verifyOTP = (email, otp) =>
+  fetch(`${BASE_URL}/auth/otp/verify/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, otp }),
+  }).then(async res => {
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || data.detail || data.otp?.[0] || "Failed to verify code");
+    }
+    return data;
+  });
+
 export const register = (userData) =>
   fetch(`${BASE_URL}/auth/register/`, {
     method: "POST",

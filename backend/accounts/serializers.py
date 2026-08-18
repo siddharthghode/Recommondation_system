@@ -1,7 +1,36 @@
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
-from .models import User, UserProfile, Department, Notification
+from django.utils import timezone
+from datetime import timedelta
+from .models import User, UserProfile, Department, Notification, EmailOTP
+
+
+# --------------------
+# Request OTP Serializer
+# --------------------
+class RequestOTPSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        return value.strip().lower()
+
+
+# --------------------
+# Verify OTP Serializer
+# --------------------
+class VerifyOTPSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    otp = serializers.CharField(max_length=6, min_length=6)
+
+    def validate_email(self, value):
+        return value.strip().lower()
+
+    def validate_otp(self, value):
+        val = value.strip()
+        if not val.isdigit() or len(val) != 6:
+            raise serializers.ValidationError("Verification code must be 6 digits.")
+        return val
 
 
 # --------------------
@@ -14,6 +43,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     role = serializers.ChoiceField(choices=User.ROLE_CHOICES, required=False, default='student')
     password_confirm = serializers.CharField(write_only=True, required=False)
     student_id = serializers.CharField(write_only=True, required=False)
+    verification_token = serializers.CharField(write_only=True, required=False)
 
     class Meta:
         model = User
@@ -28,6 +58,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'last_name',
             'department',
             'year',
+            'verification_token',
         )
         extra_kwargs = {
             'password': {'write_only': True}
@@ -40,6 +71,38 @@ class RegisterSerializer(serializers.ModelSerializer):
             user_making_request = getattr(request, 'user', None)
             if not (user_making_request and (user_making_request.is_staff or user_making_request.is_superuser)):
                 raise serializers.ValidationError({'role': f'Public registration is only allowed for students. Cannot register as {role}.'})
+
+        email = attrs.get('email', '').strip().lower()
+        if not email:
+            raise serializers.ValidationError({'email': 'Email is required for registration.'})
+
+        if User.objects.filter(email__iexact=email).exists():
+            raise serializers.ValidationError({'email': 'An account with this email already exists.'})
+
+        # OTP Verification Token check for student registration
+        if role == 'student':
+            token = attrs.get('verification_token')
+            if not token:
+                raise serializers.ValidationError({
+                    'verification_token': 'Email verification is required. Please verify your OTP first.'
+                })
+
+            otp_record = EmailOTP.objects.filter(
+                email=email,
+                verification_token=token,
+                is_verified=True
+            ).first()
+
+            if not otp_record:
+                raise serializers.ValidationError({
+                    'verification_token': 'Invalid or expired email verification. Please request a new OTP.'
+                })
+
+            # Check token freshness (verified within last 30 minutes)
+            if otp_record.verified_at and timezone.now() - otp_record.verified_at > timedelta(minutes=30):
+                raise serializers.ValidationError({
+                    'verification_token': 'Verification session expired. Please verify OTP again.'
+                })
 
         # If password_confirm provided, ensure it matches
         pw = attrs.get('password')
@@ -63,8 +126,9 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         role = validated_data.pop('role', 'student')
-        # optional student_id
+        # optional student_id and verification_token
         student_id = validated_data.pop('student_id', None)
+        token = validated_data.pop('verification_token', None)
         department_val = validated_data.pop('department', None)
         year = validated_data.pop('year', None)
 
@@ -107,6 +171,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             profile.year = year
             profile.approval_status = 'pending'
             profile.save()
+
+            # Invalidate the verification token to prevent reuse
+            if token:
+                EmailOTP.objects.filter(verification_token=token).update(verification_token=None)
 
         return user
 

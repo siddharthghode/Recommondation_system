@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 # --------------------
 # Department
@@ -98,3 +99,26 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"Notification for {self.user.username}: {self.message[:50]}"
+
+
+# --------------------
+# Email OTP Verification
+# --------------------
+class EmailOTP(models.Model):
+    email = models.EmailField(db_index=True)
+    otp_hash = models.CharField(max_length=128)
+    attempts = models.IntegerField(default=0)
+    is_verified = models.BooleanField(default=False)
+    verification_token = models.CharField(max_length=64, blank=True, null=True, unique=True, db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    verified_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def is_expired(self):
+        return timezone.now() >= self.expires_at
+
+    def __str__(self):
+        return f"OTP for {self.email} (verified={self.is_verified})"
