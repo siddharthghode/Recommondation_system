@@ -1,3 +1,4 @@
+from datetime import timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +10,7 @@ from .models import Borrow
 from .serializers import BorrowSerializer
 from books.models import Book, BookInteraction
 from accounts.models import Notification
+from books.services.recommender import invalidate_user_recommendations
 
 
 class BorrowRequestView(APIView):
@@ -42,12 +44,18 @@ class BorrowRequestView(APIView):
         if Borrow.objects.filter(user=request.user, book=book, status__in=['requested', 'approved']).exists():
             return Response({"error": "Existing active or requested borrow for this book"}, status=400)
 
-        Borrow.objects.create(
+        borrow = Borrow.objects.create(
             user=request.user,
             book=book,
             status='requested'
         )
-        return Response({"message": "Borrow request sent"})
+
+        Notification.objects.create(
+            user=request.user,
+            message=f'Your borrow request for "{book.title}" has been submitted.'
+        )
+
+        return Response({"message": "Borrow request sent", "borrow_id": borrow.id}, status=200)
 
 
 class MyBorrowsView(APIView):
@@ -58,7 +66,7 @@ class MyBorrowsView(APIView):
         if user.role == 'student' and (not hasattr(user, 'profile') or user.profile.approval_status != 'approved'):
             return Response([])
 
-        borrows = Borrow.objects.select_related('book', 'user').filter(user=request.user)
+        borrows = Borrow.objects.select_related('book', 'user', 'user__profile').filter(user=request.user).order_by('-requested_at')
         
         status = request.query_params.get('status')
         if status:
@@ -80,9 +88,9 @@ class PendingBorrowsView(APIView):
             borrows = Borrow.objects.select_related('book', 'user', 'user__profile').filter(
                 status='requested',
                 book__department=request.user.department
-            )
+            ).order_by('-requested_at')
         else:
-            borrows = Borrow.objects.select_related('book', 'user', 'user__profile').filter(status='requested')
+            borrows = Borrow.objects.select_related('book', 'user', 'user__profile').filter(status='requested').order_by('-requested_at')
 
         serialized = BorrowSerializer(borrows, many=True).data
         return Response(serialized)
@@ -104,24 +112,22 @@ class ApproveBorrowView(APIView):
             if getattr(borrow.user, 'profile', None) and borrow.user.profile.department != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
 
-        if borrow.status != 'requested':
-            return Response({"error": "Borrow not in requested state"}, status=400)
-
         with transaction.atomic():
+            borrow = Borrow.objects.select_for_update().select_related('book', 'user').get(id=borrow_id)
+            if borrow.status != 'requested':
+                return Response({"error": "Borrow not in requested state"}, status=400)
+
             book = Book.objects.select_for_update().get(id=borrow.book.id)
 
             if book.quantity <= 0:
                 return Response({"error": "Out of stock"}, status=400)
 
-            from datetime import timedelta
             approval_time = now()
             borrow.status = 'approved'
             borrow.approved_at = approval_time
             borrow.borrow_date = approval_time
             borrow.due_date = approval_time + timedelta(days=30)
-            book.quantity = book.quantity - 1
-            if book.quantity < 0:
-                book.quantity = 0
+            book.quantity = max(0, book.quantity - 1)
 
             book.save()
             borrow.save()
@@ -131,6 +137,8 @@ class ApproveBorrowView(APIView):
                 book=book,
                 interaction_type='borrow'
             )
+
+            invalidate_user_recommendations(borrow.user.id, getattr(borrow.book.department, 'id', 'all'))
 
             Notification.objects.create(
                 user=borrow.user,
@@ -145,18 +153,37 @@ class ReturnBookView(APIView):
 
     def post(self, request):
         borrow_id = request.data.get('borrow_id')
-        borrow = get_object_or_404(Borrow, id=borrow_id, user=request.user)
+        if not borrow_id:
+            return Response({"error": "borrow_id is required"}, status=400)
 
-        if borrow.status != 'approved':
-            return Response({"error": "Only approved borrows can be returned"}, status=400)
+        user = request.user
+        if user.role in ('librarian', 'admin'):
+            if user.role == 'librarian' and not user.is_superuser:
+                if not user.department:
+                    return Response({"error": "Forbidden"}, status=403)
+                borrow = get_object_or_404(Borrow.objects.select_related('book', 'user'), id=borrow_id, book__department=user.department)
+            else:
+                borrow = get_object_or_404(Borrow.objects.select_related('book', 'user'), id=borrow_id)
+        else:
+            # Student returning their own borrow
+            borrow = get_object_or_404(Borrow.objects.select_related('book', 'user'), id=borrow_id, user=user)
 
         with transaction.atomic():
+            borrow = Borrow.objects.select_for_update().select_related('book', 'user').get(id=borrow.id)
+            if borrow.status != 'approved':
+                return Response({"error": "Only approved borrows can be returned"}, status=400)
+
             book = Book.objects.select_for_update().get(id=borrow.book.id)
             borrow.status = 'returned'
             borrow.return_date = now()
             book.quantity += 1
             book.save()
             borrow.save()
+
+            Notification.objects.create(
+                user=borrow.user,
+                message=f'Your return for "{book.title}" has been recorded successfully.'
+            )
 
         return Response({"message": "Book returned successfully"})
 
@@ -177,20 +204,22 @@ class RejectBorrowView(APIView):
             if getattr(borrow.user, 'profile', None) and borrow.user.profile.department != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
 
-        if borrow.status != 'requested':
-            return Response({"error": "Borrow not in requested state"}, status=400)
+        with transaction.atomic():
+            borrow = Borrow.objects.select_for_update().select_related('book', 'user').get(id=borrow_id)
+            if borrow.status != 'requested':
+                return Response({"error": "Borrow not in requested state"}, status=400)
 
-        borrow.status = 'rejected'
-        reason = request.data.get('reason', '')
-        borrow.rejection_reason = reason
-        borrow.save()
+            borrow.status = 'rejected'
+            reason = request.data.get('reason', '')
+            borrow.rejection_reason = reason
+            borrow.save()
 
-        rejection_msg = f'Your borrow request for "{borrow.book.title}" has been rejected.'
-        if reason:
-            rejection_msg += f' Reason: {reason}'
-        Notification.objects.create(
-            user=borrow.user,
-            message=rejection_msg
-        )
+            rejection_msg = f'Your borrow request for "{borrow.book.title}" has been rejected.'
+            if reason:
+                rejection_msg += f' Reason: {reason}'
+            Notification.objects.create(
+                user=borrow.user,
+                message=rejection_msg
+            )
 
         return Response({"message": "Rejected"})

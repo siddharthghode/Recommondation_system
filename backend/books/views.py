@@ -9,6 +9,7 @@ from django.db.models import Q
 
 from accounts.models import Department
 from books.models import Book, BookInteraction, SearchHistory, BookDwellTime
+from borrows.models import Borrow
 from books.serializers import BookSerializer, BookInteractionSerializer, BookDwellTimeSerializer
 from books.services.recommender import (
     hybrid,
@@ -303,6 +304,9 @@ class BookManageView(APIView):
             book = get_object_or_404(Book, pk=pk, department=user.department)
         else:
             book = get_object_or_404(Book, pk=pk)
+
+        if Borrow.objects.filter(book=book, status__in=['requested', 'approved']).exists():
+            return Response({"error": "Cannot delete book with active or requested borrow records"}, status=400)
 
         dept_id = getattr(book.department, 'id', 'none')
         book.delete()

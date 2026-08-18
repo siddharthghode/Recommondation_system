@@ -327,6 +327,8 @@ class MarkNotificationReadView(APIView):
 
     def post(self, request):
         notification_id = request.data.get('notification_id')
+        if not notification_id:
+            return Response({'error': 'notification_id is required'}, status=400)
         try:
             notification = Notification.objects.get(id=notification_id, user=request.user)
             notification.is_read = True
