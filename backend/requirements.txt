@@ -9,3 +9,5 @@ numpy==2.4.1
 pandas==2.3.3
 argon2-cffi
 psycopg2-binary
+gunicorn==23.0.0
+whitenoise==6.8.2

@@ -1,84 +1,123 @@
 # Library Management System with Book Recommendations
 
-A full-stack university library management web app with an intelligent book recommendation engine. Students browse and borrow books, librarians manage department-scoped requests, and admins oversee the entire system. Recommendations are powered by TF-IDF vectorisation, cosine similarity, and weighted collaborative filtering via scikit-learn.
+A full-stack university library management web app with strict department isolation and an intelligent book recommendation engine. Students browse and borrow books within their department, librarians manage catalog imports and approvals for their assigned department, and admins oversee the entire system.
 
 ---
 
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Backend | Django 6.0.1 + Django REST Framework 3.16.1 |
-| Auth | JWT via djangorestframework-simplejwt 5.5.1 |
-| ML | scikit-learn 1.6.1, NumPy 2.4.1, Pandas 2.3.3 |
-| Database | PostgreSQL |
-| Frontend | React 19.2.0 + Vite |
-| Routing | React Router 7.11.0 |
-| Styling | Tailwind CSS 4.1.18 |
-| Animations | Framer Motion 12.24.10 |
-| Charts | Recharts 3.6.0 |
-
----
-
-## Quick Start
-#### Backend
-```bash
-Fresh Start
-cd backend
-chmod +x back_start.sh 
-./back_start.sh      
-this makes all tables and user in psql 
+## Architecture
 
 ```
-
-#### Frontend
-```bash
-chmod +x full_start.sh
-./full_start.sh
-this start backend and frontend
+                          Browser Client
+                                │
+                    Frontend / Nginx (:80)
+                                │
+                 ┌──────────────┴──────────────┐
+                 │                             │
+               /api/                           │
+                 │                             │
+                 ▼                             │
+            Django API                         │
+              :8000                            │
+                 │                             │
+                 ▼                             │
+            PostgreSQL                         │
+               :5432                           │
+                 │                             │
+                 └─────────────────────────────┘
 ```
-Open `http://localhost:5173` for backend
+
+| Service | Technology | Role |
+|---|---|---|
+| **frontend** | React 19 + Vite + Nginx Alpine | Serves production SPA assets and reverse-proxies `/api/` to backend |
+| **backend** | Django 6.0.1 + DRF 3.16.1 + Gunicorn | Handles REST APIs, department authorization, ML recommendation engine |
+| **db** | PostgreSQL 16 Alpine | Relational database with automated health checks |
 
 ---
 
-## Demo Credentials   [these are the demo users]
+## Quick Start (One-Command Docker Setup)
+
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) (20.10+)
+- [Docker Compose](https://docs.docker.com/compose/) (v2+)
+
+### 1. Clone & Configure
+```bash
+git clone <repository_url>
+cd Recommondation_system
+cp .env.example .env
+```
+*(Optional: edit `.env` if you want to set custom passwords, ports, or Google OAuth keys)*
+
+### 2. Start Application
+```bash
+docker compose up --build -d
+```
+The system will automatically:
+1. Initialize the PostgreSQL container and verify database health.
+2. Run all database migrations.
+3. Collect static files into WhiteNoise.
+4. Build the React frontend into static assets.
+5. Start Gunicorn and Nginx.
+
+### 3. Access Application
+- **Web Application**: `http://localhost` (or `http://localhost:8080` if port 80 is customized via `FRONTEND_PORT`)
+- **Backend Health Check**: `http://localhost/api/health/`
+- **Django Admin Panel**: `http://localhost/admin/`
+
+---
+
+## Initial Super Admin Setup
+
+Create the initial superuser:
+```bash
+docker compose exec backend python manage.py createsuperuser
+```
+Log in at `http://localhost/admin/` to create Departments and assign Department Librarians.
+
+---
+
+## Optional Demo Data
+
+To populate sample departments, librarian, and demo students:
+```bash
+# Seed initial book catalog (development only)
+docker compose exec backend python manage.py import_books
+
+# Seed demo users, borrows, and interactions
+docker compose exec backend python manage.py seed_demo
+```
+
+**Demo Credentials**:
 | Role | Username | Password |
-|------|----------|----------|
+|---|---|---|
 | Admin | `admin` | `admin123` |
-| Librarian | `librarian_cs` | `test1234` |
+| Librarian (CS) | `librarian_cs` | `test1234` |
 | Student | `aarav_sharma` | `test1234` |
 | Student | `priya_patil` | `test1234` |
 
-## Fresh Setup (remove demo users)
+---
 
-**Step 1 — Clear demo data**
-```bash
-cd backend
-source bookenv/bin/activate
-python manage.py clear_users          # removes only demo users
-# or: python manage.py clear_users --all   # removes every user
-```
+## Common Docker Commands
 
-**Step 2 — Create your superuser (admin)**
-```bash
-python manage.py createsuperuser
-# enter username, email, password when prompted
-```
-Then open `http://localhost:8000/admin`, find the new user → set `role = admin`.
+| Action | Command |
+|---|---|
+| **Start containers** | `docker compose up -d` |
+| **Rebuild & start** | `docker compose up --build -d` |
+| **View logs** | `docker compose logs -f` |
+| **View backend logs** | `docker compose logs -f backend` |
+| **Run tests** | `docker compose exec backend python manage.py test` |
+| **Django check** | `docker compose exec backend python manage.py check` |
+| **Django shell** | `docker compose exec backend python manage.py shell` |
+| **Stop containers** | `docker compose down` |
+| **Reset database** *(Destructive)* | `docker compose down -v` |
 
-**Step 3 — Create a Librarian**
-In Django admin → Users → Add User:
-- Set `role = librarian`
-- Assign a `department`
-
-**Step 4 — Students**
-Students can self-register via the frontend login page, or you can create them in Django admin with `role = student`.
+---
 
 ## Documentation
 
-| File | Description |
-|------|-------------|
-| [BLUEPRINT_REPORT.md](./BLUEPRINT_REPORT.md) | Full technical architecture, algorithm deep-dives, deployment guide |
-| [database/ER_DIAGRAM.md](./database/ER_DIAGRAM.md) | Entity relationships, constraints, cardinality |
-| [backend/README.md](./backend/README.md) | Backend setup, API reference, management commands |
-| [frontend/README.md](./frontend/README.md) | Frontend setup, routes, components, service layer |
+| Document | Purpose |
+|---|---|
+| [PROJECT_RULES.md](./PROJECT_RULES.md) | Architectural constraints and department security rules |
+| [database/ER_DIAGRAM.md](./database/ER_DIAGRAM.md) | Database schema, foreign keys, and model relationships |
+| [backend/README.md](./backend/README.md) | Backend details and REST API endpoint reference |
+| [frontend/README.md](./frontend/README.md) | Frontend component hierarchy and routing |
