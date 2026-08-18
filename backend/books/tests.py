@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.models import User, Department
@@ -308,3 +309,149 @@ class BooksDepartmentAuthorizationTests(TestCase):
         resp_recs = self.client.get("/api/books/recommendations/")
         self.assertEqual(resp_recs.status_code, 200)
         self.assertEqual(len(resp_recs.data), 0)
+
+    # --- Phase 5 Librarian CSV Catalog Import Tests ---
+    def test_unauthenticated_cannot_import_csv(self):
+        csv_file = SimpleUploadedFile("books.csv", b"title,authors\nTest Book,Author A\n", content_type="text/csv")
+        response = self.client.post("/api/books/import/", {"file": csv_file}, format="multipart")
+        self.assertEqual(response.status_code, 401)
+
+    def test_student_cannot_import_csv(self):
+        self._authenticate(self.student_a)
+        csv_file = SimpleUploadedFile("books.csv", b"title,authors\nTest Book,Author A\n", content_type="text/csv")
+        response = self.client.post("/api/books/import/", {"file": csv_file}, format="multipart")
+        self.assertEqual(response.status_code, 403)
+
+    def test_librarian_without_department_cannot_import_csv(self):
+        rogue_lib = User.objects.create_user(
+            username="rogue_lib",
+            email="rogue@test.com",
+            password="Password123!",
+            role="librarian",
+            department=None
+        )
+        self._authenticate(rogue_lib)
+        csv_file = SimpleUploadedFile("books.csv", b"title,authors\nTest Book,Author A\n", content_type="text/csv")
+        response = self.client.post("/api/books/import/", {"file": csv_file}, format="multipart")
+        self.assertEqual(response.status_code, 403)
+        self.assertIn("not assigned to a department", response.data["error"])
+
+    def test_librarian_a_imports_csv_successfully_forced_to_dept_a(self):
+        self._authenticate(self.lib_a)
+        csv_content = (
+            "title,subtitle,authors,categories,description,published_year,average_rating,quantity\n"
+            "Data Structures in Rust,Fast & Safe,Steve Klabnik,Computer Science,Learn Rust DSA,2021,4.9,5\n"
+            "Operating Systems: Three Easy Pieces,,Remzi Arpaci-Dusseau,Systems,OS Principles,2018,4.85,7\n"
+        )
+        csv_file = SimpleUploadedFile("catalog.csv", csv_content.encode("utf-8"), content_type="text/csv")
+        # Attempt to pass department_id for Dept B
+        response = self.client.post("/api/books/import/", {"file": csv_file, "department": self.dept_b.id}, format="multipart")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["created"], 2)
+        self.assertEqual(response.data["errors"], 0)
+
+        # Verify books were created in Dept A, NOT Dept B
+        rust_book = Book.objects.get(title="Data Structures in Rust")
+        self.assertEqual(rust_book.department, self.dept_a)
+        self.assertEqual(rust_book.quantity, 5)
+
+        os_book = Book.objects.get(title="Operating Systems: Three Easy Pieces")
+        self.assertEqual(os_book.department, self.dept_a)
+        self.assertEqual(os_book.quantity, 7)
+
+        # Librarian B cannot see these books
+        self._authenticate(self.lib_b)
+        resp_b = self.client.get("/api/books/")
+        book_ids = [b["id"] for b in resp_b.data["results"]]
+        self.assertNotIn(rust_book.id, book_ids)
+        self.assertNotIn(os_book.id, book_ids)
+
+    def test_csv_with_department_column_does_not_override_librarian_department(self):
+        self._authenticate(self.lib_a)
+        csv_content = (
+            "title,authors,department,quantity\n"
+            "Hacker Book,Hacker X,Mechanical Engineering,10\n"
+        )
+        csv_file = SimpleUploadedFile("hacked.csv", csv_content.encode("utf-8"), content_type="text/csv")
+        response = self.client.post("/api/books/import/", {"file": csv_file}, format="multipart")
+        self.assertEqual(response.status_code, 200)
+        book = Book.objects.get(title="Hacker Book")
+        self.assertEqual(book.department, self.dept_a)
+
+    def test_import_missing_file_returns_400(self):
+        self._authenticate(self.lib_a)
+        response = self.client.post("/api/books/import/", {}, format="multipart")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("No CSV file provided", response.data["error"])
+
+    def test_import_empty_file_returns_400(self):
+        self._authenticate(self.lib_a)
+        empty_file = SimpleUploadedFile("empty.csv", b"", content_type="text/csv")
+        response = self.client.post("/api/books/import/", {"file": empty_file}, format="multipart")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("empty", response.data["error"])
+
+    def test_import_missing_required_title_header_returns_400(self):
+        self._authenticate(self.lib_a)
+        invalid_header = SimpleUploadedFile("no_title.csv", b"authors,categories\nAuthor A,Cat B\n", content_type="text/csv")
+        response = self.client.post("/api/books/import/", {"file": invalid_header}, format="multipart")
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Missing required CSV column: 'title'", response.data["error"])
+
+    def test_import_with_row_errors_reports_useful_summary(self):
+        self._authenticate(self.lib_a)
+        csv_content = (
+            "title,authors,quantity\n"
+            "Valid Book 1,Author 1,5\n"
+            ",Author 2,3\n"  # Missing title
+            "Valid Book 2,Author 3,abc\n"  # Invalid integer qty handled gracefully
+        )
+        csv_file = SimpleUploadedFile("mixed.csv", csv_content.encode("utf-8"), content_type="text/csv")
+        response = self.client.post("/api/books/import/", {"file": csv_file}, format="multipart")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["created"], 2)
+        self.assertEqual(response.data["errors"], 1)
+        self.assertIn("Row 3: Missing required 'title' field.", response.data["row_errors"])
+
+    def test_repeated_import_does_not_create_unwanted_duplicates(self):
+        self._authenticate(self.lib_a)
+        csv_content = (
+            "title,authors,quantity,average_rating\n"
+            "Duplicate Test Book,Author Dup,5,4.2\n"
+        )
+        # First import
+        csv_file_1 = SimpleUploadedFile("dup.csv", csv_content.encode("utf-8"), content_type="text/csv")
+        res1 = self.client.post("/api/books/import/", {"file": csv_file_1}, format="multipart")
+        self.assertEqual(res1.status_code, 200)
+        self.assertEqual(res1.data["created"], 1)
+        self.assertEqual(res1.data["updated"], 0)
+
+        # Second import of same file
+        csv_file_2 = SimpleUploadedFile("dup.csv", csv_content.encode("utf-8"), content_type="text/csv")
+        res2 = self.client.post("/api/books/import/", {"file": csv_file_2}, format="multipart")
+        self.assertEqual(res2.status_code, 200)
+        self.assertEqual(res2.data["created"], 0)
+        self.assertEqual(res2.data["skipped"], 1)
+
+        # Verify only 1 book exists in database
+        self.assertEqual(Book.objects.filter(title="Duplicate Test Book", department=self.dept_a).count(), 1)
+
+    def test_import_is_non_destructive_to_existing_books(self):
+        self._authenticate(self.lib_a)
+        # Dept A already has book_a1 and book_a2
+        initial_dept_a_count = Book.objects.filter(department=self.dept_a).count()
+        self.assertEqual(initial_dept_a_count, 2)
+
+        csv_content = (
+            "title,authors,quantity\n"
+            "Brand New Non Destructive Book,Author X,3\n"
+        )
+        csv_file = SimpleUploadedFile("nondestructive.csv", csv_content.encode("utf-8"), content_type="text/csv")
+        response = self.client.post("/api/books/import/", {"file": csv_file}, format="multipart")
+        self.assertEqual(response.status_code, 200)
+
+        # Existing books must still exist
+        self.assertTrue(Book.objects.filter(id=self.book_a1.id).exists())
+        self.assertTrue(Book.objects.filter(id=self.book_a2.id).exists())
+        self.assertEqual(Book.objects.filter(department=self.dept_a).count(), 3)
+

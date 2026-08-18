@@ -26,6 +26,25 @@ export const verifyOTP = (email, otp) =>
     return data;
   });
 
+export const importBooksCSV = (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const token = localStorage.getItem('token');
+  return fetch(`${BASE_URL}/books/import/`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  }).then(async res => {
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || data.detail || 'Failed to import books CSV');
+    }
+    return data;
+  });
+};
+
 export const register = (userData) =>
   fetch(`${BASE_URL}/auth/register/`, {
     method: "POST",

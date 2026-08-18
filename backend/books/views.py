@@ -3,12 +3,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 
+from accounts.models import Department
 from books.models import Book, BookInteraction, SearchHistory, BookDwellTime
 from books.serializers import BookSerializer, BookInteractionSerializer, BookDwellTimeSerializer
 from books.services.recommender import hybrid, content_based, interaction_based, get_similar_books
+from books.services.csv_importer import import_books_from_csv
 
 
 class IsLibrarianOrAdmin(permissions.BasePermission):
@@ -345,3 +348,45 @@ class SimilarBooksView(APIView):
 
         similar_books = get_similar_books(book.id, int(request.GET.get('limit', 6)))
         return Response(BookSerializer(similar_books, many=True).data)
+
+
+class BookCSVImportView(APIView):
+    """
+    API endpoint for librarians/admins to bulk import books via CSV upload.
+    Department is strictly determined from the authenticated librarian.
+    """
+    permission_classes = [IsLibrarianOrAdmin]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request):
+        user = request.user
+        if user.role == 'librarian' and not user.is_superuser:
+            department = getattr(user, 'department', None)
+            if not department:
+                return Response({"error": "Librarian is not assigned to a department"}, status=403)
+        elif user.is_superuser or getattr(user, 'role', '') == 'admin':
+            dept_id = request.data.get('department') or request.data.get('department_id')
+            if dept_id:
+                try:
+                    department = Department.objects.get(id=dept_id)
+                except Department.DoesNotExist:
+                    return Response({"error": "Specified department does not exist"}, status=400)
+            else:
+                department = getattr(user, 'department', None) or Department.objects.first()
+            if not department:
+                return Response({"error": "No valid department found for import"}, status=400)
+        else:
+            return Response({"error": "Forbidden: Only librarians and administrators can import books."}, status=403)
+
+        if 'file' not in request.FILES:
+            return Response({"error": "No CSV file provided. Please upload a file with key 'file'."}, status=400)
+
+        csv_file = request.FILES['file']
+        if csv_file.size > 10 * 1024 * 1024:
+            return Response({"error": "File size exceeds 10MB limit."}, status=400)
+
+        result = import_books_from_csv(csv_file, department)
+        if not result.get("success", False):
+            return Response({"error": result.get("error", "CSV import failed"), "details": result}, status=400)
+
+        return Response(result, status=200)
