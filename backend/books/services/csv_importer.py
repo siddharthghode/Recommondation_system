@@ -123,6 +123,23 @@ def import_books_from_csv(file_obj, department: Department) -> dict:
             "row_errors": ["Missing header row."]
         }
 
+    # Column aliases for robust CSV parsing (supports Book_title, title, etc.)
+    COLUMN_ALIASES = {
+        'title': ['book_title', 'book title', 'booktitle', 'title', 'name', 'book_name', 'book name'],
+        'subtitle': ['subtitle', 'sub_title', 'sub title', 'book_subtitle'],
+        'authors': ['authors', 'author', 'book_author', 'book_authors', 'creator', 'by', 'writer'],
+        'categories': ['categories', 'category', 'genre', 'genres', 'subject', 'subjects'],
+        'description': ['description', 'desc', 'summary', 'synopsis', 'about'],
+        'published_year': ['published_year', 'year', 'publication_year', 'published year', 'pub_year'],
+        'num_pages': ['num_pages', 'pages', 'page_count', 'number_of_pages', 'pages_count'],
+        'average_rating': ['average_rating', 'rating', 'avg_rating', 'average rating'],
+        'ratings_count': ['ratings_count', 'reviews_count', 'rating_count', 'ratings count'],
+        'thumbnail': ['thumbnail', 'image', 'cover_image', 'image_url', 'cover', 'thumbnail_url'],
+        'quantity': ['quantity', 'copies', 'total_copies', 'stock', 'count'],
+        'isbn13': ['isbn13', 'isbn_13', 'isbn'],
+        'isbn10': ['isbn10', 'isbn_10'],
+    }
+
     # Normalize headers (lower-case, stripped)
     header_map = {}
     for idx, h in enumerate(raw_headers):
@@ -130,16 +147,24 @@ def import_books_from_csv(file_obj, department: Department) -> dict:
         if clean_h:
             header_map[clean_h] = idx
 
-    if 'title' not in header_map:
+    def find_col_idx(canonical_name):
+        aliases = COLUMN_ALIASES.get(canonical_name, [canonical_name])
+        for alias in aliases:
+            if alias in header_map:
+                return header_map[alias]
+        return None
+
+    title_col_idx = find_col_idx('title')
+    if title_col_idx is None:
         return {
             "success": False,
-            "error": "Missing required CSV column: 'title'.",
+            "error": "Missing required CSV column: 'title' (or 'Book_title').",
             "total_rows": 0,
             "created": 0,
             "updated": 0,
             "skipped": 0,
             "errors": 1,
-            "row_errors": ["Required column 'title' not found in CSV headers."]
+            "row_errors": ["Required column 'title' or 'Book_title' not found in CSV headers."]
         }
 
     # Query existing books for this department to avoid per-row queries
@@ -169,8 +194,8 @@ def import_books_from_csv(file_obj, department: Department) -> dict:
 
         total_rows += 1
 
-        def get_val(col_name, default=""):
-            idx = header_map.get(col_name)
+        def get_val(canonical_name, default=""):
+            idx = find_col_idx(canonical_name)
             if idx is not None and idx < len(row):
                 return row[idx].strip()
             return default
@@ -179,6 +204,7 @@ def import_books_from_csv(file_obj, department: Department) -> dict:
         if not raw_title:
             row_errors.append(f"Row {row_idx}: Missing required 'title' field.")
             continue
+
 
         title = _clean_str(raw_title, 900)
         subtitle = _clean_str(get_val('subtitle'), 900) or None

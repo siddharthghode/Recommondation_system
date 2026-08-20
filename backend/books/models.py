@@ -47,6 +47,7 @@ class BookInteraction(models.Model):
     INTERACTION_CHOICES = (
         ('view', 'View'),
         ('like', 'Like'),
+        ('rate', 'Rate'),
         ('borrow', 'Borrow'),
     )
 

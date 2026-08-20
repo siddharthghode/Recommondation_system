@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { fetchRecommendations } from "../services/api";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchRecommendations, BASE_URL } from "../services/api";
 import BookCard from "../components/BookCard";
 import BookDetail from "../components/BookDetail";
 
@@ -10,7 +10,10 @@ export default function Recommendations() {
   const [error, setError] = useState("");
   const [method, setMethod] = useState("hybrid");
   const [n, setN] = useState(10);
+  const [approvalStatus, setApprovalStatus] = useState(() => localStorage.getItem("approval_status") || "approved");
+  const [userProfile, setUserProfile] = useState(null);
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
   const navigate = useNavigate();
   const [selectedBook, setSelectedBook] = useState(null);
 
@@ -20,8 +23,24 @@ export default function Recommendations() {
       return;
     }
 
+    if (role === "student") {
+      fetch(`${BASE_URL}/auth/me/`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data) {
+            setUserProfile(data);
+            const status = data.profile?.approval_status || data.approval_status || "approved";
+            setApprovalStatus(status);
+            localStorage.setItem("approval_status", status);
+          }
+        })
+        .catch(() => {});
+    }
+
     loadRecommendations();
-  }, [token, method, n, navigate]);
+  }, [token, method, n, navigate, role]);
 
   const loadRecommendations = async () => {
     setLoading(true);
@@ -111,17 +130,61 @@ export default function Recommendations() {
         {!loading && !error && (
           <>
             {recommendations.length === 0 ? (
-              <div className="bg-white p-8 rounded-lg shadow text-center">
-                <p className="text-gray-600 mb-4">
-                  No recommendations available yet. Start browsing and interacting with books to get personalized recommendations!
-                </p>
-                <a
-                  href="/books"
-                  className="text-blue-600 hover:underline"
-                >
-                  Browse Books →
-                </a>
-              </div>
+              token && role === 'student' && approvalStatus === 'pending' ? (
+                <div className="bg-white p-8 sm:p-10 rounded-2xl shadow-md border border-amber-200 text-center max-w-2xl mx-auto my-6">
+                  <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mx-auto mb-4 text-3xl">
+                    ⏳
+                  </div>
+                  <span className="inline-block text-xs font-bold text-amber-800 bg-amber-100 px-3.5 py-1 rounded-full uppercase tracking-wider mb-2">
+                    🟡 Pending Approval
+                  </span>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    Personalized recommendations will unlock after approval
+                  </h3>
+                  <p className="text-slate-600 text-sm mb-6 max-w-md mx-auto">
+                    A librarian from your department ({userProfile?.profile?.department || userProfile?.department || 'your department'}) is currently reviewing your registration.
+                  </p>
+                  <Link
+                    to="/account"
+                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow transition-colors"
+                  >
+                    View / Update Profile →
+                  </Link>
+                </div>
+              ) : token && role === 'student' && approvalStatus === 'rejected' ? (
+                <div className="bg-white p-8 sm:p-10 rounded-2xl shadow-md border border-red-200 text-center max-w-2xl mx-auto my-6">
+                  <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-4 text-3xl">
+                    ❌
+                  </div>
+                  <span className="inline-block text-xs font-bold text-red-800 bg-red-100 px-3.5 py-1 rounded-full uppercase tracking-wider mb-2">
+                    🔴 Registration Rejected
+                  </span>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    Registration Not Approved
+                  </h3>
+                  <p className="text-slate-600 text-sm mb-6 max-w-md mx-auto">
+                    Your library registration was not approved. Please contact your department library administrator.
+                  </p>
+                  <Link
+                    to="/account"
+                    className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow transition-colors"
+                  >
+                    View Account Details →
+                  </Link>
+                </div>
+              ) : (
+                <div className="bg-white p-8 rounded-lg shadow text-center">
+                  <p className="text-gray-600 mb-4">
+                    No recommendations available yet. Start browsing and interacting with books to get personalized recommendations!
+                  </p>
+                  <Link
+                    to="/books"
+                    className="text-blue-600 hover:underline"
+                  >
+                    Browse Books →
+                  </Link>
+                </div>
+              )
             ) : (
               <>
                 <p className="text-sm text-gray-600 mb-4">

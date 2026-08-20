@@ -40,6 +40,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     # Accept either a department PK or department name from frontend
     department = serializers.CharField(required=False, allow_blank=True, allow_null=True)
     year = serializers.IntegerField(required=False, allow_null=True)
+    preferred_categories = serializers.CharField(required=False, allow_blank=True, allow_null=True)
     role = serializers.ChoiceField(choices=User.ROLE_CHOICES, required=False, default='student')
     password_confirm = serializers.CharField(write_only=True, required=False)
     student_id = serializers.CharField(write_only=True, required=False)
@@ -58,6 +59,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'last_name',
             'department',
             'year',
+            'preferred_categories',
             'verification_token',
         )
         extra_kwargs = {
@@ -126,11 +128,12 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         role = validated_data.pop('role', 'student')
-        # optional student_id and verification_token
+        # optional student_id, verification_token, preferred_categories
         student_id = validated_data.pop('student_id', None)
         token = validated_data.pop('verification_token', None)
         department_val = validated_data.pop('department', None)
         year = validated_data.pop('year', None)
+        preferred_categories = validated_data.pop('preferred_categories', '')
 
         # ensure username exists; if not, for students fallback to student_id
         username = validated_data.get('username') or student_id
@@ -169,6 +172,8 @@ class RegisterSerializer(serializers.ModelSerializer):
             profile.student_id = student_id or username
             profile.department = department_obj
             profile.year = year
+            if preferred_categories:
+                profile.preferred_categories = preferred_categories
             profile.approval_status = 'pending'
             profile.save()
 
@@ -185,6 +190,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
+    role = serializers.CharField(required=False, allow_blank=True, allow_null=True)
 
     def validate(self, data):
         user = authenticate(
@@ -194,6 +200,14 @@ class LoginSerializer(serializers.Serializer):
         if not user:
             # AuthenticationFailed maps to HTTP 401
             raise AuthenticationFailed('Invalid username or password')
+
+        expected_role = data.get('role')
+        if expected_role and not (user.is_superuser or user.is_staff or getattr(user, 'role', '') == 'admin'):
+            if expected_role == 'student' and user.role != 'student':
+                raise serializers.ValidationError({'role': 'This account has librarian access. Please use the Librarian Login portal.'})
+            elif expected_role == 'librarian' and user.role != 'librarian':
+                raise serializers.ValidationError({'role': 'This account is a student account. Please use the Student Login portal.'})
+
         return user
 
 

@@ -1,6 +1,6 @@
 import logging
 
-from books.models import Book, BookInteraction
+from books.models import Book, BookInteraction, BookDwellTime
 from django.db.models import Count, Q, F, IntegerField
 from django.db.models.expressions import RawSQL
 from django.core.cache import cache
@@ -132,6 +132,7 @@ def interaction_based(user, limit=6):
     WEIGHT_CASE = """
         CASE interaction_type
             WHEN 'borrow' THEN 3
+            WHEN 'rate'   THEN 3
             WHEN 'like'   THEN 2
             ELSE 1
         END
@@ -144,7 +145,16 @@ def interaction_based(user, limit=6):
         .values('book_id', 'w')
     )
 
-    if not user_weighted.exists():
+    user_book_weights = {row['book_id']: row['w'] for row in user_weighted}
+
+    # Factor in dwell time (reading interest: >= 20s)
+    dwell_records = BookDwellTime.objects.filter(user=user, duration_seconds__gte=20).values('book_id', 'duration_seconds')
+    for d in dwell_records:
+        bid = d['book_id']
+        dwell_bonus = 2 if d['duration_seconds'] >= 60 else 1
+        user_book_weights[bid] = max(user_book_weights.get(bid, 0), dwell_bonus)
+
+    if not user_book_weights:
         trending_query = BookInteraction.objects.all()
         if dept:
             trending_query = trending_query.filter(book__department=dept)
@@ -165,7 +175,6 @@ def interaction_based(user, limit=6):
         cache.set(cache_key, books, 300)
         return books
 
-    user_book_weights = {row['book_id']: row['w'] for row in user_weighted}
     interacted_book_ids = set(user_book_weights)
 
     similar_user_ids = (

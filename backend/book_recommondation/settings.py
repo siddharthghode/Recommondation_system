@@ -190,6 +190,22 @@ CORS_ALLOWED_ORIGINS = _cors_env.split(',') if _cors_env else [
 # Only allow credentials in development; in production set CORS_ALLOWED_ORIGINS via env
 CORS_ALLOW_CREDENTIALS = True
 
+# CSRF Trusted Origins for Django Admin & forms
+_csrf_env = os.getenv('CSRF_TRUSTED_ORIGINS', '')
+CSRF_TRUSTED_ORIGINS = _csrf_env.split(',') if _csrf_env else [
+    'http://localhost:8081',
+    'http://127.0.0.1:8081',
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
+    'http://localhost:80',
+    'http://127.0.0.1:80',
+    'http://localhost',
+    'http://127.0.0.1',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+
+
 # Email Configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')

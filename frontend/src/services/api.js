@@ -1,10 +1,10 @@
 export const BASE_URL = import.meta.env.VITE_API_URL || "/api";
 
-export const requestOTP = (email) =>
+export const requestOTP = (email, purpose = "register") =>
   fetch(`${BASE_URL}/auth/otp/request/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email }),
+    body: JSON.stringify({ email, purpose }),
   }).then(async res => {
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
@@ -22,6 +22,19 @@ export const verifyOTP = (email, otp) =>
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.error || data.detail || data.otp?.[0] || "Failed to verify code");
+    }
+    return data;
+  });
+
+export const resetPassword = (resetData) =>
+  fetch(`${BASE_URL}/auth/password-reset/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(resetData),
+  }).then(async res => {
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || data.detail || "Failed to reset password");
     }
     return data;
   });
@@ -65,11 +78,11 @@ export const register = (userData) =>
     return data;
   });
 
-export const login = (username, password) =>
+export const login = (username, password, role) =>
   fetch(`${BASE_URL}/auth/login/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ username, password, role: role || undefined }),
   }).then(async res => {
     const contentType = res.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
@@ -77,7 +90,8 @@ export const login = (username, password) =>
     }
     const data = await res.json();
     if (!res.ok) {
-      const error = new Error(data.detail || data.error || data.non_field_errors?.[0] || "Login failed");
+      const errorMsg = data.role?.[0] || data.detail || data.error || data.non_field_errors?.[0] || "Login failed";
+      const error = new Error(errorMsg);
       error.data = data;
       throw error;
     }

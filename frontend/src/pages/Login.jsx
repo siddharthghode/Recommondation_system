@@ -1,85 +1,56 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { BASE_URL, authenticatedFetch, login, register, requestOTP, verifyOTP } from "../services/api";
+import { motion, AnimatePresence } from "framer-motion";
+import { BASE_URL, authenticatedFetch, login, register, requestOTP, verifyOTP, getDepartments, resetPassword } from "../services/api";
 import GoogleAuthButton from "../components/GoogleAuthButton";
 
-
-const DEPARTMENTS = [
-  "Electronic Science",
-  "Instrumentation Science (USIC)",
-  "Mathematics",
-  "Environmental Science",
-  "Department of Technology",
-  "Zoology",
-  "Biotechnology",
-  "Geography",
-  "Geology",
-  "Physics",
-  "Chemistry",
-  "Botany",
-  "Atmospheric & Space Sciences",
-  "Statistics",
-  "Computer Science",
-  "Media & Communication Studies",
-  "Microbiology",
-  "School of Health Sciences",
-  "School of Energy Studies",
-  "Interdisciplinary School of Scientific Computing",
-  "Institute of Bioinformatics & Biotechnology (IBB)",
-  "Bioinformatics Center",
-  "Centre for Modeling & Simulation",
-  "School of Basic Medical Sciences (SBMS)",
-  "Commerce",
-  "Management Science (PUMBA)",
-  "Marathi",
-  "Hindi",
-  "English",
-  "Sanskrit & Prakrit Languages",
-  "Pali & Buddhist Studies",
-  "Dr. Babasaheb Ambedkar Studies",
-  "Foreign Languages",
-  "Centre for Advanced Study in Sanskrit",
-  "Economics",
-  "History",
-  "Philosophy",
-  "Anthropology",
-  "Psychology",
-  "Political Science",
-  "Sociology",
-  "Defence & Strategic Studies",
-  "Interdisciplinary School (Humanities & Social Sciences)",
-  "Women's Studies Centre",
-  "Lifelong Learning & Extension",
-  "Buddhist Studies & Dr. Ambedkar Thoughts",
-  "Law",
-  "National Centre of International Security & Defence Analysis (NISDA)",
-  "Centre for Social Science & Humanities (CSSH)",
-  "Education & Extension",
-  "Physical Education",
-  "Centre for Performing Arts",
-  "Library & Information Science",
-  "Communication & Journalism",
-  "Skill Development Center (SDC)",
-];
-
 const YEARS = [1, 2, 3, 4];
+const POPULAR_CATEGORIES = [
+  "Computer Science",
+  "Artificial Intelligence",
+  "Data Science",
+  "Algorithms",
+  "Web Development",
+  "Database",
+  "Mathematics",
+  "Physics",
+  "Engineering",
+  "Machine Learning",
+  "Software Engineering",
+  "Literature",
+];
 
 export default function Login() {
   const [isRegister, setIsRegister] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [studentId, setStudentId] = useState("");
   const [department, setDepartment] = useState("");
+  const [departments, setDepartments] = useState([]);
   const [year, setYear] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [loginRole, setLoginRole] = useState("student");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Fetch departments from DB
+  useEffect(() => {
+    getDepartments()
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setDepartments(data);
+        }
+      })
+      .catch((err) => console.error("Failed to load departments:", err));
+  }, []);
 
   // OTP Verification States
   const [otpStep, setOtpStep] = useState(1); // 1: Email entry, 2: OTP verify, 3: Full form
@@ -116,6 +87,12 @@ export default function Login() {
     setError(errMsg);
   };
 
+  const toggleCategory = (cat) => {
+    setSelectedCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+    );
+  };
+
   const handleSendOTP = async (e) => {
     if (e) e.preventDefault();
     setError("");
@@ -133,7 +110,7 @@ export default function Login() {
 
     setOtpLoading(true);
     try {
-      const res = await requestOTP(email.trim());
+      const res = await requestOTP(email.trim(), isForgotPassword ? "reset" : "register");
       setOtpStep(2);
       setCooldown(60);
       setSuccess(res.message || "Verification code sent to your email.");
@@ -141,6 +118,54 @@ export default function Login() {
       setError(err.message || "Failed to send verification code.");
     } finally {
       setOtpLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (e) => {
+    if (e) e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    if (!verificationToken) {
+      setError("Please verify the email verification code first.");
+      setOtpStep(1);
+      return;
+    }
+
+    if (!newPassword || newPassword.length < 4) {
+      setError("Password must be at least 4 characters.");
+      return;
+    }
+
+    if (newPassword !== newPasswordConfirm) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await resetPassword({
+        email: email.trim().toLowerCase(),
+        verification_token: verificationToken,
+        new_password: newPassword,
+        new_password_confirm: newPasswordConfirm,
+      });
+
+      setSuccess(res.message || "Password reset successfully! Redirecting to login...");
+      setTimeout(() => {
+        setIsForgotPassword(false);
+        setIsRegister(false);
+        setOtpStep(1);
+        setOtpCode("");
+        setVerificationToken("");
+        setNewPassword("");
+        setNewPasswordConfirm("");
+        setSuccess("Password reset successfully. Please log in with your new password.");
+      }, 2000);
+    } catch (err) {
+      setError(err.message || "Failed to reset password.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -203,7 +228,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const data = await login(username.trim(), password);
+      const data = await login(username.trim(), password, loginRole);
 
       if (!data.access || !data.refresh) {
         throw new Error("Invalid response from server");
@@ -226,14 +251,28 @@ export default function Login() {
         userRole = profile.is_superuser || profile.is_staff ? "admin" : (profile.role || "student");
       }
 
-      if (loginRole === "librarian" && userRole !== "librarian") {
+      // Enforce strict separation between Student and Librarian portals
+      if (loginRole === "student" && userRole === "librarian") {
         localStorage.removeItem("token");
         localStorage.removeItem("refreshToken");
-        setError("This account does not have librarian access.");
+        localStorage.removeItem("role");
+        setError("This is a Librarian account. Please click the 'Librarian Login' button above.");
+        return;
+      }
+
+      if (loginRole === "librarian" && userRole === "student") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("role");
+        localStorage.removeItem("approval_status");
+        setError("This is a Student account. Please click the 'Student Login' button above.");
         return;
       }
 
       localStorage.setItem("role", userRole);
+      if (data.approval_status) {
+        localStorage.setItem("approval_status", data.approval_status);
+      }
       setSuccess("Login successful! Redirecting...");
       navigate(ROLE_DESTINATIONS[userRole] ?? "/Books", { replace: true });
     } catch (err) {
@@ -312,9 +351,13 @@ export default function Login() {
         userData.username = studentId.trim();
         userData.student_id = studentId.trim();
       
-      if (year && year !== "") {
-        userData.year = parseInt(year, 10);
-      }
+        if (year && year !== "") {
+          userData.year = parseInt(year, 10);
+        }
+
+        if (selectedCategories.length > 0) {
+          userData.preferred_categories = selectedCategories.join(", ");
+        }
 
       console.log("Registering with data:", { ...userData, password: "***", password_confirm: "***" });
       const data = await register(userData);
@@ -426,158 +469,490 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center px-4 py-20">
-      {/* Background pattern */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl" />
-      </div>
+    <div className="min-h-screen bg-slate-950 bg-gradient-to-br from-slate-950 via-[#0B1528] to-slate-900 flex items-center justify-center p-4 sm:p-6 lg:p-10 font-sans antialiased text-slate-800">
+      {/* Dual Column Layout Container */}
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-800/60 grid grid-cols-1 lg:grid-cols-12"
+      >
+        {/* ========================================================================= */}
+        {/* LEFT COLUMN: Premium University Library Branding & Value Proposition     */}
+        {/* ========================================================================= */}
+        <div className="lg:col-span-5 bg-gradient-to-b from-slate-900 via-[#0D1A30] to-slate-950 text-white p-8 sm:p-10 flex flex-col justify-between relative border-b lg:border-b-0 lg:border-r border-slate-800/80">
+          {/* Subtle decorative background watermark */}
+          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative w-full max-w-md">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-          className="bg-white rounded-3xl shadow-2xl overflow-hidden"
-        >
-          {/* Top accent */}
-          <div className="h-2 bg-gradient-to-r from-blue-600 to-cyan-400" />
-
-          <div className="p-8">
-            {/* Tab header */}
-            <div className="flex gap-4 mb-6 border-b pb-4">
-              <button
-                onClick={() => { setIsRegister(false); setError(""); setSuccess(""); }}
-                className={`pb-2 px-2 font-semibold flex-1 text-center ${
-                  !isRegister
-                    ? "border-b-2 border-blue-600 text-blue-600"
-                    : "text-gray-500"
-                }`}
-              >
-                Login
-              </button>
-              <button
-                onClick={() => { setIsRegister(true); setError(""); setSuccess(""); }}
-                className={`pb-2 px-2 font-semibold flex-1 text-center ${
-                  isRegister
-                    ? "border-b-2 border-blue-600 text-blue-600"
-                    : "text-gray-500"
-                }`}
-              >
-                Register
-              </button>
-            </div>
-
-            <div className="text-center mb-8">
-              <div className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-200">
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+          {/* Top Branding Section */}
+          <div className="relative z-10">
+            {/* Library Crest Badge */}
+            <div className="flex items-center gap-3.5 mb-8">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-950/50 border border-blue-400/30">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6 text-amber-300"
+                >
+                  <path d="M11.25 4.533A9.707 9.707 0 006 3a9.735 9.735 0 00-3.25.555.75.75 0 00-.5.707v14.25a.75.75 0 001 .707A8.237 8.237 0 016 18.75c1.995 0 3.823.707 5.25 1.886V4.533zM12.75 20.636A8.214 8.214 0 0118 18.75c1.05 0 2.039.206 2.946.577a.75.75 0 001.054-.693V4.262a.75.75 0 00-.5-.707A9.735 9.735 0 0018 3a9.707 9.707 0 00-5.25 1.533v16.103z" />
                 </svg>
               </div>
-              <h1 className="text-2xl font-extrabold text-slate-900 mb-1">
-                {isRegister ? "Student Registration" : "Student Login"}
+              <div>
+                <span className="text-[10px] font-bold tracking-widest text-amber-400 uppercase block">
+                  Academic Portal
+                </span>
+                <h2 className="text-lg font-extrabold tracking-tight text-white leading-tight">
+                  Department Library
+                </h2>
+              </div>
+            </div>
+
+            {/* Headline & Description */}
+            <div className="space-y-3 mb-10">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                Your University’s <br />
+                <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-amber-300 bg-clip-text text-transparent">
+                  Digital Library Hub
+                </span>
               </h1>
-              <p className="text-slate-500 text-sm">Access the Department Library System</p>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Discover academic resources, track physical books in your department, and unlock AI-powered recommendations tailored to your studies.
+              </p>
             </div>
 
-            {/* Error */}
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-5 p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 flex items-center gap-2"
-              >
-                <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {error}
-              </motion.div>
-            )}
-
-            {/* Success */}
-            {success && (
-              <div className="mb-5 p-4 bg-green-50 text-green-700 text-sm rounded-xl border border-green-100">
-                {success}
+            {/* Value Highlights List */}
+            <div className="space-y-4">
+              <div className="flex items-start gap-3.5">
+                <div className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 text-blue-400 text-sm mt-0.5">
+                  📚
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-slate-200">Curated Department Catalogs</h4>
+                  <p className="text-xs text-slate-400 leading-normal">
+                    Direct access to specialized textbooks, reference books, and faculty publications.
+                  </p>
+                </div>
               </div>
-            )}
 
-            {isRegister ? (
+              <div className="flex items-start gap-3.5">
+                <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 text-amber-400 text-sm mt-0.5">
+                  ✨
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-slate-200">Personalized AI Recommender</h4>
+                  <p className="text-xs text-slate-400 leading-normal">
+                    Smart recommendations tailored to your reading interests and academic syllabus.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3.5">
+                <div className="w-8 h-8 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0 text-indigo-400 text-sm mt-0.5">
+                  ⚡
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-slate-200">Instant Borrow Requests</h4>
+                  <p className="text-xs text-slate-400 leading-normal">
+                    Reserve books online with instant librarian verification and return reminders.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Academic Assurance Tagline */}
+          <div className="relative z-10 pt-8 mt-8 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500">
+            <span className="flex items-center gap-1.5 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              Secure Institutional Access
+            </span>
+            <span className="text-slate-600">v2.0 Library Hub</span>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* RIGHT COLUMN: Authentication Card (Login / Register / Password Reset)     */}
+        {/* ========================================================================= */}
+        <div className="lg:col-span-7 bg-white p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
+          <div>
+            {/* Top Navigation & Status Bar */}
+            <div className="flex items-center justify-between gap-3 mb-6">
+              {/* Compact Signing-in-as Selector (Login Mode Only) */}
+              {!isRegister && !isForgotPassword ? (
+                <div className="inline-flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200/80 text-xs">
+                  <span className="text-slate-400 font-semibold px-2 hidden sm:inline">Signing in as:</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoginRole("student");
+                      setError("");
+                      setSuccess("");
+                    }}
+                    className={`px-3 py-1.5 rounded-lg font-semibold transition-all flex items-center gap-1.5 ${
+                      loginRole === "student"
+                        ? "bg-white text-blue-700 shadow-sm border border-slate-200/60"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    <span>🎓</span>
+                    <span>Student</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoginRole("librarian");
+                      setError("");
+                      setSuccess("");
+                    }}
+                    className={`px-3 py-1.5 rounded-lg font-semibold transition-all flex items-center gap-1.5 ${
+                      loginRole === "librarian"
+                        ? "bg-white text-indigo-700 shadow-sm border border-slate-200/60"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    <span>📚</span>
+                    <span>Librarian</span>
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsRegister(false);
+                    setIsForgotPassword(false);
+                    setError("");
+                    setSuccess("");
+                    setOtpStep(1);
+                  }}
+                  className="text-xs font-semibold text-slate-500 hover:text-blue-600 flex items-center gap-1 transition-colors"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  Back to Sign In
+                </button>
+              )}
+
+              {/* Mode Switch Button (Top Right) */}
+              {!isForgotPassword && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsRegister(!isRegister);
+                    setError("");
+                    setSuccess("");
+                    setOtpStep(1);
+                  }}
+                  className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  {isRegister ? "Existing Account? Sign in" : "New student? Register"}
+                </button>
+              )}
+            </div>
+
+            {/* Header Title Section */}
+            <div className="mb-6">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                {isForgotPassword
+                  ? "Reset your password"
+                  : isRegister
+                  ? "Create library account"
+                  : loginRole === "librarian"
+                  ? "Librarian Portal"
+                  : "Student Portal"}
+              </h2>
+              <p className="text-slate-500 text-sm mt-1">
+                {isForgotPassword
+                  ? "Enter your verified university email to receive a recovery code"
+                  : isRegister
+                  ? "Verify your student email to access department library resources"
+                  : loginRole === "librarian"
+                  ? "Sign in with your staff credentials to manage catalogs & circulation"
+                  : "Sign in with your Student ID or username to continue"}
+              </p>
+            </div>
+
+            {/* Notification Feedback Banners */}
+            <AnimatePresence mode="wait">
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  className="mb-5 p-3.5 bg-rose-50 text-rose-700 text-xs sm:text-sm rounded-xl border border-rose-200 flex items-start gap-2.5"
+                >
+                  <svg className="w-4 h-4 shrink-0 text-rose-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="leading-snug">{error}</span>
+                </motion.div>
+              )}
+
+              {success && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  className="mb-5 p-3.5 bg-emerald-50 text-emerald-800 text-xs sm:text-sm rounded-xl border border-emerald-200 flex items-start gap-2.5"
+                >
+                  <svg className="w-4 h-4 shrink-0 text-emerald-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="leading-snug">{success}</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* ========================================================================= */}
+            {/* VIEW A: FORGOT PASSWORD FLOW                                              */}
+            {/* ========================================================================= */}
+            {isForgotPassword ? (
               <div className="space-y-5">
-                {/* Step Progress Indicator */}
-                <div className="flex items-center justify-between mb-2 px-1">
-                  <div className="flex items-center gap-1.5">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                      otpStep > 1 ? 'bg-emerald-500 text-white' : otpStep === 1 ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-500'
-                    }`}>
-                      {otpStep > 1 ? '✓' : '1'}
-                    </div>
-                    <span className={`text-xs font-semibold ${otpStep === 1 ? 'text-blue-600' : 'text-slate-500'}`}>Email</span>
+                {/* Step Progress Bar */}
+                <div className="flex items-center justify-between mb-3 px-1">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        otpStep > 1 ? "bg-emerald-600 text-white" : "bg-blue-600 text-white"
+                      }`}
+                    >
+                      {otpStep > 1 ? "✓" : "1"}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-700">Email</span>
                   </div>
-                  <div className={`flex-1 h-0.5 mx-2 ${otpStep > 1 ? 'bg-emerald-400' : 'bg-slate-200'}`} />
-                  <div className="flex items-center gap-1.5">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                      otpStep > 2 ? 'bg-emerald-500 text-white' : otpStep === 2 ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-500'
-                    }`}>
-                      {otpStep > 2 ? '✓' : '2'}
-                    </div>
-                    <span className={`text-xs font-semibold ${otpStep === 2 ? 'text-blue-600' : 'text-slate-500'}`}>Verify Code</span>
+                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 1 ? "bg-emerald-500" : "bg-slate-200"}`} />
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        otpStep > 2
+                          ? "bg-emerald-600 text-white"
+                          : otpStep === 2
+                          ? "bg-blue-600 text-white"
+                          : "bg-slate-200 text-slate-500"
+                      }`}
+                    >
+                      {otpStep > 2 ? "✓" : "2"}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-700">Verify</span>
                   </div>
-                  <div className={`flex-1 h-0.5 mx-2 ${otpStep > 2 ? 'bg-emerald-400' : 'bg-slate-200'}`} />
-                  <div className="flex items-center gap-1.5">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                      otpStep === 3 ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-500'
-                    }`}>
+                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 2 ? "bg-emerald-500" : "bg-slate-200"}`} />
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        otpStep === 3 ? "bg-blue-600 text-white" : "bg-slate-200 text-slate-500"
+                      }`}
+                    >
                       3
-                    </div>
-                    <span className={`text-xs font-semibold ${otpStep === 3 ? 'text-blue-600' : 'text-slate-500'}`}>Details</span>
+                    </span>
+                    <span className="text-xs font-semibold text-slate-700">New Password</span>
                   </div>
                 </div>
 
-                {/* STEP 1: Email Entry & Request OTP */}
+                {/* Step 1: Email */}
                 {otpStep === 1 && (
                   <form onSubmit={handleSendOTP} className="space-y-4">
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1.5">Student Email Address</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                        University Email
+                      </label>
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value.trim())}
                         placeholder="e.g. student@college.edu"
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                       />
-                      <small className="text-gray-500 text-xs mt-1 block">
-                        A 6-digit verification code will be sent to this email address.
+                    </div>
+                    <button
+                      disabled={otpLoading || !email.trim()}
+                      className="w-full bg-slate-900 hover:bg-blue-900 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-md shadow-slate-900/10 disabled:opacity-50"
+                      type="submit"
+                    >
+                      {otpLoading ? "Sending Recovery Code..." : "Send Verification Code"}
+                    </button>
+                  </form>
+                )}
+
+                {/* Step 2: Code Verification */}
+                {otpStep === 2 && (
+                  <form onSubmit={handleVerifyOTP} className="space-y-4">
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs text-slate-700">
+                      <span>Code sent to: <strong>{email}</strong></span>
+                      <button
+                        type="button"
+                        onClick={handleChangeEmail}
+                        className="text-blue-600 font-semibold hover:underline"
+                      >
+                        Change
+                      </button>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                        Enter 6-Digit Code
+                      </label>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        pattern="[0-9]{6}"
+                        maxLength={6}
+                        value={otpCode}
+                        onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                        placeholder="123456"
+                        required
+                        autoFocus
+                        className="w-full text-center tracking-widest text-2xl font-mono font-bold py-3 px-4 rounded-xl border border-slate-200 text-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
+                      />
+                    </div>
+                    <button
+                      disabled={otpLoading || otpCode.length !== 6}
+                      className="w-full bg-slate-900 hover:bg-blue-900 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
+                      type="submit"
+                    >
+                      {otpLoading ? "Verifying..." : "Verify Code & Continue"}
+                    </button>
+                    <div className="text-center pt-1">
+                      <button
+                        type="button"
+                        onClick={handleResendOTP}
+                        disabled={cooldown > 0 || otpLoading}
+                        className="text-xs text-slate-500 hover:text-blue-600 disabled:opacity-50"
+                      >
+                        {cooldown > 0 ? `Resend code in ${cooldown}s` : "Resend Verification Code"}
+                      </button>
+                    </div>
+                  </form>
+                )}
+
+                {/* Step 3: Password Update */}
+                {otpStep === 3 && (
+                  <form onSubmit={handleResetPassword} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                        New Password
+                      </label>
+                      <input
+                        type="password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="At least 4 characters"
+                        required
+                        minLength={4}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                        Confirm New Password
+                      </label>
+                      <input
+                        type="password"
+                        value={newPasswordConfirm}
+                        onChange={(e) => setNewPasswordConfirm(e.target.value)}
+                        placeholder="Re-enter password"
+                        required
+                        minLength={4}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
+                      />
+                    </div>
+                    <button
+                      disabled={loading}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
+                      type="submit"
+                    >
+                      {loading ? "Updating..." : "Save New Password"}
+                    </button>
+                  </form>
+                )}
+              </div>
+            ) : isRegister ? (
+              /* ========================================================================= */
+              /* VIEW B: 3-STEP STUDENT REGISTRATION ONBOARDING                            */
+              /* ========================================================================= */
+              <div className="space-y-5">
+                {/* Step Indicator */}
+                <div className="flex items-center justify-between mb-4 px-1">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        otpStep > 1 ? "bg-emerald-600 text-white" : "bg-blue-600 text-white"
+                      }`}
+                    >
+                      {otpStep > 1 ? "✓" : "1"}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-700">Email</span>
+                  </div>
+                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 1 ? "bg-emerald-500" : "bg-slate-200"}`} />
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        otpStep > 2
+                          ? "bg-emerald-600 text-white"
+                          : otpStep === 2
+                          ? "bg-blue-600 text-white"
+                          : "bg-slate-200 text-slate-500"
+                      }`}
+                    >
+                      {otpStep > 2 ? "✓" : "2"}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-700">Verify</span>
+                  </div>
+                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 2 ? "bg-emerald-500" : "bg-slate-200"}`} />
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        otpStep === 3 ? "bg-blue-600 text-white" : "bg-slate-200 text-slate-500"
+                      }`}
+                    >
+                      3
+                    </span>
+                    <span className="text-xs font-semibold text-slate-700">Profile</span>
+                  </div>
+                </div>
+
+                {/* Step 1: Institutional Email */}
+                {otpStep === 1 && (
+                  <form onSubmit={handleSendOTP} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                        University Student Email
+                      </label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value.trim())}
+                        placeholder="e.g. student@university.edu"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
+                      />
+                      <small className="text-slate-400 text-xs mt-1 block">
+                        A secure 6-digit verification code will be dispatched to this address.
                       </small>
                     </div>
 
                     <button
                       disabled={otpLoading || !email.trim()}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-colors duration-200 text-sm flex items-center justify-center gap-2 mt-2 shadow-lg shadow-blue-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 disabled:opacity-50"
                       type="submit"
                     >
-                      {otpLoading ? (
-                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                        </svg>
-                      ) : (
-                        <>
-                          Send Verification Code
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </>
-                      )}
+                      {otpLoading ? "Sending Code..." : "Send Verification Code"}
                     </button>
 
-                    <div className="my-5 flex items-center gap-3">
+                    <div className="my-4 flex items-center gap-3">
                       <div className="h-px bg-slate-200 flex-1" />
-                      <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">or sign up with</span>
+                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+                        or register with
+                      </span>
                       <div className="h-px bg-slate-200 flex-1" />
                     </div>
 
@@ -595,24 +970,24 @@ export default function Login() {
                   </form>
                 )}
 
-                {/* STEP 2: Enter & Verify OTP */}
+                {/* Step 2: Verification Code */}
                 {otpStep === 2 && (
                   <form onSubmit={handleVerifyOTP} className="space-y-4">
-                    <div className="p-3.5 bg-blue-50 rounded-xl border border-blue-100 flex items-center justify-between text-xs text-blue-900">
-                      <div>
-                        Code sent to: <span className="font-semibold text-blue-950">{email}</span>
-                      </div>
+                    <div className="p-3 bg-blue-50/60 rounded-xl border border-blue-100 flex items-center justify-between text-xs text-blue-900">
+                      <span>Code sent to: <strong>{email}</strong></span>
                       <button
                         type="button"
                         onClick={handleChangeEmail}
-                        className="text-blue-600 hover:text-blue-800 font-semibold underline ml-2"
+                        className="text-blue-600 font-semibold hover:underline"
                       >
                         Change
                       </button>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1.5">Enter 6-Digit Code</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                        Enter 6-Digit Code
+                      </label>
                       <input
                         type="text"
                         inputMode="numeric"
@@ -623,216 +998,219 @@ export default function Login() {
                         placeholder="123456"
                         required
                         autoFocus
-                        className="w-full text-center tracking-widest text-xl font-bold py-3 px-4 rounded-xl border border-slate-200 text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                        className="w-full text-center tracking-widest text-2xl font-mono font-bold py-3 px-4 rounded-xl border border-slate-200 text-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                       />
-                      <small className="text-gray-500 text-xs mt-1 block text-center">
-                        Valid for 10 minutes.
-                      </small>
                     </div>
 
                     <button
                       disabled={otpLoading || otpCode.length !== 6}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-colors duration-200 text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
                       type="submit"
                     >
-                      {otpLoading ? (
-                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                        </svg>
-                      ) : (
-                        <>
-                          Verify Code & Continue
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                        </>
-                      )}
+                      {otpLoading ? "Verifying..." : "Verify Code & Proceed"}
                     </button>
 
-                    <div className="text-center pt-2">
-                      {cooldown > 0 ? (
-                        <span className="text-xs text-slate-500">
-                          Resend code in <span className="font-semibold text-slate-700">{cooldown}s</span>
-                        </span>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={handleResendOTP}
-                          disabled={otpLoading}
-                          className="text-xs text-blue-600 hover:text-blue-800 font-semibold hover:underline"
-                        >
-                          Didn't receive code? Resend Code
-                        </button>
-                      )}
+                    <div className="text-center pt-1">
+                      <button
+                        type="button"
+                        onClick={handleResendOTP}
+                        disabled={cooldown > 0 || otpLoading}
+                        className="text-xs text-slate-500 hover:text-blue-600 disabled:opacity-50 font-medium"
+                      >
+                        {cooldown > 0 ? `Resend code in ${cooldown}s` : "Resend Verification Code"}
+                      </button>
                     </div>
                   </form>
                 )}
 
-                {/* STEP 3: Complete Registration Details */}
+                {/* Step 3: Full Profile Details & Interests */}
                 {otpStep === 3 && (
-                  <form onSubmit={handleRegister} className="space-y-4">
-                    {/* Verified Email Banner */}
-                    <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-100 flex items-center gap-2 text-xs text-emerald-800">
-                      <svg className="w-4 h-4 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span className="font-medium">Verified Email:</span>
-                      <span className="font-bold">{email}</span>
-                    </div>
-
+                  <form onSubmit={handleRegister} className="space-y-4 max-h-[58vh] overflow-y-auto pr-1">
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1.5">Student ID</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                        Student ID / Roll Number *
+                      </label>
                       <input
                         value={studentId}
-                        onChange={(e) => setStudentId(e.target.value)}
-                        placeholder="Student ID (will be used as username)"
+                        onChange={(e) => setStudentId(e.target.value.trim())}
+                        placeholder="e.g. CS2026-089"
                         required
-                        minLength={2}
-                        maxLength={50}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                       />
-                      <small className="text-gray-500 text-xs mt-0.5 block">
-                        Min 2 characters, unique student identifier.
-                      </small>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1.5">First Name</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                          First Name *
+                        </label>
                         <input
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value.trim())}
                           placeholder="First Name"
                           required
-                          maxLength={150}
-                          pattern="[A-Za-z\s]+"
-                          title="First name must contain only letters and spaces"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1.5">Last Name</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                          Last Name *
+                        </label>
                         <input
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value.trim())}
                           placeholder="Last Name"
                           required
-                          maxLength={150}
-                          pattern="[A-Za-z\s]+"
-                          title="Last name must contain only letters and spaces"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                         />
                       </div>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1.5">Department (Required)</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                          Department *
+                        </label>
                         <select
                           value={department}
                           onChange={(e) => setDepartment(e.target.value)}
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                         >
-                          <option value="">Select Department (Required)</option>
-                          {DEPARTMENTS.map((dept) => (
-                            <option key={dept} value={dept}>{dept}</option>
-                          ))}
+                          <option value="">Select Department</option>
+                          {departments.map((dept) => {
+                            const name = typeof dept === "object" ? dept.name : dept;
+                            const key = typeof dept === "object" ? dept.id : dept;
+                            return (
+                              <option key={key} value={name}>
+                                {name}
+                              </option>
+                            );
+                          })}
                         </select>
                       </div>
-
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1.5">Academic Year</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                          Academic Year
+                        </label>
                         <select
                           value={year}
                           onChange={(e) => setYear(e.target.value)}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                         >
-                          <option value="">Select Year (Optional)</option>
+                          <option value="">Year (Optional)</option>
                           {YEARS.map((y) => (
-                            <option key={y} value={y}>Year {y}</option>
+                            <option key={y} value={y}>
+                              Year {y}
+                            </option>
                           ))}
                         </select>
                       </div>
                     </div>
 
-                    <div className="space-y-3">
+                    {/* Reading Interests Pills */}
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">
+                          Reading Interests
+                        </label>
+                        <span className="text-[11px] text-amber-600 font-semibold">Personalizes AI Recommendations</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5 p-2.5 bg-slate-50 rounded-xl border border-slate-200 max-h-32 overflow-y-auto">
+                        {POPULAR_CATEGORIES.map((cat) => {
+                          const isSelected = selectedCategories.includes(cat);
+                          return (
+                            <button
+                              key={cat}
+                              type="button"
+                              onClick={() => toggleCategory(cat)}
+                              className={`px-2.5 py-1 text-xs rounded-lg font-medium transition-all ${
+                                isSelected
+                                  ? "bg-blue-600 text-white shadow-sm font-semibold"
+                                  : "bg-white text-slate-700 border border-slate-200 hover:border-blue-300"
+                              }`}
+                            >
+                              {isSelected ? `✓ ${cat}` : `+ ${cat}`}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1.5">Password</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                          Password *
+                        </label>
                         <input
                           type="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Password (min 4 characters)"
+                          placeholder="Min. 4 chars"
                           required
                           minLength={4}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1.5">Confirm Password</label>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                          Confirm Password *
+                        </label>
                         <input
                           type="password"
                           value={passwordConfirm}
                           onChange={(e) => setPasswordConfirm(e.target.value)}
-                          placeholder="Confirm Password"
+                          placeholder="Re-enter password"
                           required
                           minLength={4}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                         />
                       </div>
                     </div>
 
                     <button
                       disabled={loading}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-colors duration-200 text-sm flex items-center justify-center gap-2 mt-2 shadow-lg shadow-blue-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 disabled:opacity-50 mt-2"
                       type="submit"
                     >
-                      {loading ? (
-                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                        </svg>
-                      ) : (
-                        <>
-                          Complete Registration
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </>
-                      )}
+                      {loading ? "Creating Account..." : "Complete Registration"}
                     </button>
                   </form>
                 )}
               </div>
             ) : (
-              <form onSubmit={handleLogin} className="space-y-5">
+              /* ========================================================================= */
+              /* VIEW C: STANDARD LOGIN FORM                                               */
+              /* ========================================================================= */
+              <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                      <input type="radio" checked={loginRole === "student"} onChange={() => setLoginRole("student")} />
-                      Student
-                    </label>
-                    <label className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                      <input type="radio" checked={loginRole === "librarian"} onChange={() => setLoginRole("librarian")} />
-                      Librarian
-                    </label>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Username or Student ID</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                    {loginRole === "librarian" ? "Librarian Username" : "Student ID or Username"}
+                  </label>
                   <div className="relative">
-                    <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    <svg
+                      className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
                     </svg>
                     <input
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      placeholder="Enter your Student ID / Username"
+                      placeholder={
+                        loginRole === "librarian"
+                          ? "Enter your Librarian username"
+                          : "Enter your Student ID / Username"
+                      }
                       required
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all font-medium"
                       autoComplete="username"
                     />
                   </div>
@@ -840,12 +1218,38 @@ export default function Login() {
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-sm font-semibold text-slate-700">Password</label>
-                    <button type="button" className="text-xs text-blue-600 hover:underline">Forgot password?</button>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">
+                      Password
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsForgotPassword(true);
+                        setIsRegister(false);
+                        setError("");
+                        setSuccess("");
+                        setOtpStep(1);
+                        setOtpCode("");
+                        setVerificationToken("");
+                      }}
+                      className="text-xs text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+                    >
+                      Forgot password?
+                    </button>
                   </div>
                   <div className="relative">
-                    <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    <svg
+                      className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                      />
                     </svg>
                     <input
                       type="password"
@@ -853,7 +1257,7 @@ export default function Login() {
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
                       required
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
                       autoComplete="current-password"
                     />
                   </div>
@@ -861,7 +1265,11 @@ export default function Login() {
 
                 <button
                   disabled={loading}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-colors duration-200 text-sm flex items-center justify-center gap-2 mt-2 shadow-lg shadow-blue-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={`w-full text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-md disabled:opacity-50 ${
+                    loginRole === "librarian"
+                      ? "bg-slate-900 hover:bg-indigo-950 shadow-slate-900/10"
+                      : "bg-blue-600 hover:bg-blue-700 shadow-blue-600/20"
+                  }`}
                   type="submit"
                 >
                   {loading ? (
@@ -871,7 +1279,7 @@ export default function Login() {
                     </svg>
                   ) : (
                     <>
-                      Login
+                      <span>{loginRole === "librarian" ? "Sign In to Librarian Portal" : "Sign In to Student Portal"}</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -879,9 +1287,11 @@ export default function Login() {
                   )}
                 </button>
 
-                <div className="my-5 flex items-center gap-3">
+                <div className="my-4 flex items-center gap-3">
                   <div className="h-px bg-slate-200 flex-1" />
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">or sign in with</span>
+                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+                    or continue with
+                  </span>
                   <div className="h-px bg-slate-200 flex-1" />
                 </div>
 
@@ -894,16 +1304,18 @@ export default function Login() {
                   onError={handleGoogleError}
                   disabled={loading}
                 />
-
-                <p className="text-center text-slate-400 text-xs mt-4">
-                  Department Library System · Secure Student Portal
-                </p>
               </form>
-
             )}
           </div>
-        </motion.div>
-      </div>
+
+          {/* Footer note */}
+          <div className="mt-8 pt-4 border-t border-slate-100 text-center">
+            <p className="text-xs text-slate-500">
+              Need assistance? Contact your department library administrator.
+            </p>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import math
 from rest_framework import generics, permissions, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -178,6 +179,21 @@ class InteractionCreateView(APIView):
         if interaction_type not in dict(BookInteraction.INTERACTION_CHOICES):
             return Response({"error": "Invalid interaction_type"}, status=400)
 
+        rating = request.data.get("rating")
+        if interaction_type == "rate" and rating is not None:
+            try:
+                r_val = float(rating)
+                if 1 <= r_val <= 5:
+                    cur_avg = book.average_rating or 0.0
+                    cur_cnt = book.ratings_count or 0
+                    new_cnt = cur_cnt + 1
+                    new_avg = round((cur_avg * cur_cnt + r_val) / new_cnt, 2)
+                    book.average_rating = new_avg
+                    book.ratings_count = new_cnt
+                    book.save(update_fields=['average_rating', 'ratings_count'])
+            except (ValueError, TypeError):
+                pass
+
         interaction = BookInteraction.objects.create(
             user=request.user,
             book=book,
@@ -201,10 +217,14 @@ class BookDwellTimeView(APIView):
         try:
             duration_value = float(duration)
         except (TypeError, ValueError):
-            return Response({"error": "duration must be a number"}, status=400)
+            return Response({"error": "duration must be a valid number"}, status=400)
 
-        if duration_value < 0:
-            return Response({"error": "duration must be non-negative"}, status=400)
+        if math.isnan(duration_value) or math.isinf(duration_value) or duration_value < 0:
+            return Response({"error": "duration must be a non-negative finite number"}, status=400)
+
+        # Cap single-session dwell duration to max 24 hours (86400 seconds)
+        if duration_value > 86400:
+            duration_value = 86400.0
 
         user = request.user
         dept = None

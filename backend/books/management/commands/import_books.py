@@ -53,23 +53,30 @@ class Command(BaseCommand):
             reader = csv.DictReader(f)
 
             for row in reader:
-                qty = to_int(row.get("quantity")) or 0
+                def get_field(aliases, default=""):
+                    for k, v in row.items():
+                        if k and k.strip().lower() in [a.lower() for a in aliases]:
+                            return v.strip() if isinstance(v, str) else (v or default)
+                    return default
+
+                qty = to_int(get_field(["quantity", "copies", "stock"])) or 0
                 qty = max(0, min(qty, 10))
                 
-                title = row.get("title", "").strip()[:500]
-                subtitle = (row.get("subtitle") or "")[:1000]
+                title_val = get_field(["Book_title", "book_title", "Book Title", "title", "name", "book_name"])
+                if not title_val:
+                    continue
 
                 books_to_create.append(Book(
-                    title=row.get("title", "").strip(),
-                    subtitle=row.get("subtitle"),
-                    authors=row.get("authors", ""),
-                    categories=row.get("categories", ""),
-                    description=row.get("description", ""),
-                    published_year=to_int(row.get("published_year")),
-                    num_pages=to_int(row.get("num_pages")),
-                    average_rating=to_float(row.get("average_rating")),
-                    ratings_count=to_int(row.get("ratings_count")),
-                    thumbnail=row.get("thumbnail"),
+                    title=title_val[:500],
+                    subtitle=(get_field(["subtitle", "sub_title"]) or None),
+                    authors=get_field(["authors", "author", "book_author", "creator"], "Unknown")[:500] or "Unknown",
+                    categories=get_field(["categories", "category", "genre", "genres"])[:500],
+                    description=get_field(["description", "desc", "summary"]),
+                    published_year=to_int(get_field(["published_year", "year", "pub_year"])),
+                    num_pages=to_int(get_field(["num_pages", "pages", "page_count"])),
+                    average_rating=to_float(get_field(["average_rating", "rating", "avg_rating"])),
+                    ratings_count=to_int(get_field(["ratings_count", "rating_count"])),
+                    thumbnail=get_field(["thumbnail", "image", "cover_image", "cover"]),
                     quantity=qty,
                 ))
 

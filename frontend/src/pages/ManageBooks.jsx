@@ -569,7 +569,7 @@ export default function ManageBooks() {
 
                   <div className="bg-slate-50 p-3 rounded-lg text-xs text-slate-600 space-y-1">
                     <p className="font-semibold text-slate-700">CSV Column Format:</p>
-                    <p>Required: <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">title</code></p>
+                    <p>Required: <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">Book_title</code> or <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">title</code></p>
                     <p>Optional: <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">authors</code>, <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">categories</code>, <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">quantity</code>, <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">published_year</code>, <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">description</code>, <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800">thumbnail</code></p>
                   </div>
 

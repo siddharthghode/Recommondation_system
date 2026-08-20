@@ -1,33 +1,23 @@
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL, getMyBorrows, fetchRecommendations } from "../services/api";
+import { BASE_URL, getMyBorrows, fetchRecommendations, getDepartments } from "../services/api";
 import BookCard from "../components/BookCard";
 import BookDetail from "../components/BookDetail";
 
-const DEPARTMENTS = [
-  "Electronic Science","Instrumentation Science (USIC)","Mathematics",
-  "Environmental Science","Department of Technology","Zoology","Biotechnology",
-  "Geography","Geology","Physics","Chemistry","Botany",
-  "Atmospheric & Space Sciences","Statistics","Computer Science",
-  "Media & Communication Studies","Microbiology","School of Health Sciences",
-  "School of Energy Studies","Interdisciplinary School of Scientific Computing",
-  "Institute of Bioinformatics & Biotechnology (IBB)","Bioinformatics Center",
-  "Centre for Modeling & Simulation","School of Basic Medical Sciences (SBMS)",
-  "Commerce","Management Science (PUMBA)","Marathi","Hindi","English",
-  "Sanskrit & Prakrit Languages","Pali & Buddhist Studies",
-  "Dr. Babasaheb Ambedkar Studies","Foreign Languages",
-  "Centre for Advanced Study in Sanskrit","Economics","History","Philosophy",
-  "Anthropology","Psychology","Political Science","Sociology",
-  "Defence & Strategic Studies",
-  "Interdisciplinary School (Humanities & Social Sciences)",
-  "Women's Studies Centre","Lifelong Learning & Extension",
-  "Buddhist Studies & Dr. Ambedkar Thoughts","Law",
-  "National Centre of International Security & Defence Analysis (NISDA)",
-  "Centre for Social Science & Humanities (CSSH)","Education & Extension",
-  "Physical Education","Centre for Performing Arts",
-  "Library & Information Science","Communication & Journalism",
-  "Skill Development Center (SDC)",
+const POPULAR_CATEGORIES = [
+  "Computer Science",
+  "Artificial Intelligence",
+  "Data Science",
+  "Algorithms",
+  "Web Development",
+  "Database",
+  "Mathematics",
+  "Physics",
+  "Engineering",
+  "Machine Learning",
+  "Software Engineering",
+  "Literature",
 ];
 
 export default function AccountDetails() {
@@ -39,6 +29,7 @@ export default function AccountDetails() {
     overdue: 0,
   });
   const [recommendations, setRecommendations] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [recLoading, setRecLoading] = useState(true);
   const [error, setError] = useState("");
@@ -74,6 +65,7 @@ export default function AccountDetails() {
         department: data.profile?.department ?? data.department ?? "",
         year: data.profile?.year || "",
         student_id: data.profile?.student_id || "",
+        preferred_categories: data.profile?.preferred_categories || "",
       });
       setError("");
     } catch (err) {
@@ -113,6 +105,16 @@ export default function AccountDetails() {
   }, [token]);
 
   useEffect(() => {
+    getDepartments()
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setDepartments(data);
+        }
+      })
+      .catch((err) => console.error("Failed to load departments:", err));
+  }, []);
+
+  useEffect(() => {
     if (!token) {
       navigate("/login");
       return;
@@ -132,6 +134,7 @@ export default function AccountDetails() {
         department: profile.profile?.department ?? profile.department ?? "",
         year: profile.profile?.year || "",
         student_id: profile.profile?.student_id || "",
+        preferred_categories: profile.profile?.preferred_categories || "",
       });
     }
   }, [profile]);
@@ -142,12 +145,28 @@ export default function AccountDetails() {
         first_name: profile.first_name || "",
         last_name: profile.last_name || "",
         email: profile.email || "",
-        department: profile.profile?.department || "",
+        department: profile.profile?.department ?? profile.department ?? "",
         year: profile.profile?.year || "",
         student_id: profile.profile?.student_id || "",
+        preferred_categories: profile.profile?.preferred_categories || "",
       });
     }
   }, [profile]);
+
+  const toggleCategory = (cat) => {
+    const current = (formData.preferred_categories || "")
+      .split(/[,;|]/)
+      .map((c) => c.trim())
+      .filter(Boolean);
+
+    let updated;
+    if (current.includes(cat)) {
+      updated = current.filter((c) => c !== cat);
+    } else {
+      updated = [...current, cat];
+    }
+    setFormData({ ...formData, preferred_categories: updated.join(", ") });
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -168,6 +187,7 @@ export default function AccountDetails() {
           department: formData.department,
           year: formData.year ? parseInt(formData.year) : null,
           student_id: formData.student_id,
+          preferred_categories: formData.preferred_categories,
         }),
       });
 
@@ -177,6 +197,7 @@ export default function AccountDetails() {
       }
 
       await loadProfile();
+      loadRecommendations();
       setEditMode(false);
       setSaveSuccess("Profile updated successfully!");
       setTimeout(() => setSaveSuccess(""), 3000);
@@ -384,22 +405,44 @@ export default function AccountDetails() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Department</label>
-                  <select
-                    value={formData.department || ""}
-                    onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                    className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900 bg-white"
-                  >
-                    <option value="">Select Department</option>
-                    {DEPARTMENTS.map((dept) => (
-                      <option key={dept} value={dept}>{dept}</option>
-                    ))}
-                  </select>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">
+                    Department {!(profile?.is_staff || profile?.is_superuser || profile?.role === "admin" || profile?.role === "librarian") && (
+                      <span className="text-xs text-amber-600 font-normal ml-1">🔒 (Institution Assigned)</span>
+                    )}
+                  </label>
+                  {(profile?.is_staff || profile?.is_superuser || profile?.role === "admin" || profile?.role === "librarian") ? (
+                    <select
+                      value={formData.department || ""}
+                      onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                      className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900 bg-white"
+                    >
+                      <option value="">Select Department</option>
+                      {departments.map((dept) => {
+                        const name = typeof dept === "object" ? dept.name : dept;
+                        const key = typeof dept === "object" ? dept.id : dept;
+                        return (
+                          <option key={key} value={name}>{name}</option>
+                        );
+                      })}
+                    </select>
+                  ) : (
+                    <div>
+                      <input
+                        type="text"
+                        disabled
+                        value={formData.department || "Not assigned"}
+                        className="w-full p-3 border-2 border-gray-200 bg-gray-100 text-gray-600 rounded-lg cursor-not-allowed font-medium"
+                      />
+                      <small className="text-xs text-gray-500 mt-1 block">
+                        Assigned by your institution. Contact your department librarian to request a change.
+                      </small>
+                    </div>
+                  )}
                 </div>
               </div>
               
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">Year</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Academic Year</label>
                 <input
                   type="number"
                   min="1"
@@ -408,6 +451,36 @@ export default function AccountDetails() {
                   onChange={(e) => setFormData({ ...formData, year: e.target.value })}
                   className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900"
                 />
+              </div>
+
+              {/* Preferred Categories / Reading Interests Selector */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Reading Interests / Preferred Categories <span className="text-xs text-gray-400 font-normal">(Used for personalized book recommendations)</span>
+                </label>
+                <div className="flex flex-wrap gap-2 p-3 bg-gray-50 rounded-lg border-2 border-gray-200 max-h-36 overflow-y-auto">
+                  {POPULAR_CATEGORIES.map((cat) => {
+                    const currentSelected = (formData.preferred_categories || "")
+                      .split(/[,;|]/)
+                      .map((c) => c.trim())
+                      .filter(Boolean);
+                    const isSelected = currentSelected.includes(cat);
+                    return (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => toggleCategory(cat)}
+                        className={`px-3 py-1 text-xs rounded-full font-medium transition-all ${
+                          isSelected
+                            ? 'bg-blue-600 text-white shadow-sm'
+                            : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300'
+                        }`}
+                      >
+                        {isSelected ? `✓ ${cat}` : `+ ${cat}`}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
               
               <div className="flex gap-4 pt-4">
@@ -479,6 +552,29 @@ export default function AccountDetails() {
                 <p className="font-semibold text-lg text-gray-900 capitalize">
                   {profile.role || "Student"}
                 </p>
+              </div>
+              <div className="md:col-span-2">
+                <p className="text-sm text-gray-600 mb-2">Reading Interests / Preferred Categories</p>
+                {profile.profile?.preferred_categories ? (
+                  <div className="flex flex-wrap gap-2">
+                    {profile.profile.preferred_categories
+                      .split(/[,;|]/)
+                      .map((c) => c.trim())
+                      .filter(Boolean)
+                      .map((cat, idx) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full border border-blue-200"
+                        >
+                          📚 {cat}
+                        </span>
+                      ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-gray-400 italic">
+                    No reading interests selected yet. Click &ldquo;Edit Profile&rdquo; to customize your topics for better book recommendations!
+                  </p>
+                )}
               </div>
             </div>
           )}

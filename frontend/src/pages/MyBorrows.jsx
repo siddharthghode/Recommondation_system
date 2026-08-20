@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BASE_URL, getMyBorrows, returnBook } from "../services/api";
 
@@ -7,7 +8,10 @@ export default function MyBorrows() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [approvalStatus, setApprovalStatus] = useState(() => localStorage.getItem("approval_status") || "approved");
+  const [userProfile, setUserProfile] = useState(null);
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   useEffect(() => {
     if (!token) {
@@ -15,8 +19,25 @@ export default function MyBorrows() {
       setLoading(false);
       return;
     }
+
+    if (role === "student") {
+      fetch(`${BASE_URL}/auth/me/`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data) {
+            setUserProfile(data);
+            const status = data.profile?.approval_status || data.approval_status || "approved";
+            setApprovalStatus(status);
+            localStorage.setItem("approval_status", status);
+          }
+        })
+        .catch(() => {});
+    }
+
     loadBorrows();
-  }, [token, statusFilter]);
+  }, [token, statusFilter, role]);
 
   const loadBorrows = async () => {
     try {
@@ -121,13 +142,57 @@ export default function MyBorrows() {
 
         {/* Borrows List */}
         {borrows.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-lg p-12 text-center">
-            <svg className="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            <p className="text-xl font-semibold text-gray-700 mb-2">No borrows found</p>
-            <p className="text-gray-500">You haven't borrowed any books yet.</p>
-          </div>
+          token && role === 'student' && approvalStatus === 'pending' ? (
+            <div className="bg-white rounded-2xl shadow-md border border-amber-200 p-8 sm:p-10 text-center max-w-2xl mx-auto my-6">
+              <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mx-auto mb-4 text-3xl">
+                ⏳
+              </div>
+              <span className="inline-block text-xs font-bold text-amber-800 bg-amber-100 px-3.5 py-1 rounded-full uppercase tracking-wider mb-2">
+                🟡 Pending Approval
+              </span>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
+                Borrowing privileges will activate upon librarian approval
+              </h3>
+              <p className="text-slate-600 text-sm mb-6 max-w-md mx-auto">
+                Your department librarian ({userProfile?.profile?.department || userProfile?.department || 'your department'}) is currently verifying your account.
+              </p>
+              <Link
+                to="/account"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow transition-colors"
+              >
+                View / Update Profile →
+              </Link>
+            </div>
+          ) : token && role === 'student' && approvalStatus === 'rejected' ? (
+            <div className="bg-white rounded-2xl shadow-md border border-red-200 p-8 sm:p-10 text-center max-w-2xl mx-auto my-6">
+              <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-4 text-3xl">
+                ❌
+              </div>
+              <span className="inline-block text-xs font-bold text-red-800 bg-red-100 px-3.5 py-1 rounded-full uppercase tracking-wider mb-2">
+                🔴 Registration Rejected
+              </span>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
+                Account Not Approved
+              </h3>
+              <p className="text-slate-600 text-sm mb-6 max-w-md mx-auto">
+                Your library registration was rejected. Please contact your department library administrator.
+              </p>
+              <Link
+                to="/account"
+                className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow transition-colors"
+              >
+                View Account Details →
+              </Link>
+            </div>
+          ) : (
+            <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+              <svg className="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <p className="text-xl font-semibold text-gray-700 mb-2">No borrows found</p>
+              <p className="text-gray-500">You haven't borrowed any books yet.</p>
+            </div>
+          )
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {borrows.map((borrow) => {

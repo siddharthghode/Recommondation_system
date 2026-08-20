@@ -642,4 +642,33 @@ class BooksDepartmentAuthorizationTests(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertEqual(resp.data, [])
 
+    def test_dwell_time_validation_edge_cases(self):
+        self._authenticate(self.student_a)
+        
+        # Valid dwell time
+        resp = self.client.post("/api/dwell-time/", {"book_id": self.book_a1.id, "duration": 45.5})
+        self.assertEqual(resp.status_code, 201)
+        self.assertEqual(resp.data["duration_seconds"], 45.5)
+
+        # Negative duration rejected
+        resp_neg = self.client.post("/api/dwell-time/", {"book_id": self.book_a1.id, "duration": -10})
+        self.assertEqual(resp_neg.status_code, 400)
+
+        # NaN rejected
+        resp_nan = self.client.post("/api/dwell-time/", {"book_id": self.book_a1.id, "duration": "nan"})
+        self.assertEqual(resp_nan.status_code, 400)
+
+        # Infinity rejected
+        resp_inf = self.client.post("/api/dwell-time/", {"book_id": self.book_a1.id, "duration": "inf"})
+        self.assertEqual(resp_inf.status_code, 400)
+
+        # Non-numeric string rejected
+        resp_str = self.client.post("/api/dwell-time/", {"book_id": self.book_a1.id, "duration": "invalid"})
+        self.assertEqual(resp_str.status_code, 400)
+
+        # Extremely large duration is capped to 86400s
+        resp_cap = self.client.post("/api/dwell-time/", {"book_id": self.book_a1.id, "duration": 999999})
+        self.assertEqual(resp_cap.status_code, 201)
+        self.assertEqual(resp_cap.data["duration_seconds"], 86400.0)
+
 

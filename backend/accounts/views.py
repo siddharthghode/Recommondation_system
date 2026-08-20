@@ -1,3 +1,5 @@
+from datetime import timedelta
+from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -11,7 +13,7 @@ from .serializers import (
     UserSerializer,
     NotificationSerializer
 )
-from .models import Notification, Department
+from .models import User, Notification, Department, EmailOTP
 from .services.otp import request_otp, verify_otp
 
 
@@ -36,8 +38,9 @@ class RequestOTPView(APIView):
         serializer = RequestOTPSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         email = serializer.validated_data['email']
+        purpose = request.data.get('purpose', 'register')
 
-        success, message = request_otp(email)
+        success, message = request_otp(email, purpose=purpose)
         if not success:
             return Response({'error': message}, status=400)
 
@@ -65,6 +68,49 @@ class VerifyOTPView(APIView):
             'verification_token': token,
             'email': email
         })
+
+
+# --------------------
+# Password Reset
+# --------------------
+class PasswordResetView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        email = (request.data.get('email') or '').strip().lower()
+        token = request.data.get('verification_token')
+        new_password = request.data.get('new_password')
+        new_password_confirm = request.data.get('new_password_confirm')
+
+        if not email or not token or not new_password:
+            return Response({'error': 'Email, verification token, and new password are required.'}, status=400)
+
+        if new_password != new_password_confirm:
+            return Response({'error': 'Passwords do not match.'}, status=400)
+
+        if len(new_password) < 4:
+            return Response({'error': 'Password must be at least 4 characters.'}, status=400)
+
+        otp_record = EmailOTP.objects.filter(
+            email=email,
+            verification_token=token,
+            is_verified=True
+        ).first()
+
+        if not otp_record or (otp_record.verified_at and timezone.now() - otp_record.verified_at > timedelta(minutes=30)):
+            return Response({'error': 'Invalid or expired verification session. Please request a new verification code.'}, status=400)
+
+        user = User.objects.filter(email__iexact=email).first()
+        if not user:
+            return Response({'error': 'Account not found for this email address.'}, status=404)
+
+        user.set_password(new_password)
+        user.save()
+
+        # Invalidate verification token
+        EmailOTP.objects.filter(email=email).update(verification_token=None)
+
+        return Response({'message': 'Password has been reset successfully. You can now log in.'})
 
 
 # --------------------

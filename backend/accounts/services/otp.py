@@ -34,16 +34,21 @@ def send_otp_email(email: str, otp: str) -> None:
     )
 
 
-def request_otp(email: str) -> tuple[bool, str]:
+def request_otp(email: str, purpose: str = "register") -> tuple[bool, str]:
     """
     Request a new OTP for the given email.
     Returns (success: bool, message: str).
     """
     email = email.strip().lower()
 
-    # Check if user already exists
-    if User.objects.filter(email__iexact=email).exists():
-        return False, "An account with this email already exists. Please log in instead."
+    user_exists = User.objects.filter(email__iexact=email).exists()
+    if purpose == "register" and user_exists:
+        # Enumeration protection: return generic confirmation without sending email
+        return True, "If this email is eligible for registration, a verification code has been sent."
+
+    if purpose == "reset" and not user_exists:
+        # Enumeration protection: return generic confirmation without sending email
+        return True, "If an account is associated with this email, a verification code has been sent."
 
     # Resend protection: 60-second cooldown
     last_otp = EmailOTP.objects.filter(email=email).order_by('-created_at').first()
