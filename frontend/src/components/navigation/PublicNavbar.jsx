@@ -123,7 +123,7 @@ export default function PublicNavbar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors shadow-sm"
+              className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all duration-200 shadow-md shadow-blue-900/30 flex items-center gap-1.5"
               >
                 Logout
               </button>
@@ -131,10 +131,10 @@ export default function PublicNavbar() {
           ) : (
             <Link
               to="/login"
-              className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-md shadow-blue-900/30 flex items-center gap-1.5"
+              className="bg-blue-600 hover:bg-blue-700 !text-white text-white text-sm font-bold px-4 py-2 rounded-lg transition-all duration-200 shadow-md shadow-blue-900/20 flex items-center gap-1.5"
             >
-              <span>Sign In</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="!text-white text-white">Sign In</span>
+              <svg className="w-4 h-4 !text-white text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </Link>
@@ -212,9 +212,12 @@ export default function PublicNavbar() {
                 <Link
                   to="/login"
                   onClick={closeMobileMenu}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm flex items-center justify-center"
+                  className="w-full bg-blue-600 hover:bg-blue-700 !text-white text-white font-bold py-2.5 rounded-lg text-sm flex items-center justify-center gap-1.5 transition-all duration-200 shadow-md shadow-blue-900/20"
                 >
-                  Sign In
+                  <span className="!text-white text-white">Sign In</span>
+                  <svg className="w-4 h-4 !text-white text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </Link>
               )}
             </div>
