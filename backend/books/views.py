@@ -95,7 +95,18 @@ class BookListView(generics.ListAPIView):
         category = self.request.query_params.get('category')
         if category and category != "All":
             qs = qs.filter(categories__icontains=category)
-        return qs.order_by('id')
+
+        department_param = self.request.query_params.get('department')
+        if department_param and department_param != "All":
+            if department_param.isdigit():
+                qs = qs.filter(department__id=int(department_param))
+            else:
+                qs = qs.filter(department__name__iexact=department_param)
+
+        ordering = self.request.query_params.get('ordering', '-id')
+        if ordering in ['-id', 'id', 'title', '-title', 'average_rating', '-average_rating', 'published_year', '-published_year']:
+            return qs.order_by(ordering)
+        return qs.order_by('-id')
 
 
 class BookDetailView(generics.RetrieveAPIView):

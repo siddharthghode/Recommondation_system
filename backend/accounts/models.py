@@ -74,7 +74,7 @@ class UserProfile(models.Model):
     approval_status = models.CharField(
         max_length=20,
         choices=APPROVAL_CHOICES,
-        default='approved'
+        default='pending'
     )
 
     def __str__(self):

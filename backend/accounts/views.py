@@ -268,6 +268,8 @@ class GoogleLoginView(APIView):
                 if req_department:
                     dept_obj, _ = Department.objects.get_or_create(name=req_department)
                     profile.department = dept_obj
+                    user.department = dept_obj
+                    user.save()
 
                 if req_year:
                     try:
@@ -283,6 +285,8 @@ class GoogleLoginView(APIView):
                 if req_department:
                     dept_obj, _ = Department.objects.get_or_create(name=req_department)
                     profile.department = dept_obj
+                    user.department = dept_obj
+                    user.save()
                 if req_year:
                     try:
                         profile.year = int(req_year)
@@ -334,14 +338,19 @@ class MeView(APIView):
             profile = user.profile
             if 'preferred_categories' in request.data:
                 profile.preferred_categories = request.data['preferred_categories']
-            if 'department' in request.data and (user.is_staff or user.is_superuser):
-                from .models import Department
+            if 'department' in request.data:
                 dept_name = request.data['department']
-                if dept_name:
-                    dept, _ = Department.objects.get_or_create(name=dept_name)
-                    profile.department = dept
-                else:
-                    profile.department = None
+                can_change_dept = user.is_staff or user.is_superuser or not profile.department or profile.approval_status == 'pending'
+                if can_change_dept:
+                    if dept_name:
+                        dept_obj, _ = Department.objects.get_or_create(name=dept_name)
+                        profile.department = dept_obj
+                        user.department = dept_obj
+                        user.save()
+                    else:
+                        profile.department = None
+                        user.department = None
+                        user.save()
             if 'year' in request.data:
                 profile.year = request.data['year'] or None
             if 'student_id' in request.data:

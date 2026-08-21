@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import Book, BookInteraction, SearchHistory, BookDwellTime
 
 class BookSerializer(serializers.ModelSerializer):
+    department_name = serializers.CharField(source='department.name', read_only=True, default='')
+
     class Meta:
         model = Book
         fields = '__all__'

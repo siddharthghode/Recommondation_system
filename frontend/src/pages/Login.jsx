@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { BASE_URL, authenticatedFetch, login, register, requestOTP, verifyOTP, getDepartments, resetPassword } from "../services/api";
 import GoogleAuthButton from "../components/GoogleAuthButton";
+import { useAuth } from "../context/AuthContext";
 
 const YEARS = [1, 2, 3, 4];
 const POPULAR_CATEGORIES = [
@@ -21,6 +22,7 @@ const POPULAR_CATEGORIES = [
 ];
 
 export default function Login() {
+  const { login: authLogin } = useAuth();
   const [isRegister, setIsRegister] = useState(false);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [username, setUsername] = useState("");
@@ -61,7 +63,7 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const ROLE_DESTINATIONS = { admin: "/admin", librarian: "/librarian", student: "/books" };
+  const ROLE_DESTINATIONS = { admin: "/librarian", librarian: "/librarian", student: "/books" };
 
   // Cooldown countdown timer
   useEffect(() => {
@@ -72,15 +74,13 @@ export default function Login() {
     return () => clearInterval(timer);
   }, [cooldown]);
 
-  const handleGoogleSuccess = (data) => {
-    localStorage.setItem("token", data.access);
-    localStorage.setItem("refreshToken", data.refresh);
+  const handleGoogleSuccess = async (data) => {
     const userRole = data.role || "student";
-    localStorage.setItem("role", userRole);
+    await authLogin(data);
     setSuccess("Google Authentication successful! Redirecting...");
     setTimeout(() => {
       navigate(ROLE_DESTINATIONS[userRole] ?? "/books", { replace: true });
-    }, 1000);
+    }, 800);
   };
 
   const handleGoogleError = (errMsg) => {
@@ -234,9 +234,6 @@ export default function Login() {
         throw new Error("Invalid response from server");
       }
 
-      localStorage.setItem("token", data.access);
-      localStorage.setItem("refreshToken", data.refresh);
-
       let userRole = data.role || null;
 
       if (!userRole) {
@@ -253,28 +250,24 @@ export default function Login() {
 
       // Enforce strict separation between Student and Librarian portals
       if (loginRole === "student" && userRole === "librarian") {
-        localStorage.removeItem("token");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("role");
         setError("This is a Librarian account. Please click the 'Librarian Login' button above.");
         return;
       }
 
       if (loginRole === "librarian" && userRole === "student") {
-        localStorage.removeItem("token");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("role");
-        localStorage.removeItem("approval_status");
         setError("This is a Student account. Please click the 'Student Login' button above.");
         return;
       }
 
-      localStorage.setItem("role", userRole);
-      if (data.approval_status) {
-        localStorage.setItem("approval_status", data.approval_status);
-      }
+      await authLogin({
+        access: data.access,
+        refresh: data.refresh,
+        role: userRole,
+        approval_status: data.approval_status,
+      });
+
       setSuccess("Login successful! Redirecting...");
-      navigate(ROLE_DESTINATIONS[userRole] ?? "/Books", { replace: true });
+      navigate(ROLE_DESTINATIONS[userRole] ?? "/books", { replace: true });
     } catch (err) {
       const errorMsg =
         err.message || err.detail || err.error || err.non_field_errors?.[0] ||
@@ -400,9 +393,13 @@ export default function Login() {
         userRole = "admin";
       }
       
-      const approvalStatus = data.approval_status || profile.profile?.approval_status || profile.approval_status || "approved";
-      localStorage.setItem("role", userRole);
-      localStorage.setItem("approval_status", approvalStatus);
+      const approvalStatus = data.approval_status || profile.profile?.approval_status || profile.approval_status || "pending";
+      await authLogin({
+        access: data.access,
+        refresh: data.refresh,
+        role: userRole,
+        approval_status: approvalStatus,
+      });
 
       if (approvalStatus === "pending") {
         setSuccess("Registration submitted! Your account is pending approval from your department librarian.");
@@ -411,12 +408,10 @@ export default function Login() {
       }
       
       setTimeout(() => {
-        if (userRole === "admin") {
-          navigate("/admin");
-        } else if (userRole === "librarian") {
+        if (userRole === "admin" || userRole === "librarian") {
           navigate("/librarian");
         } else {
-          navigate("/account");
+          navigate("/books");
         }
       }, 1500);
     } catch (err) {
@@ -681,9 +676,9 @@ export default function Login() {
                   initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
-                  className="mb-5 p-3.5 bg-rose-50 text-rose-700 text-xs sm:text-sm rounded-xl border border-rose-200 flex items-start gap-2.5"
+                  className="mb-5 p-3.5 bg-red-50 text-red-700 text-xs sm:text-sm rounded-xl border border-red-200 flex items-start gap-2.5"
                 >
-                  <svg className="w-4 h-4 shrink-0 text-rose-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 shrink-0 text-red-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fillRule="evenodd"
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
@@ -699,9 +694,9 @@ export default function Login() {
                   initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
-                  className="mb-5 p-3.5 bg-emerald-50 text-emerald-800 text-xs sm:text-sm rounded-xl border border-emerald-200 flex items-start gap-2.5"
+                  className="mb-5 p-3.5 bg-green-50 text-green-800 text-xs sm:text-sm rounded-xl border border-green-200 flex items-start gap-2.5"
                 >
-                  <svg className="w-4 h-4 shrink-0 text-emerald-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 shrink-0 text-green-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fillRule="evenodd"
                       d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -723,19 +718,19 @@ export default function Login() {
                   <div className="flex items-center gap-2">
                     <span
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                        otpStep > 1 ? "bg-emerald-600 text-white" : "bg-blue-600 text-white"
+                        otpStep > 1 ? "bg-green-600 text-white" : "bg-blue-600 text-white"
                       }`}
                     >
                       {otpStep > 1 ? "✓" : "1"}
                     </span>
                     <span className="text-xs font-semibold text-slate-700">Email</span>
                   </div>
-                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 1 ? "bg-emerald-500" : "bg-slate-200"}`} />
+                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 1 ? "bg-green-500" : "bg-slate-200"}`} />
                   <div className="flex items-center gap-2">
                     <span
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                         otpStep > 2
-                          ? "bg-emerald-600 text-white"
+                          ? "bg-green-600 text-white"
                           : otpStep === 2
                           ? "bg-blue-600 text-white"
                           : "bg-slate-200 text-slate-500"
@@ -745,7 +740,7 @@ export default function Login() {
                     </span>
                     <span className="text-xs font-semibold text-slate-700">Verify</span>
                   </div>
-                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 2 ? "bg-emerald-500" : "bg-slate-200"}`} />
+                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 2 ? "bg-green-500" : "bg-slate-200"}`} />
                   <div className="flex items-center gap-2">
                     <span
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
@@ -885,19 +880,19 @@ export default function Login() {
                   <div className="flex items-center gap-2">
                     <span
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                        otpStep > 1 ? "bg-emerald-600 text-white" : "bg-blue-600 text-white"
+                        otpStep > 1 ? "bg-green-600 text-white" : "bg-blue-600 text-white"
                       }`}
                     >
                       {otpStep > 1 ? "✓" : "1"}
                     </span>
                     <span className="text-xs font-semibold text-slate-700">Email</span>
                   </div>
-                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 1 ? "bg-emerald-500" : "bg-slate-200"}`} />
+                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 1 ? "bg-green-500" : "bg-slate-200"}`} />
                   <div className="flex items-center gap-2">
                     <span
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                         otpStep > 2
-                          ? "bg-emerald-600 text-white"
+                          ? "bg-green-600 text-white"
                           : otpStep === 2
                           ? "bg-blue-600 text-white"
                           : "bg-slate-200 text-slate-500"
@@ -907,7 +902,7 @@ export default function Login() {
                     </span>
                     <span className="text-xs font-semibold text-slate-700">Verify</span>
                   </div>
-                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 2 ? "bg-emerald-500" : "bg-slate-200"}`} />
+                  <div className={`flex-1 h-0.5 mx-3 ${otpStep > 2 ? "bg-green-500" : "bg-slate-200"}`} />
                   <div className="flex items-center gap-2">
                     <span
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
@@ -954,6 +949,24 @@ export default function Login() {
                         or register with
                       </span>
                       <div className="h-px bg-slate-200 flex-1" />
+                    </div>
+
+                    <div className="space-y-1.5 pt-1">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">
+                        Academic Department (Optional for Google Sign-In)
+                      </label>
+                      <select
+                        value={department}
+                        onChange={(e) => setDepartment(e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 bg-white focus:outline-none focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all"
+                      >
+                        <option value="">-- Choose Department (or select in Profile) --</option>
+                        {departments.map((dept) => {
+                          const name = typeof dept === "object" ? dept.name : dept;
+                          const key = typeof dept === "object" ? dept.id : dept;
+                          return <option key={key} value={name}>{name}</option>;
+                        })}
+                      </select>
                     </div>
 
                     <GoogleAuthButton
@@ -1267,7 +1280,7 @@ export default function Login() {
                   disabled={loading}
                   className={`w-full text-white font-semibold py-3.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 shadow-md disabled:opacity-50 ${
                     loginRole === "librarian"
-                      ? "bg-slate-900 hover:bg-indigo-950 shadow-slate-900/10"
+                      ? "bg-slate-900 hover:bg-slate-800 shadow-slate-900/10"
                       : "bg-blue-600 hover:bg-blue-700 shadow-blue-600/20"
                   }`}
                   type="submit"

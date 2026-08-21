@@ -273,6 +273,29 @@ export default function AccountDetails() {
           </div>
         )}
 
+        {/* Missing Department Banner */}
+        {profile.role === "student" && !profile.profile?.department && !profile.department && (
+          <div className="bg-indigo-50 border-l-4 border-indigo-600 p-4 rounded-r-xl shadow-sm mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🏛</span>
+              <div>
+                <h4 className="font-bold text-indigo-900">Department Not Selected</h4>
+                <p className="text-sm text-indigo-700">
+                  Please select your academic department below and click <strong>Save Changes</strong> to send your registration to your department librarian for approval.
+                </p>
+              </div>
+            </div>
+            {!editMode && (
+              <button
+                onClick={() => setEditMode(true)}
+                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold shrink-0 shadow-sm self-start sm:self-auto"
+              >
+                Select Department →
+              </button>
+            )}
+          </div>
+        )}
+
         {/* Approval Status Banner */}
         {profile.role === "student" && (
           (profile.profile?.approval_status === "pending" || profile.approval_status === "pending") ? (
@@ -406,25 +429,35 @@ export default function AccountDetails() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">
-                    Department {!(profile?.is_staff || profile?.is_superuser || profile?.role === "admin" || profile?.role === "librarian") && (
-                      <span className="text-xs text-amber-600 font-normal ml-1">🔒 (Institution Assigned)</span>
+                    Department
+                    {profile?.approval_status === "approved" && (formData.department && formData.department !== "Not assigned") && (
+                      <span className="text-xs text-emerald-600 font-normal ml-1.5">🔒 (Approved & Locked)</span>
+                    )}
+                    {(!formData.department || formData.department === "Not assigned" || profile?.approval_status === "pending") && (
+                      <span className="text-xs text-indigo-600 font-medium ml-1.5">★ (Required for Librarian Approval)</span>
                     )}
                   </label>
-                  {(profile?.is_staff || profile?.is_superuser || profile?.role === "admin" || profile?.role === "librarian") ? (
-                    <select
-                      value={formData.department || ""}
-                      onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                      className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900 bg-white"
-                    >
-                      <option value="">Select Department</option>
-                      {departments.map((dept) => {
-                        const name = typeof dept === "object" ? dept.name : dept;
-                        const key = typeof dept === "object" ? dept.id : dept;
-                        return (
-                          <option key={key} value={name}>{name}</option>
-                        );
-                      })}
-                    </select>
+                  {(profile?.is_staff || profile?.is_superuser || profile?.role === "admin" || profile?.role === "librarian" || profile?.approval_status === "pending" || !profile?.profile?.department || !profile?.department || formData.department === "Not assigned" || !formData.department) ? (
+                    <div>
+                      <select
+                        value={formData.department && formData.department !== "Not assigned" ? formData.department : ""}
+                        onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                        required
+                        className="w-full p-3 border-2 border-indigo-300 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900 bg-white font-medium shadow-sm"
+                      >
+                        <option value="">-- Choose Your Academic Department --</option>
+                        {departments.map((dept) => {
+                          const name = typeof dept === "object" ? dept.name : dept;
+                          const key = typeof dept === "object" ? dept.id : dept;
+                          return (
+                            <option key={key} value={name}>{name}</option>
+                          );
+                        })}
+                      </select>
+                      <small className="text-xs text-indigo-600 font-medium mt-1 block">
+                        Select your department so your account can be reviewed and approved by your department librarian.
+                      </small>
+                    </div>
                   ) : (
                     <div>
                       <input
@@ -537,9 +570,19 @@ export default function AccountDetails() {
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Department</p>
-                <p className="font-semibold text-lg text-gray-900">
-                  {profile.profile?.department || "Not specified"}
-                </p>
+                <div className="flex items-center gap-2">
+                  <p className="font-semibold text-lg text-gray-900">
+                    {profile.profile?.department || profile.department || "Not assigned"}
+                  </p>
+                  {(!profile.profile?.department && !profile.department) && (
+                    <button
+                      onClick={() => setEditMode(true)}
+                      className="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm"
+                    >
+                      + Choose Department
+                    </button>
+                  )}
+                </div>
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-1">Year</p>

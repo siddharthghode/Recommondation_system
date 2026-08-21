@@ -166,7 +166,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         if role == 'student':
             if not department_obj:
                 raise serializers.ValidationError({'department': 'A valid department is required for student registration'})
-            # profile created by signal
+            user.department = department_obj
+            user.save()
             profile = user.profile
             # prefer explicit student_id, otherwise use username
             profile.student_id = student_id or username

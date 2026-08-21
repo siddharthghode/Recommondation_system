@@ -227,20 +227,46 @@ class AnalyticsDepartmentAuthorizationTests(TestCase):
         pending_b.profile.refresh_from_db()
         self.assertEqual(pending_b.profile.approval_status, "pending")
 
-    def test_admin_can_view_and_approve_across_departments(self):
-        pending_b = User.objects.create_user(username="pending_me_admin", email="meadmin@test.com", password="P2", role="student")
-        pending_b.profile.department = self.dept_b
-        pending_b.profile.approval_status = "pending"
-        pending_b.profile.save()
+    def test_scenario_a_student_registration_and_cs_librarian_approval(self):
+        # Scenario A: Student registers in CS -> CS librarian sees and approves -> status becomes approved
+        cs_student = User.objects.create_user(username="new_cs_student", email="new_cs@test.com", password="P1", role="student")
+        cs_student.profile.department = self.dept_a
+        cs_student.profile.approval_status = "pending"
+        cs_student.profile.save()
 
-        self._authenticate(self.admin)
-        resp_list = self.client.get("/api/analytics/students/pending/")
-        self.assertEqual(resp_list.status_code, 200)
-        pending_ids = [s["id"] for s in resp_list.data]
-        self.assertIn(pending_b.id, pending_ids)
+        # CS Librarian sees student in pending
+        self._authenticate(self.lib_a)
+        res_pending = self.client.get("/api/analytics/students/pending/")
+        self.assertEqual(res_pending.status_code, 200)
+        ids = [s["id"] for s in res_pending.data]
+        self.assertIn(cs_student.id, ids)
 
-        resp_approve = self.client.post(f"/api/analytics/students/{pending_b.id}/approve/")
-        self.assertEqual(resp_approve.status_code, 200)
+        # CS Librarian approves student
+        res_app = self.client.post(f"/api/analytics/students/{cs_student.id}/approve/")
+        self.assertEqual(res_app.status_code, 200)
+        self.assertEqual(res_app.data["approval_status"], "approved")
 
-        pending_b.profile.refresh_from_db()
-        self.assertEqual(pending_b.profile.approval_status, "approved")
+        cs_student.profile.refresh_from_db()
+        self.assertEqual(cs_student.profile.approval_status, "approved")
+
+    def test_scenario_b_different_department_librarian_cannot_see_or_approve(self):
+        # Scenario B: Student in CS -> Mechanical Librarian cannot see or approve
+        cs_student = User.objects.create_user(username="cs_student_iso", email="cs_iso@test.com", password="P1", role="student")
+        cs_student.profile.department = self.dept_a
+        cs_student.profile.approval_status = "pending"
+        cs_student.profile.save()
+
+        # Mech Librarian (lib_b) tries to list pending
+        self._authenticate(self.lib_b)
+        res_pending = self.client.get("/api/analytics/students/pending/")
+        self.assertEqual(res_pending.status_code, 200)
+        ids = [s["id"] for s in res_pending.data]
+        self.assertNotIn(cs_student.id, ids)
+
+        # Mech Librarian tries to approve CS student
+        res_app = self.client.post(f"/api/analytics/students/{cs_student.id}/approve/")
+        self.assertEqual(res_app.status_code, 403)
+
+        # Status remains pending
+        cs_student.profile.refresh_from_db()
+        self.assertEqual(cs_student.profile.approval_status, "pending")

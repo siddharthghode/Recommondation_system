@@ -6,7 +6,7 @@ import BookDetail from '../components/BookDetail';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 import Footer from '../components/Footer';
-import { BASE_URL } from '../services/api';
+import { BASE_URL, getDepartments } from '../services/api';
 
 const PAGE_SIZE = 20;
 
@@ -14,6 +14,8 @@ export default function Books() {
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState(['All']);
   const [categoryCounts, setCategoryCounts] = useState({ All: 0 });
+  const [departments, setDepartments] = useState([]);
+  const [selectedDept, setSelectedDept] = useState('All');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
@@ -27,6 +29,15 @@ export default function Books() {
 
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
+
+  // Load departments
+  useEffect(() => {
+    getDepartments()
+      .then(data => {
+        if (Array.isArray(data)) setDepartments(data);
+      })
+      .catch(() => {});
+  }, []);
 
   // Sync latest user profile approval status
   useEffect(() => {
@@ -52,7 +63,8 @@ export default function Books() {
     try {
       setLoading(true);
       setError('');
-      let url = `${BASE_URL}/books/?page=${page}&page_size=${PAGE_SIZE}`;
+      let url = `${BASE_URL}/books/?page=${page}&page_size=${PAGE_SIZE}&ordering=-id`;
+      if (selectedDept && selectedDept !== 'All') url += `&department=${encodeURIComponent(selectedDept)}`;
       if (category && category !== 'All') url += `&category=${encodeURIComponent(category)}`;
       if (searchQuery.trim()) url += `&search=${encodeURIComponent(searchQuery.trim())}`;
 
@@ -79,7 +91,7 @@ export default function Books() {
     } finally {
       setLoading(false);
     }
-  }, [page, category, searchQuery]);
+  }, [page, selectedDept, category, searchQuery]);
 
   // ── Real API: discover categories from first pages ──────────────────────
   const loadCategories = useCallback(async () => {
@@ -87,7 +99,7 @@ export default function Books() {
       const categorySet = new Set();
       const counts = { All: 0 };
       for (let p = 1; p <= 3; p++) {
-        const res = await fetch(`${BASE_URL}/books/?page=${p}&page_size=${PAGE_SIZE}`);
+        const res = await fetch(`${BASE_URL}/books/?page=${p}&page_size=${PAGE_SIZE}&ordering=-id`);
         if (!res.ok) break;
         const data = await res.json();
         const results = data.results || (Array.isArray(data) ? data : []);
@@ -108,7 +120,7 @@ export default function Books() {
 
   useEffect(() => { loadCategories(); }, [loadCategories]);
   useEffect(() => { loadBooks(); window.scrollTo(0, 0); }, [loadBooks]);
-  useEffect(() => { setPage(1); }, [category, searchQuery]);
+  useEffect(() => { setPage(1); }, [selectedDept, category, searchQuery]);
   useEffect(() => { if (page > totalPages && totalPages > 0) setPage(1); }, [page, totalPages]);
 
   return (
@@ -148,30 +160,41 @@ export default function Books() {
         </div>
       </section>
 
-      {/* ── Category Filter Pills ───────────────────────────────────────── */}
-      <section className="bg-white border-b border-slate-100 shadow-sm">
-        <div className="w-[90%] max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-1 overflow-x-auto py-3 no-scrollbar">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setCategory(cat)}
-                className={`shrink-0 flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-full transition-colors duration-200 ${
-                  category === cat
-                    ? 'bg-blue-700 text-white shadow-lg shadow-blue-200'
-                    : 'bg-blue-500 text-white hover:bg-blue-600'
-                }`}
-              >
-                {cat}
-                {categoryCounts[cat] !== undefined && (
-                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${
-                    category === cat ? 'bg-white/20 text-white' : 'bg-blue-600/20 text-white'
-                  }`}>
-                    {categoryCounts[cat]}
-                  </span>
-                )}
-              </button>
-            ))}
+      {/* ── Department Filter Tabs ─────────────────────────────────────── */}
+      <section className="bg-slate-900 border-b border-slate-800 text-white shadow-inner">
+        <div className="w-[90%] max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
+            <span className="font-bold uppercase tracking-wider text-slate-400 mr-1 shrink-0 flex items-center gap-1">
+              <span>🏛</span> Department:
+            </span>
+            <button
+              onClick={() => setSelectedDept('All')}
+              className={`shrink-0 px-3.5 py-1.5 rounded-xl font-semibold transition ${
+                selectedDept === 'All'
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-900/30'
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+              }`}
+            >
+              All Departments ({totalCount})
+            </button>
+            {departments.map((dept) => {
+              const name = typeof dept === 'object' ? dept.name : dept;
+              const key = typeof dept === 'object' ? dept.id : dept;
+              return (
+                <button
+                  key={key}
+                  onClick={() => setSelectedDept(name)}
+                  className={`shrink-0 px-3.5 py-1.5 rounded-xl font-semibold transition flex items-center gap-1.5 ${
+                    selectedDept === name
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-900/30'
+                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  }`}
+                >
+                  <span>🏛</span>
+                  <span>{name}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -334,7 +357,6 @@ export default function Books() {
           />
         )}
       </AnimatePresence>
-      <Footer />
     </>
   );
 }

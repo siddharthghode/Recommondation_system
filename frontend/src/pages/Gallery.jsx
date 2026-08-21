@@ -128,8 +128,6 @@ export default function Gallery() {
 
       {/* Lightbox */}
       {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}
-
-      <Footer />
     </>
   );
 }

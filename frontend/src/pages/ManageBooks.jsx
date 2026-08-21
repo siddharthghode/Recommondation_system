@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Layout from '../components/Layout';
 import Toast from '../components/Toast';
 import ConfirmModal from '../components/ConfirmModal';
 import { BASE_URL, importBooksCSV } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 export default function ManageBooks() {
   const [searchParams] = useSearchParams();
   const filter = searchParams.get('filter') || 'all'; // all, in_stock, out_of_stock
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const { token: authToken } = useAuth();
+  const token = authToken || localStorage.getItem('token');
   
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -210,10 +211,8 @@ export default function ManageBooks() {
   const canEdit = filter === 'all';
 
   return (
-    <Layout>
-      <div className="p-4 md:p-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
+    <div className="space-y-6 max-w-7xl mx-auto">
+      {/* Header */}
           <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 mb-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -423,8 +422,6 @@ export default function ManageBooks() {
               </>
             )}
           </div>
-        </div>
-      </div>
 
       {/* Add/Edit Modal */}
       {(showAddModal || editingBook) && (
@@ -679,6 +676,6 @@ export default function ManageBooks() {
         type={toast.type}
         onClose={() => setToast({ ...toast, open: false })}
       />
-    </Layout>
+    </div>
   );
 }

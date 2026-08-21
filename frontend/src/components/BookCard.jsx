@@ -43,9 +43,15 @@ export default function BookCard({ book, onClick, selected, trackView = false, i
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           onError={(e) => { e.target.src = PLACEHOLDER; }}
         />
+        {/* Department badge */}
+        {(book.department_name || book.department) && (
+          <div className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-900/80 backdrop-blur-sm text-indigo-300 border border-slate-700 shadow-sm">
+            🏛 {book.department_name || (typeof book.department === 'string' ? book.department : `Dept #${book.department}`)}
+          </div>
+        )}
         {/* Availability badge */}
         <div className={`absolute top-2 right-2 text-xs font-semibold px-2 py-0.5 rounded-full ${
-          available ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-600'
+          available ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'
         }`}>
           {available ? 'Available' : 'Borrowed'}
         </div>

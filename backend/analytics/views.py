@@ -199,12 +199,13 @@ class StudentsListView(APIView):
         if request.user.role == 'librarian' and not request.user.is_superuser:
             if not request.user.department:
                 return Response([])
-            qs = User.objects.select_related("profile", "profile__department").filter(
-                role='student',
-                profile__department=request.user.department,
+            qs = User.objects.select_related("profile", "profile__department", "department").filter(
+                role='student'
+            ).filter(
+                Q(profile__department=request.user.department) | Q(department=request.user.department)
             )
         else:
-            qs = User.objects.select_related("profile", "profile__department").filter(role='student')
+            qs = User.objects.select_related("profile", "profile__department", "department").filter(role='student')
 
         # Filter by approval_status if specified (e.g., ?status=pending, ?status=approved)
         status = request.query_params.get('status')
@@ -224,13 +225,14 @@ class PendingStudentsView(APIView):
         if request.user.role == 'librarian' and not request.user.is_superuser:
             if not request.user.department:
                 return Response([])
-            qs = User.objects.select_related("profile", "profile__department").filter(
+            qs = User.objects.select_related("profile", "profile__department", "department").filter(
                 role='student',
-                profile__department=request.user.department,
                 profile__approval_status='pending'
+            ).filter(
+                Q(profile__department=request.user.department) | Q(department=request.user.department)
             )
         else:
-            qs = User.objects.select_related("profile", "profile__department").filter(
+            qs = User.objects.select_related("profile", "profile__department", "department").filter(
                 role='student',
                 profile__approval_status='pending'
             )
@@ -245,20 +247,27 @@ class ApproveStudentView(APIView):
         if request.user.role not in ("librarian", "admin"):
             return Response({"error": "Forbidden"}, status=403)
 
-        student = get_object_or_404(User.objects.select_related("profile", "profile__department"), id=user_id, role='student')
+        student = get_object_or_404(User.objects.select_related("profile", "profile__department", "department"), id=user_id, role='student')
 
         # Librarians can only approve students from their own department
         if request.user.role == 'librarian' and not request.user.is_superuser:
-            if not request.user.department or not hasattr(student, 'profile') or student.profile.department != request.user.department:
+            student_dept = getattr(student.profile, 'department', None) or student.department
+            if not request.user.department or student_dept != request.user.department:
                 return Response({"error": "Forbidden: You can only approve students in your department"}, status=403)
 
         if not hasattr(student, 'profile'):
             return Response({"error": "Student has no profile"}, status=400)
 
         student.profile.approval_status = 'approved'
+        if not student.profile.department and request.user.department:
+            student.profile.department = request.user.department
         student.profile.save()
 
-        dept_name = student.profile.department.name if student.profile.department else "the library"
+        if not student.department and request.user.department:
+            student.department = request.user.department
+            student.save()
+
+        dept_name = student.profile.department.name if student.profile.department else (student.department.name if student.department else "the library")
         Notification.objects.create(
             user=student,
             message=f"Your library registration for {dept_name} has been approved! You now have full access to browse and borrow books."
@@ -278,11 +287,12 @@ class RejectStudentView(APIView):
         if request.user.role not in ("librarian", "admin"):
             return Response({"error": "Forbidden"}, status=403)
 
-        student = get_object_or_404(User.objects.select_related("profile", "profile__department"), id=user_id, role='student')
+        student = get_object_or_404(User.objects.select_related("profile", "profile__department", "department"), id=user_id, role='student')
 
         # Librarians can only reject students from their own department
         if request.user.role == 'librarian' and not request.user.is_superuser:
-            if not request.user.department or not hasattr(student, 'profile') or student.profile.department != request.user.department:
+            student_dept = getattr(student.profile, 'department', None) or student.department
+            if not request.user.department or student_dept != request.user.department:
                 return Response({"error": "Forbidden: You can only reject students in your department"}, status=403)
 
         if not hasattr(student, 'profile'):
@@ -319,7 +329,8 @@ class StudentRecommendationsView(APIView):
 
         # librarians may only view students from their department
         if request.user.role == 'librarian' and not request.user.is_superuser:
-            if not request.user.department or not getattr(student, 'profile', None) or student.profile.department != request.user.department:
+            student_dept = getattr(student.profile, 'department', None) or student.department
+            if not request.user.department or student_dept != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
 
         limit = int(request.GET.get('limit', 6))
@@ -345,7 +356,8 @@ class StudentBorrowsView(APIView):
         student = get_object_or_404(User, id=user_id, role='student')
 
         if request.user.role == 'librarian' and not request.user.is_superuser:
-            if not request.user.department or not getattr(student, 'profile', None) or student.profile.department != request.user.department:
+            student_dept = getattr(student.profile, 'department', None) or student.department
+            if not request.user.department or student_dept != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
 
         borrows = Borrow.objects.select_related("book", "user").filter(user=student)
@@ -362,7 +374,8 @@ class StudentAnalyticsView(APIView):
         student = get_object_or_404(User, id=user_id, role='student')
 
         if request.user.role == 'librarian' and not request.user.is_superuser:
-            if not request.user.department or not getattr(student, 'profile', None) or student.profile.department != request.user.department:
+            student_dept = getattr(student.profile, 'department', None) or student.department
+            if not request.user.department or student_dept != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
 
         # Get interactions

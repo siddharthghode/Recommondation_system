@@ -16,6 +16,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    ports:
+      - "${POSTGRES_PORT_HOST:-5433}:5432"
     networks:
       - library_network
 

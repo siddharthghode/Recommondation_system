@@ -3,7 +3,7 @@ import { googleLogin } from "../services/api";
 
 const GOOGLE_CLIENT_ID =
   import.meta.env.VITE_GOOGLE_CLIENT_ID ||
-  "1083948574930-example.apps.googleusercontent.com";
+  "375016986672-gm5u85d21g1tlb7vbdv1uvms356surcs.apps.googleusercontent.com";
 
 export default function GoogleAuthButton({
   onSuccess,
@@ -132,7 +132,7 @@ export default function GoogleAuthButton({
           type="button"
           onClick={handleCustomClick}
           disabled={loading || disabled}
-          className="w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-3 px-4 rounded-xl border border-slate-200 shadow-sm transition-all duration-200 text-sm flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-white hover:bg-slate-50 text-slate-900 font-semibold py-3 px-4 rounded-xl border border-slate-200 shadow-sm transition-all duration-200 text-sm flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? (
             <svg className="w-5 h-5 animate-spin text-slate-500" fill="none" viewBox="0 0 24 24">

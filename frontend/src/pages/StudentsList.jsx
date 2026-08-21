@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Layout from "../components/Layout";
+import { useSearchParams } from "react-router-dom";
 import { getStudents, getStudentBorrows, getStudentAnalytics, approveStudent, rejectStudent } from "../services/api";
 import Toast from "../components/Toast";
+import { useAuth } from "../context/AuthContext";
 
 export default function StudentsList() {
+  const { token: authToken, department } = useAuth();
+  const token = authToken || localStorage.getItem("token");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryStatus = searchParams.get('status') || searchParams.get('tab') || searchParams.get('filter');
+
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -12,26 +18,48 @@ export default function StudentsList() {
   const [analytics, setAnalytics] = useState(null);
   const [borrowsLoading, setBorrowsLoading] = useState(false);
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('borrows'); // 'borrows', 'analytics'
-  const [statusFilter, setStatusFilter] = useState('all'); // 'all', 'pending', 'approved', 'rejected'
+  const [activeTab, setActiveTab] = useState('profile'); // 'profile', 'borrows', 'analytics'
+  const [statusFilter, setStatusFilter] = useState(queryStatus || 'all'); // 'all', 'pending', 'approved', 'rejected'
   const [actionLoading, setActionLoading] = useState(false);
   const [toast, setToast] = useState({ open: false, message: '', type: 'info' });
   const [searchQuery, setSearchQuery] = useState('');
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (!token) {
-      window.location.href = '/login';
-      return;
+    if (queryStatus && queryStatus !== statusFilter) {
+      setStatusFilter(queryStatus);
     }
-    loadStudents();
+  }, [queryStatus]);
+
+  const handleFilterChange = (newFilter) => {
+    setStatusFilter(newFilter);
+    if (newFilter === 'all') {
+      setSearchParams({});
+    } else {
+      setSearchParams({ status: newFilter });
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      loadStudents();
+    }
   }, [token]);
 
   const loadStudents = async () => {
     try {
       setLoading(true);
       const data = await getStudents(token);
-      setStudents(data);
+      setStudents(data || []);
+
+      // Auto select first pending student if filter is pending
+      const currentFilter = queryStatus || statusFilter;
+      if (currentFilter === 'pending' && Array.isArray(data)) {
+        const pendingList = data.filter(s => (s.approval_status === 'pending' || s.profile?.approval_status === 'pending'));
+        if (pendingList.length > 0) {
+          setSelectedStudent(pendingList[0]);
+          setActiveTab('profile');
+        }
+      }
     } catch (err) {
       console.error('Failed to load students:', err);
       setToast({ open: true, message: 'Failed to load students', type: 'error' });
@@ -81,7 +109,7 @@ export default function StudentsList() {
     try {
       setBorrowsLoading(true);
       const data = await getStudentBorrows(token, studentId);
-      setBorrows(data);
+      setBorrows(data || []);
     } catch (err) {
       console.error('Failed to load student borrows:', err);
       setToast({ open: true, message: 'Failed to load borrow records', type: 'error' });
@@ -98,7 +126,6 @@ export default function StudentsList() {
       setAnalytics(data);
     } catch (err) {
       console.error('Failed to load student analytics:', err);
-      setToast({ open: true, message: 'Failed to load analytics', type: 'error' });
       setAnalytics(null);
     } finally {
       setAnalyticsLoading(false);
@@ -107,7 +134,12 @@ export default function StudentsList() {
 
   const handleStudentClick = (student) => {
     setSelectedStudent(student);
-    setActiveTab('borrows');
+    const sStatus = student.approval_status || student.profile?.approval_status || 'approved';
+    if (sStatus === 'pending') {
+      setActiveTab('profile');
+    } else {
+      setActiveTab('borrows');
+    }
     loadStudentBorrows(student.id);
     loadStudentAnalytics(student.id);
   };
@@ -173,30 +205,45 @@ export default function StudentsList() {
 
   if (loading) {
     return (
-      <Layout>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-            <p className="mt-4 text-gray-600">Loading students...</p>
-          </div>
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
+          <p className="mt-4 text-slate-400 text-sm">Loading students in {department || 'your department'}...</p>
         </div>
-      </Layout>
+      </div>
     );
   }
 
   return (
-    <Layout>
-      <div className="p-6 md:p-10 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div className="space-y-6 max-w-7xl mx-auto">
+      <div className="bg-gradient-to-r from-slate-900 via-indigo-950/30 to-slate-900 p-6 rounded-3xl border border-slate-800">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
         >
-          <div className="mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              🎓 Department Students & Registrations
-            </h2>
-            <p className="text-gray-600">Manage student approvals and view borrowing history</p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  🏛 {department || 'Department Library'}
+                </span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                🎓 Student Registrations & Approvals
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                Approve new student accounts and view student reading analytics for <strong>{department || 'your department'}</strong>.
+              </p>
+            </div>
+
+            <button
+              onClick={loadStudents}
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold border border-slate-700 flex items-center gap-2 self-start sm:self-auto transition"
+            >
+              <span>🔄</span>
+              <span>Refresh</span>
+            </button>
           </div>
 
           {/* Status Filter Tabs */}
@@ -311,7 +358,7 @@ export default function StudentsList() {
                                 <button
                                   disabled={actionLoading}
                                   onClick={(e) => handleApprove(student.id, e)}
-                                  className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-1 px-2 rounded-md transition-colors disabled:opacity-50"
+                                  className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold py-1 px-2 rounded-md transition-colors disabled:opacity-50"
                                 >
                                   ✓ Approve
                                 </button>
@@ -361,7 +408,7 @@ export default function StudentsList() {
                             ? 'bg-amber-100 text-amber-900 border border-amber-300'
                             : (selectedStudent.approval_status || selectedStudent.profile?.approval_status) === 'rejected'
                             ? 'bg-red-100 text-red-700 border border-red-300'
-                            : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                            : 'bg-green-100 text-green-800 border border-green-300'
                         }`}>
                           {selectedStudent.approval_status || selectedStudent.profile?.approval_status || 'approved'}
                         </span>
@@ -380,7 +427,7 @@ export default function StudentsList() {
                           <button
                             disabled={actionLoading}
                             onClick={(e) => handleApprove(selectedStudent.id, e)}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold py-1.5 px-4 rounded-lg shadow-sm transition-colors disabled:opacity-50"
+                            className="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-1.5 px-4 rounded-lg shadow-sm transition-colors disabled:opacity-50"
                           >
                             ✓ Approve Registration
                           </button>
@@ -408,29 +455,138 @@ export default function StudentsList() {
                   {/* Tabs */}
                   <div className="flex gap-2 mb-6 border-b-2 border-gray-200">
                     <button
+                      onClick={() => setActiveTab('profile')}
+                      className={`px-4 py-2 font-semibold transition-colors flex items-center gap-1.5 ${
+                        activeTab === 'profile'
+                          ? 'text-blue-600 border-b-2 border-blue-600 -mb-0.5'
+                          : 'text-gray-600 hover:text-gray-800'
+                      }`}
+                    >
+                      <span>👤</span> Registration Profile
+                    </button>
+                    <button
                       onClick={() => setActiveTab('borrows')}
-                      className={`px-4 py-2 font-semibold transition-colors ${
+                      className={`px-4 py-2 font-semibold transition-colors flex items-center gap-1.5 ${
                         activeTab === 'borrows'
                           ? 'text-blue-600 border-b-2 border-blue-600 -mb-0.5'
                           : 'text-gray-600 hover:text-gray-800'
                       }`}
                     >
-                      📚 Books Data
+                      <span>📚</span> Books Data ({borrows.length})
                     </button>
                     <button
                       onClick={() => setActiveTab('analytics')}
-                      className={`px-4 py-2 font-semibold transition-colors ${
+                      className={`px-4 py-2 font-semibold transition-colors flex items-center gap-1.5 ${
                         activeTab === 'analytics'
                           ? 'text-blue-600 border-b-2 border-blue-600 -mb-0.5'
                           : 'text-gray-600 hover:text-gray-800'
                       }`}
                     >
-                      📊 Analytics
+                      <span>📊</span> Analytics
                     </button>
                   </div>
 
-                  {/* Content */}
-                  {activeTab === 'borrows' ? (
+                  {/* Tab 1: Profile & Registration Review */}
+                  {activeTab === 'profile' && (
+                    <div className="space-y-6">
+                      {(selectedStudent.approval_status === 'pending' || selectedStudent.profile?.approval_status === 'pending') && (
+                        <div className="bg-amber-50/90 border-2 border-amber-300 rounded-2xl p-5 shadow-sm">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-xl">⏳</span>
+                                <h4 className="font-bold text-amber-900 text-base">Pending Registration Review</h4>
+                              </div>
+                              <p className="text-xs text-amber-800 mt-1 max-w-xl">
+                                This student registered for the <strong>{selectedStudent.department || selectedStudent.profile?.department || department || 'department'}</strong> library. Click approve below to grant full library access.
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-2 shrink-0">
+                              <button
+                                disabled={actionLoading}
+                                onClick={(e) => handleApprove(selectedStudent.id, e)}
+                                className="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl shadow transition flex items-center gap-1.5 disabled:opacity-50"
+                              >
+                                <span>✓</span> Approve Student
+                              </button>
+                              <button
+                                disabled={actionLoading}
+                                onClick={(e) => handleReject(selectedStudent.id, e)}
+                                className="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2.5 px-4 rounded-xl shadow transition flex items-center gap-1.5 disabled:opacity-50"
+                              >
+                                <span>✕</span> Reject
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                        <h4 className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Student Profile Details</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                          <div className="bg-white p-4 rounded-xl border border-slate-200">
+                            <span className="text-xs text-slate-500 block font-medium">Full Name</span>
+                            <span className="font-bold text-slate-900 text-base">
+                              {selectedStudent.first_name && selectedStudent.last_name
+                                ? `${selectedStudent.first_name} ${selectedStudent.last_name}`
+                                : selectedStudent.username}
+                            </span>
+                          </div>
+                          <div className="bg-white p-4 rounded-xl border border-slate-200">
+                            <span className="text-xs text-slate-500 block font-medium">Student ID / Roll No</span>
+                            <span className="font-bold text-slate-900 text-base font-mono">
+                              {selectedStudent.profile?.student_id || selectedStudent.username}
+                            </span>
+                          </div>
+                          <div className="bg-white p-4 rounded-xl border border-slate-200">
+                            <span className="text-xs text-slate-500 block font-medium">Institutional Email</span>
+                            <span className="font-semibold text-slate-900">{selectedStudent.email || 'Not provided'}</span>
+                          </div>
+                          <div className="bg-white p-4 rounded-xl border border-slate-200">
+                            <span className="text-xs text-slate-500 block font-medium">Department</span>
+                            <span className="font-bold text-indigo-700">
+                              🏛 {selectedStudent.department || selectedStudent.profile?.department || 'Not assigned'}
+                            </span>
+                          </div>
+                          <div className="bg-white p-4 rounded-xl border border-slate-200">
+                            <span className="text-xs text-slate-500 block font-medium">Academic Year</span>
+                            <span className="font-semibold text-slate-900">
+                              {selectedStudent.profile?.year ? `Year ${selectedStudent.profile.year}` : 'Not specified'}
+                            </span>
+                          </div>
+                          <div className="bg-white p-4 rounded-xl border border-slate-200">
+                            <span className="text-xs text-slate-500 block font-medium">Approval Status</span>
+                            <span className={`inline-block text-xs uppercase font-bold px-2.5 py-1 rounded-full mt-0.5 ${
+                              (selectedStudent.approval_status || selectedStudent.profile?.approval_status) === 'pending'
+                                ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                                : (selectedStudent.approval_status || selectedStudent.profile?.approval_status) === 'rejected'
+                                ? 'bg-red-100 text-red-700 border border-red-300'
+                                : 'bg-green-100 text-green-800 border border-green-300'
+                            }`}>
+                              {selectedStudent.approval_status || selectedStudent.profile?.approval_status || 'approved'}
+                            </span>
+                          </div>
+                          <div className="bg-white p-4 rounded-xl border border-slate-200 sm:col-span-2">
+                            <span className="text-xs text-slate-500 block font-medium mb-1.5">Reading Interests / Preferred Categories</span>
+                            {selectedStudent.profile?.preferred_categories ? (
+                              <div className="flex flex-wrap gap-1.5">
+                                {selectedStudent.profile.preferred_categories.split(',').map((cat, i) => (
+                                  <span key={i} className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-200">
+                                    {cat.trim()}
+                                  </span>
+                                ))}
+                              </div>
+                            ) : (
+                              <span className="text-xs text-slate-400 italic">No preferred categories selected yet</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tab 2: Borrows Content */}
+                  {activeTab === 'borrows' && (
                     borrowsLoading ? (
                       <div className="flex items-center justify-center py-20">
                         <div className="text-center">
@@ -537,18 +693,19 @@ export default function StudentsList() {
                     </div>
                   )}
                 </div>
-              )
-            ) : activeTab === 'analytics' ? (
-              // Analytics Tab
-              analyticsLoading ? (
-                <div className="flex items-center justify-center py-20">
-                  <div className="text-center">
-                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                    <p className="mt-4 text-gray-600">Loading analytics...</p>
+              ))}
+
+              {/* Tab 3: Analytics Content */}
+              {activeTab === 'analytics' && (
+                analyticsLoading ? (
+                  <div className="flex items-center justify-center py-20">
+                    <div className="text-center">
+                      <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                      <p className="mt-4 text-gray-600">Loading analytics...</p>
+                    </div>
                   </div>
-                </div>
-              ) : analytics ? (
-                <div className="space-y-6">
+                ) : analytics ? (
+                  <div className="space-y-6">
                   {/* Interaction Stats */}
                   <div>
                     <h4 className="text-lg font-bold text-gray-800 mb-4">📈 Interaction Statistics</h4>
@@ -661,21 +818,20 @@ export default function StudentsList() {
                 <div className="text-center py-12">
                   <p className="text-gray-600">Failed to load analytics</p>
                 </div>
-              )
-            ) : null}
-          </div>
-        )}
+              ))}
             </div>
-          </div>
-        </motion.div>
-
-        <Toast 
-          open={toast.open} 
-          message={toast.message} 
-          type={toast.type} 
-          onClose={() => setToast(s => ({ ...s, open: false }))} 
-        />
+          )}
+        </div>
       </div>
-    </Layout>
-  );
+    </motion.div>
+
+    <Toast 
+      open={toast.open} 
+      message={toast.message} 
+      type={toast.type} 
+      onClose={() => setToast(s => ({ ...s, open: false }))} 
+    />
+    </div>
+  </div>
+);
 }
