@@ -4,6 +4,11 @@ set -e
 echo "Running database migrations..."
 python manage.py migrate --noinput
 
+if [ -n "$ADMIN_USERNAME" ] && [ -n "$ADMIN_PASSWORD" ]; then
+    echo "Creating/updating production admin..."
+    python manage.py create_admin
+fi
+
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
