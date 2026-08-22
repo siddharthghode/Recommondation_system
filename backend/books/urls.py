@@ -6,13 +6,15 @@ from .views import (
     RecommendationView,
     BookManageView,
     SimilarBooksView,
-    BookCSVImportView
+    BookCSVImportView,
+    BookCategoriesView
 )
 
 urlpatterns = [
     # Fixed-string paths must come before parameterised ones so Django
     # doesn't try to match e.g. "recommendations" as an integer <pk>.
     path('', BookListView.as_view()),
+    path('categories/', BookCategoriesView.as_view(), name='book-categories'),
     path('import/', BookCSVImportView.as_view(), name='book-import-csv'),
     path('recommendations/', RecommendationView.as_view(), name='book-recommendations'),
     path('manage/', BookManageView.as_view(), name='book-manage'),

@@ -1,4 +1,7 @@
 import math
+import re
+from collections import defaultdict
+from django.core.cache import cache
 from rest_framework import generics, permissions, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -415,4 +418,47 @@ class BookCSVImportView(APIView):
         if not result.get("success", False):
             return Response({"error": result.get("error", "CSV import failed"), "details": result}, status=400)
 
+        # Clear cached categories on successful book import
+        cache.delete("book_categories_all")
+
         return Response(result, status=200)
+
+
+class BookCategoriesView(APIView):
+    """
+    API endpoint returning unique cleaned book categories from the library.
+    Optional query parameter: ?department=<id_or_name>
+    """
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        dept_param = request.query_params.get('department')
+        cache_key = f"book_categories_{dept_param or 'all'}"
+        cached = cache.get(cache_key)
+        if cached:
+            return Response(cached)
+
+        qs = Book.objects.exclude(categories__isnull=True).exclude(categories='')
+        if dept_param and dept_param != "All":
+            if dept_param.isdigit():
+                qs = qs.filter(department_id=int(dept_param))
+            else:
+                qs = qs.filter(department__name__iexact=dept_param)
+
+        raw_categories = qs.values_list('categories', flat=True)
+        category_counts = defaultdict(int)
+
+        for raw in raw_categories:
+            if not raw:
+                continue
+            tokens = re.split(r'[,;|]', str(raw))
+            for token in tokens:
+                cleaned = token.strip()
+                # Exclude purely numeric tokens or year ranges (e.g. '1802-1885', '1933-1939')
+                if cleaned and len(cleaned) >= 2 and not re.match(r'^\d+(-\d+)?$', cleaned):
+                    category_counts[cleaned] += 1
+
+        sorted_categories = sorted(category_counts.keys(), key=lambda c: (-category_counts[c], c.lower()))
+
+        cache.set(cache_key, sorted_categories, 600)
+        return Response(sorted_categories)

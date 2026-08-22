@@ -1,24 +1,38 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { BASE_URL, authenticatedFetch, login, register, requestOTP, verifyOTP, getDepartments, resetPassword } from "../services/api";
+import { BASE_URL, authenticatedFetch, login, register, requestOTP, verifyOTP, getDepartments, resetPassword, getBookCategories } from "../services/api";
 import GoogleAuthButton from "../components/GoogleAuthButton";
 import { useAuth } from "../context/AuthContext";
 
 const YEARS = [1, 2, 3, 4];
 const POPULAR_CATEGORIES = [
+  "History",
+  "Biology",
   "Computer Science",
   "Artificial Intelligence",
   "Data Science",
   "Algorithms",
   "Web Development",
   "Database",
+  "Software Engineering",
   "Mathematics",
   "Physics",
+  "Chemistry",
   "Engineering",
-  "Machine Learning",
-  "Software Engineering",
+  "Philosophy & Ethics",
+  "Economics",
+  "Business & Management",
+  "Psychology",
+  "Politics",
   "Literature",
+  "Fiction",
+  "Biographies",
+  "Science Fiction",
+  "Law & Criminology",
+  "Art",
+  "Music",
+  "Geography",
 ];
 
 export default function Login() {
@@ -37,7 +51,9 @@ export default function Login() {
   const [department, setDepartment] = useState("");
   const [departments, setDepartments] = useState([]);
   const [year, setYear] = useState("");
+  const [availableCategories, setAvailableCategories] = useState(POPULAR_CATEGORIES);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [customCategory, setCustomCategory] = useState("");
   const [loginRole, setLoginRole] = useState("student");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -53,6 +69,18 @@ export default function Login() {
       })
       .catch((err) => console.error("Failed to load departments:", err));
   }, []);
+
+  // Dynamically load categories from books in the library & department
+  useEffect(() => {
+    getBookCategories(department || null)
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const merged = Array.from(new Set([...data, ...POPULAR_CATEGORIES]));
+          setAvailableCategories(merged);
+        }
+      })
+      .catch((err) => console.error("Failed to load book categories:", err));
+  }, [department]);
 
   // OTP Verification States
   const [otpStep, setOtpStep] = useState(1); // 1: Email entry, 2: OTP verify, 3: Full form
@@ -91,6 +119,15 @@ export default function Login() {
     setSelectedCategories((prev) =>
       prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
     );
+  };
+
+  const handleAddCustomCategory = (e) => {
+    if (e) e.preventDefault();
+    const trimmed = customCategory.trim();
+    if (trimmed && !selectedCategories.includes(trimmed)) {
+      setSelectedCategories((prev) => [...prev, trimmed]);
+      setCustomCategory("");
+    }
   };
 
   const handleSendOTP = async (e) => {
@@ -1129,8 +1166,8 @@ export default function Login() {
                         </label>
                         <span className="text-[11px] text-amber-600 font-semibold">Personalizes AI Recommendations</span>
                       </div>
-                      <div className="flex flex-wrap gap-1.5 p-2.5 bg-slate-50 rounded-xl border border-slate-200 max-h-32 overflow-y-auto">
-                        {POPULAR_CATEGORIES.map((cat) => {
+                      <div className="flex flex-wrap gap-1.5 p-2.5 bg-slate-50 rounded-xl border border-slate-200 max-h-36 overflow-y-auto">
+                        {Array.from(new Set([...availableCategories, ...selectedCategories])).map((cat) => {
                           const isSelected = selectedCategories.includes(cat);
                           return (
                             <button
@@ -1147,6 +1184,29 @@ export default function Login() {
                             </button>
                           );
                         })}
+                      </div>
+                      <div className="flex gap-1.5 mt-2">
+                        <input
+                          type="text"
+                          value={customCategory}
+                          onChange={(e) => setCustomCategory(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              e.preventDefault();
+                              handleAddCustomCategory();
+                            }
+                          }}
+                          placeholder="Type custom interest (e.g. Ancient History)..."
+                          className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
+                        />
+                        <button
+                          type="button"
+                          onClick={handleAddCustomCategory}
+                          disabled={!customCategory.trim()}
+                          className="px-3 py-1.5 text-xs font-semibold bg-slate-800 text-white rounded-lg hover:bg-slate-700 disabled:opacity-40 transition-colors"
+                        >
+                          + Add
+                        </button>
                       </div>
                     </div>
 

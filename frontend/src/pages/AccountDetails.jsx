@@ -1,23 +1,37 @@
 import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL, getMyBorrows, fetchRecommendations, getDepartments } from "../services/api";
+import { BASE_URL, getMyBorrows, fetchRecommendations, getDepartments, getBookCategories } from "../services/api";
 import BookCard from "../components/BookCard";
 import BookDetail from "../components/BookDetail";
 
 const POPULAR_CATEGORIES = [
+  "History",
+  "Biology",
   "Computer Science",
   "Artificial Intelligence",
   "Data Science",
   "Algorithms",
   "Web Development",
   "Database",
+  "Software Engineering",
   "Mathematics",
   "Physics",
+  "Chemistry",
   "Engineering",
-  "Machine Learning",
-  "Software Engineering",
+  "Philosophy & Ethics",
+  "Economics",
+  "Business & Management",
+  "Psychology",
+  "Politics",
   "Literature",
+  "Fiction",
+  "Biographies",
+  "Science Fiction",
+  "Law & Criminology",
+  "Art",
+  "Music",
+  "Geography",
 ];
 
 export default function AccountDetails() {
@@ -30,11 +44,13 @@ export default function AccountDetails() {
   });
   const [recommendations, setRecommendations] = useState([]);
   const [departments, setDepartments] = useState([]);
+  const [availableCategories, setAvailableCategories] = useState(POPULAR_CATEGORIES);
   const [loading, setLoading] = useState(true);
   const [recLoading, setRecLoading] = useState(true);
   const [error, setError] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({});
+  const [customCategory, setCustomCategory] = useState("");
   const [saveLoading, setSaveLoading] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
@@ -115,6 +131,18 @@ export default function AccountDetails() {
   }, []);
 
   useEffect(() => {
+    const dept = formData.department || profile?.profile?.department || profile?.department || null;
+    getBookCategories(dept)
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const merged = Array.from(new Set([...data, ...POPULAR_CATEGORIES]));
+          setAvailableCategories(merged);
+        }
+      })
+      .catch((err) => console.error("Failed to load book categories:", err));
+  }, [formData.department, profile]);
+
+  useEffect(() => {
     if (!token) {
       navigate("/login");
       return;
@@ -166,6 +194,21 @@ export default function AccountDetails() {
       updated = [...current, cat];
     }
     setFormData({ ...formData, preferred_categories: updated.join(", ") });
+  };
+
+  const handleAddCustomCategory = (e) => {
+    if (e) e.preventDefault();
+    const trimmed = customCategory.trim();
+    if (!trimmed) return;
+    const current = (formData.preferred_categories || "")
+      .split(/[,;|]/)
+      .map((c) => c.trim())
+      .filter(Boolean);
+    if (!current.includes(trimmed)) {
+      const updated = [...current, trimmed];
+      setFormData({ ...formData, preferred_categories: updated.join(", ") });
+    }
+    setCustomCategory("");
   };
 
   const handleUpdate = async (e) => {
@@ -492,27 +535,53 @@ export default function AccountDetails() {
                   Reading Interests / Preferred Categories <span className="text-xs text-gray-400 font-normal">(Used for personalized book recommendations)</span>
                 </label>
                 <div className="flex flex-wrap gap-2 p-3 bg-gray-50 rounded-lg border-2 border-gray-200 max-h-36 overflow-y-auto">
-                  {POPULAR_CATEGORIES.map((cat) => {
+                  {(() => {
                     const currentSelected = (formData.preferred_categories || "")
                       .split(/[,;|]/)
                       .map((c) => c.trim())
                       .filter(Boolean);
-                    const isSelected = currentSelected.includes(cat);
-                    return (
-                      <button
-                        key={cat}
-                        type="button"
-                        onClick={() => toggleCategory(cat)}
-                        className={`px-3 py-1 text-xs rounded-full font-medium transition-all ${
-                          isSelected
-                            ? 'bg-blue-600 text-white shadow-sm'
-                            : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300'
-                        }`}
-                      >
-                        {isSelected ? `✓ ${cat}` : `+ ${cat}`}
-                      </button>
-                    );
-                  })}
+                    const allCats = Array.from(new Set([...availableCategories, ...currentSelected]));
+                    return allCats.map((cat) => {
+                      const isSelected = currentSelected.includes(cat);
+                      return (
+                        <button
+                          key={cat}
+                          type="button"
+                          onClick={() => toggleCategory(cat)}
+                          className={`px-3 py-1 text-xs rounded-full font-medium transition-all ${
+                            isSelected
+                              ? 'bg-blue-600 text-white shadow-sm'
+                              : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300'
+                          }`}
+                        >
+                          {isSelected ? `✓ ${cat}` : `+ ${cat}`}
+                        </button>
+                      );
+                    });
+                  })()}
+                </div>
+                <div className="flex gap-2 mt-2">
+                  <input
+                    type="text"
+                    value={customCategory}
+                    onChange={(e) => setCustomCategory(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAddCustomCategory();
+                      }
+                    }}
+                    placeholder="Type custom interest (e.g. Ancient History)..."
+                    className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddCustomCategory}
+                    disabled={!customCategory.trim()}
+                    className="px-3 py-1.5 text-xs font-semibold bg-gray-800 text-white rounded-lg hover:bg-gray-700 disabled:opacity-40 transition-colors"
+                  >
+                    + Add
+                  </button>
                 </div>
               </div>
               

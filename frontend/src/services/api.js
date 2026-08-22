@@ -1,5 +1,15 @@
 export const BASE_URL = import.meta.env.VITE_API_URL || "/api";
 
+export const getBookCategories = (department = null) => {
+  const url = department
+    ? `${BASE_URL}/books/categories/?department=${encodeURIComponent(department)}`
+    : `${BASE_URL}/books/categories/`;
+  return fetch(url).then(async (res) => {
+    if (!res.ok) return [];
+    return res.json().catch(() => []);
+  });
+};
+
 export const requestOTP = (email, purpose = "register") =>
   fetch(`${BASE_URL}/auth/otp/request/`, {
     method: "POST",

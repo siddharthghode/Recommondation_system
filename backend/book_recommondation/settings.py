@@ -204,7 +204,17 @@ CSRF_TRUSTED_ORIGINS = _csrf_env.split(',') if _csrf_env else [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
 ]
-
+# Cache Configuration - shared across gunicorn worker processes
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/tmp/django_cache',
+        'TIMEOUT': 600,
+        'OPTIONS': {
+            'MAX_ENTRIES': 10000
+        }
+    }
+}
 
 # Email Configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
