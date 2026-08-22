@@ -299,7 +299,7 @@ The backend test suite is verified inside the Docker container:
 ```bash
 docker compose exec backend python manage.py test
 ```
-- **Verified Baseline**: **102 / 102 tests passing** covering department authorization, student approval workflows, email OTP verification, CSV catalog imports, ML recommendation algorithms, concurrency locking, and inventory management.
+- **Verified Baseline**: **104 / 104 tests passing (100% OK)** covering department authorization, student approval workflows, email OTP verification, dynamic category discovery, CSV catalog imports, ML recommendation algorithms, concurrency locking, and inventory management.
 
 ---
 
@@ -310,8 +310,8 @@ Recommondation_system/
 ├── backend/
 │   ├── accounts/               # User auth, departments, profiles, OTP, notifications
 │   ├── analytics/              # Librarian & student dashboard statistics
-│   ├── book_recommondation/    # Django project settings, WSGI, URLs, health checks
-│   ├── books/                  # Book catalog, CSV import, scikit-learn recommendation engine
+│   ├── book_recommondation/    # Django project settings, WSGI, URLs, caching, health checks
+│   ├── books/                  # Book catalog, CSV import, categories API, ML recommender
 │   ├── borrows/                # Borrow lifecycle, atomic inventory locks, return ownership
 │   ├── messaging/              # Internal messaging service
 │   ├── data/                   # Initial CSV datasets (books_6k.csv)
@@ -329,6 +329,7 @@ Recommondation_system/
 │   ├── package.json            # Frontend dependencies
 │   └── vite.config.js          # Vite build configuration
 ├── docker-compose.yml          # Docker Compose orchestration definition
+├── DEPLOYMENT.md               # Complete production deployment & SSL guide
 ├── .env.example                # Environment variables template
 ├── .gitignore                  # Git ignored files (.env, pycache, dist, etc.)
 ├── PROJECT_RULES.md            # System architecture and department security rules
@@ -337,22 +338,17 @@ Recommondation_system/
 
 ---
 
-## Deployment & Cloud Portability
+## Production Deployment
 
-The application is containerized following 12-factor principles and is not locked to any specific cloud provider. It can be deployed to:
-- **AWS** (ECS / Fargate / EC2)
-- **Google Cloud Platform** (Cloud Run / GKE / Compute Engine)
-- **Microsoft Azure** (Container Apps / AKS / Virtual Machines)
-- **DigitalOcean** (App Platform / Droplets)
-- **VPS / Linux Servers** (Ubuntu / Debian / RHEL via Docker Compose)
+For complete step-by-step instructions on setting up a Linux server, SSL/HTTPS certificates, domain mapping, automated backups, and server sizing, see the dedicated [DEPLOYMENT.md](file:///home/sidhharth/sppu/git/Recommondation_system/DEPLOYMENT.md) guide.
 
-### Production Deployment Checklist:
+### Quick Production Deployment Checklist:
 1. Generate a strong cryptographic `DJANGO_SECRET_KEY`.
-2. Set `DEBUG=False` and `DJANGO_ENV=production`.
-3. Configure `ALLOWED_HOSTS` and `CORS_ALLOWED_ORIGINS` with your production domain name.
-4. Provide a managed PostgreSQL database instance (e.g. AWS RDS / GCP Cloud SQL) by configuring `POSTGRES_HOST`, `POSTGRES_USER`, and `POSTGRES_PASSWORD`.
-5. Terminate SSL/TLS with HTTPS (e.g. Let's Encrypt / AWS ALB / Cloudflare).
-6. Configure SMTP email credentials for student registration OTP delivery.
+2. Set `DEBUG=False` and `DJANGO_ENV=production` in `.env`.
+3. Configure `ALLOWED_HOSTS`, `CORS_ALLOWED_ORIGINS`, and `CSRF_TRUSTED_ORIGINS` with your production domain name.
+4. Set up SMTP email credentials (`EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`) in `.env` and `backend/.env`.
+5. Terminate SSL/TLS with HTTPS (e.g. Let's Encrypt / Certbot / Cloudflare).
+6. Launch services with `docker compose up --build -d`.
 
 ---
 
