@@ -111,8 +111,11 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
-| `POST` | `/api/auth/register/` | public | Register new student |
+| `POST` | `/api/auth/otp/request/` | public | Request 6-digit email OTP for registration or password reset |
+| `POST` | `/api/auth/otp/verify/` | public | Verify OTP and obtain single-use verification token |
+| `POST` | `/api/auth/register/` | public | Register new student (requires verified token) |
 | `POST` | `/api/auth/login/` | public | Login; returns `access`, `refresh`, `role` |
+| `GET` | `/api/auth/departments/` | public | List active departments |
 | `GET` | `/api/auth/me/` | required | Get current user profile |
 | `PUT` | `/api/auth/me/` | required | Update profile (first_name, last_name, email, department, year, student_id, preferred_categories) |
 | `POST` | `/api/auth/refresh/` | public | Refresh access token |
@@ -125,9 +128,11 @@ All endpoints require `Authorization: Bearer <access_token>` unless marked **pub
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
 | `GET` | `/api/books/` | public | List/search books (`?search=&category=&page=&page_size=`) |
+| `GET` | `/api/books/categories/` | public | List dynamically extracted book categories (`?department=`) |
 | `GET` | `/api/books/<id>/` | public | Book detail |
-| `GET` | `/api/books/<id>/similar/` | public | TF-IDF similar books (cached 10 min) |
+| `GET` | `/api/books/<id>/similar/` | public | TF-IDF similar books (cached) |
 | `GET` | `/api/books/recommendations/` | required | Personalised recommendations (`?type=hybrid\|content\|interaction&limit=N`) |
+| `POST` | `/api/books/import/` | librarian/admin | Bulk import book catalog from CSV |
 | `POST` | `/api/books/track/<id>/` | required | Record a view interaction |
 | `POST` | `/api/books/manage/` | librarian/admin | Create book |
 | `PUT` | `/api/books/manage/<id>/` | librarian/admin | Update book |
