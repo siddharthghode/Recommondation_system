@@ -27,6 +27,8 @@ services:
       dockerfile: Dockerfile
     container_name: library_backend
     restart: unless-stopped
+    env_file:
+      - ./backend/.env
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-library_db}
       POSTGRES_USER: ${POSTGRES_USER:-library_user}

@@ -1,3 +1,4 @@
+import logging
 import secrets
 from datetime import timedelta
 from django.utils import timezone
@@ -5,6 +6,8 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core.mail import send_mail
 from django.conf import settings
 from accounts.models import User, EmailOTP
+
+logger = logging.getLogger(__name__)
 
 
 def generate_otp() -> str:
@@ -73,7 +76,8 @@ def request_otp(email: str, purpose: str = "register") -> tuple[bool, str]:
     # Send the email
     try:
         send_otp_email(email, raw_otp)
-    except Exception:
+    except Exception as e:
+        logger.exception("Failed to send OTP verification email to %s: %s", email, e)
         return False, "Failed to send verification email. Please try again later."
 
     return True, "Verification code sent to your email."
