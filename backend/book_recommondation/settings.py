@@ -104,7 +104,7 @@ DATABASES = {
     }
 }
 
-if 'test' in sys.argv or os.getenv('DJANGO_TESTING') == 'true':
+if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': ':memory:',
