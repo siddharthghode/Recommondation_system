@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchRecommendations, BASE_URL } from "../services/api";
 import BookCard from "../components/BookCard";
@@ -16,6 +16,20 @@ export default function Recommendations() {
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
   const [selectedBook, setSelectedBook] = useState(null);
+
+  const loadRecommendations = useCallback(async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const data = await fetchRecommendations(token, n, method);
+      setRecommendations(data);
+    } catch (err) {
+      setError(err.detail || err.message || "Failed to load recommendations");
+      console.error("Error loading recommendations:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [token, n, method]);
 
   useEffect(() => {
     if (!token) {
@@ -40,21 +54,7 @@ export default function Recommendations() {
     }
 
     loadRecommendations();
-  }, [token, method, n, navigate, role]);
-
-  const loadRecommendations = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const data = await fetchRecommendations(token, n, method);
-      setRecommendations(data);
-    } catch (err) {
-      setError(err.detail || err.message || "Failed to load recommendations");
-      console.error("Error loading recommendations:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [token, navigate, role, loadRecommendations]);
 
   if (!token) {
     return null;

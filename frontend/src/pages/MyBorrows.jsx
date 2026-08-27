@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BASE_URL, getMyBorrows, returnBook } from "../services/api";
@@ -12,6 +12,20 @@ export default function MyBorrows() {
   const [userProfile, setUserProfile] = useState(null);
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
+
+  const loadBorrows = useCallback(async () => {
+    try {
+      setLoading(true);
+      const status = statusFilter === "all" ? null : statusFilter;
+      const data = await getMyBorrows(token, status);
+      setBorrows(data);
+      setError("");
+    } catch (err) {
+      setError(err.error || err.message || "Failed to load borrows");
+    } finally {
+      setLoading(false);
+    }
+  }, [token, statusFilter]);
 
   useEffect(() => {
     if (!token) {
@@ -37,21 +51,7 @@ export default function MyBorrows() {
     }
 
     loadBorrows();
-  }, [token, statusFilter, role]);
-
-  const loadBorrows = async () => {
-    try {
-      setLoading(true);
-      const status = statusFilter === "all" ? null : statusFilter;
-      const data = await getMyBorrows(token, status);
-      setBorrows(data);
-      setError("");
-    } catch (err) {
-      setError(err.error || err.message || "Failed to load borrows");
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [token, role, loadBorrows]);
 
   const handleReturn = async (borrowId) => {
     if (!window.confirm("Are you sure you want to return this book?")) {

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import { getStudents, getStudentBorrows, getStudentAnalytics, approveStudent, rejectStudent } from "../services/api";
 import Toast from "../components/Toast";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 
 export default function StudentsList() {
   const { token: authToken, department } = useAuth();
@@ -28,7 +28,7 @@ export default function StudentsList() {
     if (queryStatus && queryStatus !== statusFilter) {
       setStatusFilter(queryStatus);
     }
-  }, [queryStatus]);
+  }, [queryStatus, statusFilter]);
 
   const handleFilterChange = (newFilter) => {
     setStatusFilter(newFilter);
@@ -39,13 +39,7 @@ export default function StudentsList() {
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      loadStudents();
-    }
-  }, [token]);
-
-  const loadStudents = async () => {
+  const loadStudents = useCallback(async () => {
     try {
       setLoading(true);
       const data = await getStudents(token);
@@ -66,7 +60,13 @@ export default function StudentsList() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token, queryStatus, statusFilter]);
+
+  useEffect(() => {
+    if (token) {
+      loadStudents();
+    }
+  }, [token, loadStudents]);
 
   const handleApprove = async (studentId, e) => {
     if (e) e.stopPropagation();
@@ -249,7 +249,7 @@ export default function StudentsList() {
           {/* Status Filter Tabs */}
           <div className="flex flex-wrap gap-2 mb-6">
             <button
-              onClick={() => setStatusFilter('all')}
+              onClick={() => handleFilterChange('all')}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                 statusFilter === 'all'
                   ? 'bg-blue-600 text-white shadow-md'
@@ -259,7 +259,7 @@ export default function StudentsList() {
               All Students ({students.length})
             </button>
             <button
-              onClick={() => setStatusFilter('pending')}
+              onClick={() => handleFilterChange('pending')}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-1.5 ${
                 statusFilter === 'pending'
                   ? 'bg-amber-500 text-white shadow-md'
@@ -269,7 +269,7 @@ export default function StudentsList() {
               <span>⏳</span> Pending Approval ({pendingCount})
             </button>
             <button
-              onClick={() => setStatusFilter('approved')}
+              onClick={() => handleFilterChange('approved')}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                 statusFilter === 'approved'
                   ? 'bg-emerald-600 text-white shadow-md'
@@ -279,7 +279,7 @@ export default function StudentsList() {
               Approved ({approvedCount})
             </button>
             <button
-              onClick={() => setStatusFilter('rejected')}
+              onClick={() => handleFilterChange('rejected')}
               className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                 statusFilter === 'rejected'
                   ? 'bg-red-600 text-white shadow-md'

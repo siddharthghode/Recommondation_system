@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   getAdminStats,
@@ -87,16 +87,7 @@ export default function AdminDashboard() {
   const [success, setSuccess] = useState("");
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (!token) {
-      setError("Please login");
-      setLoading(false);
-      return;
-    }
-    loadData();
-  }, [activeSection]);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -123,7 +114,16 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token, activeSection]);
+
+  useEffect(() => {
+    if (!token) {
+      setError("Please login");
+      setLoading(false);
+      return;
+    }
+    loadData();
+  }, [token, loadData]);
 
   // Page Content Handlers
   const handlePageSubmit = async () => {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { BASE_URL, authenticatedFetch, login, register, requestOTP, verifyOTP, getDepartments, resetPassword, getBookCategories } from "../services/api";
 import GoogleAuthButton from "../components/GoogleAuthButton";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 
 const YEARS = [1, 2, 3, 4];
 const POPULAR_CATEGORIES = [

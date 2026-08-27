@@ -12,8 +12,6 @@ const PAGE_SIZE = 20;
 
 export default function Books() {
   const [books, setBooks] = useState([]);
-  const [categories, setCategories] = useState(['All']);
-  const [categoryCounts, setCategoryCounts] = useState({ All: 0 });
   const [departments, setDepartments] = useState([]);
   const [selectedDept, setSelectedDept] = useState('All');
   const [page, setPage] = useState(1);
@@ -93,32 +91,6 @@ export default function Books() {
     }
   }, [page, selectedDept, category, searchQuery]);
 
-  // ── Real API: discover categories from first pages ──────────────────────
-  const loadCategories = useCallback(async () => {
-    try {
-      const categorySet = new Set();
-      const counts = { All: 0 };
-      for (let p = 1; p <= 3; p++) {
-        const res = await fetch(`${BASE_URL}/books/?page=${p}&page_size=${PAGE_SIZE}&ordering=-id`);
-        if (!res.ok) break;
-        const data = await res.json();
-        const results = data.results || (Array.isArray(data) ? data : []);
-        if (p === 1) counts['All'] = data.count || results.length || 0;
-        results.forEach((book) => {
-          (book.categories || '').toString().split(/[,;|]/).map(s => s.trim()).filter(Boolean)
-            .forEach(c => { categorySet.add(c); counts[c] = (counts[c] || 0) + 1; });
-        });
-        if (results.length < PAGE_SIZE) break;
-      }
-      setCategories(['All', ...Array.from(categorySet).sort()]);
-      setCategoryCounts(counts);
-    } catch {
-      setCategories(['All']);
-      setCategoryCounts({ All: 0 });
-    }
-  }, []);
-
-  useEffect(() => { loadCategories(); }, [loadCategories]);
   useEffect(() => { loadBooks(); window.scrollTo(0, 0); }, [loadBooks]);
   useEffect(() => { setPage(1); }, [selectedDept, category, searchQuery]);
   useEffect(() => { if (page > totalPages && totalPages > 0) setPage(1); }, [page, totalPages]);

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Toast from '../components/Toast';
 import ConfirmModal from '../components/ConfirmModal';
 import { BASE_URL, importBooksCSV } from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 
 export default function ManageBooks() {
   const [searchParams] = useSearchParams();
@@ -35,15 +35,7 @@ export default function ManageBooks() {
     published_year: ''
   });
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-    loadBooks();
-  }, [token, filter, navigate]);
-
-  const loadBooks = async () => {
+  const loadBooks = useCallback(async () => {
     setLoading(true);
     try {
       let allBooks = [];
@@ -65,7 +57,15 @@ export default function ManageBooks() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token, filter]);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    loadBooks();
+  }, [token, navigate, loadBooks]);
 
   const handleDelete = (bookId) => {
     setConfirmState({ 

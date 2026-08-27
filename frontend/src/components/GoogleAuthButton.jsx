@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { googleLogin } from "../services/api";
 
 const GOOGLE_CLIENT_ID =
@@ -16,37 +16,42 @@ export default function GoogleAuthButton({
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleCredentialResponse = async (response) => {
-    if (!response || !response.credential) {
-      if (onError) onError("Failed to obtain Google credentials");
-      return;
-    }
+  const extraDataStr = JSON.stringify(extraData);
 
-    setLoading(true);
-    try {
-      const payload = {
-        credential: response.credential,
-        ...extraData,
-      };
+  const handleCredentialResponse = useCallback(
+    async (response) => {
+      if (!response || !response.credential) {
+        if (onError) onError("Failed to obtain Google credentials");
+        return;
+      }
 
-      const data = await googleLogin(payload);
-      if (onSuccess) {
-        onSuccess(data);
+      setLoading(true);
+      try {
+        const payload = {
+          credential: response.credential,
+          ...JSON.parse(extraDataStr),
+        };
+
+        const data = await googleLogin(payload);
+        if (onSuccess) {
+          onSuccess(data);
+        }
+      } catch (err) {
+        console.error("Google Auth error:", err);
+        if (onError) {
+          onError(
+            err.message ||
+              err.error ||
+              err.detail ||
+              "Google authentication failed. Please try again."
+          );
+        }
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      console.error("Google Auth error:", err);
-      if (onError) {
-        onError(
-          err.message ||
-            err.error ||
-            err.detail ||
-            "Google authentication failed. Please try again."
-        );
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [extraDataStr, onError, onSuccess]
+  );
 
   useEffect(() => {
     let script = document.getElementById("google-gsi-script");
@@ -100,7 +105,7 @@ export default function GoogleAuthButton({
         script.removeEventListener("load", initializeGoogle);
       }
     };
-  }, [isRegister, JSON.stringify(extraData)]);
+  }, [isRegister, handleCredentialResponse]);
 
   const handleCustomClick = () => {
     if (window.google?.accounts?.id) {

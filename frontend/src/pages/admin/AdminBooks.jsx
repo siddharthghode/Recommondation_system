@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { BASE_URL, fetchBooks, createBook, updateBook, deleteBook, getCategories } from "../../services/api";
 
@@ -26,12 +26,7 @@ export default function AdminBooks() {
   });
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    loadBooks();
-    loadCategories();
-  }, []);
-
-  const loadBooks = async () => {
+  const loadBooks = useCallback(async () => {
     try {
       setLoading(true);
       const data = await fetchBooks();
@@ -42,16 +37,21 @@ export default function AdminBooks() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     try {
       const data = await getCategories(token);
       setCategories(Array.isArray(data.results) ? data.results : Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Failed to load categories:", err);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    loadBooks();
+    loadCategories();
+  }, [loadBooks, loadCategories]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
