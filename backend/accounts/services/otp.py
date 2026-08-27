@@ -15,6 +15,62 @@ def generate_otp() -> str:
     return f"{secrets.randbelow(900000) + 100000}"
 
 
+def get_otp(email: str, only_active: bool = False) -> EmailOTP | None:
+    """
+    Retrieve the most recent OTP record for the given email.
+    If only_active is True, returns only unverified, non-expired OTPs with remaining attempts.
+    """
+    email = email.strip().lower()
+    qs = EmailOTP.objects.filter(email=email).order_by('-created_at')
+    if only_active:
+        now = timezone.now()
+        qs = qs.filter(is_verified=False, expires_at__gt=now, attempts__lt=5)
+    return qs.first()
+
+
+def get_otp_status(email: str) -> dict:
+    """
+    Retrieve structured status information about the OTP state for an email.
+    Useful for checking cooldown, remaining attempts, and validity.
+    """
+    email = email.strip().lower()
+    otp_record = EmailOTP.objects.filter(email=email).order_by('-created_at').first()
+    if not otp_record:
+        return {
+            "has_otp": False,
+            "is_active": False,
+            "is_verified": False,
+            "is_expired": False,
+            "attempts": 0,
+            "attempts_remaining": 5,
+            "cooldown_remaining_seconds": 0,
+            "can_resend": True,
+            "message": "No OTP requested for this email."
+        }
+
+    now = timezone.now()
+    is_expired = otp_record.is_expired()
+    is_active = (not otp_record.is_verified) and (not is_expired) and (otp_record.attempts < 5)
+
+    elapsed_seconds = (now - otp_record.created_at).total_seconds()
+    cooldown_remaining = max(0, int(60 - elapsed_seconds))
+    expires_in_seconds = max(0, int((otp_record.expires_at - now).total_seconds())) if not is_expired else 0
+
+    return {
+        "has_otp": True,
+        "is_active": is_active,
+        "is_verified": otp_record.is_verified,
+        "is_expired": is_expired,
+        "attempts": otp_record.attempts,
+        "attempts_remaining": max(0, 5 - otp_record.attempts),
+        "expires_in_seconds": expires_in_seconds,
+        "cooldown_remaining_seconds": cooldown_remaining,
+        "can_resend": cooldown_remaining == 0,
+        "created_at": otp_record.created_at.isoformat() if otp_record.created_at else None,
+        "verified_at": otp_record.verified_at.isoformat() if otp_record.verified_at else None,
+    }
+
+
 def send_otp_email(email: str, otp: str) -> None:
     """Send OTP email using Django's configured EMAIL_BACKEND."""
     subject = "Your Department Library Verification Code"

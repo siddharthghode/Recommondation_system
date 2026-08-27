@@ -10,6 +10,15 @@ export const getBookCategories = (department = null) => {
   });
 };
 
+export const getOTPStatus = (email) =>
+  fetch(`${BASE_URL}/auth/otp/status/?email=${encodeURIComponent(email)}`).then(async res => {
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || data.detail || "Failed to fetch OTP status");
+    }
+    return data;
+  });
+
 export const requestOTP = (email, purpose = "register") =>
   fetch(`${BASE_URL}/auth/otp/request/`, {
     method: "POST",

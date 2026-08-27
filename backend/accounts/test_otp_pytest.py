@@ -1,4 +1,9 @@
-import pytest
+try:
+    import pytest
+except ImportError:
+    import unittest
+    raise unittest.SkipTest("pytest is not installed in this environment.")
+
 from django.core import mail
 from accounts.models import EmailOTP, User
 from accounts.services.otp import generate_otp, request_otp, verify_otp
@@ -62,3 +67,29 @@ class TestPytestOTPAuthentication:
         otp_record = EmailOTP.objects.get(email=email)
         assert otp_record.is_verified is True
         assert otp_record.verification_token == token
+
+    def test_get_otp_and_get_otp_status(self):
+        """get_otp retrieves record and get_otp_status returns structured metadata."""
+        from accounts.services.otp import get_otp, get_otp_status
+
+        email = "pytest_get_otp@univ.edu"
+        # Before requesting OTP
+        status = get_otp_status(email)
+        assert status["has_otp"] is False
+        assert status["can_resend"] is True
+        assert get_otp(email) is None
+
+        # After requesting OTP
+        request_otp(email)
+        record = get_otp(email)
+        assert record is not None
+        assert record.email == email
+
+        status_after = get_otp_status(email)
+        assert status_after["has_otp"] is True
+        assert status_after["is_active"] is True
+        assert status_after["attempts"] == 0
+        assert status_after["attempts_remaining"] == 5
+        assert status_after["is_verified"] is False
+        assert status_after["can_resend"] is False
+

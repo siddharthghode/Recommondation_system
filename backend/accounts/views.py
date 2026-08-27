@@ -14,7 +14,7 @@ from .serializers import (
     NotificationSerializer
 )
 from .models import User, Notification, Department, EmailOTP
-from .services.otp import request_otp, verify_otp
+from .services.otp import request_otp, verify_otp, get_otp, get_otp_status
 
 
 # --------------------
@@ -26,6 +26,31 @@ class DepartmentListView(APIView):
     def get(self, request):
         departments = Department.objects.all().order_by('name')
         return Response([{"id": d.id, "name": d.name} for d in departments])
+
+
+# --------------------
+# Get OTP Status
+# --------------------
+class GetOTPView(APIView):
+    """
+    Get current OTP status/details for a given email.
+    Supports GET (with ?email=query_param) and POST (with {"email": "..."}).
+    """
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        email = request.query_params.get('email', '').strip().lower()
+        if not email:
+            return Response({'error': 'Email query parameter is required.'}, status=400)
+        status_info = get_otp_status(email)
+        return Response({'email': email, **status_info})
+
+    def post(self, request):
+        serializer = RequestOTPSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+        status_info = get_otp_status(email)
+        return Response({'email': email, **status_info})
 
 
 # --------------------

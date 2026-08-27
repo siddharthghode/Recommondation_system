@@ -318,3 +318,32 @@ class AccountsDepartmentAuthorizationTests(TestCase):
         self.assertEqual(resp_admin.status_code, 200)
         self.assertIn("access", resp_admin.data)
 
+    def test_get_otp_status_api(self):
+        email = "get_otp_api_test@test.com"
+        # 1. GET before requesting OTP
+        resp_before = self.client.get(f"/api/auth/otp/status/?email={email}")
+        self.assertEqual(resp_before.status_code, 200)
+        self.assertFalse(resp_before.data["has_otp"])
+        self.assertTrue(resp_before.data["can_resend"])
+
+        # 2. Request OTP
+        self.client.post("/api/auth/otp/request/", {"email": email})
+
+        # 3. GET after requesting OTP
+        resp_after = self.client.get(f"/api/auth/otp/status/?email={email}")
+        self.assertEqual(resp_after.status_code, 200)
+        self.assertTrue(resp_after.data["has_otp"])
+        self.assertTrue(resp_after.data["is_active"])
+        self.assertEqual(resp_after.data["attempts"], 0)
+        self.assertEqual(resp_after.data["attempts_remaining"], 5)
+
+        # 4. POST /api/auth/otp/get/
+        resp_post = self.client.post("/api/auth/otp/get/", {"email": email})
+        self.assertEqual(resp_post.status_code, 200)
+        self.assertTrue(resp_post.data["has_otp"])
+
+        # 5. Missing email parameter
+        resp_missing = self.client.get("/api/auth/otp/status/")
+        self.assertEqual(resp_missing.status_code, 400)
+
+
