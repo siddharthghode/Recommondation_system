@@ -1,208 +1,141 @@
 # Frontend — React + Vite
 
-## Requirements
-
-- Node.js 18+
-- npm
+Modern, responsive Single Page Application (SPA) built with React 19, Vite, Tailwind CSS 4, Framer Motion, and Recharts for the University Library Management and Recommendation System.
 
 ---
 
-## Setup
+## 🚀 Quick Setup
 
+### Option 1: Using Docker Compose (Recommended)
+From the root repository directory:
+```bash
+cp .env.example .env
+docker compose up --build -d
+# Frontend is served via Nginx on http://localhost (or configured FRONTEND_PORT)
+```
+
+### Option 2: Local Development (Vite Dev Server)
 ```bash
 cd frontend
+
+# 1. Install dependencies
 npm install
+
+# 2. Copy environment template (optional)
+cp .env.example .env
+
+# 3. Start development server with hot module replacement
 npm run dev
 # → http://localhost:5173
 ```
 
-### Available Scripts
+---
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start Vite development server |
-| `npm run build` | Production build (outputs to `dist/`) |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run ESLint |
+## 🛠️ Available Scripts
+
+| Script | Command | Purpose |
+|---|---|---|
+| `npm run dev` | `vite` | Starts local dev server at `http://localhost:5173` with proxy to backend |
+| `npm run build` | `vite build` | Compiles optimized production bundle into `dist/` |
+| `npm run lint` | `npx eslint .` | Runs ESLint check across all JSX and JS files |
+| `npm run lint:fix` | `npx eslint . --fix` | Automatically fixes auto-fixable lint issues |
+| `npm run preview` | `vite preview` | Locally serves the built production assets in `dist/` |
 
 ---
 
-## Configuration
+## ⚙️ Configuration & Environment
 
-The API base URL is defined at the top of `src/services/api.js`:
+The frontend connects to the backend API via `src/services/api.js`:
 
 ```js
-export const BASE_URL = "http://localhost:8000/api";
+export const BASE_URL = import.meta.env.VITE_API_URL || "/api";
 ```
 
-Change this for staging or production deployments.
+### Environment Variables (`.env`):
+| Variable | Default | Purpose |
+|---|---|---|
+| `VITE_API_URL` | `/api` | Base API URL prefix (proxied to backend in both dev and prod) |
+| `VITE_GOOGLE_CLIENT_ID` | `""` | Google OAuth Client ID for Google Sign-In & Registration |
+
+In local development (`npm run dev`), `vite.config.js` proxies all requests starting with `/api` directly to `http://localhost:8000`.
 
 ---
 
-## Demo Credentials
+## 🔐 Route Matrix & Access Control
 
-| Role | Username | Password |
-|------|----------|----------|
-| Student | `aarav_sharma` | `test1234` |
-| Librarian | `librarian_cs` | `test1234` |
-| Admin | `admin` | `admin123` |
+Route permissions are enforced by `ProtectedRoute` and role checks:
 
----
+| Route Path | Component | Target Role / Access |
+|---|---|---|
+| `/` | `Home` | Public |
+| `/about` | `AboutUs` | Public |
+| `/gallery` | `Gallery` | Public |
+| `/books` | `Books` | Public |
+| `/login` | `Login` | Public (includes student registration modal & OTP) |
+| `/account` | `AccountDetails` | Authenticated (Student / Librarian / Admin) |
+| `/recommendations` | `Recommendations` | Authenticated Student |
+| `/my-borrows` | `MyBorrows` | Authenticated Student |
+| `/librarian` | `LibrarianDashboard` | Librarian / Admin |
+| `/librarian/books` | `ManageBooks` | Librarian / Admin |
+| `/librarian/students` | `StudentsList` | Librarian / Admin |
+| `/admin` | `AdminDashboard` | Admin |
+| `/admin/books` | `AdminBooks` | Admin |
+| `/admin/students` | `AdminStudents` | Admin |
 
-## Routes
-
-| Path | Component | Access |
-|------|-----------|--------|
-| `/` | `Home` | public |
-| `/about` | `AboutUs` | public |
-| `/gallery` | `Gallery` | public |
-| `/books` | `Books` | public |
-| `/login` | `Login` | public |
-| `/account` | `AccountDetails` | authenticated |
-| `/recommendations` | `Recommendations` | authenticated |
-| `/my-borrows` | `MyBorrows` | student only |
-| `/librarian` | `LibrarianDashboard` | librarian only |
-| `/librarian/books` | `ManageBooks` | librarian only |
-| `/librarian/students` | `StudentsList` | librarian only |
-| `/admin` | `AdminDashboard` | admin only |
-| `/admin/books` | `AdminBooks` | admin only |
-| `/admin/students` | `AdminStudents` | admin only |
-
-Route access is enforced by `ProtectedRoute`. Admins bypass all role checks and can access every route. Authenticated users hitting an unauthorised route are redirected to their own home (`ROLE_HOME`) rather than `/login`.
+> **Note**: Admins have global administrative privileges and can navigate across student, librarian, and admin views.
 
 ---
 
-## Pages
+## 👥 Demo Logins
 
-| Page | Description |
-|------|-------------|
-| `Home` | Landing page |
-| `AboutUs` | Static about page |
-| `Gallery` | Image gallery |
-| `Books` | Book catalogue — search, category filter, pagination (20/page, 6k+ books) |
-| `Login` | JWT login + student registration; loading spinner on submit; role-based redirect |
-| `AccountDetails` | View/edit profile (name, email, dept dropdown, year, student ID); borrow stats; hybrid recommendations |
-| `Recommendations` | Personalised recommendations (hybrid/content/interaction tabs) |
-| `MyBorrows` | Student borrow history with status badges |
-| `Messages` | ~~Removed~~ | ~~authenticated~~ | Removed |
-| `LibrarianDashboard` | Action-first: pending requests table with inline approve/reject, stat cards, borrow trend chart, top books, students list |
-| `ManageBooks` | Librarian book management (create, update, delete) |
-| `StudentsList` | Librarian view of department students |
-| `AdminDashboard` | Global borrow management and system stats |
-| `AdminBooks` | Admin book management |
-| `AdminStudents` | Admin student management |
+| Role | Username | Password | Notes |
+|---|---|---|---|
+| **Super Admin** | `admin` | `admin123` | Global system oversight |
+| **Librarian** | `librarian_cs` | `test1234` | Computer Science department librarian |
+| **Student** | `aarav_sharma` | `test1234` | Computer Science student (pre-approved) |
+| **Student** | `priya_patil` | `test1234` | Computer Science student (pre-approved) |
 
 ---
 
-## Key Components
+## 🧩 Key Components
 
-| Component | Description |
-|-----------|-------------|
-| `ProtectedRoute` | Auth + role guard. Uses `useState` + `storage` event listener for cross-tab logout sync. Admins bypass all role checks. |
-| `PageTransition` | Framer Motion wrapper for animated route transitions |
-| `BookCard` | Book thumbnail card used in catalogue and recommendation lists |
-| `BookDetail` | Side-panel / modal with full book info, borrow button, and dwell-time tracking |
-| `BooksList` | Paginated book list with `loading: true` initial state (prevents flash of empty content) |
-| `Navbar` | Top navigation with user menu and notification bell |
-| `Notifications` | Dropdown notification panel with mark-read support |
-| `InterestSelector` | Onboarding modal for new students to pick preferred categories |
-| `Loading` | Spinner / skeleton loader |
-| `ErrorMessage` | Inline error display |
-| `Toast` | Transient success/error notification (used in LibrarianDashboard) |
-| `LibrarianDashboard` | Single-file action-first dashboard. Real API data only — no fake fallback for requests. |
+| Component | File Path | Purpose |
+|---|---|---|
+| `ProtectedRoute` | `src/components/ProtectedRoute.jsx` | Guards private routes and verifies user roles with cross-tab logout sync |
+| `Navbar` | `src/components/Navbar.jsx` | Navigation header with user dropdown and notification badge |
+| `Notifications` | `src/components/Notifications.jsx` | Dropdown panel with mark-as-read for borrow status updates |
+| `BookCard` | `src/components/BookCard.jsx` | Book card with thumbnail, rating, availability badge, and interaction triggers |
+| `BookDetail` | `src/components/BookDetail.jsx` | Modal displaying book metadata, borrow button, and dwell-time tracker |
+| `InterestSelector` | `src/components/InterestSelector.jsx` | Category preference modal for onboarding students |
+| `PageTransition` | `src/components/PageTransition.jsx` | Framer Motion wrapper for animated page transitions |
 
 ---
 
-## Service Layer (`src/services/api.js`)
+## 📡 API Service Layer (`src/services/api.js`)
 
-All backend communication is centralised here.
+All network requests are centralized in `src/services/api.js`. Key architectural patterns include:
 
-### Key utilities
-
-- `authenticatedFetch(url, options)` — flat two-step pattern: one initial fetch, one conditional retry after token refresh. Never recurses. Redirects to `/login` on refresh failure.
-- `refreshToken()` — exchanges stored refresh token for new access token; clears `localStorage` on failure.
-- `fetchBooks(params)` — accepts query params, defaults to `page_size=100`.
-
-### Function groups
-
-| Group | Functions |
-|-------|-----------|
-| Auth | `login`, `register`, `refreshToken` |
-| Books | `fetchBooks`, `getSimilarBooks` |
-| Recommendations | `fetchRecommendations` |
-| Interactions | `trackInteraction`, `trackDwellTime` |
-| Borrowing | `requestBorrow`, `returnBook`, `getMyBorrows`, `approveBorrow`, `rejectBorrow`, `getBorrowRequests` |
-| Analytics | `fetchLibrarianDashboard`, `getStudents`, `getStudentBorrows`, `getStudentAnalytics` |
-| Notifications | `getNotifications`, `markNotificationRead`, `markAllNotificationsRead` |
-| Admin | `getAdminStats`, `getAdminStudents`, `getAdminBooks`, `createBook`, `updateBook`, `deleteBook` |
+1. **Automatic JWT Token Refresh**: `authenticatedFetch()` transparently refreshes expired access tokens using the refresh token before retrying failed requests.
+2. **Cross-Tab Synchronization**: Logouts in one tab immediately synchronize across all open browser tabs using the `storage` event.
+3. **Dwell Time Logging**: Time spent inspecting book modals is automatically recorded to fine-tune recommendation scoring.
 
 ---
 
-## State Management
+## 🔧 Troubleshooting
 
-| Concern | Mechanism |
-|---------|-----------|
-| Auth state | `localStorage` (`token`, `refreshToken`, `role`) |
-| Cross-tab logout | `window.addEventListener('storage', ...)` in `ProtectedRoute` |
-| Local UI state | `useState` / `useEffect` / `useCallback` hooks |
-| Form pre-fill | Three-layer sync: `loadProfile` → `useEffect([profile])` → `handleReset` |
-| URL-driven state | Query params (search, category, page) in `Books.jsx` |
+### 1. API requests fail in local development
+- Ensure the backend server is running on `http://localhost:8000`.
+- Verify the Vite proxy setting in `vite.config.js` points to `http://localhost:8000`.
 
----
-
-## Known Patterns & Bug Fixes
-
-### `loading: true` initial state (BooksList)
-All list components initialise `loading` as `true` to prevent a flash of "No books found" before the first fetch completes.
-
-### Form state sync (AccountDetails)
-`formData` is populated in three places to handle all edge cases:
-1. Inside `loadProfile()` immediately after the API response
-2. A `useEffect` watching `[profile]` for external profile changes
-3. `handleReset` (Cancel button) restores last-fetched server state
-
-### Department field
-The department input is a `<select>` dropdown (not free text) to ensure only valid `Department` FK values are submitted.
-
-### Token refresh (api.js)
-`authenticatedFetch` uses a flat two-step pattern — never recursive — to prevent infinite refresh loops on persistent 401s.
-
----
-
-## Dependencies
-
-| Package | Version | Purpose |
-|---------|---------|---------| 
-| react | 19.2.0 | UI library |
-| react-dom | 19.2.0 | DOM rendering |
-| react-router-dom | 7.11.0 | Client-side routing |
-| tailwindcss | 4.1.18 | Utility-first CSS |
-| framer-motion | 12.24.10 | Page and component animations |
-| recharts | 3.6.0 | Dashboard charts (AreaChart, BarChart) |
-| lucide-react | latest | Icon set |
-
----
-
-## Troubleshooting
-
-**Frontend can't reach the backend**
-- Ensure backend is running on `http://localhost:8000`
-- Check `CORS_ALLOWED_ORIGINS` in `settings.py` includes `http://localhost:5173`
-
-**Books page is empty**
-- Run: `python manage.py import_books`
-- Check browser network tab for API errors
-
-**Librarian dashboard shows no data**
-- Run: `python manage.py seed_demo` (requires books to be imported first)
-
-**Stale auth / login loop**
+### 2. Clearing stale login session
+Open your browser DevTools Console and execute:
 ```js
-// Run in browser console
-localStorage.clear()
+localStorage.clear();
+window.location.reload();
 ```
 
-**Dependency issues**
+### 3. Reinstalling dependencies
+If you encounter package conflicts:
 ```bash
 rm -rf node_modules package-lock.json
 npm install

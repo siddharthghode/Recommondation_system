@@ -1,230 +1,195 @@
 # Backend — Django REST Framework
 
-## Requirements
+A high-performance Django REST Framework API powering role-based access control, strict department catalog scoping, student verification workflows, atomic borrow transactions, dwell-time analytics, and machine learning book recommendations.
 
-- Python 3.11+ (developed on 3.13)
-- PostgreSQL 14+
+---
 
-## Setup
+## 🚀 Quick Setup
 
+### Option 1: Using Docker Compose (Recommended)
+From the root repository directory:
+```bash
+cp .env.example .env
+docker compose up --build -d
+docker compose exec backend python manage.py import_books
+docker compose exec backend python manage.py seed_demo
+```
+
+### Option 2: Local Native Setup (Python Virtual Environment)
 ```bash
 cd backend
 
 # 1. Create and activate virtual environment
-python -m venv bookenv
+python3 -m venv bookenv
 source bookenv/bin/activate          # Windows: bookenv\Scripts\activate
 
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Apply migrations
+# 3. Create .env file (optional, defaults are provided)
+cp .env.example .env
+
+# 4. Apply database migrations
 python manage.py migrate
 
-# 4. Import book catalogue (~6k books)
-python manage.py import_books        # reads data/books_6k.csv
+# 5. Import book catalogue (~6.8k books)
+python manage.py import_books        # reads backend/data/books_6k.csv
 
-# 5. Seed demo data (users + borrow history + interactions)
+# 6. Seed demo departments, users, borrow history & ML interactions
 python manage.py seed_demo
 
-# 6. Start server
+# 7. Start Django development server
 python manage.py runserver 0.0.0.0:8000
 ```
 
 ---
 
-## Demo Users
+## 👥 Demo Users
 
-| Username | Password | Role |
-|----------|----------|------|
-| `admin` | `admin123` | Admin / Superuser |
-| `librarian_cs` | `test1234` | Librarian (CS dept) |
-| `aarav_sharma` | `test1234` | Student |
-| `priya_patil` | `test1234` | Student |
-| `rohan_desai` | `test1234` | Student |
-| `sneha_kulkarni` | `test1234` | Student |
-| `vikram_joshi` | `test1234` | Student |
-| `ananya_mehta` | `test1234` | Student |
-| `karan_singh` | `test1234` | Student |
-| `pooja_nair` | `test1234` | Student |
-| `arjun_rao` | `test1234` | Student |
-| `divya_iyer` | `test1234` | Student |
+| Username | Password | Role | Department / Scope |
+|----------|----------|------|--------------------|
+| `admin` | `admin123` | Admin / Superuser | Global system oversight & Django admin |
+| `librarian_cs` | `test1234` | Librarian | Computer Science Department |
+| `aarav_sharma` | `test1234` | Student | Computer Science (Approved) |
+| `priya_patil` | `test1234` | Student | Computer Science (Approved) |
+| `rohan_desai` | `test1234` | Student | Computer Science (Approved) |
+| `sneha_kulkarni` | `test1234` | Student | Computer Science (Approved) |
+| `vikram_joshi` | `test1234` | Student | Computer Science (Approved) |
+| `ananya_mehta` | `test1234` | Student | Computer Science (Approved) |
+| `karan_singh` | `test1234` | Student | Computer Science (Approved) |
+| `pooja_nair` | `test1234` | Student | Computer Science (Approved) |
+| `arjun_rao` | `test1234` | Student | Computer Science (Approved) |
+| `divya_iyer` | `test1234` | Student | Computer Science (Approved) |
 
-Django admin panel: `http://localhost:8000/admin`
+- **Django Admin Panel**: `http://localhost:8000/admin/`
 
 ---
 
-## Management Commands
+## 🛠️ Management Commands
 
 | Command | Description |
 |---------|-------------|
-| `seed_demo` | Creates all demo users, assigns 200 books to CS dept, seeds borrow history (45 records), 5 pending requests, 200 ML interactions |
-| `import_books [path]` | Imports books from CSV; defaults to `data/books_6k.csv` |
-| `seed_interactions [--count N]` | Generates N additional `BookInteraction` records (default: 500) |
-
-### What `seed_demo` creates
-
-- 1 admin, 1 librarian (CS dept), 10 students with real Indian names
-- All students assigned to Computer Science department with student IDs `CS2021001–CS2021010`
-- 200 random books from the catalogue assigned to CS department
-- 45 borrow history records (70% returned, 30% active) spread over last 60 days
-- 5 pending borrow requests (10–300 minutes old) for the librarian dashboard
-- 200 ML interactions (view/like/borrow weighted 65/25/10) for recommendation engine
+| `import_books [path]` | Imports books from CSV; defaults to `data/books_6k.csv` (6,810 books). |
+| `seed_demo` | Seeds CS department, admin, CS librarian, 10 demo students, 200 catalog assignments, 45 borrow records, 5 pending requests, and 200 ML interactions. |
+| `seed_interactions [--count N]` | Generates N additional `BookInteraction` records (default: 500) for ML training. |
+| `create_admin` | Creates or updates the production admin account using `ADMIN_USERNAME` and `ADMIN_PASSWORD` env vars. |
 
 ---
 
-## Environment Variables
+## 🧪 Testing
 
-Create a `.env` file in the `backend/` directory:
-
-```env
-# Django security (required in production)
-DJANGO_SECRET_KEY=your-secret-key-here
-JWT_SIGNING_KEY=your-jwt-signing-key-here
-```
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `DJANGO_SECRET_KEY` | insecure dev key | **Must be set in production** |
-| `JWT_SIGNING_KEY` | falls back to `SECRET_KEY` | Separate JWT signing key (recommended) |
-
-`python-dotenv` loads this file automatically via `load_dotenv()` in `settings.py`.
-
----
-
-## Django Apps
-
-| App | Responsibility |
-|-----|---------------|
-| `accounts` | Custom `User` model (student/librarian/admin), `UserProfile`, `Department`, `Notification`; JWT login & register |
-| `books` | Book CRUD, search/filter/pagination, interaction tracking (view/like/borrow), dwell-time, TF-IDF recommendation engine |
-| `borrows` | Borrow lifecycle: request → approve/reject → return; atomic stock management with `select_for_update()` |
-| `analytics` | Librarian/admin dashboard stats, per-student borrows and analytics |
-| `messaging` | ~~Removed~~ — messaging feature has been removed from the project |
-
----
-
-## API Reference
-
-All endpoints require `Authorization: Bearer <access_token>` unless marked **public**.
-
-### Auth — `/api/auth/`
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| `POST` | `/api/auth/otp/request/` | public | Request 6-digit email OTP for registration or password reset |
-| `POST` | `/api/auth/otp/verify/` | public | Verify OTP and obtain single-use verification token |
-| `POST` | `/api/auth/register/` | public | Register new student (requires verified token) |
-| `POST` | `/api/auth/login/` | public | Login; returns `access`, `refresh`, `role` |
-| `GET` | `/api/auth/departments/` | public | List active departments |
-| `GET` | `/api/auth/me/` | required | Get current user profile |
-| `PUT` | `/api/auth/me/` | required | Update profile (first_name, last_name, email, department, year, student_id, preferred_categories) |
-| `POST` | `/api/auth/refresh/` | public | Refresh access token |
-| `GET` | `/api/auth/notifications/` | required | List notifications (`?is_read=true/false`) |
-| `POST` | `/api/auth/notifications/mark-read/` | required | Mark one notification read |
-| `POST` | `/api/auth/notifications/mark-all-read/` | required | Mark all notifications read |
-
-### Books — `/api/books/`
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| `GET` | `/api/books/` | public | List/search books (`?search=&category=&page=&page_size=`) |
-| `GET` | `/api/books/categories/` | public | List dynamically extracted book categories (`?department=`) |
-| `GET` | `/api/books/<id>/` | public | Book detail |
-| `GET` | `/api/books/<id>/similar/` | public | TF-IDF similar books (cached) |
-| `GET` | `/api/books/recommendations/` | required | Personalised recommendations (`?type=hybrid\|content\|interaction&limit=N`) |
-| `POST` | `/api/books/import/` | librarian/admin | Bulk import book catalog from CSV |
-| `POST` | `/api/books/track/<id>/` | required | Record a view interaction |
-| `POST` | `/api/books/manage/` | librarian/admin | Create book |
-| `PUT` | `/api/books/manage/<id>/` | librarian/admin | Update book |
-| `DELETE` | `/api/books/manage/<id>/` | librarian/admin | Delete book |
-
-### Interactions & Dwell-Time
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| `POST` | `/api/interactions/` | required | Create `BookInteraction` (`view`, `like`, `borrow`) |
-| `POST` | `/api/dwell-time/` | required | Record time spent on a book page (seconds) |
-
-### Borrows — `/api/borrows/`
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| `POST` | `/api/borrows/request/` | student | Request to borrow a book |
-| `GET` | `/api/borrows/my/` | required | Current user's borrow history (`?status=`) |
-| `GET` | `/api/borrows/pending/` | librarian/admin | Pending requests (dept-scoped for librarians) |
-| `POST` | `/api/borrows/approve/<id>/` | librarian/admin | Approve; atomically decrements stock via `select_for_update()` |
-| `POST` | `/api/borrows/reject/<id>/` | librarian/admin | Reject with optional reason; notifies student |
-| `POST` | `/api/borrows/return/` | student | Return a borrowed book |
-
-### Analytics — `/api/analytics/`
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| `GET` | `/api/analytics/librarian-dashboard/` | librarian/admin | Dashboard stats (dept-scoped or global) |
-| `GET` | `/api/analytics/students/` | librarian/admin | Student list (dept-scoped for librarians) |
-| `GET` | `/api/analytics/students/<id>/recommendations/` | librarian/admin | Recommendations for a student |
-| `GET` | `/api/analytics/students/<id>/borrows/` | librarian/admin | Borrow history for a student |
-| `GET` | `/api/analytics/students/<id>/analytics/` | librarian/admin | Interaction analytics for a student |
-
-
-## Key Settings (`book_recommondation/settings.py`)
-
-| Setting | Value |
-|---|---|
-| `AUTH_USER_MODEL` | `accounts.User` |
-| `DATABASE ENGINE` | `django.db.backends.postgresql` → `library_db` |
-| `DEFAULT_AUTHENTICATION_CLASSES` | `JWTAuthentication` |
-| `DEFAULT_PERMISSION_CLASSES` | `IsAuthenticated` |
-| `ACCESS_TOKEN_LIFETIME` | 60 minutes |
-| `REFRESH_TOKEN_LIFETIME` | 1 day |
-| `PASSWORD_HASHERS` | Argon2 (preferred) → PBKDF2 → BCrypt |
-| `CORS_ALLOWED_ORIGINS` | `localhost:5173`, `127.0.0.1:5173` |
-
----
-
-## Database Setup & Reset
-
-To initialize or fully reset and reseed PostgreSQL:
+The backend includes test suites verified with both Django's built-in test runner and Pytest:
 
 ```bash
-# Automated (creates user, db, grants permissions, migrates & seeds)
-./back_start.sh
+# Run Django test runner (105 tests)
+python manage.py test
 
-# Or manual reset:
-sudo -u postgres psql -c "DROP DATABASE IF EXISTS library_db;"
-sudo -u postgres psql -c "CREATE DATABASE library_db OWNER library_user;"
-python manage.py migrate
-python manage.py import_books
-python manage.py seed_demo
+# Run Pytest suite (125 tests)
+pytest -q
 ```
 
 ---
 
-## Tech Stack
+## 🔑 Environment Variables
 
-| Package | Version | Purpose |
-|---------|---------|---------| 
-| Django | 6.0.1 | Web framework |
-| djangorestframework | 3.16.1 | REST API |
-| djangorestframework-simplejwt | 5.5.1 | JWT authentication |
-| django-cors-headers | 4.0.0 | CORS |
-| scikit-learn | 1.6.1 | TF-IDF, cosine similarity |
-| NumPy | 2.4.1 | Vectorisation |
-| Pandas | 2.3.3 | CSV import, data processing |
-| argon2-cffi | 23.1.0 | Argon2 password hashing |
-| python-dotenv | 1.2.1 | `.env` file support |
-| Faker | 25.8.0 | Seed data generation |
+Configure `backend/.env` or root `.env`:
+
+| Variable | Default (Local) | Default (Docker) | Description |
+|---|---|---|---|
+| `POSTGRES_DB` | `library_db` | `library_db` | PostgreSQL database name |
+| `POSTGRES_USER` | `library_user` | `library_user` | PostgreSQL username |
+| `POSTGRES_PASSWORD` | `StrongPass@123` | `StrongPass@123` | PostgreSQL password |
+| `POSTGRES_HOST` | `127.0.0.1` | `db` | Database hostname |
+| `POSTGRES_PORT` | `5432` | `5432` | Database port |
+| `DEBUG` | `True` | `False` | Django debug mode |
+| `DJANGO_SECRET_KEY` | *(dev insecure key)* | *(docker key)* | Cryptographic key (**required in production**) |
+| `DJANGO_ENV` | `development` | `production` | Enforces production secret checks when `production` |
+| `ALLOWED_HOSTS` | `localhost,127.0.0.1` | `localhost,127.0.0.1,backend,frontend` | Allowed Host header values |
+| `CORS_ALLOWED_ORIGINS` | `http://localhost:5173` | `http://localhost,http://localhost:80` | Allowed CORS origins |
+| `EMAIL_BACKEND` | `console.EmailBackend` | `console.EmailBackend` | Set to `smtp.EmailBackend` for live SMTP |
 
 ---
 
-## Production Checklist
+## 📦 Django App Architecture
 
-- [ ] Set `DJANGO_SECRET_KEY` to a secure random value
-- [ ] Set `DEBUG = False`
-- [ ] Set `ALLOWED_HOSTS` to your production domain
-- [ ] Update `CORS_ALLOWED_ORIGINS` to production frontend URL
-- [ ] Switch `DATABASE` to PostgreSQL + install `psycopg2-binary`
-- [ ] Run `python manage.py collectstatic`
-- [ ] Serve with Gunicorn behind Nginx
-- [ ] Enable HTTPS and set `SECURE_SSL_REDIRECT = True`
-- [ ] Set `JWT_SIGNING_KEY` separately from `SECRET_KEY`
+| App | Purpose |
+|-----|---------|
+| `accounts` | Custom `User` model (student/librarian/admin), `UserProfile`, `Department`, `Notification`, OTP verification, JWT auth |
+| `books` | Book catalog CRUD, search/filter, category extraction, CSV imports, TF-IDF cosine similarity, ML hybrid recommender |
+| `borrows` | Borrow lifecycle (request → approve/reject → return), atomic concurrency stock locks (`select_for_update`) |
+| `analytics` | Librarian and student dashboard metrics, borrowing trends, top books, reading statistics |
+| `messaging` | Internal messaging API (`/api/messages/`) |
+
+---
+
+## 📡 REST API Reference
+
+All protected endpoints require `Authorization: Bearer <access_token>` header.
+
+### Health Check
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `GET` | `/api/health/` | Public | Backend health status (`{"status": "healthy"}`) |
+
+### Authentication & Profiles — `/api/auth/`
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `POST` | `/api/auth/otp/request/` | Public | Request 6-digit email OTP for student registration |
+| `POST` | `/api/auth/otp/verify/` | Public | Verify OTP and obtain verification token |
+| `POST` | `/api/auth/register/` | Public | Student self-registration (with OTP token) |
+| `POST` | `/api/auth/login/` | Public | Login; returns JWT `access`, `refresh`, and user `role` |
+| `POST` | `/api/auth/google/` | Public | Google OAuth login / registration |
+| `GET` | `/api/auth/departments/` | Public | List active academic departments |
+| `GET` | `/api/auth/me/` | Authenticated | Get current authenticated user profile |
+| `PUT` | `/api/auth/me/` | Authenticated | Update user profile |
+| `POST` | `/api/auth/refresh/` | Public | Refresh JWT access token |
+| `GET` | `/api/auth/notifications/` | Authenticated | List user notifications |
+| `POST` | `/api/auth/notifications/mark-read/` | Authenticated | Mark single notification as read |
+| `POST` | `/api/auth/notifications/mark-all-read/` | Authenticated | Mark all notifications as read |
+
+### Books & Recommendations — `/api/books/`
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `GET` | `/api/books/` | Public | List/search books (`?search=&category=&page=&page_size=`) |
+| `GET` | `/api/books/categories/` | Public | Dynamic category list (`?department=`) |
+| `GET` | `/api/books/<id>/` | Public | Retrieve book details |
+| `GET` | `/api/books/<id>/similar/` | Public | TF-IDF content similarity recommendations |
+| `GET` | `/api/books/recommendations/` | Authenticated | Personalized recommendations (`?type=hybrid\|content\|interaction&limit=N`) |
+| `POST` | `/api/books/import/` | Librarian/Admin | Bulk import books from CSV with department scoping |
+| `POST` | `/api/books/manage/` | Librarian/Admin | Create new book in department |
+| `PUT` | `/api/books/manage/<id>/` | Librarian/Admin | Update book details |
+| `DELETE` | `/api/books/manage/<id>/` | Librarian/Admin | Delete book |
+
+### Interactions & Dwell Time
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `POST` | `/api/interactions/` | Authenticated | Record book interaction (`view`, `like`, `borrow`) |
+| `POST` | `/api/dwell-time/` | Authenticated | Record time spent viewing a book (seconds) |
+
+### Borrow Management — `/api/borrows/`
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `POST` | `/api/borrows/request/` | Student | Request book loan |
+| `GET` | `/api/borrows/my/` | Authenticated | Student's active and historical borrow records |
+| `GET` | `/api/borrows/pending/` | Librarian/Admin | Pending borrow requests for department |
+| `POST` | `/api/borrows/approve/<id>/` | Librarian/Admin | Atomically approve borrow and decrement inventory |
+| `POST` | `/api/borrows/reject/<id>/` | Librarian/Admin | Reject borrow request with optional reason |
+| `POST` | `/api/borrows/return/` | Student | Return active borrowed book |
+
+### Analytics & Reports — `/api/analytics/`
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `GET` | `/api/analytics/librarian-dashboard/` | Librarian/Admin | Department borrowing metrics and overview |
+| `GET` | `/api/analytics/students/` | Librarian/Admin | List department students and approval status |
+| `GET` | `/api/analytics/students/<id>/recommendations/` | Librarian/Admin | Recommendations for specific student |
+| `GET` | `/api/analytics/students/<id>/borrows/` | Librarian/Admin | Borrow history for specific student |
+| `GET` | `/api/analytics/students/<id>/analytics/` | Librarian/Admin | Interaction analytics for specific student |
+
+---
+
+## 🔒 Security Highlights
+
+- **Department Scoping**: Librarians and students only interact with data matching their assigned department.
+- **Concurrency Protection**: Stock modifications utilize Django's `select_for_update()` transaction locks to eliminate race conditions.
+- **Argon2 Password Hashing**: State-of-the-art memory-hard hashing with fallback to PBKDF2.
+- **Stateless JWT**: Short-lived access tokens (60 min) with refresh rotation.
