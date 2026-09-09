@@ -204,17 +204,23 @@ CSRF_TRUSTED_ORIGINS = _csrf_env.split(',') if _csrf_env else [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
 ]
-# Cache Configuration - shared across gunicorn worker processes
+# Cache Configuration - Redis Cloud via django-redis
+REDIS_URL = os.getenv('REDIS_URL') or 'redis://127.0.0.1:6379/1'
+
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/tmp/django_cache',
-        'TIMEOUT': 600,
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL,
         'OPTIONS': {
-            'MAX_ENTRIES': 10000
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
+
+if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
+    CACHES['default'] = {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
 
 # Email Configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
