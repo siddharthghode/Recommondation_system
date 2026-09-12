@@ -15,6 +15,13 @@ from books.serializers import BookSerializer
 from accounts.serializers import UserSerializer
 from borrows.serializers import BorrowSerializer
 from books.services.recommender import hybrid, content_based, interaction_based
+from books.cache_utils import (
+    dashboard_key,
+    recommendation_key,
+    invalidate_dashboard_cache,
+    safe_cache_get,
+    safe_cache_set,
+)
 
 
 class LibrarianDashboardView(APIView):
@@ -39,8 +46,15 @@ class LibrarianDashboardView(APIView):
                     "top_categories": [],
                     "borrow_trends": [],
                 })
+            scope = f"dept:{department.id}"
         else:
             department = None
+            scope = "admin"
+
+        cache_key = dashboard_key(scope)
+        cached = safe_cache_get(cache_key)
+        if cached is not None:
+            return Response(cached)
 
         # 📚 BOOK STATS (Strictly department-scoped for librarians)
         if department:
@@ -170,7 +184,7 @@ class LibrarianDashboardView(APIView):
             .order_by("day")
         )
 
-        return Response({
+        dashboard_data = {
             "books": {
                 "total": book_stats["total"],
                 "in_stock": book_stats["in_stock"],
@@ -186,7 +200,9 @@ class LibrarianDashboardView(APIView):
             },
             "top_categories": top_categories,
             "borrow_trends": borrow_trends,
-        })
+        }
+        safe_cache_set(cache_key, dashboard_data, 180)
+        return Response(dashboard_data)
 
 
 class StudentsListView(APIView):
@@ -273,6 +289,8 @@ class ApproveStudentView(APIView):
             message=f"Your library registration for {dept_name} has been approved! You now have full access to browse and borrow books."
         )
 
+        invalidate_dashboard_cache(getattr(request.user.department, 'id', None))
+
         return Response({
             "message": "Student registration approved successfully",
             "approval_status": "approved",
@@ -311,6 +329,8 @@ class RejectStudentView(APIView):
             message=rejection_msg
         )
 
+        invalidate_dashboard_cache(getattr(request.user.department, 'id', None))
+
         return Response({
             "message": "Student registration rejected",
             "approval_status": "rejected",
@@ -332,9 +352,17 @@ class StudentRecommendationsView(APIView):
             student_dept = getattr(student.profile, 'department', None) or student.department
             if not request.user.department or student_dept != request.user.department:
                 return Response({"error": "Forbidden"}, status=403)
+        else:
+            student_dept = getattr(student.profile, 'department', None) or student.department
 
         limit = int(request.GET.get('limit', 6))
         rec_type = request.GET.get('type', 'hybrid')
+
+        dept_key = student_dept.id if student_dept else 'all'
+        cache_key = recommendation_key(rec_type, student.id, dept_key, limit)
+        cached = safe_cache_get(cache_key)
+        if cached is not None:
+            return Response(cached)
 
         if rec_type == 'content':
             books = content_based(student, limit)
@@ -343,7 +371,10 @@ class StudentRecommendationsView(APIView):
         else:
             books = hybrid(student, limit)
 
-        return Response(BookSerializer(books, many=True).data)
+        serialized = BookSerializer(books, many=True).data
+        safe_cache_set(cache_key, serialized, 600)
+        return Response(serialized)
+
 
 
 class StudentBorrowsView(APIView):

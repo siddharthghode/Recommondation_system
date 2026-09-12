@@ -204,8 +204,12 @@ CSRF_TRUSTED_ORIGINS = _csrf_env.split(',') if _csrf_env else [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
 ]
-# Cache Configuration - Redis Cloud via django-redis
-REDIS_URL = os.getenv('REDIS_URL') or 'redis://127.0.0.1:6379/1'
+# Cache Configuration - Local Redis / Redis Cloud via django-redis
+_raw_redis_url = (os.getenv('REDIS_URL') or '').strip()
+if not _raw_redis_url or 'YOUR_REDIS_HOST' in _raw_redis_url or 'your_redis_cloud_url' in _raw_redis_url:
+    REDIS_URL = 'redis://127.0.0.1:6379/1'
+else:
+    REDIS_URL = _raw_redis_url
 
 CACHES = {
     'default': {
@@ -213,9 +217,17 @@ CACHES = {
         'LOCATION': REDIS_URL,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'CONNECTION_POOL_KWARGS': {'max_connections': 50},
+            'SOCKET_CONNECT_TIMEOUT': 5,
+            'SOCKET_TIMEOUT': 5,
+            'IGNORE_EXCEPTIONS': True,
         }
     }
 }
+
+# Session Management: cached_db stores sessions in Redis with PostgreSQL fallback
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+SESSION_CACHE_ALIAS = 'default'
 
 if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
     CACHES['default'] = {

@@ -24,6 +24,20 @@ from books.services.recommender import (
     invalidate_book_similar_cache,
 )
 from books.services.csv_importer import import_books_from_csv
+from books.cache_utils import (
+    categories_key,
+    similar_books_key,
+    recommendation_key,
+    book_detail_key,
+    book_list_default_key,
+    invalidate_catalog_cache,
+    invalidate_categories_cache,
+    invalidate_book_cache,
+    invalidate_dashboard_cache,
+    safe_delete_pattern,
+    safe_cache_get,
+    safe_cache_set,
+)
 
 
 class IsLibrarianOrAdmin(permissions.BasePermission):
@@ -111,6 +125,37 @@ class BookListView(generics.ListAPIView):
             return qs.order_by(ordering)
         return qs.order_by('-id')
 
+    def list(self, request, *args, **kwargs):
+        search = request.query_params.get('search')
+        category = request.query_params.get('category')
+        dept_param = request.query_params.get('department')
+        ordering = request.query_params.get('ordering', '-id')
+        page = request.query_params.get('page', '1')
+
+        is_default_request = (
+            not search and
+            (not category or category == "All") and
+            (not dept_param or dept_param == "All") and
+            ordering in ('-id', '') and
+            page in ('1', '')
+        )
+
+        if is_default_request:
+            user = request.user
+            dept = _get_user_department(user)
+            dept_key = dept.id if dept else 'all'
+            cache_key = book_list_default_key(dept_key)
+            cached_data = safe_cache_get(cache_key)
+            if cached_data is not None:
+                return Response(cached_data)
+
+            response = super().list(request, *args, **kwargs)
+            if response.status_code == 200:
+                safe_cache_set(cache_key, response.data, 300)
+            return response
+
+        return super().list(request, *args, **kwargs)
+
 
 class BookDetailView(generics.RetrieveAPIView):
     serializer_class = BookSerializer
@@ -134,6 +179,31 @@ class BookDetailView(generics.RetrieveAPIView):
                     return Book.objects.select_related('department').filter(department=dept)
                 return Book.objects.none()
         return Book.objects.select_related('department').all()
+
+    def retrieve(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        if pk is not None:
+            cache_key = book_detail_key(pk)
+            cached_data = safe_cache_get(cache_key)
+            if cached_data is not None:
+                user = request.user
+                if not user.is_authenticated or user.is_superuser or getattr(user, 'role', '') == 'admin':
+                    return Response(cached_data)
+                elif getattr(user, 'role', '') == 'librarian':
+                    dept = getattr(user, 'department', None)
+                    if dept and cached_data.get('department') == dept.id:
+                        return Response(cached_data)
+                elif getattr(user, 'role', '') == 'student':
+                    if hasattr(user, 'profile') and user.profile.approval_status == 'approved':
+                        dept = user.profile.department
+                        if dept and cached_data.get('department') == dept.id:
+                            return Response(cached_data)
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+        safe_cache_set(book_detail_key(instance.id), data, 1800)
+        return Response(data)
 
 
 class TrackBookView(APIView):
@@ -205,6 +275,7 @@ class InteractionCreateView(APIView):
                     book.average_rating = new_avg
                     book.ratings_count = new_cnt
                     book.save(update_fields=['average_rating', 'ratings_count'])
+                    invalidate_book_cache(book.id)
             except (ValueError, TypeError):
                 pass
 
@@ -275,6 +346,13 @@ class RecommendationView(APIView):
             limit = 6
 
         rec_type = (request.GET.get('type') or 'hybrid').lower()
+        dept = _get_user_department(request.user)
+        dept_key = dept.id if dept else 'all'
+
+        cache_key = recommendation_key(rec_type, request.user.id, dept_key, limit)
+        cached = safe_cache_get(cache_key)
+        if cached is not None:
+            return Response(cached)
 
         if rec_type == 'content':
             books = content_based(request.user, limit)
@@ -283,7 +361,9 @@ class RecommendationView(APIView):
         else:
             books = hybrid(request.user, limit)
 
-        return Response(BookSerializer(books, many=True).data)
+        serialized = BookSerializer(books, many=True).data
+        safe_cache_set(cache_key, serialized, 600)
+        return Response(serialized)
 
 
 class BookManageView(APIView):
@@ -305,7 +385,10 @@ class BookManageView(APIView):
 
         serializer = BookSerializer(data=data)
         if serializer.is_valid():
-            serializer.save()
+            saved_book = serializer.save()
+            invalidate_catalog_cache()
+            invalidate_categories_cache()
+            invalidate_dashboard_cache(getattr(saved_book.department, 'id', None))
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
@@ -325,7 +408,10 @@ class BookManageView(APIView):
         serializer = BookSerializer(book, data=data)
         if serializer.is_valid():
             saved_book = serializer.save()
-            invalidate_book_similar_cache(saved_book.id, getattr(saved_book.department, 'id', 'none'))
+            invalidate_book_cache(saved_book.id)
+            invalidate_catalog_cache()
+            invalidate_categories_cache()
+            invalidate_dashboard_cache(getattr(saved_book.department, 'id', None))
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
@@ -344,7 +430,10 @@ class BookManageView(APIView):
 
         dept_id = getattr(book.department, 'id', 'none')
         book.delete()
-        invalidate_book_similar_cache(pk, dept_id)
+        invalidate_book_cache(pk)
+        invalidate_catalog_cache()
+        invalidate_categories_cache()
+        invalidate_dashboard_cache(dept_id)
         return Response({"message": "Book deleted successfully"}, status=200)
 
 
@@ -362,6 +451,7 @@ class SimilarBooksView(APIView):
             limit = 6
 
         user = request.user
+        dept = None
         if user.is_authenticated and not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
             if getattr(user, 'role', '') == 'student':
                 if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
@@ -369,14 +459,21 @@ class SimilarBooksView(APIView):
                 dept = user.profile.department
             else:
                 dept = getattr(user, 'department', None)
-            if not dept:
-                return Response([])
+        dept_key = dept.id if dept else 'all'
+        cache_key = similar_books_key(book_id, dept_key, limit)
+        cached = safe_cache_get(cache_key)
+        if cached is not None:
+            return Response(cached)
+
+        if dept:
             book = get_object_or_404(Book, id=book_id, department=dept)
         else:
             book = get_object_or_404(Book, id=book_id)
 
         similar_books = get_similar_books(book.id, limit)
-        return Response(BookSerializer(similar_books, many=True).data)
+        serialized = BookSerializer(similar_books, many=True).data
+        safe_cache_set(cache_key, serialized, 3600)
+        return Response(serialized)
 
 
 class BookCSVImportView(APIView):
@@ -418,8 +515,11 @@ class BookCSVImportView(APIView):
         if not result.get("success", False):
             return Response({"error": result.get("error", "CSV import failed"), "details": result}, status=400)
 
-        # Clear cached categories on successful book import
-        cache.delete("book_categories_all")
+        # Clear cached catalog, categories, dashboards, and similar books on successful book import
+        invalidate_catalog_cache()
+        invalidate_categories_cache()
+        invalidate_dashboard_cache(getattr(department, 'id', None))
+        safe_delete_pattern("books:similar:*")
 
         return Response(result, status=200)
 
@@ -433,9 +533,15 @@ class BookCategoriesView(APIView):
 
     def get(self, request):
         dept_param = request.query_params.get('department')
-        cache_key = f"book_categories_{dept_param or 'all'}"
-        cached = cache.get(cache_key)
-        if cached:
+        if not dept_param and request.user.is_authenticated:
+            dept = _get_user_department(request.user)
+            if dept:
+                dept_param = str(dept.id)
+
+        dept_key = dept_param if (dept_param and dept_param != "All") else 'all'
+        cache_key = categories_key(dept_key)
+        cached = safe_cache_get(cache_key)
+        if cached is not None:
             return Response(cached)
 
         qs = Book.objects.exclude(categories__isnull=True).exclude(categories='')
@@ -460,5 +566,6 @@ class BookCategoriesView(APIView):
 
         sorted_categories = sorted(category_counts.keys(), key=lambda c: (-category_counts[c], c.lower()))
 
-        cache.set(cache_key, sorted_categories, 600)
+        safe_cache_set(cache_key, sorted_categories, 3600)
         return Response(sorted_categories)
+

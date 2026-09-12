@@ -17,6 +17,9 @@ from .models import User, Notification, Department, EmailOTP
 from .services.otp import request_otp, verify_otp, get_otp, get_otp_status
 
 
+from django.core.cache import cache
+from books.cache_utils import department_list_key, invalidate_user_recommendations, safe_cache_get, safe_cache_set
+
 # --------------------
 # Department List (Public for Registration)
 # --------------------
@@ -24,8 +27,15 @@ class DepartmentListView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
+        cache_key = department_list_key()
+        cached = safe_cache_get(cache_key)
+        if cached is not None:
+            return Response(cached)
+
         departments = Department.objects.all().order_by('name')
-        return Response([{"id": d.id, "name": d.name} for d in departments])
+        data = [{"id": d.id, "name": d.name} for d in departments]
+        safe_cache_set(cache_key, data, 86400)
+        return Response(data)
 
 
 # --------------------
@@ -386,6 +396,10 @@ class MeView(APIView):
         user.refresh_from_db()
         if hasattr(user, 'profile'):
             user.profile.refresh_from_db()
+
+        # Invalidate cached recommendations as preferences / department may have changed
+        user_dept = getattr(user, 'department', None) or getattr(getattr(user, 'profile', None), 'department', None)
+        invalidate_user_recommendations(user.id, getattr(user_dept, 'id', 'all'))
 
         serializer = UserSerializer(user)
         return Response(serializer.data)

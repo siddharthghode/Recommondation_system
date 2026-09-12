@@ -35,23 +35,31 @@ class Command(BaseCommand):
         masked_url = mask_redis_url(raw_url) if raw_url else "Not configured (using default fallback)"
 
         self.stdout.write(self.style.NOTICE("=================================================="))
-        self.stdout.write(self.style.NOTICE(" Redis Cloud Connection Verification"))
+        self.stdout.write(self.style.NOTICE(" Redis Connection Verification (Local / Cloud)"))
         self.stdout.write(self.style.NOTICE("=================================================="))
         self.stdout.write(f"Configured REDIS_URL: {masked_url}")
 
-        if not raw_url or raw_url.strip() in ("", "your_redis_cloud_url"):
+        if not raw_url or raw_url.strip() in ("", "your_redis_cloud_url") or "YOUR_REDIS_HOST" in raw_url:
             self.stdout.write(
                 self.style.WARNING(
-                    "\n[WARNING] REDIS_URL is not set in environment or is set to placeholder."
-                    "\nTo connect to Redis Cloud, add REDIS_URL to your .env file:"
-                    "\n  REDIS_URL=redis://default:<password>@<host>:<port>"
+                    "\n[WARNING] REDIS_URL is not set or is set to a placeholder."
+                    "\nUsing local Redis fallback: redis://127.0.0.1:6379/1"
+                    "\nTo configure Redis, add REDIS_URL to your .env file:"
+                    "\n  Local Redis: REDIS_URL=redis://127.0.0.1:6379/1"
+                    "\n  Redis Cloud: REDIS_URL=redis://default:<password>@<host>:<port>"
                 )
             )
 
         # 1. Test low-level Redis connection (PING)
         self.stdout.write("\n1. Testing raw Redis connection (PING)...")
         try:
-            client = get_redis_connection("default")
+            try:
+                client = get_redis_connection("default")
+            except NotImplementedError:
+                from django.conf import settings
+                import redis
+                effective_url = getattr(settings, 'REDIS_URL', None) or raw_url or 'redis://127.0.0.1:6379/1'
+                client = redis.from_url(effective_url)
             start = time.time()
             pong = client.ping()
             latency = (time.time() - start) * 1000

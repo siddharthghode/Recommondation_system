@@ -1,6 +1,14 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from .models import User, UserProfile
+from .models import User, UserProfile, Department
+from books.cache_utils import invalidate_department_cache, invalidate_categories_cache
+
+
+@receiver(post_save, sender=Department)
+@receiver(post_delete, sender=Department)
+def clear_department_cache(sender, instance, **kwargs):
+    invalidate_department_cache()
+    invalidate_categories_cache()
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

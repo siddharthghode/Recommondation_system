@@ -21,6 +21,23 @@ services:
     networks:
       - library_network
 
+  redis:
+    image: redis:7-alpine
+    container_name: library_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "${REDIS_PORT_HOST:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - library_network
+
   backend:
     build:
       context: ./backend
@@ -38,6 +55,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-StrongPass@123}
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/1}
       DEBUG: ${DEBUG:-False}
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-django-insecure-docker-secret-key-change-in-prod}
       DJANGO_ENV: ${DJANGO_ENV:-development}
@@ -49,6 +67,8 @@ services:
       - media_data:/app/media
     depends_on:
       db:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     networks:
       - library_network
@@ -74,6 +94,8 @@ volumes:
     name: library_postgres_data
   media_data:
     name: library_media_data
+  redis_data:
+    name: library_redis_data
 
 networks:
   library_network:

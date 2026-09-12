@@ -26,24 +26,38 @@ def _get_department_for_user(user):
     return getattr(user, 'department', None)
 
 
+from books.cache_utils import (
+    recommendation_key,
+    similar_books_key,
+    invalidate_user_recommendations as utils_invalidate_user_recommendations,
+    invalidate_book_cache as utils_invalidate_book_cache,
+)
+
+
+def _ids_to_books(id_list):
+    """Hydrate Book model instances in preserved order with select_related('department')."""
+    if not id_list:
+        return []
+    books = Book.objects.select_related('department').filter(id__in=id_list)
+    id_map = {b.id: b for b in books}
+    return [id_map[bid] for bid in id_list if bid in id_map]
+
+
 def _get_cache_key(prefix, user_id, limit, dept_id='all'):
     """Generate cache key for recommendations including department scope"""
-    return f"{prefix}:user:{user_id}:dept:{dept_id}:limit:{limit}"
+    p_map = {'content_rec': 'content', 'interaction_rec': 'interaction', 'hybrid_rec': 'hybrid'}
+    rec_type = p_map.get(prefix, prefix)
+    return recommendation_key(rec_type, user_id, dept_id, limit)
 
 
 def invalidate_user_recommendations(user_id, dept_id='all'):
     """Invalidate recommendation caches for a specific user."""
-    for prefix in ("content_rec", "interaction_rec", "hybrid_rec"):
-        for limit in (5, 6, 10, 15, 20):
-            cache.delete(_get_cache_key(prefix, user_id, limit, dept_id))
-            cache.delete(_get_cache_key(prefix, user_id, limit, 'all'))
+    utils_invalidate_user_recommendations(user_id, dept_id)
 
 
 def invalidate_book_similar_cache(book_id, dept_id='none'):
     """Invalidate cached similar books for a specific book."""
-    for limit in (5, 6, 10, 15, 20):
-        cache.delete(f"similar_books:{book_id}:dept:{dept_id}:limit:{limit}")
-        cache.delete(f"similar_books:{book_id}:dept:none:limit:{limit}")
+    utils_invalidate_book_cache(book_id)
 
 
 def content_based(user, limit=6):
@@ -57,12 +71,14 @@ def content_based(user, limit=6):
         return []
 
     dept_id = dept.id if dept else 'all'
-    cache_key = _get_cache_key("content_rec", user.id, limit, dept_id)
+    cache_key = _get_cache_key("content", user.id, limit, dept_id)
     cached = cache.get(cache_key)
-    if cached:
+    if cached is not None:
+        if cached and isinstance(cached[0], int):
+            return _ids_to_books(cached)
         return cached
 
-    base_books = Book.objects.all()
+    base_books = Book.objects.select_related('department').all()
     if dept:
         base_books = base_books.filter(department=dept)
 
@@ -81,7 +97,7 @@ def content_based(user, limit=6):
             .filter(quantity__gt=0, average_rating__isnull=False)
             .order_by('-average_rating', '-ratings_count')[:limit]
         )
-        cache.set(cache_key, books, 300)
+        cache.set(cache_key, [b.id for b in books], 600)
         return books
 
     categories = [
@@ -105,7 +121,7 @@ def content_based(user, limit=6):
         .order_by('-score', '-average_rating')[:limit]
     )
 
-    cache.set(cache_key, books, 300)
+    cache.set(cache_key, [b.id for b in books], 600)
     return books
 
 
@@ -120,12 +136,14 @@ def interaction_based(user, limit=6):
         return []
 
     dept_id = dept.id if dept else 'all'
-    cache_key = _get_cache_key("interaction_rec", user.id, limit, dept_id)
+    cache_key = _get_cache_key("interaction", user.id, limit, dept_id)
     cached = cache.get(cache_key)
-    if cached:
+    if cached is not None:
+        if cached and isinstance(cached[0], int):
+            return _ids_to_books(cached)
         return cached
 
-    base_books = Book.objects.all()
+    base_books = Book.objects.select_related('department').all()
     if dept:
         base_books = base_books.filter(department=dept)
 
@@ -236,7 +254,7 @@ def interaction_based(user, limit=6):
         reverse=True,
     )
 
-    cache.set(cache_key, books, 300)
+    cache.set(cache_key, [b.id for b in books], 600)
     return books
 
 
@@ -251,9 +269,11 @@ def hybrid(user, limit=6):
         return []
 
     dept_id = dept.id if dept else 'all'
-    cache_key = _get_cache_key("hybrid_rec", user.id, limit, dept_id)
+    cache_key = _get_cache_key("hybrid", user.id, limit, dept_id)
     cached = cache.get(cache_key)
-    if cached:
+    if cached is not None:
+        if cached and isinstance(cached[0], int):
+            return _ids_to_books(cached)
         return cached
 
     fetch_limit = max(int(limit * 1.5), limit + 3)
@@ -261,7 +281,7 @@ def hybrid(user, limit=6):
     content_books = content_based(user, fetch_limit)
     interaction_books = interaction_based(user, fetch_limit)
 
-    base_books = Book.objects.all()
+    base_books = Book.objects.select_related('department').all()
     if dept:
         base_books = base_books.filter(department=dept)
 
@@ -289,13 +309,13 @@ def hybrid(user, limit=6):
             .order_by('-average_rating', '-ratings_count')[:limit]
         )
 
-    cache.set(cache_key, result, 300)
+    cache.set(cache_key, [b.id for b in result], 600)
     return result
 
 
 def _category_fallback(query, book_id, limit, department=None):
     """Shared fallback: top-rated in-stock books matching the category query in department."""
-    qs = Book.objects.filter(query).exclude(id=book_id).filter(quantity__gt=0)
+    qs = Book.objects.select_related('department').filter(query).exclude(id=book_id).filter(quantity__gt=0)
     if department:
         qs = qs.filter(department=department)
     return list(qs.order_by('-average_rating')[:limit])
@@ -303,7 +323,7 @@ def _category_fallback(query, book_id, limit, department=None):
 
 def _author_fallback(source_book, book_id, limit, department=None):
     """Last-resort fallback: books by the same author in department."""
-    qs = Book.objects.filter(authors__icontains=source_book.authors).exclude(id=book_id).filter(quantity__gt=0)
+    qs = Book.objects.select_related('department').filter(authors__icontains=source_book.authors).exclude(id=book_id).filter(quantity__gt=0)
     if department:
         qs = qs.filter(department=department)
     return list(qs.order_by('-average_rating')[:limit])
@@ -321,16 +341,19 @@ def get_similar_books(book_id, limit=6):
         return []
 
     dept = source_book.department
-    cache_key = f"similar_books:{book_id}:dept:{dept.id if dept else 'none'}:limit:{limit}"
+    dept_str = str(dept.id) if dept else 'all'
+    cache_key = similar_books_key(book_id, dept_str, limit)
     cached = cache.get(cache_key)
-    if cached:
+    if cached is not None:
+        if cached and isinstance(cached[0], int):
+            return _ids_to_books(cached)
         return cached
 
     source_categories = source_book.categories.lower() if source_book.categories else ""
 
     if not source_categories:
         similar = _author_fallback(source_book, book_id, limit, department=dept)
-        cache.set(cache_key, similar, 600)
+        cache.set(cache_key, [b.id for b in similar], 3600)
         return similar
 
     category_tokens = [c.strip() for c in source_categories.split(',') if c.strip()]
@@ -348,7 +371,7 @@ def get_similar_books(book_id, limit=6):
 
     if not candidates:
         similar = _author_fallback(source_book, book_id, limit, department=dept)
-        cache.set(cache_key, similar, 600)
+        cache.set(cache_key, [b.id for b in similar], 3600)
         return similar
 
     source_text = (
@@ -390,7 +413,8 @@ def get_similar_books(book_id, limit=6):
         top_ids = [cid for cid, _ in scored[:limit]]
 
         id_to_rank = {cid: rank for rank, cid in enumerate(top_ids)}
-        result_qs = Book.objects.filter(id__in=top_ids)
+        # Fix N+1 query: select_related('department')
+        result_qs = Book.objects.select_related('department').filter(id__in=top_ids)
         if dept:
             result_qs = result_qs.filter(department=dept)
 
@@ -412,5 +436,6 @@ def get_similar_books(book_id, limit=6):
     if not similar:
         similar = _author_fallback(source_book, book_id, limit, department=dept)
 
-    cache.set(cache_key, similar, 600)
+    cache.set(cache_key, [b.id for b in similar], 3600)
     return similar
+

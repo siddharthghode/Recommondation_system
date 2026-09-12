@@ -10,7 +10,12 @@ from .models import Borrow
 from .serializers import BorrowSerializer
 from books.models import Book, BookInteraction
 from accounts.models import Notification
-from books.services.recommender import invalidate_user_recommendations
+from books.cache_utils import (
+    invalidate_user_recommendations,
+    invalidate_book_cache,
+    invalidate_catalog_cache,
+    invalidate_dashboard_cache,
+)
 
 
 class BorrowRequestView(APIView):
@@ -54,6 +59,8 @@ class BorrowRequestView(APIView):
             user=request.user,
             message=f'Your borrow request for "{book.title}" has been submitted.'
         )
+
+        invalidate_dashboard_cache(getattr(book.department, 'id', None))
 
         return Response({"message": "Borrow request sent", "borrow_id": borrow.id}, status=200)
 
@@ -139,6 +146,9 @@ class ApproveBorrowView(APIView):
             )
 
             invalidate_user_recommendations(borrow.user.id, getattr(borrow.book.department, 'id', 'all'))
+            invalidate_book_cache(book.id)
+            invalidate_catalog_cache()
+            invalidate_dashboard_cache(getattr(book.department, 'id', None))
 
             Notification.objects.create(
                 user=borrow.user,
@@ -185,6 +195,11 @@ class ReturnBookView(APIView):
                 message=f'Your return for "{book.title}" has been recorded successfully.'
             )
 
+            invalidate_book_cache(book.id)
+            invalidate_catalog_cache()
+            invalidate_dashboard_cache(getattr(book.department, 'id', None))
+            invalidate_user_recommendations(borrow.user.id, getattr(book.department, 'id', 'all'))
+
         return Response({"message": "Book returned successfully"})
 
 
@@ -221,5 +236,7 @@ class RejectBorrowView(APIView):
                 user=borrow.user,
                 message=rejection_msg
             )
+
+            invalidate_dashboard_cache(getattr(borrow.book.department, 'id', None))
 
         return Response({"message": "Rejected"})
