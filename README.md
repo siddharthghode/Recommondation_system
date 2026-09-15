@@ -5,10 +5,11 @@
 [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react&logoColor=black)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-7.3.1-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://postgresql.org)
+[![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)](https://redis.io)
 [![Docker](https://img.shields.io/badge/Docker-Compose%20v2-2496ED?logo=docker&logoColor=white)](https://docker.com)
-[![Tests](https://img.shields.io/badge/Tests-125%20Passing-success)](file:///home/sidhharth/sppu/git/Recommondation_system/pytest.ini)
+[![Tests](https://img.shields.io/badge/Tests-155%20Passing-success)](file:///home/sidhharth/sppu/git/Recommondation_system/pytest.ini)
 
-A production-ready, full-stack university library management system featuring role-based access control, strict department-level catalog isolation, student registration approval workflows, email OTP verification, Google OAuth, librarian CSV catalog imports, an intelligent machine learning recommendation engine, atomic inventory management, in-app notifications, and containerized Docker deployment.
+A production-ready, full-stack university library management system featuring role-based access control, strict department-level catalog isolation, student registration approval workflows, email OTP verification, Google OAuth, librarian CSV catalog imports, an intelligent machine learning recommendation engine, high-performance Redis in-memory caching, atomic inventory management, in-app notifications, and containerized Docker deployment.
 
 ---
 
@@ -18,7 +19,7 @@ Choose between **Docker** (recommended — zero host dependencies) or **Local De
 
 ### Option A: 🐳 Docker Compose (Recommended)
 
-Run the entire stack (PostgreSQL + Django API + React Nginx) with Docker:
+Run the entire stack (PostgreSQL + Redis 7 + Django API + React Nginx) with Docker:
 
 ```bash
 # 1. Clone the repository
@@ -125,6 +126,12 @@ The `python manage.py seed_demo` command creates ready-to-test accounts:
 - **Machine Learning Recommendations**: Real-time personalized book recommendations powered by TF-IDF vectorization, cosine similarity, collaborative filtering, and hybrid ranking.
 - **Borrow Lifecycle**: Request books, track active loans, receive instant in-app notifications on approvals/rejections, and manage returns.
 
+### ⚡ High-Performance In-Memory Caching (Redis 7)
+- **Book Catalog & Categories Caching**: First-page catalogs and dynamic category counts are cached with instant automated invalidation on book CRUD and CSV imports.
+- **Recommendation & Similarity Caching**: TF-IDF content similarity calculations and hybrid recommendations are cached per-user/department to ensure sub-millisecond response times.
+- **Librarian Analytics Caching**: Dashboard aggregation metrics are cached and invalidated immediately on borrow/student approvals.
+- **Session Storage**: Django sessions utilize `cached_db`, storing active sessions in Redis with PostgreSQL fallback.
+
 ---
 
 ## 🤖 Recommendation Engine Architecture
@@ -175,6 +182,7 @@ The recommendation engine blends multiple machine learning techniques to deliver
 | **Authentication** | SimpleJWT 5.5, Argon2, Google OAuth 2.0 | Token-based auth and secure password hashing |
 | **Machine Learning** | scikit-learn 1.6, NumPy 2.4, Pandas 2.3 | TF-IDF similarity, vector calculations & data processing |
 | **Database** | PostgreSQL 16 Alpine | ACID relational database with row-level locks |
+| **Caching & Storage** | Redis 7 Alpine, django-redis 5.4 | High-performance in-memory caching and session store |
 | **Web Server** | Nginx Alpine, Gunicorn 23.0, WhiteNoise 6.8 | Reverse proxy, WSGI application server & static files |
 | **Containerization**| Docker, Docker Compose v2 | Multi-container isolated environment with automated health checks |
 
@@ -185,16 +193,16 @@ The recommendation engine blends multiple machine learning techniques to deliver
 ```
 Recommondation_system/
 ├── backend/
-│   ├── accounts/               # User auth, department model, profile, OTP, notifications
-│   ├── analytics/              # Librarian & student dashboard statistics
-│   ├── book_recommondation/    # Django core settings, WSGI, URLs, caching, health check
-│   ├── books/                  # Book catalog, CSV import, categories API, ML recommender
+│   ├── accounts/               # User auth, department model, profile, OTP, notifications, check_redis CLI
+│   ├── analytics/              # Librarian & student dashboard statistics (cached)
+│   ├── book_recommondation/    # Django core settings, WSGI, URLs, Redis cache configuration
+│   ├── books/                  # Book catalog, CSV import, categories, ML recommender, Redis cache_utils
 │   ├── borrows/                # Borrow lifecycle, atomic inventory locks, return ownership
-│   ├── messaging/              # Internal messaging endpoints
+│   ├── messaging/              # Internal messaging endpoints & test suite
 │   ├── data/                   # Initial CSV datasets (books_6k.csv)
 │   ├── Dockerfile              # Python 3.13 backend container
 │   ├── entrypoint.sh           # Automated migrations, collectstatic & Gunicorn startup
-│   ├── requirements.txt        # Backend dependencies
+│   ├── requirements.txt        # Backend dependencies (includes redis, django-redis)
 │   └── manage.py               # Django CLI
 ├── frontend/
 │   ├── src/
@@ -205,10 +213,10 @@ Recommondation_system/
 │   ├── nginx.conf              # Nginx SPA routing and /api/ reverse proxy
 │   ├── package.json            # Frontend dependencies and npm scripts
 │   └── vite.config.js          # Vite build & proxy configuration
-├── docker-compose.yml          # Docker Compose orchestration definition
+├── docker-compose.yml          # Docker Compose definition (db, redis, backend, frontend)
 ├── DEPLOYMENT.md               # Production deployment, SSL/TLS, and server sizing guide
 ├── PROJECT_RULES.md            # System architecture and department security rules
-├── .env.example                # Template environment variables
+├── .env.example                # Template environment variables (includes REDIS_URL)
 └── README.md                   # Project documentation & quick start guide
 ```
 
@@ -227,7 +235,7 @@ docker compose exec backend python manage.py test
 ```bash
 cd backend
 python manage.py test        # Django test runner (105 tests)
-pytest -q                    # Pytest runner (125 tests)
+pytest -q                    # Pytest runner (155 tests passing across all apps)
 ```
 
 ### Run Frontend Build & Lint:
@@ -247,12 +255,13 @@ npm run build                # Production Vite asset build
 | **Rebuild & Start** | `docker compose up --build -d` | `pip install -r requirements.txt` & `npm install` |
 | **Stop Services** | `docker compose down` | `Ctrl + C` |
 | **View Logs** | `docker compose logs -f backend` | Terminal stdout |
+| **Verify Redis** | `docker compose exec backend python manage.py check_redis` | `python manage.py check_redis` |
 | **Run Migrations** | `docker compose exec backend python manage.py migrate` | `python manage.py migrate` |
 | **Import 6k Books** | `docker compose exec backend python manage.py import_books` | `python manage.py import_books` |
 | **Seed Demo Data** | `docker compose exec backend python manage.py seed_demo` | `python manage.py seed_demo` |
 | **Create Superuser** | `docker compose exec backend python manage.py createsuperuser` | `python manage.py createsuperuser` |
 | **Django Shell** | `docker compose exec backend python manage.py shell` | `python manage.py shell` |
-| **Run Test Suite** | `docker compose exec backend python manage.py test` | `python manage.py test` |
+| **Run Test Suite** | `docker compose exec backend pytest` | `pytest` |
 | **Reset Database** | `docker compose down -v` | Drop database / delete SQLite file |
 
 ---
@@ -280,6 +289,8 @@ cp .env.example .env
 | `FRONTEND_PORT` | `80` | Host port for Nginx frontend |
 | `GOOGLE_CLIENT_ID` | *(Optional)* | Google OAuth Web Client ID |
 | `EMAIL_BACKEND` | `django.core.mail.backends.console.EmailBackend` | Email backend (console for dev, smtp for prod) |
+| `REDIS_URL` | `redis://127.0.0.1:6379/1` (Local) / `redis://redis:6379/1` (Docker) | Redis cache & session backend connection URL |
+| `REDIS_PORT_HOST` | `6379` | Host binding port for Redis container |
 
 ---
 
@@ -316,6 +327,17 @@ docker compose up --build -d
 docker compose exec backend python manage.py import_books
 docker compose exec backend python manage.py seed_demo
 ```
+
+### 4. Redis caching verification and fallback
+To test your Redis cache connection:
+```bash
+# In Docker:
+docker compose exec backend python manage.py check_redis
+
+# Locally:
+python manage.py check_redis
+```
+If Redis is temporarily offline, Django gracefully falls back without crashing because `IGNORE_EXCEPTIONS=True` is enabled in `CACHES['default']['OPTIONS']`.
 
 ---
 

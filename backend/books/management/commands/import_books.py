@@ -91,4 +91,21 @@ class Command(BaseCommand):
                 Book.objects.bulk_create(books_to_create, batch_size)
 
         total_count = Book.objects.count()
+
+        # Invalidate cached book catalog, categories, dashboards, and similar books
+        try:
+            from books.cache_utils import (
+                invalidate_catalog_cache,
+                invalidate_categories_cache,
+                invalidate_dashboard_cache,
+                safe_delete_pattern,
+            )
+            invalidate_catalog_cache()
+            invalidate_categories_cache()
+            invalidate_dashboard_cache()
+            safe_delete_pattern("books:similar:*")
+            self.stdout.write("🧹 Cache invalidated for catalog, categories, and dashboards.")
+        except Exception as e:
+            self.stdout.write(f"⚠️ Cache invalidation skipped: {e}")
+
         self.stdout.write(self.style.SUCCESS(f"✅ Imported {total_count} books from {csv_path}"))

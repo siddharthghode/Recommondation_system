@@ -1,12 +1,12 @@
 # Production Deployment Guide
 
-A complete, production-grade guide for deploying the **Library Management & Book Recommendation System** using Docker, Docker Compose, PostgreSQL 16, Django (Gunicorn + WhiteNoise), and React (Nginx reverse proxy).
+A complete, production-grade guide for deploying the **Library Management & Book Recommendation System** using Docker, Docker Compose, PostgreSQL 16, Redis 7, Django (Gunicorn + WhiteNoise), and React (Nginx reverse proxy).
 
 ---
 
 ## 1. Architecture Overview
 
-In production, the application is deployed as three containerized services running on an isolated Docker bridge network:
+In production, the application is deployed as four containerized services running on an isolated Docker bridge network:
 
 ```
                             Internet / Clients
@@ -25,13 +25,13 @@ In production, the application is deployed as three containerized services runni
        │   library_backend         │             │
        │   (Django 6 + Gunicorn    │             │
        │    WSGI 3 Workers)        │             │
-       └─────────────┬─────────────┘             │
-                     │                           │
-                     ▼                           │
-       ┌───────────────────────────┐             │
-       │   library_db              │             │
-       │   (PostgreSQL 16 Alpine)  │◄────────────┘
-       └───────────────────────────┘
+       └─────┬───────────────┬─────┘             │
+             │               │                   │
+             ▼               ▼                   │
+┌──────────────────────────┐ ┌───────────────────┴───────┐
+│   library_db             │ │   library_redis           │
+│   (PostgreSQL 16 Alpine) │ │   (Redis 7 Alpine Cache)  │
+└──────────────────────────┘ └───────────────────────────┘
 ```
 
 ---
@@ -150,6 +150,12 @@ EMAIL_USE_TLS=True
 EMAIL_HOST_USER=your-email@gmail.com
 EMAIL_HOST_PASSWORD=your-16-character-gmail-app-password
 DEFAULT_FROM_EMAIL=your-email@gmail.com
+
+# ==============================================================================
+# REDIS CONFIGURATION (Caching & Session Storage)
+# ==============================================================================
+REDIS_URL=redis://redis:6379/1
+REDIS_PORT_HOST=6379
 ```
 
 > **Note on Gmail SMTP**: Use a 16-character **App Password** generated from [Google Account Security](https://myaccount.google.com/apppasswords), not your personal account password.
@@ -165,8 +171,12 @@ docker compose up --build -d
 
 ### Verification Commands
 ```bash
-# Check running containers (all should be Up / healthy)
+# Check running containers (all 4 should be Up / healthy: frontend, backend, db, redis)
 docker compose ps
+
+# Verify Redis caching connectivity
+docker compose exec redis redis-cli ping
+docker compose exec backend python manage.py check_redis
 
 # View live application logs
 docker compose logs -f backend
@@ -268,3 +278,4 @@ Add a cron job (`crontab -e`):
 | **OTP Email not sending** | Invalid SMTP credentials or port blocked | Verify `EMAIL_HOST_USER` and 16-char app password in `.env`. Check logs with `docker compose logs backend`. |
 | **Google Sign-In `origin_mismatch`** | Google Cloud Console origin missing | Add `https://yourdomain.com` to Authorized JavaScript Origins in Google Cloud Console. |
 | **Out of Memory during build** | RAM exhausted during `npm run build` | Add a 2GB swap file as documented in Section 2. |
+| **Redis connection failure** | Redis container not running or URL mismatch | Run `docker compose ps` to ensure `library_redis` is healthy. Test with `docker compose exec backend python manage.py check_redis`. (Django gracefully falls back if Redis is offline with `IGNORE_EXCEPTIONS=True`). |

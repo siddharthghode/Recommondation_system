@@ -73,18 +73,19 @@ python manage.py runserver 0.0.0.0:8000
 | `seed_demo` | Seeds CS department, admin, CS librarian, 10 demo students, 200 catalog assignments, 45 borrow records, 5 pending requests, and 200 ML interactions. |
 | `seed_interactions [--count N]` | Generates N additional `BookInteraction` records (default: 500) for ML training. |
 | `create_admin` | Creates or updates the production admin account using `ADMIN_USERNAME` and `ADMIN_PASSWORD` env vars. |
+| `check_redis` | Verifies raw connectivity (PING) and Django cache operations against Redis / Redis Cloud. |
 
 ---
 
 ## 🧪 Testing
 
-The backend includes test suites verified with both Django's built-in test runner and Pytest:
+The backend includes comprehensive test suites verified with both Django's built-in test runner and Pytest:
 
 ```bash
 # Run Django test runner (105 tests)
 python manage.py test
 
-# Run Pytest suite (125 tests)
+# Run Pytest suite (155 tests passing across all apps)
 pytest -q
 ```
 
@@ -107,6 +108,7 @@ Configure `backend/.env` or root `.env`:
 | `ALLOWED_HOSTS` | `localhost,127.0.0.1` | `localhost,127.0.0.1,backend,frontend` | Allowed Host header values |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost:5173` | `http://localhost,http://localhost:80` | Allowed CORS origins |
 | `EMAIL_BACKEND` | `console.EmailBackend` | `console.EmailBackend` | Set to `smtp.EmailBackend` for live SMTP |
+| `REDIS_URL` | `redis://127.0.0.1:6379/1` | `redis://redis:6379/1` | Redis cache and session storage URL |
 
 ---
 
@@ -115,10 +117,10 @@ Configure `backend/.env` or root `.env`:
 | App | Purpose |
 |-----|---------|
 | `accounts` | Custom `User` model (student/librarian/admin), `UserProfile`, `Department`, `Notification`, OTP verification, JWT auth |
-| `books` | Book catalog CRUD, search/filter, category extraction, CSV imports, TF-IDF cosine similarity, ML hybrid recommender |
+| `books` | Book catalog CRUD, search/filter, category extraction, CSV imports, TF-IDF cosine similarity, ML hybrid recommender, and centralized Redis caching (`cache_utils.py`) |
 | `borrows` | Borrow lifecycle (request → approve/reject → return), atomic concurrency stock locks (`select_for_update`) |
 | `analytics` | Librarian and student dashboard metrics, borrowing trends, top books, reading statistics |
-| `messaging` | Internal messaging API (`/api/messages/`) |
+| `messaging` | Internal messaging API (`/api/messages/`) with role-based scoping and conversation threading |
 
 ---
 

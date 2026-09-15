@@ -196,6 +196,25 @@ class Command(BaseCommand):
 
         self.stdout.write(f"✓ {interaction_count} ML interactions created")
 
+        # ── Invalidate Caches ──────────────────────────────────────────
+        try:
+            from books.cache_utils import (
+                invalidate_department_cache,
+                invalidate_categories_cache,
+                invalidate_catalog_cache,
+                invalidate_dashboard_cache,
+                safe_delete_pattern,
+            )
+            invalidate_department_cache()
+            invalidate_categories_cache()
+            invalidate_catalog_cache()
+            invalidate_dashboard_cache()
+            safe_delete_pattern("books:similar:*")
+            safe_delete_pattern("recs:*")
+            self.stdout.write("✓ Redis/Django caches cleared for demo data")
+        except Exception as e:
+            self.stdout.write(f"⚠️ Cache invalidation skipped: {e}")
+
         # ── Summary ────────────────────────────────────────────────────
         self.stdout.write(self.style.SUCCESS(
             "\n✅ Seed complete!\n"
