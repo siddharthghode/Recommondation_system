@@ -11,11 +11,23 @@ jobs:
     name: Backend Pytest & Coverage
     runs-on: ubuntu-latest
 
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
       DJANGO_ENV: development
       DEBUG: "True"
       DJANGO_SECRET_KEY: "ci-test-secret-key-for-automated-pipeline"
       DJANGO_TESTING: "true"
+      REDIS_URL: "redis://127.0.0.1:6379/1"
 
     steps:
       - name: Checkout Repository
