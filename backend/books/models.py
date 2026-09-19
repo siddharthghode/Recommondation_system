@@ -15,10 +15,10 @@ class Book(models.Model):
     description = models.TextField(blank=True)
     published_year = models.IntegerField(null=True, blank=True)
     num_pages = models.IntegerField(null=True, blank=True)
-    average_rating = models.FloatField(null=True, blank=True)
+    average_rating = models.FloatField(null=True, blank=True, db_index=True)
     ratings_count = models.IntegerField(null=True, blank=True)
     thumbnail = models.URLField(blank=True)
-    quantity = models.IntegerField(default=0)
+    quantity = models.IntegerField(default=0, db_index=True)
     department = models.ForeignKey(
         Department,
         on_delete=models.SET_NULL,
@@ -27,6 +27,12 @@ class Book(models.Model):
         related_name="books",
     )
     embedding = models.JSONField(default=list, blank=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["department", "quantity"]),
+            models.Index(fields=["-average_rating", "-ratings_count"]),
+        ]
 
     def __str__(self):
         return self.title
@@ -65,6 +71,8 @@ class BookInteraction(models.Model):
     class Meta:
         indexes = [
             models.Index(fields=["user", "session_id", "sequence_order"]),
+            models.Index(fields=["book", "interaction_type"]),
+            models.Index(fields=["user", "interaction_type"]),
         ]
 
     def __str__(self):
