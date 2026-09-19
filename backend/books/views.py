@@ -25,6 +25,10 @@ from books.services.recommender import (
 )
 from books.services.csv_importer import import_books_from_csv
 from books.cache_utils import (
+    BOOK_DETAIL_CACHE_TTL,
+    BOOK_LIST_CACHE_TTL,
+    SIMILAR_BOOKS_CACHE_TTL,
+    CATEGORIES_CACHE_TTL,
     categories_key,
     similar_books_key,
     recommendation_key,
@@ -151,7 +155,7 @@ class BookListView(generics.ListAPIView):
 
             response = super().list(request, *args, **kwargs)
             if response.status_code == 200:
-                safe_cache_set(cache_key, response.data, 300)
+                safe_cache_set(cache_key, response.data, BOOK_LIST_CACHE_TTL)
             return response
 
         return super().list(request, *args, **kwargs)
@@ -202,7 +206,7 @@ class BookDetailView(generics.RetrieveAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         data = serializer.data
-        safe_cache_set(book_detail_key(instance.id), data, 1800)
+        safe_cache_set(book_detail_key(instance.id), data, BOOK_DETAIL_CACHE_TTL)
         return Response(data)
 
 
@@ -472,7 +476,7 @@ class SimilarBooksView(APIView):
 
         similar_books = get_similar_books(book.id, limit)
         serialized = BookSerializer(similar_books, many=True).data
-        safe_cache_set(cache_key, serialized, 3600)
+        safe_cache_set(cache_key, serialized, SIMILAR_BOOKS_CACHE_TTL)
         return Response(serialized)
 
 
@@ -566,6 +570,5 @@ class BookCategoriesView(APIView):
 
         sorted_categories = sorted(category_counts.keys(), key=lambda c: (-category_counts[c], c.lower()))
 
-        safe_cache_set(cache_key, sorted_categories, 3600)
+        safe_cache_set(cache_key, sorted_categories, CATEGORIES_CACHE_TTL)
         return Response(sorted_categories)
-

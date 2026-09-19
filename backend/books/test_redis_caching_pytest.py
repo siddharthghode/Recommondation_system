@@ -7,6 +7,11 @@ from accounts.models import Department
 from books.models import Book, BookInteraction
 from borrows.models import Borrow
 from books.cache_utils import (
+    BOOK_CACHE_TTL,
+    BOOK_DETAIL_CACHE_TTL,
+    BOOK_LIST_CACHE_TTL,
+    SIMILAR_BOOKS_CACHE_TTL,
+    CATEGORIES_CACHE_TTL,
     department_list_key,
     categories_key,
     book_detail_key,
@@ -420,3 +425,82 @@ class TestRedisFailureGracefulFallback:
                 res = api_client.get("/api/analytics/librarian-dashboard/", **headers)
                 assert res.status_code == 200
                 assert res.data["books"]["total"] == 3
+
+
+@pytest.mark.django_db
+class TestBookCacheTTL:
+    """Verify book cache TTL constants and ensure endpoints set cache with 3-4 days TTL."""
+
+    def test_ttl_constants_in_3_to_4_days_range(self):
+        min_ttl = 3 * 86400  # 3 days = 259,200 seconds
+        max_ttl = 4 * 86400  # 4 days = 345,600 seconds
+        for ttl, name in [
+            (BOOK_CACHE_TTL, "BOOK_CACHE_TTL"),
+            (BOOK_DETAIL_CACHE_TTL, "BOOK_DETAIL_CACHE_TTL"),
+            (BOOK_LIST_CACHE_TTL, "BOOK_LIST_CACHE_TTL"),
+            (SIMILAR_BOOKS_CACHE_TTL, "SIMILAR_BOOKS_CACHE_TTL"),
+            (CATEGORIES_CACHE_TTL, "CATEGORIES_CACHE_TTL"),
+        ]:
+            assert min_ttl <= ttl <= max_ttl, f"{name} ({ttl}s) is not within 3-4 days ({min_ttl}-{max_ttl}s)"
+
+    def test_book_detail_sets_cache_with_3_to_4_day_ttl(
+        self, api_client, approved_cs_student, cs_sample_books, auth_headers
+    ):
+        book = cs_sample_books[0]
+        headers = auth_headers(approved_cs_student)
+
+        with patch("books.views.safe_cache_set") as mock_set:
+            res = api_client.get(f"/api/books/{book.id}/", **headers)
+            assert res.status_code == 200
+            mock_set.assert_called_once()
+            call_args = mock_set.call_args[0]
+            # call signature: safe_cache_set(key, data, timeout)
+            assert call_args[0] == book_detail_key(book.id)
+            assert call_args[2] == BOOK_DETAIL_CACHE_TTL
+            assert call_args[2] >= 3 * 86400
+
+    def test_book_list_sets_cache_with_3_to_4_day_ttl(
+        self, api_client, approved_cs_student, cs_sample_books, auth_headers
+    ):
+        headers = auth_headers(approved_cs_student)
+        dept_id = approved_cs_student.profile.department.id
+
+        with patch("books.views.safe_cache_set") as mock_set:
+            res = api_client.get("/api/books/", **headers)
+            assert res.status_code == 200
+            mock_set.assert_called_once()
+            call_args = mock_set.call_args[0]
+            assert call_args[0] == book_list_default_key(dept_id)
+            assert call_args[2] == BOOK_LIST_CACHE_TTL
+            assert call_args[2] >= 3 * 86400
+
+    def test_similar_books_sets_cache_with_3_to_4_day_ttl(
+        self, api_client, approved_cs_student, cs_sample_books, auth_headers
+    ):
+        book = cs_sample_books[0]
+        headers = auth_headers(approved_cs_student)
+        dept_id = approved_cs_student.profile.department.id
+
+        with patch("books.views.safe_cache_set") as mock_set:
+            res = api_client.get(f"/api/books/{book.id}/similar/", **headers)
+            assert res.status_code == 200
+            mock_set.assert_called_once()
+            call_args = mock_set.call_args[0]
+            assert call_args[0] == similar_books_key(book.id, dept_id, 6)
+            assert call_args[2] == SIMILAR_BOOKS_CACHE_TTL
+            assert call_args[2] >= 3 * 86400
+
+    def test_categories_sets_cache_with_3_to_4_day_ttl(
+        self, api_client, approved_cs_student, cs_sample_books, auth_headers
+    ):
+        headers = auth_headers(approved_cs_student)
+        dept_id = approved_cs_student.profile.department.id
+
+        with patch("books.views.safe_cache_set") as mock_set:
+            res = api_client.get("/api/books/categories/", **headers)
+            assert res.status_code == 200
+            mock_set.assert_called_once()
+            call_args = mock_set.call_args[0]
+            assert call_args[0] == categories_key(dept_id)
+            assert call_args[2] == CATEGORIES_CACHE_TTL
+            assert call_args[2] >= 3 * 86400

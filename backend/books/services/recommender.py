@@ -27,6 +27,7 @@ def _get_department_for_user(user):
 
 
 from books.cache_utils import (
+    SIMILAR_BOOKS_CACHE_TTL,
     recommendation_key,
     similar_books_key,
     invalidate_user_recommendations as utils_invalidate_user_recommendations,
@@ -353,7 +354,7 @@ def get_similar_books(book_id, limit=6):
 
     if not source_categories:
         similar = _author_fallback(source_book, book_id, limit, department=dept)
-        cache.set(cache_key, [b.id for b in similar], 3600)
+        cache.set(cache_key, [b.id for b in similar], SIMILAR_BOOKS_CACHE_TTL)
         return similar
 
     category_tokens = [c.strip() for c in source_categories.split(',') if c.strip()]
@@ -371,7 +372,7 @@ def get_similar_books(book_id, limit=6):
 
     if not candidates:
         similar = _author_fallback(source_book, book_id, limit, department=dept)
-        cache.set(cache_key, [b.id for b in similar], 3600)
+        cache.set(cache_key, [b.id for b in similar], SIMILAR_BOOKS_CACHE_TTL)
         return similar
 
     source_text = (
@@ -436,6 +437,6 @@ def get_similar_books(book_id, limit=6):
     if not similar:
         similar = _author_fallback(source_book, book_id, limit, department=dept)
 
-    cache.set(cache_key, [b.id for b in similar], 3600)
+    cache.set(cache_key, [b.id for b in similar], SIMILAR_BOOKS_CACHE_TTL)
     return similar
 

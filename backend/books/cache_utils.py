@@ -3,9 +3,21 @@ Centralized Cache Key Management & Invalidation Helpers for Library Management S
 Uses Django's standard cache API with django-redis.
 """
 import logging
+import os
 from django.core.cache import cache
 
 logger = logging.getLogger(__name__)
+
+
+# ==============================================================================
+# CACHE TTL CONSTANTS (in seconds)
+# ==============================================================================
+# Default TTL for book caching: 3 days (259,200s; range: 3-4 days, e.g. 4 days = 345,600s)
+BOOK_CACHE_TTL = int(os.getenv("BOOK_CACHE_TTL", 3 * 86400))
+BOOK_DETAIL_CACHE_TTL = int(os.getenv("BOOK_DETAIL_CACHE_TTL", BOOK_CACHE_TTL))
+BOOK_LIST_CACHE_TTL = int(os.getenv("BOOK_LIST_CACHE_TTL", BOOK_CACHE_TTL))
+SIMILAR_BOOKS_CACHE_TTL = int(os.getenv("SIMILAR_BOOKS_CACHE_TTL", BOOK_CACHE_TTL))
+CATEGORIES_CACHE_TTL = int(os.getenv("CATEGORIES_CACHE_TTL", BOOK_CACHE_TTL))
 
 
 # ==============================================================================
