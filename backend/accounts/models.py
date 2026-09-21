@@ -85,12 +85,26 @@ class UserProfile(models.Model):
 # Notification
 # --------------------
 class Notification(models.Model):
+    NOTIFICATION_TYPE_CHOICES = (
+        ('borrow_approved', 'Borrow Approved'),
+        ('borrow_rejected', 'Borrow Rejected'),
+        ('return_reminder', 'Return Reminder'),
+        ('overdue', 'Overdue'),
+        ('general', 'General'),
+    )
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='notifications'
     )
+    title = models.CharField(max_length=255, blank=True, default='')
     message = models.TextField()
+    notification_type = models.CharField(
+        max_length=30,
+        choices=NOTIFICATION_TYPE_CHOICES,
+        default='general'
+    )
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -12,9 +12,9 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 
 from accounts.models import Department
-from books.models import Book, BookInteraction, SearchHistory, BookDwellTime
+from books.models import Book, BookInteraction, SearchHistory, BookDwellTime, BookReview
 from borrows.models import Borrow
-from books.serializers import BookSerializer, BookInteractionSerializer, BookDwellTimeSerializer
+from books.serializers import BookSerializer, BookInteractionSerializer, BookDwellTimeSerializer, BookReviewSerializer
 from books.services.recommender import (
     hybrid,
     content_based,
@@ -298,7 +298,7 @@ class BookDwellTimeView(APIView):
 
     def post(self, request):
         book_id = request.data.get("book_id")
-        duration = request.data.get("duration")
+        duration = request.data.get("duration_seconds") or request.data.get("duration")
 
         if not book_id or duration is None:
             return Response({"error": "book_id and duration are required"}, status=400)
@@ -572,3 +572,48 @@ class BookCategoriesView(APIView):
 
         safe_cache_set(cache_key, sorted_categories, CATEGORIES_CACHE_TTL)
         return Response(sorted_categories)
+
+
+class BookReviewView(APIView):
+    """
+    GET  /api/books/<book_id>/reviews/          — list reviews (public)
+    POST /api/books/<book_id>/reviews/          — create review (authenticated student)
+    PUT  /api/books/<book_id>/reviews/<id>/     — update own review
+    DELETE /api/books/<book_id>/reviews/<id>/   — delete own review
+    """
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [permissions.AllowAny()]
+        return [IsAuthenticated()]
+
+    def _get_book(self, book_id, user):
+        if user.is_authenticated and not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
+            dept = _get_user_department(user)
+            if dept:
+                return get_object_or_404(Book, id=book_id, department=dept)
+        return get_object_or_404(Book, id=book_id)
+
+    def get(self, request, book_id):
+        reviews = BookReview.objects.filter(book_id=book_id).select_related('user')
+        return Response(BookReviewSerializer(reviews, many=True).data)
+
+    def post(self, request, book_id):
+        book = self._get_book(book_id, request.user)
+        if BookReview.objects.filter(user=request.user, book=book).exists():
+            return Response({'error': 'You have already reviewed this book.'}, status=400)
+        serializer = BookReviewSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=request.user, book=book)
+        return Response(serializer.data, status=201)
+
+    def put(self, request, book_id, review_id):
+        review = get_object_or_404(BookReview, id=review_id, book_id=book_id, user=request.user)
+        serializer = BookReviewSerializer(review, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, book_id, review_id):
+        review = get_object_or_404(BookReview, id=review_id, book_id=book_id, user=request.user)
+        review.delete()
+        return Response(status=204)

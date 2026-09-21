@@ -7,7 +7,8 @@ from .views import (
     BookManageView,
     SimilarBooksView,
     BookCSVImportView,
-    BookCategoriesView
+    BookCategoriesView,
+    BookReviewView,
 )
 
 urlpatterns = [
@@ -21,5 +22,7 @@ urlpatterns = [
     path('manage/<int:pk>/', BookManageView.as_view(), name='book-manage-detail'),
     path('track/<int:book_id>/', TrackBookView.as_view(), name='book-track'),
     path('<int:book_id>/similar/', SimilarBooksView.as_view(), name='similar-books'),
+    path('<int:book_id>/reviews/', BookReviewView.as_view(), name='book-reviews'),
+    path('<int:book_id>/reviews/<int:review_id>/', BookReviewView.as_view(), name='book-review-detail'),
     path('<int:pk>/', BookDetailView.as_view(), name='book-detail'),
 ]

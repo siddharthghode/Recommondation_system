@@ -57,7 +57,9 @@ class BorrowRequestView(APIView):
 
         Notification.objects.create(
             user=request.user,
-            message=f'Your borrow request for "{book.title}" has been submitted.'
+            title='Borrow Request Submitted',
+            message=f'Your borrow request for "{book.title}" has been submitted.',
+            notification_type='general'
         )
 
         invalidate_dashboard_cache(getattr(book.department, 'id', None))
@@ -152,7 +154,9 @@ class ApproveBorrowView(APIView):
 
             Notification.objects.create(
                 user=borrow.user,
-                message=f'Your borrow request for "{book.title}" has been approved!'
+                title='Borrow Request Approved',
+                message=f'Your borrow request for "{book.title}" has been approved!',
+                notification_type='borrow_approved'
             )
 
         return Response({"message": "Approved"})
@@ -192,7 +196,9 @@ class ReturnBookView(APIView):
 
             Notification.objects.create(
                 user=borrow.user,
-                message=f'Your return for "{book.title}" has been recorded successfully.'
+                title='Book Returned',
+                message=f'Your return for "{book.title}" has been recorded successfully.',
+                notification_type='general'
             )
 
             invalidate_book_cache(book.id)
@@ -234,7 +240,9 @@ class RejectBorrowView(APIView):
                 rejection_msg += f' Reason: {reason}'
             Notification.objects.create(
                 user=borrow.user,
-                message=rejection_msg
+                title='Borrow Request Rejected',
+                message=rejection_msg,
+                notification_type='borrow_rejected'
             )
 
             invalidate_dashboard_cache(getattr(borrow.book.department, 'id', None))

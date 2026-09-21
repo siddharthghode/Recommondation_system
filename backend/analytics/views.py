@@ -286,7 +286,9 @@ class ApproveStudentView(APIView):
         dept_name = student.profile.department.name if student.profile.department else (student.department.name if student.department else "the library")
         Notification.objects.create(
             user=student,
-            message=f"Your library registration for {dept_name} has been approved! You now have full access to browse and borrow books."
+            title='Library Registration Approved',
+            message=f"Your library registration for {dept_name} has been approved! You now have full access to browse and borrow books.",
+            notification_type='general'
         )
 
         invalidate_dashboard_cache(getattr(request.user.department, 'id', None))
@@ -326,7 +328,9 @@ class RejectStudentView(APIView):
 
         Notification.objects.create(
             user=student,
-            message=rejection_msg
+            title='Library Registration Rejected',
+            message=rejection_msg,
+            notification_type='general'
         )
 
         invalidate_dashboard_cache(getattr(request.user.department, 'id', None))
