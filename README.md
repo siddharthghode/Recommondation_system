@@ -288,7 +288,9 @@ cp .env.example .env
 | `CORS_ALLOWED_ORIGINS` | `http://localhost,http://localhost:80,http://127.0.0.1` | Authorized CORS domains |
 | `FRONTEND_PORT` | `80` | Host port for Nginx frontend |
 | `GOOGLE_CLIENT_ID` | *(Optional)* | Google OAuth Web Client ID |
-| `EMAIL_BACKEND` | `django.core.mail.backends.console.EmailBackend` | Email backend (console for dev, smtp for prod) |
+| `EMAIL_BACKEND` | `anymail.backends.brevo.EmailBackend` | Email backend (`console` for dev, Brevo HTTP API for prod) |
+| `BREVO_API_KEY` | *(Set Brevo API key)* | Brevo v3 API key for transactional OTP emails |
+| `DEFAULT_FROM_EMAIL` | *(Set verified sender)* | Verified Brevo sender email address |
 | `REDIS_URL` | `redis://127.0.0.1:6379/1` (Local) / `redis://redis:6379/1` (Docker) | Redis cache & session backend connection URL |
 | `REDIS_PORT_HOST` | `6379` | Host binding port for Redis container |
 

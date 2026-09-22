@@ -106,8 +106,9 @@ Configure `backend/.env` or root `.env`:
 | `DJANGO_SECRET_KEY` | *(dev insecure key)* | *(docker key)* | Cryptographic key (**required in production**) |
 | `DJANGO_ENV` | `development` | `production` | Enforces production secret checks when `production` |
 | `ALLOWED_HOSTS` | `localhost,127.0.0.1` | `localhost,127.0.0.1,backend,frontend` | Allowed Host header values |
-| `CORS_ALLOWED_ORIGINS` | `http://localhost:5173` | `http://localhost,http://localhost:80` | Allowed CORS origins |
-| `EMAIL_BACKEND` | `console.EmailBackend` | `console.EmailBackend` | Set to `smtp.EmailBackend` for live SMTP |
+| `EMAIL_BACKEND` | `console.EmailBackend` | `anymail.backends.brevo.EmailBackend` | Email backend (`console` for dev, Brevo HTTP API for prod) |
+| `BREVO_API_KEY` | *(empty)* | *(Set Brevo v3 key)* | Brevo API key for transactional OTP emails |
+| `DEFAULT_FROM_EMAIL` | `noreply@library.local` | `your-email@example.com` | Verified Brevo sender email address |
 | `REDIS_URL` | `redis://127.0.0.1:6379/1` | `redis://redis:6379/1` | Redis cache and session storage URL |
 
 ---

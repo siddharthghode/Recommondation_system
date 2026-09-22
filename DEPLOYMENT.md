@@ -141,15 +141,11 @@ FRONTEND_PORT=80
 GOOGLE_CLIENT_ID=your-google-oauth-client-id.apps.googleusercontent.com
 
 # ==============================================================================
-# EMAIL SMTP CONFIGURATION (Required for OTPs)
+# EMAIL CONFIGURATION (Brevo HTTP API - Required for OTPs)
 # ==============================================================================
-EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=your-email@gmail.com
-EMAIL_HOST_PASSWORD=your-16-character-gmail-app-password
-DEFAULT_FROM_EMAIL=your-email@gmail.com
+EMAIL_BACKEND=anymail.backends.brevo.EmailBackend
+BREVO_API_KEY=xkeysib-your-v3-api-key-here
+DEFAULT_FROM_EMAIL=your-verified-brevo-email@example.com
 
 # ==============================================================================
 # REDIS CONFIGURATION (Caching & Session Storage)
@@ -158,7 +154,9 @@ REDIS_URL=redis://redis:6379/1
 REDIS_PORT_HOST=6379
 ```
 
-> **Note on Gmail SMTP**: Use a 16-character **App Password** generated from [Google Account Security](https://myaccount.google.com/apppasswords), not your personal account password.
+> **Brevo HTTP API (Port 443 HTTPS)**: 
+> We use Brevo's REST API via `django-anymail[brevo]` instead of SMTP. This runs directly over HTTPS port 443 and works reliably in containerized and cloud environments like Render without encountering outbound SMTP port blocks.
+> Get your v3 API key from [Brevo SMTP & API](https://app.brevo.com/settings/keys/api) and verify your sender email under Senders.
 
 ---
 
@@ -275,7 +273,7 @@ Add a cron job (`crontab -e`):
 | :--- | :--- | :--- |
 | **`CSRF verification failed` (403)** | Missing domain in CSRF whitelist | Add `https://yourdomain.com` to `CSRF_TRUSTED_ORIGINS` in `.env` and run `docker compose up -d backend`. |
 | **`DisallowedHost` (400)** | Domain not in allowed hosts | Add your domain to `ALLOWED_HOSTS` in `.env`. |
-| **OTP Email not sending** | Invalid SMTP credentials or port blocked | Verify `EMAIL_HOST_USER` and 16-char app password in `.env`. Check logs with `docker compose logs backend`. |
+| **OTP Email not sending** | Invalid Brevo API key or unverified sender | Verify `BREVO_API_KEY` and ensure `DEFAULT_FROM_EMAIL` matches a verified sender in Brevo. Check logs with `docker compose logs backend`. |
 | **Google Sign-In `origin_mismatch`** | Google Cloud Console origin missing | Add `https://yourdomain.com` to Authorized JavaScript Origins in Google Cloud Console. |
 | **Out of Memory during build** | RAM exhausted during `npm run build` | Add a 2GB swap file as documented in Section 2. |
 | **Redis connection failure** | Redis container not running or URL mismatch | Run `docker compose ps` to ensure `library_redis` is healthy. Test with `docker compose exec backend python manage.py check_redis`. (Django gracefully falls back if Redis is offline with `IGNORE_EXCEPTIONS=True`). |

@@ -16,3 +16,4 @@ pytest-django>=4.9.0
 pytest-cov>=5.0.0
 redis>=5.0.0
 django-redis>=5.4.0
+django-anymail[brevo]>=12.0

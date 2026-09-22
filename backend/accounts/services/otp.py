@@ -72,7 +72,7 @@ def get_otp_status(email: str) -> dict:
 
 
 def send_otp_email(email: str, otp: str) -> None:
-    """Send OTP email using Django's configured EMAIL_BACKEND."""
+    """Send OTP email using Brevo HTTP API or configured EMAIL_BACKEND."""
     subject = "Your Department Library Verification Code"
     message = (
         f"Hello,\n\n"
@@ -83,10 +83,25 @@ def send_otp_email(email: str, otp: str) -> None:
         f"Best regards,\n"
         f"Department Library Team"
     )
+    html_message = (
+        f'<div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff;">'
+        f'<h2 style="color: #1e3a8a; text-align: center; margin-top: 0;">Department Library System</h2>'
+        f'<p style="color: #334155; font-size: 15px;">Hello,</p>'
+        f'<p style="color: #334155; font-size: 15px;">Your verification code for the Department Library System is:</p>'
+        f'<div style="text-align: center; margin: 28px 0;">'
+        f'<span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #2563eb; background: #eff6ff; padding: 12px 28px; border-radius: 6px; display: inline-block; border: 1px dashed #bfdbfe;">{otp}</span>'
+        f'</div>'
+        f'<p style="color: #64748b; font-size: 13px; text-align: center;">This code will expire in <strong>10 minutes</strong>.</p>'
+        f'<p style="color: #dc2626; font-size: 12px; text-align: center;"><strong>Security Notice:</strong> Never share this verification code with anyone.</p>'
+        f'<hr style="border: none; border-top: 1px solid #e2e8f0; margin: 24px 0;" />'
+        f'<p style="color: #94a3b8; font-size: 12px; text-align: center; margin-bottom: 0;">Department Library Team</p>'
+        f'</div>'
+    )
     from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@library.local')
     send_mail(
         subject=subject,
         message=message,
+        html_message=html_message,
         from_email=from_email,
         recipient_list=[email],
         fail_silently=False,
