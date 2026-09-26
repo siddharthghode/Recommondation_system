@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
-from django.db import transaction
+from django.db import transaction, IntegrityError
 
 from .models import Borrow
 from .serializers import BorrowSerializer
@@ -27,42 +27,46 @@ class BorrowRequestView(APIView):
             return Response({"error": "book_id is required"}, status=400)
 
         user = request.user
-        # Department and approval check for students and librarians
-        if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
-            if user.role == 'student':
-                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
-                    return Response({"error": "Your registration is pending approval from your department librarian"}, status=403)
-                dept = user.profile.department
+        with transaction.atomic():
+            # Department and approval check for students and librarians
+            if not (user.is_superuser or getattr(user, 'role', '') == 'admin'):
+                if user.role == 'student':
+                    if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
+                        return Response({"error": "Your registration is pending approval from your department librarian"}, status=403)
+                    dept = user.profile.department
+                else:
+                    dept = getattr(user, 'department', None)
+                if not dept:
+                    return Response({"error": "You must be assigned to a department to borrow books"}, status=403)
+                book = get_object_or_404(Book.objects.select_for_update(), id=book_id, department=dept)
             else:
-                dept = getattr(user, 'department', None)
-            if not dept:
-                return Response({"error": "You must be assigned to a department to borrow books"}, status=403)
-            book = get_object_or_404(Book, id=book_id, department=dept)
-        else:
-            book = get_object_or_404(Book, id=book_id)
+                book = get_object_or_404(Book.objects.select_for_update(), id=book_id)
 
-        # Prevent requesting when no stock
-        if book.quantity <= 0:
-            return Response({"error": "Book not available"}, status=400)
+            # Prevent requesting when no stock
+            if book.quantity <= 0:
+                return Response({"error": "Book not available"}, status=400)
 
-        # Prevent duplicate active/requested borrows for same book by same user
-        if Borrow.objects.filter(user=request.user, book=book, status__in=['requested', 'approved']).exists():
-            return Response({"error": "Existing active or requested borrow for this book"}, status=400)
+            # Prevent duplicate active/requested borrows for same book by same user
+            if Borrow.objects.filter(user=request.user, book=book, status__in=['requested', 'approved']).exists():
+                return Response({"error": "Existing active or requested borrow for this book"}, status=400)
 
-        borrow = Borrow.objects.create(
-            user=request.user,
-            book=book,
-            status='requested'
-        )
+            try:
+                borrow = Borrow.objects.create(
+                    user=request.user,
+                    book=book,
+                    status='requested'
+                )
+            except IntegrityError:
+                return Response({"error": "Existing active or requested borrow for this book"}, status=400)
 
-        Notification.objects.create(
-            user=request.user,
-            title='Borrow Request Submitted',
-            message=f'Your borrow request for "{book.title}" has been submitted.',
-            notification_type='general'
-        )
-
-        invalidate_dashboard_cache(getattr(book.department, 'id', None))
+            dept_id = getattr(book.department, 'id', None)
+            Notification.objects.create(
+                user=request.user,
+                title='Borrow Request Submitted',
+                message=f'Your borrow request for "{book.title}" has been submitted.',
+                notification_type='general'
+            )
+            invalidate_dashboard_cache(dept_id)
 
         return Response({"message": "Borrow request sent", "borrow_id": borrow.id}, status=200)
 
@@ -238,6 +242,7 @@ class RejectBorrowView(APIView):
             rejection_msg = f'Your borrow request for "{borrow.book.title}" has been rejected.'
             if reason:
                 rejection_msg += f' Reason: {reason}'
+
             Notification.objects.create(
                 user=borrow.user,
                 title='Borrow Request Rejected',
@@ -248,3 +253,30 @@ class RejectBorrowView(APIView):
             invalidate_dashboard_cache(getattr(borrow.book.department, 'id', None))
 
         return Response({"message": "Rejected"})
+
+
+class DepartmentBorrowsView(APIView):
+    """
+    Consolidated circulation endpoint for librarians and admins.
+    Eliminates N+1 client-side HTTP request storms by fetching all department
+    borrows in a single optimized query with relations preloaded.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        if user.role not in ('librarian', 'admin'):
+            return Response({"error": "Forbidden"}, status=403)
+
+        qs = Borrow.objects.select_related('book', 'book__department', 'user', 'user__profile')
+        if user.role == 'librarian' and not user.is_superuser:
+            if not user.department:
+                return Response([])
+            qs = qs.filter(book__department=user.department)
+
+        status_filter = request.query_params.get('status')
+        if status_filter and status_filter != 'all':
+            qs = qs.filter(status=status_filter)
+
+        qs = qs.order_by('-requested_at')
+        return Response(BorrowSerializer(qs, many=True).data)

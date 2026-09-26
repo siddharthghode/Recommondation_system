@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.mail import send_mail
 from django.conf import settings
+from django.db import transaction
+from django.core.cache import cache
 from accounts.models import User, EmailOTP
 
 logger = logging.getLogger(__name__)
@@ -124,31 +126,36 @@ def request_otp(email: str, purpose: str = "register") -> tuple[bool, str]:
         # Enumeration protection: return generic confirmation without sending email
         return True, "If an account is associated with this email, a verification code has been sent."
 
-    # Resend protection: 60-second cooldown
-    last_otp = EmailOTP.objects.filter(email=email).order_by('-created_at').first()
-    if last_otp and (timezone.now() - last_otp.created_at) < timedelta(seconds=60):
-        remaining_sec = int(60 - (timezone.now() - last_otp.created_at).total_seconds())
-        return False, f"Please wait {remaining_sec} seconds before requesting a new code."
+    with transaction.atomic():
+        # Resend protection: 60-second cooldown check against DB with row lock
+        last_otp = EmailOTP.objects.select_for_update().filter(email=email).order_by('-created_at').first()
+        if last_otp and (timezone.now() - last_otp.created_at) < timedelta(seconds=60):
+            remaining_sec = max(1, int(60 - (timezone.now() - last_otp.created_at).total_seconds()))
+            return False, f"Please wait {remaining_sec} seconds before requesting a new code."
 
-    # Invalidate previous unverified OTPs for this email
-    EmailOTP.objects.filter(email=email, is_verified=False).update(expires_at=timezone.now())
+        # Invalidate previous unverified OTPs for this email
+        EmailOTP.objects.filter(email=email, is_verified=False).update(expires_at=timezone.now())
 
-    # Generate and securely store hashed OTP
-    raw_otp = generate_otp()
-    otp_hash = make_password(raw_otp)
-    expires_at = timezone.now() + timedelta(minutes=10)
+        # Generate and securely store hashed OTP
+        raw_otp = generate_otp()
+        otp_hash = make_password(raw_otp)
+        expires_at = timezone.now() + timedelta(minutes=10)
 
-    EmailOTP.objects.create(
-        email=email,
-        otp_hash=otp_hash,
-        expires_at=expires_at,
-    )
+        EmailOTP.objects.create(
+            email=email,
+            otp_hash=otp_hash,
+            expires_at=expires_at,
+        )
 
     # Send the email
     try:
         send_otp_email(email, raw_otp)
     except Exception as e:
         logger.exception("Failed to send OTP verification email to %s: %s", email, e)
+        try:
+            cache.delete(cooldown_cache_key)
+        except Exception:
+            pass
         return False, "Failed to send verification email. Please try again later."
 
     return True, "Verification code sent to your email."
@@ -157,36 +164,44 @@ def request_otp(email: str, purpose: str = "register") -> tuple[bool, str]:
 def verify_otp(email: str, otp: str) -> tuple[bool, str, str | None]:
     """
     Verify the provided OTP for the given email.
+    Uses select_for_update() to prevent race-condition brute-forcing of attempts.
     Returns (success: bool, message: str, verification_token: str | None).
     """
     email = email.strip().lower()
     otp = str(otp).strip()
 
-    otp_record = EmailOTP.objects.filter(email=email, is_verified=False).order_by('-created_at').first()
-    if not otp_record:
-        return False, "No active verification code found. Please request a new code.", None
+    with transaction.atomic():
+        otp_record = (
+            EmailOTP.objects
+            .select_for_update()
+            .filter(email=email, is_verified=False)
+            .order_by('-created_at')
+            .first()
+        )
+        if not otp_record:
+            return False, "No active verification code found. Please request a new code.", None
 
-    if otp_record.attempts >= 5:
-        return False, "Too many failed attempts. Please request a new verification code.", None
-
-    if otp_record.is_expired():
-        return False, "Verification code has expired. Please request a new code.", None
-
-    if not check_password(otp, otp_record.otp_hash):
-        otp_record.attempts += 1
         if otp_record.attempts >= 5:
-            otp_record.expires_at = timezone.now()
-        otp_record.save()
-        remaining = max(0, 5 - otp_record.attempts)
-        if remaining == 0:
             return False, "Too many failed attempts. Please request a new verification code.", None
-        return False, f"Invalid verification code. {remaining} attempt(s) remaining.", None
 
-    # OTP is valid! Mark verified and issue single-use registration verification token
-    verification_token = secrets.token_urlsafe(32)
-    otp_record.is_verified = True
-    otp_record.verified_at = timezone.now()
-    otp_record.verification_token = verification_token
-    otp_record.save()
+        if otp_record.is_expired():
+            return False, "Verification code has expired. Please request a new code.", None
+
+        if not check_password(otp, otp_record.otp_hash):
+            otp_record.attempts += 1
+            if otp_record.attempts >= 5:
+                otp_record.expires_at = timezone.now()
+            otp_record.save(update_fields=['attempts', 'expires_at'])
+            remaining = max(0, 5 - otp_record.attempts)
+            if remaining == 0:
+                return False, "Too many failed attempts. Please request a new verification code.", None
+            return False, f"Invalid verification code. {remaining} attempt(s) remaining.", None
+
+        # OTP is valid! Mark verified and issue single-use registration verification token
+        verification_token = secrets.token_urlsafe(32)
+        otp_record.is_verified = True
+        otp_record.verified_at = timezone.now()
+        otp_record.verification_token = verification_token
+        otp_record.save(update_fields=['is_verified', 'verified_at', 'verification_token'])
 
     return True, "Email verified successfully.", verification_token

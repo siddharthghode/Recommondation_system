@@ -1,5 +1,6 @@
 from datetime import timedelta
 from django.utils import timezone
+from django.db import transaction, IntegrityError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -268,66 +269,71 @@ class GoogleLoginView(APIView):
         first_name = google_user_info.get('given_name') or google_user_info.get('name', '').split(' ')[0] or ''
         last_name = google_user_info.get('family_name') or (google_user_info.get('name', '').split(' ')[-1] if ' ' in google_user_info.get('name', '') else '')
 
-        # Check if user with this email already exists
-        user = User.objects.filter(email=email).first()
+        with transaction.atomic():
+            # Check if user with this email already exists
+            user = User.objects.filter(email=email).first()
 
-        if not user:
-            # Check if user exists by username derived from email
-            base_username = email.split('@')[0]
-            username = base_username
-            counter = 1
-            while User.objects.filter(username=username).exists():
-                username = f"{base_username}_{counter}"
-                counter += 1
+            if not user:
+                # Check if user exists by username derived from email
+                base_username = email.split('@')[0]
+                username = base_username
+                counter = 1
+                while User.objects.filter(username=username).exists():
+                    username = f"{base_username}_{counter}"
+                    counter += 1
 
-            # Only allow student role creation via public Google OAuth
-            role = 'student' if req_role not in ['librarian', 'admin'] else 'student'
+                # Only allow student role creation via public Google OAuth
+                role = 'student' if req_role not in ['librarian', 'admin'] else 'student'
 
-            user = User.objects.create(
-                username=username,
-                email=email,
-                first_name=first_name,
-                last_name=last_name,
-                role=role
-            )
-            user.set_unusable_password()
-            user.save()
-
-            # Configure student profile
-            if hasattr(user, 'profile'):
-                profile = user.profile
-                # Set a friendly student ID based on username if default
-                if not profile.student_id or profile.student_id == username:
-                    profile.student_id = f"G-{username}"
-                
-                if req_department:
-                    dept_obj, _ = Department.objects.get_or_create(name=req_department)
-                    profile.department = dept_obj
-                    user.department = dept_obj
+                try:
+                    user = User.objects.create(
+                        username=username,
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name,
+                        role=role
+                    )
+                    user.set_unusable_password()
                     user.save()
+                except IntegrityError:
+                    # Concurrently created by a parallel request
+                    user = User.objects.filter(email=email).first()
 
-                if req_year:
-                    try:
-                        profile.year = int(req_year)
-                    except (ValueError, TypeError):
-                        pass
+                # Configure student profile
+                if user and hasattr(user, 'profile'):
+                    profile = user.profile
+                    # Set a friendly student ID based on username if default
+                    if not profile.student_id or profile.student_id == username:
+                        profile.student_id = f"G-{username}"
+                    
+                    if req_department:
+                        dept_obj, _ = Department.objects.get_or_create(name=req_department)
+                        profile.department = dept_obj
+                        user.department = dept_obj
+                        user.save()
 
-                profile.save()
-        else:
-            # Optionally update profile details if provided
-            if hasattr(user, 'profile') and (req_department or req_year):
-                profile = user.profile
-                if req_department:
-                    dept_obj, _ = Department.objects.get_or_create(name=req_department)
-                    profile.department = dept_obj
-                    user.department = dept_obj
-                    user.save()
-                if req_year:
-                    try:
-                        profile.year = int(req_year)
-                    except (ValueError, TypeError):
-                        pass
-                profile.save()
+                    if req_year:
+                        try:
+                            profile.year = int(req_year)
+                        except (ValueError, TypeError):
+                            pass
+
+                    profile.save()
+            else:
+                # Optionally update profile details if provided
+                if hasattr(user, 'profile') and (req_department or req_year):
+                    profile = user.profile
+                    if req_department:
+                        dept_obj, _ = Department.objects.get_or_create(name=req_department)
+                        profile.department = dept_obj
+                        user.department = dept_obj
+                        user.save()
+                    if req_year:
+                        try:
+                            profile.year = int(req_year)
+                        except (ValueError, TypeError):
+                            pass
+                    profile.save()
 
         # Create JWT tokens
         refresh = RefreshToken.for_user(user)

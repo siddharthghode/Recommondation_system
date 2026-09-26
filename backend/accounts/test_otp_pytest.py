@@ -93,3 +93,37 @@ class TestPytestOTPAuthentication:
         assert status_after["is_verified"] is False
         assert status_after["can_resend"] is False
 
+    def test_verification_token_consumed_atomically(self, api_client, cs_dept):
+        """Single-use verification token cannot be replayed or used twice."""
+        from accounts.models import Department
+        email = "replay_test@univ.edu"
+        request_otp(email)
+
+        import re
+        match = re.search(r'\b\d{6}\b', mail.outbox[-1].body)
+        raw_code = match.group(0) if match else "123456"
+
+        success, _, token = verify_otp(email, raw_code)
+        assert success is True
+
+        payload = {
+            "username": "student_replay1",
+            "password": "Password123!",
+            "password_confirm": "Password123!",
+            "email": email,
+            "department": cs_dept.id,
+            "verification_token": token,
+            "role": "student"
+        }
+
+        # First registration consumes token
+        res1 = api_client.post("/api/auth/register/", payload)
+        assert res1.status_code == 201
+
+        # Second registration with same token fails immediately
+        payload["username"] = "student_replay2"
+        payload["email"] = "other@univ.edu"
+        res2 = api_client.post("/api/auth/register/", payload)
+        assert res2.status_code == 400
+        assert "verification_token" in res2.data
+

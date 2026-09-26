@@ -106,3 +106,45 @@ class TestPytestBorrowingWorkflows:
         assert borrow.status == "returned"
         assert borrow.return_date is not None
         assert target_book.quantity == 3
+
+    def test_duplicate_borrow_request_prevented_by_unique_constraint(
+        self, api_client, approved_cs_student, cs_sample_books, auth_headers
+    ):
+        """Simultaneous or duplicate borrow request for same user/book is prevented."""
+        from django.db import IntegrityError
+        target_book = cs_sample_books[0]
+        api_client.credentials(**auth_headers(approved_cs_student))
+
+        # First request succeeds
+        res1 = api_client.post("/api/borrows/request/", {"book_id": target_book.id})
+        assert res1.status_code == 200
+
+        # Second concurrent/duplicate request fails cleanly with 400
+        res2 = api_client.post("/api/borrows/request/", {"book_id": target_book.id})
+        assert res2.status_code == 400
+        assert "Existing active or requested borrow" in res2.data["error"]
+
+        # Database UniqueConstraint prevents direct model violation
+        with pytest.raises(IntegrityError):
+            Borrow.objects.create(
+                user=approved_cs_student,
+                book=target_book,
+                status="requested"
+            )
+
+    def test_department_borrows_endpoint(
+        self, api_client, cs_librarian, approved_cs_student, cs_sample_books, auth_headers
+    ):
+        """Librarian retrieves consolidated department borrows in one query."""
+        target_book = cs_sample_books[0]
+        Borrow.objects.create(
+            user=approved_cs_student,
+            book=target_book,
+            status="requested"
+        )
+        api_client.credentials(**auth_headers(cs_librarian))
+        res = api_client.get("/api/borrows/department/")
+        assert res.status_code == 200
+        assert isinstance(res.data, list)
+        assert len(res.data) >= 1
+        assert res.data[0]["book_title"] == target_book.title

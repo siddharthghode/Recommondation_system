@@ -17,20 +17,6 @@ export default function Recommendations() {
   const navigate = useNavigate();
   const [selectedBook, setSelectedBook] = useState(null);
 
-  const loadRecommendations = useCallback(async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const data = await fetchRecommendations(token, n, method);
-      setRecommendations(data);
-    } catch (err) {
-      setError(err.detail || err.message || "Failed to load recommendations");
-      console.error("Error loading recommendations:", err);
-    } finally {
-      setLoading(false);
-    }
-  }, [token, n, method]);
-
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -52,9 +38,38 @@ export default function Recommendations() {
         })
         .catch(() => {});
     }
+  }, [token, navigate, role]);
 
-    loadRecommendations();
-  }, [token, navigate, role, loadRecommendations]);
+  useEffect(() => {
+    if (!token) return;
+    let isCancelled = false;
+
+    const fetchRecs = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const data = await fetchRecommendations(token, n, method);
+        if (!isCancelled) {
+          setRecommendations(Array.isArray(data) ? data : []);
+        }
+      } catch (err) {
+        if (!isCancelled) {
+          setError(err.detail || err.message || "Failed to load recommendations");
+          console.error("Error loading recommendations:", err);
+        }
+      } finally {
+        if (!isCancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchRecs();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [token, n, method]);
 
   if (!token) {
     return null;

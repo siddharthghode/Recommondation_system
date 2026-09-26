@@ -154,6 +154,7 @@ export default function BookDetail({ book, onClose }) {
 
   // Handle Borrow Request
   const handleBorrow = async () => {
+    if (borrowing || borrowSuccess) return;
     if (!token) {
       navigate('/login');
       return;

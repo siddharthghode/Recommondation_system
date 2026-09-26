@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { BASE_URL, returnBook } from '../../services/api';
+import { BASE_URL, returnBook, getDepartmentBorrows } from '../../services/api';
 import { useAuth } from '../../context/useAuth';
 import Toast from '../../components/Toast';
 
@@ -18,41 +18,13 @@ export default function LibrarianReturns() {
 
     try {
       setLoading(true);
-      // Fetch department approved borrows via analytics students or borrows
-      const res = await fetch(`${BASE_URL}/analytics/students/`, {
-        headers: { Authorization: `Bearer ${activeToken}` },
-      });
-      if (!res.ok) throw new Error('Failed to load students');
-      const students = await res.json();
-      
-      // Load active borrows for all students in this department
-      const allBorrows = [];
-      await Promise.all(
-        students.map(async (student) => {
-          try {
-            const bRes = await fetch(`${BASE_URL}/analytics/students/${student.id}/borrows/`, {
-              headers: { Authorization: `Bearer ${activeToken}` },
-            });
-            if (bRes.ok) {
-              const bData = await bRes.json();
-              if (Array.isArray(bData)) {
-                bData.forEach((b) => {
-                  allBorrows.push({
-                    ...b,
-                    student_name: student.first_name ? `${student.first_name} ${student.last_name || ''}` : student.username,
-                    student_email: student.email,
-                    student_code: student.profile?.student_id || student.username,
-                  });
-                });
-              }
-            }
-          } catch {
-            // continue
-          }
-        })
-      );
-
-      setActiveBorrows(allBorrows);
+      const data = await getDepartmentBorrows(activeToken);
+      const formatted = (Array.isArray(data) ? data : []).map((b) => ({
+        ...b,
+        student_name: b.student_name || b.student_id || 'Student',
+        student_code: b.student_id,
+      }));
+      setActiveBorrows(formatted);
     } catch (err) {
       console.error('Failed to load department circulation:', err);
       setToast({ open: true, message: 'Failed to load return records', type: 'error' });

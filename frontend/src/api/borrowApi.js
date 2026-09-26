@@ -22,3 +22,6 @@ export const getBorrowHistory = (status = null) =>
 
 export const getOverdueBooks = () =>
   apiClient.get("/borrows/my/?status=overdue").catch(() => []);
+
+export const getDepartmentBorrows = (status = null) =>
+  apiClient.get("/borrows/department/", { params: status ? { status } : {} });

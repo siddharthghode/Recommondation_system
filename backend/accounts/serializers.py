@@ -127,6 +127,8 @@ class RegisterSerializer(serializers.ModelSerializer):
             return None
 
     def create(self, validated_data):
+        from django.db import transaction
+
         role = validated_data.pop('role', 'student')
         # optional student_id, verification_token, preferred_categories
         student_id = validated_data.pop('student_id', None)
@@ -143,44 +145,54 @@ class RegisterSerializer(serializers.ModelSerializer):
         # resolve department if provided (allows frontend to send name or pk)
         department_obj = self._resolve_department(department_val)
 
-        # create user instance and set password using Django hashing
-        password = validated_data.get('password')
-        user = User(
-            username=username,
-            email=validated_data.get('email', ''),
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', ''),
-            role=role
-        )
-        if password:
-            user.set_password(password)
-        user.save()
+        with transaction.atomic():
+            # Atomically consume the verification token before creating user to prevent concurrent reuse
+            if role == 'student' and token:
+                email_val = validated_data.get('email', '').strip().lower()
+                consumed = EmailOTP.objects.filter(
+                    email=email_val,
+                    verification_token=token,
+                    is_verified=True
+                ).update(verification_token=None)
+                if consumed == 0:
+                    raise serializers.ValidationError({
+                        'verification_token': 'Verification token is invalid, expired, or has already been used.'
+                    })
 
-        # if librarian, attach department on user (if provided)
-        if role == 'librarian':
-            if department_obj:
+            # create user instance and set password using Django hashing
+            password = validated_data.get('password')
+            user = User(
+                username=username,
+                email=validated_data.get('email', ''),
+                first_name=validated_data.get('first_name', ''),
+                last_name=validated_data.get('last_name', ''),
+                role=role
+            )
+            if password:
+                user.set_password(password)
+            user.save()
+
+            # if librarian, attach department on user (if provided)
+            if role == 'librarian':
+                if department_obj:
+                    user.department = department_obj
+                    user.save()
+
+            # if student, ensure profile fields are set
+            if role == 'student':
+                if not department_obj:
+                    raise serializers.ValidationError({'department': 'A valid department is required for student registration'})
                 user.department = department_obj
                 user.save()
-
-        # if student, ensure profile fields are set
-        if role == 'student':
-            if not department_obj:
-                raise serializers.ValidationError({'department': 'A valid department is required for student registration'})
-            user.department = department_obj
-            user.save()
-            profile = user.profile
-            # prefer explicit student_id, otherwise use username
-            profile.student_id = student_id or username
-            profile.department = department_obj
-            profile.year = year
-            if preferred_categories:
-                profile.preferred_categories = preferred_categories
-            profile.approval_status = 'pending'
-            profile.save()
-
-            # Invalidate the verification token to prevent reuse
-            if token:
-                EmailOTP.objects.filter(verification_token=token).update(verification_token=None)
+                profile = user.profile
+                # prefer explicit student_id, otherwise use username
+                profile.student_id = student_id or username
+                profile.department = department_obj
+                profile.year = year
+                if preferred_categories:
+                    profile.preferred_categories = preferred_categories
+                profile.approval_status = 'pending'
+                profile.save()
 
         return user
 

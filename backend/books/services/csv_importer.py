@@ -60,7 +60,35 @@ def import_books_from_csv(file_obj, department: Department) -> dict:
             "row_errors": ["No department assigned."]
         }
 
-    # Read and decode file
+    # Distributed lock per department to prevent concurrent conflicting CSV imports
+    lock_key = f"csv_import_dept_{department.id}"
+    try:
+        acquired = cache.add(lock_key, "1", timeout=300)
+    except Exception:
+        acquired = True
+
+    if not acquired:
+        return {
+            "success": False,
+            "error": "A book import is already in progress for this department. Please wait.",
+            "total_rows": 0,
+            "created": 0,
+            "updated": 0,
+            "skipped": 0,
+            "errors": 1,
+            "row_errors": ["Concurrent import conflict."]
+        }
+
+    try:
+        return _do_import_books(file_obj, department)
+    finally:
+        try:
+            cache.delete(lock_key)
+        except Exception:
+            pass
+
+
+def _do_import_books(file_obj, department: Department) -> dict:
     try:
         content = file_obj.read()
         if isinstance(content, bytes):
@@ -298,7 +326,16 @@ def import_books_from_csv(file_obj, department: Department) -> dict:
             Book.objects.bulk_update(books_to_update, fields_to_update, batch_size=500)
 
     if created_count > 0 or updated_count > 0:
-        cache.clear()
+        from books.cache_utils import (
+            invalidate_catalog_cache,
+            invalidate_categories_cache,
+            invalidate_dashboard_cache,
+            safe_delete_pattern,
+        )
+        invalidate_catalog_cache()
+        invalidate_categories_cache()
+        invalidate_dashboard_cache(getattr(department, 'id', None))
+        safe_delete_pattern("books:similar:*")
 
     error_count = len(row_errors)
     return {

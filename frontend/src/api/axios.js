@@ -68,6 +68,7 @@ apiClient.interceptors.response.use(
 
       const refreshToken = localStorage.getItem("refresh_token");
       if (!refreshToken) {
+        processQueue(new Error("No refresh token available"), null);
         isRefreshing = false;
         return Promise.reject(error.response.data || error);
       }

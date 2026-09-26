@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.shortcuts import get_object_or_404
+from django.db import transaction, IntegrityError
 from django.db.models import Q
 
 from accounts.models import Department
@@ -272,14 +273,17 @@ class InteractionCreateView(APIView):
             try:
                 r_val = float(rating)
                 if 1 <= r_val <= 5:
-                    cur_avg = book.average_rating or 0.0
-                    cur_cnt = book.ratings_count or 0
-                    new_cnt = cur_cnt + 1
-                    new_avg = round((cur_avg * cur_cnt + r_val) / new_cnt, 2)
-                    book.average_rating = new_avg
-                    book.ratings_count = new_cnt
-                    book.save(update_fields=['average_rating', 'ratings_count'])
-                    invalidate_book_cache(book.id)
+                    with transaction.atomic():
+                        locked_book = Book.objects.select_for_update().get(id=book.id)
+                        cur_avg = locked_book.average_rating or 0.0
+                        cur_cnt = locked_book.ratings_count or 0
+                        new_cnt = cur_cnt + 1
+                        new_avg = round((cur_avg * cur_cnt + r_val) / new_cnt, 2)
+                        locked_book.average_rating = new_avg
+                        locked_book.ratings_count = new_cnt
+                        locked_book.save(update_fields=['average_rating', 'ratings_count'])
+                        transaction.on_commit(lambda: invalidate_book_cache(locked_book.id))
+                        book = locked_book
             except (ValueError, TypeError):
                 pass
 
@@ -603,7 +607,10 @@ class BookReviewView(APIView):
             return Response({'error': 'You have already reviewed this book.'}, status=400)
         serializer = BookReviewSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(user=request.user, book=book)
+        try:
+            serializer.save(user=request.user, book=book)
+        except IntegrityError:
+            return Response({'error': 'You have already reviewed this book.'}, status=400)
         return Response(serializer.data, status=201)
 
     def put(self, request, book_id, review_id):

@@ -19,6 +19,7 @@ export default function Books() {
   const [totalCount, setTotalCount] = useState(0);
   const [category, setCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [selectedBook, setSelectedBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -27,6 +28,14 @@ export default function Books() {
 
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
+
+  // Debounce search query to prevent concurrent out-of-order requests
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [searchQuery]);
 
   // Load departments
   useEffect(() => {
@@ -56,44 +65,60 @@ export default function Books() {
     }
   }, [token, role]);
 
-  // ── Real API: load books ────────────────────────────────────────────────
-  const loadBooks = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError('');
-      let url = `${BASE_URL}/books/?page=${page}&page_size=${PAGE_SIZE}&ordering=-id`;
-      if (selectedDept && selectedDept !== 'All') url += `&department=${encodeURIComponent(selectedDept)}`;
-      if (category && category !== 'All') url += `&category=${encodeURIComponent(category)}`;
-      if (searchQuery.trim()) url += `&search=${encodeURIComponent(searchQuery.trim())}`;
+  // Reset to page 1 whenever filters change
+  useEffect(() => {
+    setPage(1);
+  }, [selectedDept, category, debouncedQuery]);
 
-      const authToken = localStorage.getItem('token');
-      const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
-      const res = await fetch(url, { headers });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
+  // ── Real API: load books with AbortController for race condition protection ──
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
 
-      if (data.results) {
-        setBooks(data.results);
-        setTotalCount(data.count || 0);
-        setTotalPages(Math.ceil((data.count || 0) / PAGE_SIZE) || 1);
-      } else if (Array.isArray(data)) {
-        setBooks(data);
-        setTotalCount(data.length);
-        setTotalPages(1);
-      } else {
+    const fetchBooks = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        let url = `${BASE_URL}/books/?page=${page}&page_size=${PAGE_SIZE}&ordering=-id`;
+        if (selectedDept && selectedDept !== 'All') url += `&department=${encodeURIComponent(selectedDept)}`;
+        if (category && category !== 'All') url += `&category=${encodeURIComponent(category)}`;
+        if (debouncedQuery.trim()) url += `&search=${encodeURIComponent(debouncedQuery.trim())}`;
+
+        const authToken = localStorage.getItem('token');
+        const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
+        const res = await fetch(url, { headers, signal });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        if (data.results) {
+          setBooks(data.results);
+          setTotalCount(data.count || 0);
+          setTotalPages(Math.ceil((data.count || 0) / PAGE_SIZE) || 1);
+        } else if (Array.isArray(data)) {
+          setBooks(data);
+          setTotalCount(data.length);
+          setTotalPages(1);
+        } else {
+          setBooks([]);
+        }
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+        setError(err.message || 'Failed to load books.');
         setBooks([]);
+      } finally {
+        if (!signal.aborted) {
+          setLoading(false);
+        }
       }
-    } catch (err) {
-      setError(err.message || 'Failed to load books.');
-      setBooks([]);
-    } finally {
-      setLoading(false);
-    }
-  }, [page, selectedDept, category, searchQuery]);
+    };
 
-  useEffect(() => { loadBooks(); window.scrollTo(0, 0); }, [loadBooks]);
-  useEffect(() => { setPage(1); }, [selectedDept, category, searchQuery]);
-  useEffect(() => { if (page > totalPages && totalPages > 0) setPage(1); }, [page, totalPages]);
+    fetchBooks();
+    window.scrollTo(0, 0);
+
+    return () => {
+      controller.abort();
+    };
+  }, [page, selectedDept, category, debouncedQuery]);
 
   return (
     <>

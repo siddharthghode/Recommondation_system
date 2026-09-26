@@ -24,6 +24,7 @@ import {
   rejectBorrow as _rejectBorrow,
   getBorrowHistory as _getBorrowHistory,
   getOverdueBooks as _getOverdueBooks,
+  getDepartmentBorrows as _getDepartmentBorrows,
 } from "../api/borrowApi";
 
 import {
@@ -97,6 +98,11 @@ export const getMyBorrows = (tokenOrStatus, maybeStatus) => {
 export const returnBook = (tokenOrBorrowId, maybeBorrowId) => {
   if (isLegacyToken(tokenOrBorrowId)) return _returnBook(maybeBorrowId);
   return _returnBook(tokenOrBorrowId);
+};
+
+export const getDepartmentBorrows = (tokenOrStatus, maybeStatus) => {
+  if (isLegacyToken(tokenOrStatus)) return _getDepartmentBorrows(maybeStatus);
+  return _getDepartmentBorrows(tokenOrStatus);
 };
 
 export const requestBorrow = (tokenOrBookId, maybeBookId) => {

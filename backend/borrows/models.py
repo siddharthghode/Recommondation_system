@@ -23,5 +23,14 @@ class Borrow(models.Model):
     return_date = models.DateTimeField(null=True, blank=True)
     rejection_reason = models.TextField(null=True, blank=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'book'],
+                condition=models.Q(status__in=['requested', 'approved']),
+                name='unique_active_or_requested_borrow'
+            )
+        ]
+
     def __str__(self):
         return f"{self.user} → {self.book} ({self.status})"

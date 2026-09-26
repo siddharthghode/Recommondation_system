@@ -61,11 +61,29 @@ def invalidate_book_similar_cache(book_id, dept_id='none'):
     utils_invalidate_book_cache(book_id)
 
 
+def _acquire_stampede_lock(lock_key: str, timeout: int = 10) -> bool:
+    """Acquire a temporary stampede lock using cache.add. Returns True if acquired."""
+    try:
+        return bool(cache.add(lock_key, "1", timeout=timeout))
+    except Exception:
+        return True
+
+
+def _release_stampede_lock(lock_key: str):
+    """Release stampede lock."""
+    try:
+        cache.delete(lock_key)
+    except Exception:
+        pass
+
+
 def content_based(user, limit=6):
     """
     Recommend based on preferred categories and book similarity using TF-IDF.
     Strictly scoped to user's department.
     """
+    import time
+
     dept = _get_department_for_user(user)
     is_scoped = getattr(user, 'role', '') in ('student', 'librarian') and not getattr(user, 'is_superuser', False)
     if is_scoped and not dept:
@@ -79,6 +97,23 @@ def content_based(user, limit=6):
             return _ids_to_books(cached)
         return cached
 
+    lock_key = f"stampede:{cache_key}"
+    if not _acquire_stampede_lock(lock_key, timeout=10):
+        for _ in range(5):
+            time.sleep(0.05)
+            cached = cache.get(cache_key)
+            if cached is not None:
+                if cached and isinstance(cached[0], int):
+                    return _ids_to_books(cached)
+                return cached
+
+    try:
+        return _compute_content_based(user, limit, dept, cache_key)
+    finally:
+        _release_stampede_lock(lock_key)
+
+
+def _compute_content_based(user, limit, dept, cache_key):
     base_books = Book.objects.select_related('department').all()
     if dept:
         base_books = base_books.filter(department=dept)
@@ -131,6 +166,8 @@ def interaction_based(user, limit=6):
     Collaborative filtering: recommend books liked by similar users.
     Strictly scoped to user's department.
     """
+    import time
+
     dept = _get_department_for_user(user)
     is_scoped = getattr(user, 'role', '') in ('student', 'librarian') and not getattr(user, 'is_superuser', False)
     if is_scoped and not dept:
@@ -144,6 +181,23 @@ def interaction_based(user, limit=6):
             return _ids_to_books(cached)
         return cached
 
+    lock_key = f"stampede:{cache_key}"
+    if not _acquire_stampede_lock(lock_key, timeout=10):
+        for _ in range(5):
+            time.sleep(0.05)
+            cached = cache.get(cache_key)
+            if cached is not None:
+                if cached and isinstance(cached[0], int):
+                    return _ids_to_books(cached)
+                return cached
+
+    try:
+        return _compute_interaction_based(user, limit, dept, cache_key)
+    finally:
+        _release_stampede_lock(lock_key)
+
+
+def _compute_interaction_based(user, limit, dept, cache_key):
     base_books = Book.objects.select_related('department').all()
     if dept:
         base_books = base_books.filter(department=dept)
@@ -350,6 +404,23 @@ def get_similar_books(book_id, limit=6):
             return _ids_to_books(cached)
         return cached
 
+    lock_key = f"stampede:{cache_key}"
+    if not _acquire_stampede_lock(lock_key, timeout=10):
+        for _ in range(5):
+            time.sleep(0.05)
+            cached = cache.get(cache_key)
+            if cached is not None:
+                if cached and isinstance(cached[0], int):
+                    return _ids_to_books(cached)
+                return cached
+
+    try:
+        return _compute_similar_books(source_book, book_id, limit, dept, cache_key)
+    finally:
+        _release_stampede_lock(lock_key)
+
+
+def _compute_similar_books(source_book, book_id, limit, dept, cache_key):
     source_categories = source_book.categories.lower() if source_book.categories else ""
 
     if not source_categories:

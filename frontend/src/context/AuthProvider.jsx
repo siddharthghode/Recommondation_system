@@ -29,9 +29,10 @@ export function AuthProvider({ children }) {
         // Attempt one token refresh
         try {
           const newToken = await apiRefreshToken();
-          if (newToken) {
-            setToken(newToken);
-            return fetchUserProfile(newToken);
+          const accessToken = newToken?.access || newToken;
+          if (accessToken && typeof accessToken === 'string') {
+            setToken(accessToken);
+            return fetchUserProfile(accessToken);
           }
         } catch {
           logout();
