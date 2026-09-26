@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchRecommendations, BASE_URL } from "../services/api";
 import BookCard from "../components/BookCard";
@@ -12,10 +12,15 @@ export default function Recommendations() {
   const [n, setN] = useState(10);
   const [approvalStatus, setApprovalStatus] = useState(() => localStorage.getItem("approval_status") || "approved");
   const [userProfile, setUserProfile] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
   const navigate = useNavigate();
   const [selectedBook, setSelectedBook] = useState(null);
+
+  const loadRecommendations = () => {
+    setRefreshTrigger((prev) => prev + 1);
+  };
 
   useEffect(() => {
     if (!token) {
@@ -69,7 +74,7 @@ export default function Recommendations() {
     return () => {
       isCancelled = true;
     };
-  }, [token, n, method]);
+  }, [token, n, method, refreshTrigger]);
 
   if (!token) {
     return null;
