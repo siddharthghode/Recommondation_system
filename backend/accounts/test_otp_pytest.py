@@ -127,3 +127,17 @@ class TestPytestOTPAuthentication:
         assert res2.status_code == 400
         assert "verification_token" in res2.data
 
+    def test_request_otp_email_send_failure_cleans_up_record(self, monkeypatch):
+        """When sending OTP email fails, unverified OTP record is cleaned up so user is not locked out."""
+        def fail_send(email, otp):
+            raise ConnectionError("Brevo API network timeout")
+        monkeypatch.setattr("accounts.services.otp.send_otp_email", fail_send)
+
+        email = "fail_mail@univ.edu"
+        success, message = request_otp(email, purpose="register")
+        assert success is False
+        assert "Failed to send verification email" in message
+        # Invariant: user must not have an active unverified OTP blocking retry
+        assert EmailOTP.objects.filter(email=email, is_verified=False).count() == 0
+
+
