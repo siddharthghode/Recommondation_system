@@ -129,10 +129,20 @@ if _db_host and _db_host not in ('127.0.0.1', 'localhost'):
     DATABASES["default"]["OPTIONS"]["sslmode"] = os.getenv('POSTGRES_SSLMODE', 'require')
 
 if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
-    }
+    if os.getenv('TEST_DATABASE_ENGINE') == 'postgresql':
+        DATABASES['default'] = {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('TEST_POSTGRES_DB', 'test_library'),
+            'USER': os.getenv('TEST_POSTGRES_USER', 'postgres'),
+            'PASSWORD': os.getenv('TEST_POSTGRES_PASSWORD', 'testpass'),
+            'HOST': os.getenv('TEST_POSTGRES_HOST', '127.0.0.1'),
+            'PORT': os.getenv('TEST_POSTGRES_PORT', '5433'),
+        }
+    else:
+        DATABASES['default'] = {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
 
 
 # Password validation

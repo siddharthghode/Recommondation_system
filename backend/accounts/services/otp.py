@@ -141,7 +141,7 @@ def request_otp(email: str, purpose: str = "register") -> tuple[bool, str]:
         otp_hash = make_password(raw_otp)
         expires_at = timezone.now() + timedelta(minutes=10)
 
-        EmailOTP.objects.create(
+        created_record = EmailOTP.objects.create(
             email=email,
             otp_hash=otp_hash,
             expires_at=expires_at,
@@ -152,8 +152,9 @@ def request_otp(email: str, purpose: str = "register") -> tuple[bool, str]:
         send_otp_email(email, raw_otp)
     except Exception as e:
         logger.exception("Failed to send OTP verification email to %s: %s", email, e)
+        # Roll back newly created unverified record so user is not blocked by cooldown
         try:
-            cache.delete(cooldown_cache_key)
+            created_record.delete()
         except Exception:
             pass
         return False, "Failed to send verification email. Please try again later."

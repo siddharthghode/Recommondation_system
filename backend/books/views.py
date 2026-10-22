@@ -147,6 +147,11 @@ class BookListView(generics.ListAPIView):
 
         if is_default_request:
             user = request.user
+            # Unapproved students must not receive cached global catalog or poison cache
+            if user.is_authenticated and getattr(user, 'role', '') == 'student':
+                if not hasattr(user, 'profile') or user.profile.approval_status != 'approved':
+                    return super().list(request, *args, **kwargs)
+
             dept = _get_user_department(user)
             dept_key = dept.id if dept else 'all'
             cache_key = book_list_default_key(dept_key)
