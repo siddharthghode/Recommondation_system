@@ -12,13 +12,9 @@ class TestPostgresSpecificAnalytics:
     """
 
     @pytest.fixture(autouse=True)
-    def skip_if_not_postgres(self):
-        """Skip these tests if not connected to a PostgreSQL database."""
-        if connection.vendor != "postgresql":
-            pytest.skip(
-                f"Requires PostgreSQL database; currently connected to {connection.vendor}. "
-                "Run with TEST_DATABASE_ENGINE=postgresql to execute."
-            )
+    def verify_postgres(self):
+        """Verify the database is PostgreSQL."""
+        assert connection.vendor == "postgresql", f"Expected PostgreSQL database; got {connection.vendor}"
 
     def test_postgres_unnest_string_to_array_category_aggregation(self, api_client, auth_headers, cs_dept):
         """

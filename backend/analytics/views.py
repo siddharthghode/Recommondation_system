@@ -124,48 +124,37 @@ class LibrarianDashboardView(APIView):
             .order_by("-count")[:5]
         )
 
-        # 📊 TOP CATEGORIES (DB-side split + count on PostgreSQL; fallback in test runner)
-        top_categories = []
-        if connection.vendor == "postgresql":
-            with connection.cursor() as cursor:
-                if department:
-                    cursor.execute(
-                        """
-                        SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
-                               COUNT(*) AS count
-                        FROM books_book b
-                        WHERE b.categories IS NOT NULL
-                          AND b.categories <> ''
-                          AND b.department_id = %s
-                        GROUP BY category
-                        ORDER BY count DESC
-                        LIMIT 5;
-                        """,
-                        [department.id],
-                    )
-                else:
-                    cursor.execute(
-                        """
-                        SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
-                               COUNT(*) AS count
-                        FROM books_book b
-                        WHERE b.categories IS NOT NULL
-                          AND b.categories <> ''
-                        GROUP BY category
-                        ORDER BY count DESC
-                        LIMIT 5;
-                        """
-                    )
-                top_categories = [{"category": row[0], "count": row[1]} for row in cursor.fetchall()]
-        else:
-            cat_counts = {}
-            for cats in all_books.exclude(categories__isnull=True).exclude(categories="").values_list("categories", flat=True):
-                for cat in cats.split(","):
-                    c_clean = cat.strip()
-                    if c_clean:
-                        cat_counts[c_clean] = cat_counts.get(c_clean, 0) + 1
-            sorted_cats = sorted(cat_counts.items(), key=lambda x: x[1], reverse=True)[:5]
-            top_categories = [{"category": c, "count": cnt} for c, cnt in sorted_cats]
+        # 📊 TOP CATEGORIES (DB-side split + count on PostgreSQL)
+        with connection.cursor() as cursor:
+            if department:
+                cursor.execute(
+                    """
+                    SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
+                           COUNT(*) AS count
+                    FROM books_book b
+                    WHERE b.categories IS NOT NULL
+                      AND b.categories <> ''
+                      AND b.department_id = %s
+                    GROUP BY category
+                    ORDER BY count DESC
+                    LIMIT 5;
+                    """,
+                    [department.id],
+                )
+            else:
+                cursor.execute(
+                    """
+                    SELECT TRIM(UNNEST(STRING_TO_ARRAY(b.categories, ','))) AS category,
+                           COUNT(*) AS count
+                    FROM books_book b
+                    WHERE b.categories IS NOT NULL
+                      AND b.categories <> ''
+                    GROUP BY category
+                    ORDER BY count DESC
+                    LIMIT 5;
+                    """
+                )
+            top_categories = [{"category": row[0], "count": row[1]} for row in cursor.fetchall()]
 
         # 📈 BORROW TRENDS (DB-side date buckets + counts)
         borrow_trends = list(

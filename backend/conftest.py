@@ -177,3 +177,12 @@ def auth_headers():
         refresh = RefreshToken.for_user(user)
         return {"HTTP_AUTHORIZATION": f"Bearer {refresh.access_token}"}
     return _get_headers
+
+
+@pytest.fixture(autouse=True)
+def clean_cache_between_tests():
+    """Ensure cache isolation between test cases."""
+    from django.core.cache import cache
+    cache.clear()
+    yield
+    cache.clear()

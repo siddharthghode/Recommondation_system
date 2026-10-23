@@ -50,6 +50,20 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgrespassword
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
       redis:
         image: redis:7-alpine
         ports:
@@ -66,6 +80,12 @@ jobs:
       DJANGO_SECRET_KEY: "ci-test-secret-key-for-automated-pipeline"
       DJANGO_TESTING: "true"
       REDIS_URL: "redis://127.0.0.1:6379/1"
+      TEST_POSTGRES_HOST: "127.0.0.1"
+      TEST_POSTGRES_PORT: "5432"
+      TEST_POSTGRES_BASE_DB: "postgres"
+      TEST_POSTGRES_DB: "test_library"
+      TEST_POSTGRES_USER: "postgres"
+      TEST_POSTGRES_PASSWORD: "postgrespassword"
 
     steps:
       - name: Checkout Repository

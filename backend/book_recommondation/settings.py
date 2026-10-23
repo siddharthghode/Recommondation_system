@@ -122,27 +122,33 @@ else:
         }
     }
 
+# Detect testing environment explicitly (manage.py test, pytest, or DJANGO_TESTING env)
+_is_testing = (
+    'test' in sys.argv
+    or 'pytest' in sys.modules
+    or any('pytest' in arg for arg in sys.argv)
+    or os.getenv('DJANGO_TESTING', '').lower() in ('true', '1', 'yes')
+)
+
+# Dedicated PostgreSQL Test Configuration - PostgreSQL is the sole supported engine
+if _is_testing:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('TEST_POSTGRES_BASE_DB', 'postgres'),
+        'USER': os.getenv('TEST_POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.getenv('TEST_POSTGRES_PASSWORD', 'postgres'),
+        'HOST': os.getenv('TEST_POSTGRES_HOST', '127.0.0.1'),
+        'PORT': str(os.getenv('TEST_POSTGRES_PORT', '5432')),
+        'TEST': {
+            'NAME': os.getenv('TEST_POSTGRES_DB', 'test_library'),
+        },
+    }
+
 # Enable SSL mode require for Supabase / remote database connections
 _db_host = DATABASES["default"].get("HOST", "")
-if _db_host and _db_host not in ('127.0.0.1', 'localhost'):
+if _db_host and _db_host not in ('127.0.0.1', 'localhost', 'postgres'):
     DATABASES["default"].setdefault("OPTIONS", {})
     DATABASES["default"]["OPTIONS"]["sslmode"] = os.getenv('POSTGRES_SSLMODE', 'require')
-
-if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
-    if os.getenv('TEST_DATABASE_ENGINE') == 'postgresql':
-        DATABASES['default'] = {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('TEST_POSTGRES_DB', 'test_library'),
-            'USER': os.getenv('TEST_POSTGRES_USER', 'postgres'),
-            'PASSWORD': os.getenv('TEST_POSTGRES_PASSWORD', 'testpass'),
-            'HOST': os.getenv('TEST_POSTGRES_HOST', '127.0.0.1'),
-            'PORT': os.getenv('TEST_POSTGRES_PORT', '5433'),
-        }
-    else:
-        DATABASES['default'] = {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:',
-        }
 
 
 # Password validation
@@ -263,7 +269,7 @@ CACHES = {
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_CACHE_ALIAS = 'default'
 
-if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
+if _is_testing:
     CACHES['default'] = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }

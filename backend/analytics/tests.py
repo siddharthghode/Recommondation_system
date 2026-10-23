@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core.cache import cache
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.models import User, Department
@@ -8,6 +9,7 @@ from borrows.models import Borrow
 
 class AnalyticsDepartmentAuthorizationTests(TestCase):
     def setUp(self):
+        cache.clear()
         self.client = APIClient()
 
         # Departments

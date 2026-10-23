@@ -262,7 +262,7 @@ npm run build                # Production Vite asset build
 | **Create Superuser** | `docker compose exec backend python manage.py createsuperuser` | `python manage.py createsuperuser` |
 | **Django Shell** | `docker compose exec backend python manage.py shell` | `python manage.py shell` |
 | **Run Test Suite** | `docker compose exec backend pytest` | `pytest` |
-| **Reset Database** | `docker compose down -v` | Drop database / delete SQLite file |
+| **Reset Database** | `docker compose down -v` | Drop database and reset persistent volumes |
 
 ---
 
@@ -293,6 +293,43 @@ cp .env.example .env
 | `DEFAULT_FROM_EMAIL` | *(Set verified sender)* | Verified Brevo sender email address |
 | `REDIS_URL` | `redis://127.0.0.1:6379/1` (Local) / `redis://redis:6379/1` (Docker) | Redis cache & session backend connection URL |
 | `REDIS_PORT_HOST` | `6379` | Host binding port for Redis container |
+
+### Test Database Environment Variables (PostgreSQL-Only Testing)
+
+The test suite runs strictly on PostgreSQL to validate real transactions, `select_for_update` row locks, partial unique constraints, and PostgreSQL-native functions (`STRING_TO_ARRAY`, `UNNEST`). In-memory SQLite is disabled.
+
+| Variable | Default (Local Tests) | CI / Custom Configuration | Purpose |
+|---|---|---|---|
+| `TEST_POSTGRES_DB` | `test_library` | `test_library` | Dedicated test database name |
+| `TEST_POSTGRES_USER` | `postgres` | `postgres` | Test database username |
+| `TEST_POSTGRES_PASSWORD` | `postgres` | `postgrespassword` | Test database password |
+| `TEST_POSTGRES_HOST` | `127.0.0.1` | `127.0.0.1` | Test database host address |
+| `TEST_POSTGRES_PORT` | `5432` | `5432` | Test database port |
+
+---
+
+## 🧪 Testing with PostgreSQL
+
+Automated tests require a running PostgreSQL instance (local PostgreSQL server or Docker container). Tests never connect to or modify production Supabase databases.
+
+### Running Tests Locally
+```bash
+# 1. Ensure local PostgreSQL is running:
+pg_isready -h 127.0.0.1 -p 5432
+
+# 2. Run the full pytest suite:
+cd backend
+pytest
+
+# 3. Run specific PostgreSQL analytics tests:
+pytest analytics/test_analytics_postgres.py -v
+
+# 4. Run concurrency & inventory tests:
+pytest borrows/test_borrows_concurrency_pytest.py -v
+```
+
+### GitHub Actions CI Provisioning
+In CI (`.github/workflows/ci.yml`), a dedicated `postgres:16-alpine` service container is automatically provisioned alongside `redis:7-alpine`. CI executes tests against this container with non-production credentials, guaranteeing 100% database engine parity with production.
 
 ---
 
@@ -340,6 +377,21 @@ docker compose exec backend python manage.py check_redis
 python manage.py check_redis
 ```
 If Redis is temporarily offline, Django gracefully falls back without crashing because `IGNORE_EXCEPTIONS=True` is enabled in `CACHES['default']['OPTIONS']`.
+
+### 5. PostgreSQL connection errors during local tests
+If running `pytest` fails with `connection to server at "127.0.0.1", port 5432 failed`:
+1. Check that PostgreSQL is running locally:
+   ```bash
+   pg_isready -h 127.0.0.1 -p 5432
+   ```
+2. Start PostgreSQL service if stopped:
+   ```bash
+   sudo systemctl start postgresql
+   ```
+3. If using custom credentials, supply them via environment variables:
+   ```bash
+   TEST_POSTGRES_USER=myuser TEST_POSTGRES_PASSWORD=mypass pytest
+   ```
 
 ---
 
