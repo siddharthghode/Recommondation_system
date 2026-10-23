@@ -1,4 +1,5 @@
 import logging
+import time
 
 from books.models import Book, BookInteraction, BookDwellTime
 from django.db.models import Count, Q, F, IntegerField
@@ -82,8 +83,6 @@ def content_based(user, limit=6):
     Recommend based on preferred categories and book similarity using TF-IDF.
     Strictly scoped to user's department.
     """
-    import time
-
     dept = _get_department_for_user(user)
     is_scoped = getattr(user, 'role', '') in ('student', 'librarian') and not getattr(user, 'is_superuser', False)
     if is_scoped and not dept:
@@ -166,8 +165,6 @@ def interaction_based(user, limit=6):
     Collaborative filtering: recommend books liked by similar users.
     Strictly scoped to user's department.
     """
-    import time
-
     dept = _get_department_for_user(user)
     is_scoped = getattr(user, 'role', '') in ('student', 'librarian') and not getattr(user, 'is_superuser', False)
     if is_scoped and not dept:
