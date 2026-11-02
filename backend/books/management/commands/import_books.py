@@ -33,6 +33,11 @@ class Command(BaseCommand):
             nargs="?",
             help="Optional path to CSV file (defaults to BASE_DIR/data/books_6k.csv)",
         )
+        parser.add_argument(
+            "--clear",
+            action="store_true",
+            help="Explicitly delete existing books before importing (destructive)",
+        )
 
     def handle(self, *args, **kwargs):
         # Use provided path if any, else default to BASE_DIR/data/books_6k.csv
@@ -43,8 +48,9 @@ class Command(BaseCommand):
             self.stderr.write(f"❌ CSV not found: {csv_path}")
             return
 
-        Book.objects.all().delete()
-        self.stdout.write("🧹 Old books deleted")
+        if kwargs.get("clear"):
+            Book.objects.all().delete()
+            self.stdout.write("🧹 Old books deleted (--clear requested)")
 
         books_to_create = []
         batch_size = 1000

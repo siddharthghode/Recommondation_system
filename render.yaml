@@ -6,11 +6,14 @@ services:
     dockerContext: ./backend
     plan: free
     healthCheckPath: /api/health/
+    preDeployCommand: python manage.py migrate --noinput
     envVars:
       - key: DJANGO_ENV
         value: production
       - key: DEBUG
         value: "False"
+      - key: MIGRATE_ON_BOOT
+        value: "false"
       - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: POSTGRES_HOST

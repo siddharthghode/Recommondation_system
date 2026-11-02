@@ -1,3 +1,4 @@
+import logging
 from datetime import timedelta
 from django.utils import timezone
 from django.db import transaction, IntegrityError
@@ -5,6 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+
+logger = logging.getLogger(__name__)
 
 from .serializers import (
     RequestOTPSerializer,
@@ -169,6 +172,8 @@ class RegisterView(APIView):
         approval_status = user.profile.approval_status if user.role == 'student' and hasattr(user, 'profile') else 'approved'
         access['approval_status'] = approval_status
 
+        logger.info("Security audit: User %s registered (role=%s, status=%s)", user.username, user.role, approval_status)
+
         return Response({
             "access": str(access),
             "refresh": str(refresh),
@@ -197,6 +202,8 @@ class LoginView(APIView):
         access['role'] = user.role
         approval_status = user.profile.approval_status if user.role == 'student' and hasattr(user, 'profile') else 'approved'
         access['approval_status'] = approval_status
+
+        logger.info("Security audit: User %s registered (role=%s, status=%s)", user.username, user.role, approval_status)
 
         return Response({
             "access": str(access),
@@ -343,6 +350,8 @@ class GoogleLoginView(APIView):
         access['role'] = user.role
         approval_status = user.profile.approval_status if user.role == 'student' and hasattr(user, 'profile') else 'approved'
         access['approval_status'] = approval_status
+
+        logger.info("Security audit: User %s registered (role=%s, status=%s)", user.username, user.role, approval_status)
 
         return Response({
             "access": str(access),

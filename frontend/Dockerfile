@@ -31,4 +31,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
+# 12-Factor Disposability: graceful shutdown signal for Nginx
+STOPSIGNAL SIGQUIT
+
 CMD ["nginx", "-g", "daemon off;"]

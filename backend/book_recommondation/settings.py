@@ -30,13 +30,15 @@ load_dotenv(BASE_DIR.parent / '.env')
 # Prefer reading the secret from the environment in production
 _secret_key = os.getenv('DJANGO_SECRET_KEY')
 if not _secret_key:
-    import sys
-    if os.getenv('DJANGO_ENV') == 'production':
+    if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
+        _secret_key = 'django-insecure-test-key-only-for-automated-tests'
+    elif os.getenv('DJANGO_ENV') == 'production':
         raise RuntimeError('DJANGO_SECRET_KEY environment variable is not set!')
-    _secret_key =os.getenv('DJANGO_SECRET_KEY')
+    else:
+        _secret_key = 'django-insecure-dev-only-secret-key-do-not-use-in-production'
 SECRET_KEY = _secret_key
 
-DEBUG = os.getenv('DEBUG', 'True') == 'False'
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'testserver,localhost,127.0.0.1').split(',')
 
@@ -116,23 +118,27 @@ else:
             "NAME": os.getenv('POSTGRES_DB', 'postgres'),
             "USER": os.getenv('POSTGRES_USER', 'postgres'),
             "PASSWORD": os.getenv('POSTGRES_PASSWORD', ''),
-            "HOST": os.getenv('POSTGRES_HOST', 'aws-0-ap-southeast-1.pooler.supabase.com'),
+            "HOST": os.getenv('POSTGRES_HOST', 'localhost'),
             "PORT": os.getenv('POSTGRES_PORT', '5432'),
             "CONN_MAX_AGE": int(os.getenv('CONN_MAX_AGE', 60)),
         }
     }
 
-# Enable SSL mode require for Supabase / remote database connections
+# Enable SSL mode require for remote database connections (e.g., Supabase / RDS)
 _db_host = DATABASES["default"].get("HOST", "")
-if _db_host and _db_host not in ('127.0.0.1', 'localhost'):
+if _db_host and _db_host not in ('127.0.0.1', 'localhost', 'db'):
     DATABASES["default"].setdefault("OPTIONS", {})
     DATABASES["default"]["OPTIONS"]["sslmode"] = os.getenv('POSTGRES_SSLMODE', 'require')
 
 if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
-    }
+    # Allow testing against real PostgreSQL if USE_POSTGRES_TESTS is enabled (e.g. in CI pipeline)
+    if os.getenv('USE_POSTGRES_TESTS', 'false').lower() in ('true', '1', 't'):
+        pass
+    else:
+        DATABASES['default'] = {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
 
 
 # Password validation
@@ -285,5 +291,79 @@ if not DEBUG:
     if SECURE_SSL_REDIRECT:
         SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', 31536000))
         SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-        SESSION_COOKIE_SECURE = True
-        CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'True').lower() in ('true', '1', 't')
+    CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'True').lower() in ('true', '1', 't')
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+
+# ------------------------------------------------------------------------------
+# 12-Factor Logging: Event streams to stdout/stderr
+# ------------------------------------------------------------------------------
+LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO').upper()
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] {levelname} [{name}:{lineno}] {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': LOG_LEVEL,
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+        'django.server': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'accounts': {
+            'handlers': ['console'],
+            'level': LOG_LEVEL,
+            'propagate': False,
+        },
+        'books': {
+            'handlers': ['console'],
+            'level': LOG_LEVEL,
+            'propagate': False,
+        },
+        'borrows': {
+            'handlers': ['console'],
+            'level': LOG_LEVEL,
+            'propagate': False,
+        },
+        'analytics': {
+            'handlers': ['console'],
+            'level': LOG_LEVEL,
+            'propagate': False,
+        },
+        'messaging': {
+            'handlers': ['console'],
+            'level': LOG_LEVEL,
+            'propagate': False,
+        },
+    },
+}

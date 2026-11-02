@@ -60,11 +60,31 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: library_ci_db
+          POSTGRES_USER: ci_user
+          POSTGRES_PASSWORD: ci_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ci_user -d library_ci_db"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
       DJANGO_ENV: development
       DEBUG: "True"
       DJANGO_SECRET_KEY: "ci-test-secret-key-for-automated-pipeline"
       DJANGO_TESTING: "true"
+      USE_POSTGRES_TESTS: "true"
+      POSTGRES_DB: library_ci_db
+      POSTGRES_USER: ci_user
+      POSTGRES_PASSWORD: ci_password
+      POSTGRES_HOST: "127.0.0.1"
+      POSTGRES_PORT: "5432"
       REDIS_URL: "redis://127.0.0.1:6379/1"
 
     steps:

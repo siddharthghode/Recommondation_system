@@ -1,3 +1,4 @@
+import logging
 from datetime import timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,6 +17,8 @@ from books.cache_utils import (
     invalidate_catalog_cache,
     invalidate_dashboard_cache,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class BorrowRequestView(APIView):
@@ -163,6 +166,8 @@ class ApproveBorrowView(APIView):
                 notification_type='borrow_approved'
             )
 
+            logger.info("Circulation audit: Borrow id=%s approved for user=%s book_id=%s", borrow.id, borrow.user.username, book.id)
+
         return Response({"message": "Approved"})
 
 
@@ -210,6 +215,8 @@ class ReturnBookView(APIView):
             invalidate_dashboard_cache(getattr(book.department, 'id', None))
             invalidate_user_recommendations(borrow.user.id, getattr(book.department, 'id', 'all'))
 
+            logger.info("Circulation audit: Return recorded for borrow id=%s user=%s book_id=%s", borrow.id, borrow.user.username, book.id)
+
         return Response({"message": "Book returned successfully"})
 
 
@@ -251,6 +258,8 @@ class RejectBorrowView(APIView):
             )
 
             invalidate_dashboard_cache(getattr(borrow.book.department, 'id', None))
+
+            logger.info("Circulation audit: Borrow id=%s rejected for user=%s by librarian=%s", borrow.id, borrow.user.username, request.user.username)
 
         return Response({"message": "Rejected"})
 

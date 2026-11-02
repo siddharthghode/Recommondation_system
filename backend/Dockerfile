@@ -11,12 +11,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Create unprivileged system user for process isolation
+RUN groupadd -r appgroup && useradd -r -g appgroup -d /app -s /sbin/nologin appuser
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN chmod +x entrypoint.sh
+# Pre-compile static assets at build time (Factor 5: Separation of Build and Run)
+RUN DJANGO_SECRET_KEY=build-dummy-key-for-collectstatic DJANGO_TESTING=true python manage.py collectstatic --noinput
+
+RUN chmod +x entrypoint.sh && \
+    chown -R appuser:appgroup /app
+
+USER appuser
 
 EXPOSE 8000
 
