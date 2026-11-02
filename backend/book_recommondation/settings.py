@@ -33,10 +33,10 @@ if not _secret_key:
     import sys
     if os.getenv('DJANGO_ENV') == 'production':
         raise RuntimeError('DJANGO_SECRET_KEY environment variable is not set!')
-    _secret_key = 'django-insecure-$=#g)6fcewk3g1r^kf2i(ud-74u#gjj_9q5g4r0#+x0bnc$a(@'
+    _secret_key =os.getenv('DJANGO_SECRET_KEY')
 SECRET_KEY = _secret_key
 
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG', 'True') == 'False'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'testserver,localhost,127.0.0.1').split(',')
 
