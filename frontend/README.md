@@ -2,6 +2,8 @@
 
 Modern, responsive Single Page Application (SPA) built with React 19, Vite, Tailwind CSS 4, Framer Motion, and Recharts for the University Library Management and Recommendation System.
 
+> 📘 **Full Architecture & Runbook**: See [implementation_project.md](../implementation_project.md) for complete 12-factor architecture, endpoints, and deployment details.
+
 ---
 
 ## 🚀 Quick Setup
@@ -45,10 +47,14 @@ npm run dev
 
 ## ⚙️ Configuration & Environment
 
-The frontend connects to the backend API via `src/services/api.js`:
+The frontend connects to the backend API via centralized services in `src/services/api.js` and `src/api/axios.js`:
 
 ```js
-export const BASE_URL = import.meta.env.VITE_API_URL || "/api";
+// Supports runtime configuration injected via window.__RUNTIME_CONFIG__ with build-time fallback
+export const BASE_URL =
+  window.__RUNTIME_CONFIG__?.VITE_API_URL ||
+  import.meta.env.VITE_API_URL ||
+  "/api";
 ```
 
 ### Environment Variables (`.env`):
@@ -57,7 +63,7 @@ export const BASE_URL = import.meta.env.VITE_API_URL || "/api";
 | `VITE_API_URL` | `/api` | Base API URL prefix (proxied to backend in both dev and prod) |
 | `VITE_GOOGLE_CLIENT_ID` | `""` | Google OAuth Client ID for Google Sign-In & Registration |
 
-In local development (`npm run dev`), `vite.config.js` proxies all requests starting with `/api` directly to `http://localhost:8000`.
+In local development (`npm run dev`), `vite.config.js` proxies all requests starting with `/api` directly to `http://localhost:8000`. In production, the Nginx container proxies `/api/` to the backend service and handles graceful shutdown via `STOPSIGNAL SIGQUIT`.
 
 ---
 

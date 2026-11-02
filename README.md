@@ -7,9 +7,11 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://postgresql.org)
 [![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)](https://redis.io)
 [![Docker](https://img.shields.io/badge/Docker-Compose%20v2-2496ED?logo=docker&logoColor=white)](https://docker.com)
-[![Tests](https://img.shields.io/badge/Tests-155%20Passing-success)](file:///home/sidhharth/sppu/git/Recommondation_system/pytest.ini)
+[![Tests](https://img.shields.io/badge/Tests-170%20Passing-success)](pytest.ini)
 
 A production-ready, full-stack university library management system featuring role-based access control, strict department-level catalog isolation, student registration approval workflows, email OTP verification, Google OAuth, librarian CSV catalog imports, an intelligent machine learning recommendation engine, high-performance Redis in-memory caching, atomic inventory management, in-app notifications, and containerized Docker deployment.
+
+> 📖 **Comprehensive Implementation Guide**: See [implementation_project.md](implementation_project.md) for the complete 12-factor architectural specification, REST API contracts, and operations runbook.
 
 ---
 
@@ -33,7 +35,7 @@ cp .env.example .env
 docker compose up --build -d
 
 # 4. Populate catalog & demo data (admin, librarian, students, 6.8k books)
-docker compose exec backend python manage.py import_books
+docker compose exec backend python manage.py import_books --clear
 docker compose exec backend python manage.py seed_demo
 ```
 
@@ -56,7 +58,7 @@ pip install -r requirements.txt
 python manage.py migrate
 
 # Seed catalog & demo accounts
-python manage.py import_books
+python manage.py import_books --clear
 python manage.py seed_demo
 
 # Start Django development server
@@ -86,7 +88,7 @@ npm run dev
 |---|---|---|---|
 | **Web Application** | [`http://localhost`](http://localhost) | [`http://localhost:5173`](http://localhost:5173) | Main React UI for Students & Librarians |
 | **Django Admin Panel** | [`http://localhost/admin/`](http://localhost/admin/) | [`http://localhost:8000/admin/`](http://localhost:8000/admin/) | Super Admin management dashboard |
-| **API Health Check** | [`http://localhost/api/health/`](http://localhost/api/health/) | [`http://localhost:8000/api/health/`](http://localhost:8000/api/health/) | JSON status (`{"status": "healthy"}`) |
+| **API Health Check** | [`http://localhost/api/health/`](http://localhost/api/health/) | [`http://localhost:8000/api/health/`](http://localhost:8000/api/health/) | Deep health check verifying PostgreSQL & Redis connectivity |
 
 > **Note**: If port 80 is occupied on your host machine, change `FRONTEND_PORT=8080` in `.env` and access at `http://localhost:8080`.
 
@@ -214,6 +216,7 @@ Recommondation_system/
 │   ├── package.json            # Frontend dependencies and npm scripts
 │   └── vite.config.js          # Vite build & proxy configuration
 ├── docker-compose.yml          # Docker Compose definition (db, redis, backend, frontend)
+├── implementation_project.md   # Comprehensive implementation guide & operations runbook
 ├── DEPLOYMENT.md               # Production deployment, SSL/TLS, and server sizing guide
 ├── PROJECT_RULES.md            # System architecture and department security rules
 ├── .env.example                # Template environment variables (includes REDIS_URL)
@@ -228,14 +231,18 @@ The repository includes a comprehensive automated test suite covering authentica
 
 ### Run Tests in Docker:
 ```bash
-docker compose exec backend python manage.py test
+docker compose exec backend pytest -q           # Pytest runner (170 tests)
+docker compose exec backend python manage.py test # Django runner (114 tests)
 ```
 
 ### Run Tests Locally (Backend):
 ```bash
 cd backend
-python manage.py test        # Django test runner (105 tests)
-pytest -q                    # Pytest runner (155 tests passing across all apps)
+python manage.py test        # Django test runner (114 tests)
+pytest -q                    # Pytest runner (170 tests passing across all apps)
+
+# Optional: Run tests against real PostgreSQL container
+USE_POSTGRES_TESTS=true pytest -q
 ```
 
 ### Run Frontend Build & Lint:
@@ -257,11 +264,12 @@ npm run build                # Production Vite asset build
 | **View Logs** | `docker compose logs -f backend` | Terminal stdout |
 | **Verify Redis** | `docker compose exec backend python manage.py check_redis` | `python manage.py check_redis` |
 | **Run Migrations** | `docker compose exec backend python manage.py migrate` | `python manage.py migrate` |
-| **Import 6k Books** | `docker compose exec backend python manage.py import_books` | `python manage.py import_books` |
+| **Import 6k Books** | `docker compose exec backend python manage.py import_books [--clear]` | `python manage.py import_books [--clear]` |
 | **Seed Demo Data** | `docker compose exec backend python manage.py seed_demo` | `python manage.py seed_demo` |
-| **Create Superuser** | `docker compose exec backend python manage.py createsuperuser` | `python manage.py createsuperuser` |
+| **Seed ML Interactions**| `docker compose exec backend python manage.py seed_interactions` | `python manage.py seed_interactions` |
+| **Create Super Admin** | `docker compose exec backend python manage.py create_admin` | `python manage.py create_admin` |
 | **Django Shell** | `docker compose exec backend python manage.py shell` | `python manage.py shell` |
-| **Run Test Suite** | `docker compose exec backend pytest` | `pytest` |
+| **Run Test Suite** | `docker compose exec backend pytest -q` | `pytest -q` |
 | **Reset Database** | `docker compose down -v` | Drop database / delete SQLite file |
 
 ---
@@ -281,9 +289,12 @@ cp .env.example .env
 | `POSTGRES_PASSWORD` | `StrongPass@123` | PostgreSQL password |
 | `POSTGRES_HOST` | `db` (Docker) / `127.0.0.1` (Local) | Database host address |
 | `POSTGRES_PORT` | `5432` | Database port |
+| `POSTGRES_PORT_HOST` | `5432` | Host binding port for PostgreSQL container |
 | `DEBUG` | `False` (Production) / `True` (Dev) | Django debug flag |
 | `DJANGO_SECRET_KEY` | *(Set a secure string)* | Cryptographic signing key |
 | `DJANGO_ENV` | `production` / `development` | Enforces secret key checks in production |
+| `MIGRATE_ON_BOOT` | `true` | Runs database migrations on container startup |
+| `USE_POSTGRES_TESTS` | `false` | When true, runs backend test suite against PostgreSQL |
 | `ALLOWED_HOSTS` | `localhost,127.0.0.1,backend,frontend` | Allowed HTTP host headers |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost,http://localhost:80,http://127.0.0.1` | Authorized CORS domains |
 | `FRONTEND_PORT` | `80` | Host port for Nginx frontend |
@@ -326,7 +337,7 @@ To completely wipe all records and re-seed from scratch:
 ```bash
 docker compose down -v
 docker compose up --build -d
-docker compose exec backend python manage.py import_books
+docker compose exec backend python manage.py import_books --clear
 docker compose exec backend python manage.py seed_demo
 ```
 

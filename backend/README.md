@@ -2,6 +2,8 @@
 
 A high-performance Django REST Framework API powering role-based access control, strict department catalog scoping, student verification workflows, atomic borrow transactions, dwell-time analytics, and machine learning book recommendations.
 
+> 📘 **Full Architecture & Runbook**: See [implementation_project.md](../implementation_project.md) for complete 12-factor architecture, endpoints, and deployment details.
+
 ---
 
 ## 🚀 Quick Setup
@@ -11,7 +13,7 @@ From the root repository directory:
 ```bash
 cp .env.example .env
 docker compose up --build -d
-docker compose exec backend python manage.py import_books
+docker compose exec backend python manage.py import_books --clear
 docker compose exec backend python manage.py seed_demo
 ```
 
@@ -33,7 +35,7 @@ cp .env.example .env
 python manage.py migrate
 
 # 5. Import book catalogue (~6.8k books)
-python manage.py import_books        # reads backend/data/books_6k.csv
+python manage.py import_books --clear        # reads backend/data/books_6k.csv; use --clear to replace catalog
 
 # 6. Seed demo departments, users, borrow history & ML interactions
 python manage.py seed_demo
@@ -69,7 +71,7 @@ python manage.py runserver 0.0.0.0:8000
 
 | Command | Description |
 |---------|-------------|
-| `import_books [path]` | Imports books from CSV; defaults to `data/books_6k.csv` (6,810 books). |
+| `import_books [path] [--clear]` | Imports books from CSV; defaults to `data/books_6k.csv` (6,810 books). Safe append by default; pass `--clear` to wipe old catalog first. |
 | `seed_demo` | Seeds CS department, admin, CS librarian, 10 demo students, 200 catalog assignments, 45 borrow records, 5 pending requests, and 200 ML interactions. |
 | `seed_interactions [--count N]` | Generates N additional `BookInteraction` records (default: 500) for ML training. |
 | `create_admin` | Creates or updates the production admin account using `ADMIN_USERNAME` and `ADMIN_PASSWORD` env vars. |
@@ -82,11 +84,14 @@ python manage.py runserver 0.0.0.0:8000
 The backend includes comprehensive test suites verified with both Django's built-in test runner and Pytest:
 
 ```bash
-# Run Django test runner (105 tests)
+# Run Django test runner (114 tests)
 python manage.py test
 
-# Run Pytest suite (155 tests passing across all apps)
+# Run Pytest suite (170 tests passing across all apps)
 pytest -q
+
+# Run against real PostgreSQL container (optional)
+USE_POSTGRES_TESTS=true pytest -q
 ```
 
 ---
@@ -110,6 +115,8 @@ Configure `backend/.env` or root `.env`:
 | `BREVO_API_KEY` | *(empty)* | *(Set Brevo v3 key)* | Brevo API key for transactional OTP emails |
 | `DEFAULT_FROM_EMAIL` | `noreply@library.local` | `your-email@example.com` | Verified Brevo sender email address |
 | `REDIS_URL` | `redis://127.0.0.1:6379/1` | `redis://redis:6379/1` | Redis cache and session storage URL |
+| `MIGRATE_ON_BOOT` | `true` | `true` | Run migrations during entrypoint boot |
+| `USE_POSTGRES_TESTS` | `false` | `false` | Run test suite against PostgreSQL instead of SQLite |
 
 ---
 
@@ -132,7 +139,7 @@ All protected endpoints require `Authorization: Bearer <access_token>` header.
 ### Health Check
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
-| `GET` | `/api/health/` | Public | Backend health status (`{"status": "healthy"}`) |
+| `GET` | `/api/health/` | Public | Deep health check verifying PostgreSQL & Redis connectivity (`{"status": "healthy", "service": "library-backend", "database": "healthy", "cache": "healthy"}`) |
 
 ### Authentication & Profiles — `/api/auth/`
 | Method | Endpoint | Auth | Description |

@@ -2,6 +2,8 @@
 
 A complete, production-grade guide for deploying the **Library Management & Book Recommendation System** using Docker, Docker Compose, PostgreSQL 16, Redis 7, Django (Gunicorn + WhiteNoise), and React (Nginx reverse proxy).
 
+> 📘 **Master Operations Runbook**: For the exhaustive implementation manual, 12-factor compliance matrix, and complete REST API contracts, see [implementation_project.md](implementation_project.md).
+
 ---
 
 ## 1. Architecture Overview
@@ -112,13 +114,14 @@ python3 -c "from django.core.management.utils import get_random_secret_key; prin
 Open `.env` in an editor (`nano .env`):
 ```env
 # ==============================================================================
-# DATABASE CONFIGURATION (Supabase Cloud PostgreSQL)
+# DATABASE CONFIGURATION (Default: Local Docker PostgreSQL container 'db')
 # ==============================================================================
-POSTGRES_DB=postgres
-POSTGRES_USER=postgres.your-project-ref
-POSTGRES_PASSWORD=your-supabase-db-password
-POSTGRES_HOST=aws-0-ap-southeast-1.pooler.supabase.com
+POSTGRES_DB=library_db
+POSTGRES_USER=library_user
+POSTGRES_PASSWORD=StrongPass@123
+POSTGRES_HOST=db
 POSTGRES_PORT=5432
+# Note: For Cloud PostgreSQL (Supabase / AWS RDS), point POSTGRES_HOST to the external host URL.
 
 # ==============================================================================
 # DJANGO SETTINGS
@@ -180,8 +183,9 @@ docker compose exec backend python manage.py check_redis
 docker compose logs -f backend
 docker compose logs -f frontend
 
-# Test backend health endpoint
+# Test backend deep health check endpoint
 curl http://localhost/api/health/
+# Expected: {"status": "healthy", "service": "library-backend", "database": "healthy", "cache": "healthy"}
 ```
 
 ---
@@ -189,14 +193,22 @@ curl http://localhost/api/health/
 ## 6. Initial Super Admin & Data Setup
 
 ### 1. Create Initial Super Admin
+You can either create a super admin interactively:
 ```bash
 docker compose exec backend python manage.py createsuperuser
 ```
-Follow the interactive prompts to set your username, email, and secure password.
-
-### 2. (Optional) Seed 6,000 Book Catalog
+Or use the idempotent non-interactive command:
 ```bash
-docker compose exec backend python manage.py import_books
+docker compose exec -e ADMIN_USERNAME=admin -e ADMIN_PASSWORD=admin123 backend python manage.py create_admin
+```
+
+### 2. (Optional) Seed 6,800+ Book Catalog & Demo Data
+```bash
+# Clear existing and import fresh catalog:
+docker compose exec backend python manage.py import_books --clear
+
+# Seed demo departments, users, borrow records, and ML interactions:
+docker compose exec backend python manage.py seed_demo
 ```
 
 ### 3. Log in to Django Admin
