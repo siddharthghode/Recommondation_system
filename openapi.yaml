@@ -1,0 +1,2435 @@
+openapi: 3.0.3
+info:
+  title: Library Management & Intelligent Book Recommendation System API
+  version: 1.0.0
+  description: RESTful API documentation for the 12-Factor Library Management and Recommendation System. Provides complete
+    specifications for user authentication (JWT & OTP), role-based access control (Student, Librarian, Admin), book catalog
+    search with TF-IDF recommendations, circulation lifecycle, in-app messaging, and analytics dashboards.
+  contact:
+    name: Library Engineering Team
+    email: support@library.local
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+- url: http://localhost:8082
+  description: Docker Compose Nginx Gateway (Frontend + API Proxy)
+- url: http://localhost:8000
+  description: Local Django Backend Development Server
+tags:
+- name: Health
+  description: 12-Factor Backing Services & System Health
+- name: Authentication
+  description: User registration, OTP verification, JWT login & profiles
+- name: Books
+  description: Catalog discovery, faceted filtering, reviews, and tracking
+- name: Book Management
+  description: Librarian/Admin catalog CRUD and bulk CSV import
+- name: Recommendations
+  description: Content-based, interaction-based, and hybrid recommender endpoints
+- name: Circulation
+  description: Borrow requests, approvals, returns, and circulation history
+- name: Analytics
+  description: Librarian intelligence dashboards and student analytics
+- name: Messaging
+  description: In-app communication threads between students and librarians
+paths:
+  /api/health/:
+    get:
+      tags:
+      - Health
+      summary: 12-Factor Deep Health Check
+      description: Verifies that attached backing services (PostgreSQL database and Redis cache) are healthy and responsive.
+      responses:
+        '200':
+          description: All backing services healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          description: One or more backing services unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /api/auth/departments/:
+    get:
+      tags:
+      - Authentication
+      summary: List all college departments
+      description: Returns list of departments for registration dropdowns and filtering. Cached in Redis for 24h.
+      responses:
+        '200':
+          description: Department list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Department'
+  /api/auth/otp/request/:
+    post:
+      tags:
+      - Authentication
+      summary: Request email verification OTP
+      description: Sends a secure 6-digit OTP code to the specified email via Brevo transactional email (or terminal console
+        in dev mode). Rate-limited to max 3 attempts per 10 minutes.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestOTPRequest'
+      responses:
+        '200':
+          description: OTP sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Verification code sent to your email.
+        '400':
+          description: Validation error or rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/otp/verify/:
+    post:
+      tags:
+      - Authentication
+      summary: Verify 6-digit OTP
+      description: Validates the 6-digit code. On success, issues a single-use verification token valid for 30 minutes for
+        registration or password reset.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyOTPRequest'
+      responses:
+        '200':
+          description: OTP verified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyOTPResponse'
+        '400':
+          description: Invalid or expired code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/otp/status/:
+    get:
+      tags:
+      - Authentication
+      summary: Check OTP verification status
+      parameters:
+      - name: email
+        in: query
+        required: true
+        schema:
+          type: string
+          format: email
+        description: Email address to inspect OTP status
+      responses:
+        '200':
+          description: OTP record status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                  exists:
+                    type: boolean
+                  is_verified:
+                    type: boolean
+                  is_expired:
+                    type: boolean
+                  seconds_remaining:
+                    type: integer
+        '400':
+          description: Email query parameter required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/password-reset/:
+    post:
+      tags:
+      - Authentication
+      summary: Reset password using OTP verification token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetRequest'
+      responses:
+        '200':
+          description: Password reset successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Invalid token or password mismatch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/register/:
+    post:
+      tags:
+      - Authentication
+      summary: Student registration
+      description: Registers a new student account. Requires a verified OTP session token. Account starts in 'pending' status
+        until approved by the department librarian.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+        '400':
+          description: Validation error or token expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/login/:
+    post:
+      tags:
+      - Authentication
+      summary: User login (JWT)
+      description: Authenticates student, librarian, or admin credentials. Returns JWT access and refresh tokens along with
+        role and approval status.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Missing credentials or invalid portal role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Invalid username or password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/refresh/:
+    post:
+      tags:
+      - Authentication
+      summary: Refresh JWT access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+      responses:
+        '200':
+          description: Token refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefreshResponse'
+        '401':
+          description: Token is invalid or expired
+  /api/auth/google/:
+    post:
+      tags:
+      - Authentication
+      summary: Google OAuth 2.0 Sign-In / Register
+      description: Accepts a Google credential (ID token), verifies signature against Google tokeninfo endpoint, auto-creates
+        student profile if needed, and issues JWT tokens.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleLoginRequest'
+      responses:
+        '200':
+          description: Google authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid Google credential or audience mismatch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/auth/me/:
+    get:
+      tags:
+      - Authentication
+      summary: Get authenticated user profile
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Current user profile data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Authentication required
+    put:
+      tags:
+      - Authentication
+      summary: Update authenticated user profile
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                department:
+                  type: string
+                year:
+                  type: integer
+                student_id:
+                  type: string
+                preferred_categories:
+                  type: string
+        responses:
+          '200':
+            description: Profile updated
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+          '401':
+            description: Authentication required
+  /api/auth/notifications/:
+    get:
+      tags:
+      - Authentication
+      summary: List user notifications
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: is_read
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Filter by read status (true/false)
+      responses:
+        '200':
+          description: List of notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+        '401':
+          description: Authentication required
+  /api/auth/notifications/mark-read/:
+    post:
+      tags:
+      - Authentication
+      summary: Mark specific notification as read
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notification_id:
+                  type: integer
+              required:
+              - notification_id
+      responses:
+        '200':
+          description: Notification marked as read
+        '404':
+          description: Notification not found
+  /api/auth/notifications/mark-all-read/:
+    post:
+      tags:
+      - Authentication
+      summary: Mark all notifications as read
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: All notifications marked as read
+  /api/books/:
+    get:
+      tags:
+      - Books
+      summary: Search and filter catalog books
+      description: Paginated book catalog. Department-scoped for approved students and librarians. Public or admin users can
+        search across departments.
+      parameters:
+      - name: search
+        in: query
+        schema:
+          type: string
+        description: Full-text search in title, authors, categories, description
+      - name: category
+        in: query
+        schema:
+          type: string
+        description: Filter by genre/category name
+      - name: department
+        in: query
+        schema:
+          type: string
+        description: Filter by department ID or name
+      - name: ordering
+        in: query
+        schema:
+          type: string
+          enum:
+          - -id
+          - id
+          - title
+          - -title
+          - average_rating
+          - -average_rating
+          - published_year
+          - -published_year
+          default: -id
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+      responses:
+        '200':
+          description: Paginated book results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBookList'
+  /api/books/{pk}/:
+    get:
+      tags:
+      - Books
+      summary: Get book details by ID
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Book details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
+  /api/books/categories/:
+    get:
+      tags:
+      - Books
+      summary: Get distinct book categories
+      parameters:
+      - name: department
+        in: query
+        schema:
+          type: string
+        description: Filter categories for a specific department
+      responses:
+        '200':
+          description: List of clean category names ordered by frequency
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/books/manage/:
+    post:
+      tags:
+      - Book Management
+      summary: Create new book in catalog
+      description: Librarian or Admin only. For librarians, automatically attaches their department.
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Designing Data-Intensive Applications
+                subtitle:
+                  type: string
+                  example: The Big Ideas Behind Reliable, Scalable Systems
+                authors:
+                  type: string
+                  example: Martin Kleppmann
+                categories:
+                  type: string
+                  example: Computers, Database Design
+                description:
+                  type: string
+                  example: Data is at the center of many challenges...
+                published_year:
+                  type: integer
+                  example: 2017
+                num_pages:
+                  type: integer
+                  example: 616
+                average_rating:
+                  type: number
+                  example: 4.8
+                ratings_count:
+                  type: integer
+                  example: 4500
+                thumbnail:
+                  type: string
+                  format: uri
+                quantity:
+                  type: integer
+                  default: 5
+                  example: 5
+                department:
+                  type: integer
+                  description: Required for admin, auto-set for librarian
+                  example: 1
+              required:
+              - title
+              - authors
+              - quantity
+      responses:
+        '201':
+          description: Book created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Validation error
+        '403':
+          description: 'Forbidden: Requires Librarian or Admin role'
+  /api/books/manage/{pk}/:
+    put:
+      tags:
+      - Book Management
+      summary: Update existing book
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: Book updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '403':
+          description: Forbidden
+        '404':
+          description: Book not found
+    delete:
+      tags:
+      - Book Management
+      summary: Delete book from catalog
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Book deleted successfully
+        '400':
+          description: Cannot delete book with active or requested borrow records
+        '403':
+          description: Forbidden
+        '404':
+          description: Book not found
+  /api/books/import/:
+    post:
+      tags:
+      - Book Management
+      summary: Bulk import books via CSV upload
+      description: Upload a CSV file containing book records. Enforces 10MB file limit, schema mapping, and department scoping.
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV catalog file
+                department:
+                  type: integer
+                  description: Department ID (Admins only)
+              required:
+              - file
+      responses:
+        '200':
+          description: CSV import report
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  created_count:
+                    type: integer
+                    example: 250
+                  updated_count:
+                    type: integer
+                    example: 10
+                  errors:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: File format error or validation failure
+        '403':
+          description: Forbidden
+  /api/books/recommendations/:
+    get:
+      tags:
+      - Recommendations
+      summary: Personalized book recommendations
+      description: Returns machine learning recommendations for the authenticated student using Content-based (TF-IDF), Interaction-based,
+        or Hybrid algorithms scoped to their department.
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 6
+          maximum: 50
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - hybrid
+          - content
+          - interaction
+          - collaborative
+          default: hybrid
+      responses:
+        '200':
+          description: Recommended books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        '401':
+          description: Authentication required
+  /api/books/{book_id}/similar/:
+    get:
+      tags:
+      - Recommendations
+      summary: Get similar books (TF-IDF Content Matching)
+      parameters:
+      - name: book_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 6
+          maximum: 50
+      responses:
+        '200':
+          description: Similar books list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
+  /api/books/{book_id}/reviews/:
+    get:
+      tags:
+      - Books
+      summary: List reviews for a book
+      parameters:
+      - name: book_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookReview'
+    post:
+      tags:
+      - Books
+      summary: Create review for a book
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: book_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookReviewCreate'
+      responses:
+        '201':
+          description: Review posted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookReview'
+        '400':
+          description: Already reviewed or invalid rating
+        '401':
+          description: Authentication required
+  /api/books/{book_id}/reviews/{review_id}/:
+    put:
+      tags:
+      - Books
+      summary: Update your review
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: book_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: review_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookReviewCreate'
+      responses:
+        '200':
+          description: Review updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookReview'
+        '404':
+          description: Review not found
+    delete:
+      tags:
+      - Books
+      summary: Delete your review
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: book_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: review_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Review deleted
+        '404':
+          description: Review not found
+  /api/books/track/{book_id}/:
+    post:
+      tags:
+      - Books
+      summary: Track view interaction on book
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: book_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: View tracked
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /api/interactions/:
+    post:
+      tags:
+      - Books
+      summary: Record book interaction (view/like/borrow/rate)
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                book_id:
+                  type: integer
+                  example: 101
+                interaction_type:
+                  type: string
+                  enum:
+                  - view
+                  - like
+                  - borrow
+                  - rate
+                  example: like
+                rating:
+                  type: number
+                  minimum: 1
+                  maximum: 5
+                  description: Required if interaction_type is 'rate'
+                  example: 5.0
+              required:
+              - book_id
+              - interaction_type
+      responses:
+        '201':
+          description: Interaction recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookInteraction'
+        '400':
+          description: Invalid interaction type or missing book_id
+  /api/dwell-time/:
+    post:
+      tags:
+      - Books
+      summary: Record user dwell time on book page
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                book_id:
+                  type: integer
+                  example: 101
+                duration_seconds:
+                  type: number
+                  minimum: 0
+                  maximum: 86400
+                  example: 32.5
+              required:
+              - book_id
+              - duration_seconds
+      responses:
+        '201':
+          description: Dwell time recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDwellTime'
+        '400':
+          description: Invalid duration or book_id
+  /api/borrows/request/:
+    post:
+      tags:
+      - Circulation
+      summary: Submit book borrow request
+      description: Approved student creates a request for a book in their department.
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                book_id:
+                  type: integer
+                  example: 101
+              required:
+              - book_id
+      responses:
+        '200':
+          description: Borrow request created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Borrow request sent
+                  borrow_id:
+                    type: integer
+                    example: 12
+        '400':
+          description: Book out of stock or duplicate active request
+        '403':
+          description: Account not approved or department mismatch
+  /api/borrows/my/:
+    get:
+      tags:
+      - Circulation
+      summary: List authenticated student's borrows
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - requested
+          - approved
+          - returned
+          - rejected
+      responses:
+        '200':
+          description: List of user borrow records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Borrow'
+  /api/borrows/pending/:
+    get:
+      tags:
+      - Circulation
+      summary: List pending borrow requests (Librarian/Admin)
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Pending borrow records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Borrow'
+        '403':
+          description: Forbidden
+  /api/borrows/department/:
+    get:
+      tags:
+      - Circulation
+      summary: List department circulation records (Librarian/Admin)
+      description: Consolidated circulation endpoint pre-joining book, user, and profile relations.
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - all
+          - requested
+          - approved
+          - returned
+          - rejected
+      responses:
+        '200':
+          description: Circulation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Borrow'
+        '403':
+          description: Forbidden
+  /api/borrows/approve/{borrow_id}/:
+    post:
+      tags:
+      - Circulation
+      summary: Approve pending borrow request
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: borrow_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Borrow approved, book quantity decremented
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Out of stock or borrow not in requested state
+        '403':
+          description: 'Forbidden: Department mismatch'
+  /api/borrows/reject/{borrow_id}/:
+    post:
+      tags:
+      - Circulation
+      summary: Reject pending borrow request
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: borrow_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  example: Reserved for senior thesis students.
+      responses:
+        '200':
+          description: Borrow rejected
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Borrow not in requested state
+        '403':
+          description: Forbidden
+  /api/borrows/return/:
+    post:
+      tags:
+      - Circulation
+      summary: Process book return
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                borrow_id:
+                  type: integer
+                  example: 8
+              required:
+              - borrow_id
+      responses:
+        '200':
+          description: Return processed, book quantity restored
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Only approved borrows can be returned
+        '404':
+          description: Borrow record not found
+  /api/analytics/librarian-dashboard/:
+    get:
+      tags:
+      - Analytics
+      summary: Get Librarian Intelligence Dashboard metrics
+      description: Consolidated statistics including book inventory, circulation aggregates, most viewed books, borrow trends,
+        and top categories. Scoped to librarian department.
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Dashboard analytics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LibrarianDashboard'
+        '403':
+          description: Forbidden
+  /api/analytics/students/:
+    get:
+      tags:
+      - Analytics
+      summary: List students in department (Librarian/Admin)
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - all
+          - pending
+          - approved
+          - rejected
+      responses:
+        '200':
+          description: Student list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '403':
+          description: Forbidden
+  /api/analytics/students/pending/:
+    get:
+      tags:
+      - Analytics
+      summary: List pending student registrations awaiting librarian approval
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Pending students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '403':
+          description: Forbidden
+  /api/analytics/students/{user_id}/approve/:
+    post:
+      tags:
+      - Analytics
+      summary: Approve student registration
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Student approved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  approval_status:
+                    type: string
+                    example: approved
+                  student_id:
+                    type: integer
+        '403':
+          description: 'Forbidden: Department mismatch'
+        '404':
+          description: Student not found
+  /api/analytics/students/{user_id}/reject/:
+    post:
+      tags:
+      - Analytics
+      summary: Reject student registration
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  example: Invalid student ID or department mismatch.
+      responses:
+        '200':
+          description: Student rejected
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  approval_status:
+                    type: string
+                    example: rejected
+                  student_id:
+                    type: integer
+        '403':
+          description: Forbidden
+        '404':
+          description: Student not found
+  /api/analytics/students/{user_id}/analytics/:
+    get:
+      tags:
+      - Analytics
+      summary: Get specific student reading analytics
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Student interaction metrics, category preferences, and reading history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  interaction_stats:
+                    type: object
+                  preferred_categories:
+                    type: array
+                    items:
+                      type: string
+                  category_interactions:
+                    type: array
+                    items:
+                      type: object
+                  borrowed_books:
+                    type: array
+                    items:
+                      type: object
+        '403':
+          description: Forbidden
+  /api/analytics/students/{user_id}/recommendations/:
+    get:
+      tags:
+      - Analytics
+      summary: Inspect student recommendations (Librarian/Admin)
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 6
+      - name: type
+        in: query
+        schema:
+          type: string
+          default: hybrid
+      responses:
+        '200':
+          description: Student recommendations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        '403':
+          description: Forbidden
+  /api/analytics/students/{user_id}/borrows/:
+    get:
+      tags:
+      - Analytics
+      summary: View student borrow history (Librarian/Admin)
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Borrow records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Borrow'
+        '403':
+          description: Forbidden
+  /api/messages/:
+    get:
+      tags:
+      - Messaging
+      summary: List all messages for authenticated user
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Message list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+    post:
+      tags:
+      - Messaging
+      summary: Send new message
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageCreate'
+      responses:
+        '201':
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          description: Validation error
+  /api/messages/{id}/:
+    get:
+      tags:
+      - Messaging
+      summary: Get message by ID
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Message detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: Message not found
+    delete:
+      tags:
+      - Messaging
+      summary: Delete message
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Message deleted
+        '404':
+          description: Message not found
+  /api/messages/inbox/:
+    get:
+      tags:
+      - Messaging
+      summary: Get user inbox messages
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: is_read
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Inbox messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+  /api/messages/sent/:
+    get:
+      tags:
+      - Messaging
+      summary: Get user sent messages
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Sent messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+  /api/messages/unread_count/:
+    get:
+      tags:
+      - Messaging
+      summary: Get unread message count
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Unread count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unread_count:
+                    type: integer
+  /api/messages/librarians/:
+    get:
+      tags:
+      - Messaging
+      summary: Get librarian contact list for students
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Librarians list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserBrief'
+  /api/messages/students/:
+    get:
+      tags:
+      - Messaging
+      summary: Get student directory for librarians
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Students list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserBrief'
+        '403':
+          description: Only librarians and admins may access student contact list
+  /api/messages/{id}/mark_read/:
+    post:
+      tags:
+      - Messaging
+      summary: Mark specific message as read
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Message marked as read
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+  /api/messages/mark_all_read/:
+    post:
+      tags:
+      - Messaging
+      summary: Mark all received messages as read
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: All messages marked as read
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+  /api/messages/{id}/conversation/:
+    get:
+      tags:
+      - Messaging
+      summary: Get conversation history with specific user
+      description: Returns chronologically sorted thread between current user and user {id}. Marks incoming messages as read.
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Other User ID
+      responses:
+        '200':
+          description: Conversation message thread
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+        '404':
+          description: User not found
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JSON Web Token (JWT). Format: `Bearer <access_token>`'
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: healthy
+        service:
+          type: string
+          example: library-backend
+        database:
+          type: string
+          example: healthy
+        cache:
+          type: string
+          example: healthy
+      required:
+      - status
+      - service
+      - database
+      - cache
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Invalid credentials or forbidden access.
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Computer Science
+      required:
+      - id
+      - name
+    UserProfile:
+      type: object
+      properties:
+        student_id:
+          type: string
+          example: STU1001
+        department:
+          type: string
+          nullable: true
+          example: Computer Science
+        department_id:
+          type: integer
+          nullable: true
+          example: 1
+        year:
+          type: integer
+          nullable: true
+          example: 3
+        preferred_categories:
+          type: string
+          example: Fiction, Computer Science
+        approval_status:
+          type: string
+          enum:
+          - pending
+          - approved
+          - rejected
+          example: approved
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 5
+        username:
+          type: string
+          example: alice
+        email:
+          type: string
+          format: email
+          example: alice@university.edu
+        first_name:
+          type: string
+          example: Alice
+        last_name:
+          type: string
+          example: Johnson
+        role:
+          type: string
+          enum:
+          - student
+          - librarian
+          - admin
+          example: student
+        department:
+          type: string
+          nullable: true
+          example: Computer Science
+        approval_status:
+          type: string
+          enum:
+          - pending
+          - approved
+          - rejected
+          example: approved
+        is_staff:
+          type: boolean
+          example: false
+        profile:
+          $ref: '#/components/schemas/UserProfile'
+      required:
+      - id
+      - username
+      - email
+      - role
+    UserBrief:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        username:
+          type: string
+          example: librarian_cs
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        full_name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: librarian@university.edu
+        role:
+          type: string
+          example: librarian
+      required:
+      - id
+      - username
+      - full_name
+      - email
+      - role
+    RequestOTPRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: student@university.edu
+        purpose:
+          type: string
+          enum:
+          - register
+          - reset_password
+          default: register
+          example: register
+      required:
+      - email
+    VerifyOTPRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: student@university.edu
+        otp:
+          type: string
+          minLength: 6
+          maxLength: 6
+          example: '123456'
+      required:
+      - email
+      - otp
+    VerifyOTPResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: OTP verified successfully.
+        verification_token:
+          type: string
+          example: c5c76db2e960410f9a744cb89d9ae3f1
+        email:
+          type: string
+          example: student@university.edu
+      required:
+      - message
+      - verification_token
+      - email
+    PasswordResetRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: student@university.edu
+        verification_token:
+          type: string
+          example: c5c76db2e960410f9a744cb89d9ae3f1
+        new_password:
+          type: string
+          minLength: 4
+          example: NewPass@123
+        new_password_confirm:
+          type: string
+          minLength: 4
+          example: NewPass@123
+      required:
+      - email
+      - verification_token
+      - new_password
+      - new_password_confirm
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: student_01
+        password:
+          type: string
+          format: password
+          example: StudentPass@123
+        password_confirm:
+          type: string
+          format: password
+          example: StudentPass@123
+        email:
+          type: string
+          format: email
+          example: student01@university.edu
+        role:
+          type: string
+          enum:
+          - student
+          default: student
+          example: student
+        student_id:
+          type: string
+          example: STU1001
+        first_name:
+          type: string
+          example: Alice
+        last_name:
+          type: string
+          example: Smith
+        department:
+          type: string
+          example: Computer Science
+        year:
+          type: integer
+          example: 2
+        preferred_categories:
+          type: string
+          example: Science, Programming
+        verification_token:
+          type: string
+          example: c5c76db2e960410f9a744cb89d9ae3f1
+      required:
+      - username
+      - password
+      - email
+      - department
+      - verification_token
+    RegisterResponse:
+      type: object
+      properties:
+        access:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6...
+        refresh:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6...
+        role:
+          type: string
+          example: student
+        approval_status:
+          type: string
+          example: pending
+        message:
+          type: string
+          example: Registration submitted. Pending approval from department librarian.
+      required:
+      - access
+      - refresh
+      - role
+      - approval_status
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: student_01
+        password:
+          type: string
+          format: password
+          example: StudentPass@123
+        role:
+          type: string
+          enum:
+          - student
+          - librarian
+          - admin
+          example: student
+      required:
+      - username
+      - password
+    LoginResponse:
+      type: object
+      properties:
+        access:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6...
+        refresh:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6...
+        role:
+          type: string
+          example: student
+        approval_status:
+          type: string
+          example: approved
+      required:
+      - access
+      - refresh
+      - role
+      - approval_status
+    TokenRefreshRequest:
+      type: object
+      properties:
+        refresh:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6...
+      required:
+      - refresh
+    TokenRefreshResponse:
+      type: object
+      properties:
+        access:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6...
+      required:
+      - access
+    GoogleLoginRequest:
+      type: object
+      properties:
+        credential:
+          type: string
+          description: Google OAuth ID Token or Access Token
+          example: eyJhbGci...
+        department:
+          type: string
+          example: Computer Science
+        year:
+          type: integer
+          example: 2
+        role:
+          type: string
+          default: student
+          example: student
+      required:
+      - credential
+    Notification:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 12
+        title:
+          type: string
+          example: Borrow Request Approved
+        message:
+          type: string
+          example: Your borrow request for 'Clean Code' has been approved!
+        notification_type:
+          type: string
+          enum:
+          - borrow_approved
+          - borrow_rejected
+          - return_reminder
+          - overdue
+          - general
+          example: borrow_approved
+        is_read:
+          type: boolean
+          example: false
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-11-03T12:00:00Z'
+      required:
+      - id
+      - title
+      - message
+      - notification_type
+      - is_read
+      - created_at
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 101
+        title:
+          type: string
+          example: 'Clean Code: A Handbook of Agile Software Craftsmanship'
+        subtitle:
+          type: string
+          nullable: true
+          example: A Handbook of Agile Software Craftsmanship
+        authors:
+          type: string
+          example: Robert C. Martin
+        categories:
+          type: string
+          example: Computers, Software Engineering
+        description:
+          type: string
+          example: Even bad code can function. But if code isn't clean...
+        published_year:
+          type: integer
+          nullable: true
+          example: 2008
+        num_pages:
+          type: integer
+          nullable: true
+          example: 464
+        average_rating:
+          type: number
+          format: float
+          nullable: true
+          example: 4.5
+        ratings_count:
+          type: integer
+          nullable: true
+          example: 3200
+        thumbnail:
+          type: string
+          format: uri
+          example: https://books.google.com/content?id=123
+        quantity:
+          type: integer
+          example: 5
+        department:
+          type: integer
+          nullable: true
+          example: 1
+        department_name:
+          type: string
+          example: Computer Science
+      required:
+      - id
+      - title
+      - authors
+      - quantity
+    PaginatedBookList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 6810
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost:8082/api/books/?page=2
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: null
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+      required:
+      - count
+      - results
+    BookReview:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+        username:
+          type: string
+          example: student_01
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          example: 5
+        comment:
+          type: string
+          example: Must read for every developer!
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-11-03T14:20:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-11-03T14:20:00Z'
+      required:
+      - id
+      - username
+      - rating
+      - comment
+      - created_at
+    BookReviewCreate:
+      type: object
+      properties:
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          example: 5
+        comment:
+          type: string
+          example: Insightful and practical.
+      required:
+      - rating
+      - comment
+    BookInteraction:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 55
+        user:
+          type: integer
+          example: 2
+        book:
+          type: integer
+          example: 101
+        interaction_type:
+          type: string
+          enum:
+          - view
+          - like
+          - borrow
+          - rate
+          example: view
+        timestamp:
+          type: string
+          format: date-time
+          example: '2026-11-03T15:00:00Z'
+      required:
+      - id
+      - user
+      - book
+      - interaction_type
+    BookDwellTime:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 18
+        user:
+          type: integer
+          example: 2
+        book:
+          type: integer
+          example: 101
+        duration_seconds:
+          type: number
+          format: float
+          example: 45.5
+        timestamp:
+          type: string
+          format: date-time
+          example: '2026-11-03T15:05:00Z'
+      required:
+      - id
+      - user
+      - book
+      - duration_seconds
+    Borrow:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 8
+        user:
+          type: integer
+          example: 2
+        book:
+          type: integer
+          example: 101
+        book_title:
+          type: string
+          example: Clean Code
+        book_authors:
+          type: string
+          example: Robert C. Martin
+        book_categories:
+          type: string
+          example: Computers
+        book_quantity:
+          type: integer
+          example: 4
+        student_name:
+          type: string
+          example: Alice Johnson
+        student_id:
+          type: string
+          example: student_01
+        status:
+          type: string
+          enum:
+          - requested
+          - approved
+          - returned
+          - rejected
+          example: approved
+        status_display:
+          type: string
+          example: Approved
+        requested_at:
+          type: string
+          format: date-time
+          example: '2026-11-03T09:00:00Z'
+        approved_at:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-11-03T09:30:00Z'
+        borrow_date:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-11-03T09:30:00Z'
+        due_date:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-12-03T09:30:00Z'
+        return_date:
+          type: string
+          format: date-time
+          nullable: true
+          example: null
+        rejection_reason:
+          type: string
+          nullable: true
+          example: null
+      required:
+      - id
+      - user
+      - book
+      - status
+      - requested_at
+    LibrarianDashboard:
+      type: object
+      properties:
+        books:
+          type: object
+          properties:
+            total:
+              type: integer
+              example: 1500
+            in_stock:
+              type: integer
+              example: 1420
+            out_of_stock:
+              type: integer
+              example: 80
+        students:
+          type: integer
+          example: 350
+        borrows:
+          type: object
+          properties:
+            requested:
+              type: integer
+              example: 5
+            approved:
+              type: integer
+              example: 42
+            returned:
+              type: integer
+              example: 310
+            total:
+              type: integer
+              example: 357
+        most_viewed_books:
+          type: array
+          items:
+            type: object
+            properties:
+              book__title:
+                type: string
+                example: Introduction to Algorithms
+              count:
+                type: integer
+                example: 85
+        most_borrowed_books:
+          type: array
+          items:
+            type: object
+            properties:
+              book__title:
+                type: string
+                example: Clean Code
+              count:
+                type: integer
+                example: 24
+        active_students:
+          type: object
+          properties:
+            total:
+              type: integer
+              example: 120
+            last_30_days:
+              type: integer
+              example: 45
+        top_categories:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+                example: Computers
+              count:
+                type: integer
+                example: 140
+        borrow_trends:
+          type: array
+          items:
+            type: object
+            properties:
+              day:
+                type: string
+                format: date
+                example: '2026-11-01'
+              total:
+                type: integer
+                example: 12
+              returned:
+                type: integer
+                example: 8
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        sender:
+          type: integer
+          example: 2
+        sender_details:
+          $ref: '#/components/schemas/UserBrief'
+        recipient:
+          type: integer
+          example: 5
+        recipient_details:
+          $ref: '#/components/schemas/UserBrief'
+        subject:
+          type: string
+          example: Book Extension Request
+        body:
+          type: string
+          example: Hello, may I extend the return date by one week?
+        is_read:
+          type: boolean
+          example: false
+        parent_message:
+          type: integer
+          nullable: true
+          example: null
+        reply_count:
+          type: integer
+          example: 0
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-11-03T10:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-11-03T10:00:00Z'
+      required:
+      - id
+      - sender
+      - recipient
+      - subject
+      - body
+      - is_read
+      - created_at
+    MessageCreate:
+      type: object
+      properties:
+        recipient:
+          type: integer
+          example: 5
+        subject:
+          type: string
+          example: Inquiry regarding availability
+        body:
+          type: string
+          example: 'Is the new edition of AI: A Modern Approach available?'
+        parent_message:
+          type: integer
+          nullable: true
+          example: null
+      required:
+      - recipient
+      - subject
+      - body
+
