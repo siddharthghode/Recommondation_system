@@ -112,13 +112,19 @@ python3 -c "from django.core.management.utils import get_random_secret_key; prin
 Open `.env` in an editor (`nano .env`):
 ```env
 # ==============================================================================
-# DATABASE CONFIGURATION (Supabase Cloud PostgreSQL)
+# DATABASE CONFIGURATION (Local PostgreSQL Docker Service)
 # ==============================================================================
-POSTGRES_DB=postgres
-POSTGRES_USER=postgres.your-project-ref
-POSTGRES_PASSWORD=your-supabase-db-password
-POSTGRES_HOST=aws-0-ap-southeast-1.pooler.supabase.com
+POSTGRES_DB=library_recommondation
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=pass@123
+POSTGRES_HOST=db
 POSTGRES_PORT=5432
+POSTGRES_PORT_HOST=5433
+POSTGRES_SSLMODE=disable
+
+# Note: In production or cloud deployments, specify your remote host or DATABASE_URL:
+# POSTGRES_HOST=your-remote-db-host
+# POSTGRES_SSLMODE=require
 
 # ==============================================================================
 # DJANGO SETTINGS
