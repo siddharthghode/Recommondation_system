@@ -1,6 +1,28 @@
 name: library
 
 services:
+  db:
+    image: postgres:16-alpine
+    container_name: library_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-library_recommondation}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pass@123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-library_recommondation}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    ports:
+      - "${POSTGRES_PORT_HOST:-5433}:5432"
+    networks:
+      - library_network
+
   redis:
     image: redis:7-alpine
     container_name: library_redis
@@ -11,6 +33,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+      start_period: 3s
     ports:
       - "${REDIS_PORT_HOST:-6379}:6379"
     volumes:
@@ -30,25 +53,28 @@ services:
       - path: ./backend/.env
         required: false
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-library_recommondation}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-}
-      POSTGRES_HOST: ${POSTGRES_HOST:-aws-0-ap-southeast-1.pooler.supabase.com}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pass@123}
+      POSTGRES_HOST: ${POSTGRES_HOST:-db}
       POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+      POSTGRES_SSLMODE: ${POSTGRES_SSLMODE:-disable}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379/1}
       DEBUG: ${DEBUG:-False}
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-django-insecure-docker-secret-key-change-in-prod}
       DJANGO_ENV: ${DJANGO_ENV:-development}
-      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,backend,frontend}
-      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost,http://localhost:80,http://localhost:8080,http://localhost:8081,http://127.0.0.1,http://127.0.0.1:8081}
-      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://localhost,http://localhost:80,http://localhost:8080,http://localhost:8081,http://127.0.0.1,http://127.0.0.1:8081}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,backend,frontend,testserver}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost,http://localhost:80,http://localhost:8080,http://localhost:8081,http://127.0.0.1,http://127.0.0.1:8081,http://localhost:5173,http://127.0.0.1:5173}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://localhost,http://localhost:80,http://localhost:8080,http://localhost:8081,http://127.0.0.1,http://127.0.0.1:8081,http://localhost:5173,http://127.0.0.1:5173}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
-      EMAIL_BACKEND: ${EMAIL_BACKEND:-anymail.backends.brevo.EmailBackend}
+      EMAIL_BACKEND: ${EMAIL_BACKEND:-django.core.mail.backends.console.EmailBackend}
       BREVO_API_KEY: ${BREVO_API_KEY:-}
-      DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-}
+      DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-noreply@library.local}
     volumes:
       - media_data:/app/media
     depends_on:
+      db:
+        condition: service_healthy
       redis:
         condition: service_healthy
     networks:
@@ -71,6 +97,8 @@ services:
       - library_network
 
 volumes:
+  postgres_data:
+    name: library_postgres_data
   media_data:
     name: library_media_data
   redis_data:

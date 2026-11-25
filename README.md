@@ -276,22 +276,24 @@ cp .env.example .env
 
 | Variable | Default (Local/Docker) | Purpose |
 |---|---|---|
-| `POSTGRES_DB` | `library_db` | PostgreSQL database name |
-| `POSTGRES_USER` | `library_user` | PostgreSQL database username |
-| `POSTGRES_PASSWORD` | `StrongPass@123` | PostgreSQL password |
-| `POSTGRES_HOST` | `db` (Docker) / `127.0.0.1` (Local) | Database host address |
-| `POSTGRES_PORT` | `5432` | Database port |
-| `DEBUG` | `False` (Production) / `True` (Dev) | Django debug flag |
+| `POSTGRES_DB` | `library_recommondation` | PostgreSQL database name |
+| `POSTGRES_USER` | `postgres` | PostgreSQL database username |
+| `POSTGRES_PASSWORD` | `pass@123` | PostgreSQL password (local development default only) |
+| `POSTGRES_HOST` | `db` (Docker) / `localhost` (Local) | Database host address |
+| `POSTGRES_PORT` | `5432` | Internal database port |
+| `POSTGRES_PORT_HOST` | `5433` | Host-mapped database port (avoids conflict with local host PostgreSQL) |
+| `POSTGRES_SSLMODE` | `disable` (Local) / `require` (Remote) | SSL connection mode |
+| `DEBUG` | `True` (Dev) / `False` (Production) | Django debug flag |
 | `DJANGO_SECRET_KEY` | *(Set a secure string)* | Cryptographic signing key |
-| `DJANGO_ENV` | `production` / `development` | Enforces secret key checks in production |
-| `ALLOWED_HOSTS` | `localhost,127.0.0.1,backend,frontend` | Allowed HTTP host headers |
+| `DJANGO_ENV` | `development` / `production` | Enforces secret key checks in production |
+| `ALLOWED_HOSTS` | `localhost,127.0.0.1,backend,frontend,testserver` | Allowed HTTP host headers |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost,http://localhost:80,http://127.0.0.1` | Authorized CORS domains |
 | `FRONTEND_PORT` | `80` | Host port for Nginx frontend |
 | `GOOGLE_CLIENT_ID` | *(Optional)* | Google OAuth Web Client ID |
-| `EMAIL_BACKEND` | `anymail.backends.brevo.EmailBackend` | Email backend (`console` for dev, Brevo HTTP API for prod) |
+| `EMAIL_BACKEND` | `django.core.mail.backends.console.EmailBackend` | Email backend (`console` for dev, Brevo HTTP API for prod) |
 | `BREVO_API_KEY` | *(Set Brevo API key)* | Brevo v3 API key for transactional OTP emails |
-| `DEFAULT_FROM_EMAIL` | *(Set verified sender)* | Verified Brevo sender email address |
-| `REDIS_URL` | `redis://127.0.0.1:6379/1` (Local) / `redis://redis:6379/1` (Docker) | Redis cache & session backend connection URL |
+| `DEFAULT_FROM_EMAIL` | `noreply@library.local` | Verified sender email address |
+| `REDIS_URL` | `redis://redis:6379/1` (Docker) / `redis://127.0.0.1:6379/1` (Local) | Redis cache & session backend connection URL |
 | `REDIS_PORT_HOST` | `6379` | Host binding port for Redis container |
 
 ---

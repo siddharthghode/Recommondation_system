@@ -28,14 +28,14 @@ def mask_redis_url(url: str) -> str:
 
 
 class Command(BaseCommand):
-    help = "Verify connection to Redis / Redis Cloud and check Django cache operations."
+    help = "Verify connection to Redis and check Django cache operations."
 
     def handle(self, *args, **options):
         raw_url = os.getenv("REDIS_URL")
         masked_url = mask_redis_url(raw_url) if raw_url else "Not configured (using default fallback)"
 
         self.stdout.write(self.style.NOTICE("=================================================="))
-        self.stdout.write(self.style.NOTICE(" Redis Connection Verification (Local / Cloud)"))
+        self.stdout.write(self.style.NOTICE(" Redis Connection Verification (Local Docker / Host)"))
         self.stdout.write(self.style.NOTICE("=================================================="))
         self.stdout.write(f"Configured REDIS_URL: {masked_url}")
 
@@ -43,10 +43,10 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.WARNING(
                     "\n[WARNING] REDIS_URL is not set or is set to a placeholder."
-                    "\nUsing local Redis fallback: redis://127.0.0.1:6379/1"
+                    "\nUsing local Redis fallback: redis://redis:6379/1 (in Docker) or redis://127.0.0.1:6379/1"
                     "\nTo configure Redis, add REDIS_URL to your .env file:"
-                    "\n  Local Redis: REDIS_URL=redis://127.0.0.1:6379/1"
-                    "\n  Redis Cloud: REDIS_URL=redis://default:<password>@<host>:<port>"
+                    "\n  Docker Compose: REDIS_URL=redis://redis:6379/1"
+                    "\n  Local Native:   REDIS_URL=redis://127.0.0.1:6379/1"
                 )
             )
 

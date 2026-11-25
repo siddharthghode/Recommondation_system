@@ -7,11 +7,14 @@ import time
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-CSV_PATH = '/home/sidhharth/sppu/git/Recommondation_system/backend/data/prog_book.csv'
-DOWNLOADS_PATH = '/home/sidhharth/Downloads/prog_book.csv'
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+CSV_PATH = str(BASE_DIR / 'data' / 'prog_book.csv')
+DOWNLOADS_PATH = str(Path.home() / 'Downloads' / 'prog_book.csv')
 
 # Backup original
-backup_path = '/home/sidhharth/sppu/git/Recommondation_system/backend/data/prog_book_backup.csv'
+backup_path = str(BASE_DIR / 'data' / 'prog_book_backup.csv')
 if not os.path.exists(backup_path):
     df_raw = pd.read_csv(CSV_PATH)
     df_raw.to_csv(backup_path, index=False)

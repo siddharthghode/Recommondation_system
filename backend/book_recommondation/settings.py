@@ -30,13 +30,15 @@ load_dotenv(BASE_DIR.parent / '.env')
 # Prefer reading the secret from the environment in production
 _secret_key = os.getenv('DJANGO_SECRET_KEY')
 if not _secret_key:
-    import sys
-    if os.getenv('DJANGO_ENV') == 'production':
+    if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
+        _secret_key = 'django-insecure-test-key-only-for-automated-tests'
+    elif os.getenv('DJANGO_ENV') == 'production':
         raise RuntimeError('DJANGO_SECRET_KEY environment variable is not set!')
-    _secret_key =os.getenv('DJANGO_SECRET_KEY')
+    else:
+        _secret_key = 'django-insecure-dev-only-secret-key-do-not-use-in-production'
 SECRET_KEY = _secret_key
 
-DEBUG = os.getenv('DEBUG', 'True') == 'False'
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'testserver,localhost,127.0.0.1').split(',')
 
@@ -93,7 +95,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'book_recommondation.wsgi.application'
 
 
-# Database Configuration - Supabase Cloud PostgreSQL
+# Database Configuration - Local PostgreSQL (with remote override support)
 _db_url = os.getenv('DATABASE_URL')
 if _db_url:
     from urllib.parse import urlparse, unquote
@@ -113,26 +115,31 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv('POSTGRES_DB', 'postgres'),
+            "NAME": os.getenv('POSTGRES_DB', 'library_recommondation'),
             "USER": os.getenv('POSTGRES_USER', 'postgres'),
-            "PASSWORD": os.getenv('POSTGRES_PASSWORD', ''),
-            "HOST": os.getenv('POSTGRES_HOST', 'aws-0-ap-southeast-1.pooler.supabase.com'),
+            "PASSWORD": os.getenv('POSTGRES_PASSWORD', 'pass@123'),
+            "HOST": os.getenv('POSTGRES_HOST', 'db'),
             "PORT": os.getenv('POSTGRES_PORT', '5432'),
             "CONN_MAX_AGE": int(os.getenv('CONN_MAX_AGE', 60)),
         }
     }
 
-# Enable SSL mode require for Supabase / remote database connections
+# SSL configuration: disable for local development (db/localhost/127.0.0.1); require for remote unless overridden
 _db_host = DATABASES["default"].get("HOST", "")
-if _db_host and _db_host not in ('127.0.0.1', 'localhost'):
+_default_sslmode = 'disable' if _db_host in ('127.0.0.1', 'localhost', 'db', '') else 'require'
+_sslmode = os.getenv('POSTGRES_SSLMODE', _default_sslmode)
+if _sslmode:
     DATABASES["default"].setdefault("OPTIONS", {})
-    DATABASES["default"]["OPTIONS"]["sslmode"] = os.getenv('POSTGRES_SSLMODE', 'require')
+    DATABASES["default"]["OPTIONS"]["sslmode"] = _sslmode
 
 if 'test' in sys.argv or 'pytest' in sys.modules or os.getenv('DJANGO_TESTING') == 'true':
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
-    }
+    if os.getenv('USE_POSTGRES_TESTS', 'false').lower() in ('true', '1', 't'):
+        pass
+    else:
+        DATABASES['default'] = {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
 
 
 # Password validation
@@ -228,10 +235,11 @@ CSRF_TRUSTED_ORIGINS = _csrf_env.split(',') if _csrf_env else [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
 ]
-# Cache Configuration - Local Redis / Redis Cloud via django-redis
+# Cache Configuration - Local Redis via django-redis
 _raw_redis_url = (os.getenv('REDIS_URL') or '').strip()
 if not _raw_redis_url or 'YOUR_REDIS_HOST' in _raw_redis_url or 'your_redis_cloud_url' in _raw_redis_url:
-    REDIS_URL = 'redis://127.0.0.1:6379/1'
+    _in_docker = os.path.exists('/.dockerenv') or os.getenv('POSTGRES_HOST') == 'db'
+    REDIS_URL = 'redis://redis:6379/1' if _in_docker else 'redis://127.0.0.1:6379/1'
 else:
     REDIS_URL = _raw_redis_url
 
