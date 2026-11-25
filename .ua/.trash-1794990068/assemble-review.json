@@ -1,0 +1,13 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "Zero dropped edges during merge.",
+    "All 172 scanned project files have matching nodes.",
+    "All importMap edges are satisfied."
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "backend/accounts/admin.py",
+      "language": "python",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/management/commands/clear_users.py",
+      "language": "python",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/management/commands/seed_demo.py",
+      "language": "python",
+      "sizeLines": 224,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/models.py",
+      "language": "python",
+      "sizeLines": 138,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/serializers.py",
+      "language": "python",
+      "sizeLines": 278,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/services/otp.py",
+      "language": "python",
+      "sizeLines": 207,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/signals.py",
+      "language": "python",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/test_otp_pytest.py",
+      "language": "python",
+      "sizeLines": 129,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/tests.py",
+      "language": "python",
+      "sizeLines": 349,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/urls.py",
+      "language": "python",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/views.py",
+      "language": "python",
+      "sizeLines": 453,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/admin.py",
+      "language": "python",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/models.py",
+      "language": "python",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/tests.py",
+      "language": "python",
+      "sizeLines": 272,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/urls.py",
+      "language": "python",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/views.py",
+      "language": "python",
+      "sizeLines": 458,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/book_recommondation/urls.py",
+      "language": "python",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/admin.py",
+      "language": "python",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/cache_utils.py",
+      "language": "python",
+      "sizeLines": 200,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/management/commands/import_books.py",
+      "language": "python",
+      "sizeLines": 111,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/management/commands/seed_interactions.py",
+      "language": "python",
+      "sizeLines": 81,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "backend/accounts/admin.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/accounts/management/commands/clear_users.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/accounts/management/commands/seed_demo.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/accounts/models.py": [],
+    "backend/accounts/serializers.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/accounts/services/otp.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/accounts/signals.py": [
+      "backend/accounts/models.py",
+      "backend/books/cache_utils.py"
+    ],
+    "backend/accounts/test_otp_pytest.py": [
+      "backend/accounts/models.py",
+      "backend/accounts/services/otp.py"
+    ],
+    "backend/accounts/tests.py": [
+      "backend/accounts/models.py",
+      "backend/accounts/services/otp.py"
+    ],
+    "backend/accounts/urls.py": [
+      "backend/accounts/views.py"
+    ],
+    "backend/accounts/views.py": [
+      "backend/accounts/models.py",
+      "backend/accounts/serializers.py",
+      "backend/accounts/services/otp.py",
+      "backend/books/cache_utils.py"
+    ],
+    "backend/analytics/admin.py": [
+      "backend/analytics/models.py"
+    ],
+    "backend/analytics/models.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/analytics/tests.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/analytics/urls.py": [
+      "backend/analytics/views.py"
+    ],
+    "backend/analytics/views.py": [
+      "backend/accounts/models.py",
+      "backend/accounts/serializers.py",
+      "backend/books/cache_utils.py",
+      "backend/books/models.py",
+      "backend/books/serializers.py",
+      "backend/books/services/recommender.py",
+      "backend/borrows/models.py",
+      "backend/borrows/serializers.py"
+    ],
+    "backend/book_recommondation/urls.py": [
+      "backend/books/views.py"
+    ],
+    "backend/books/admin.py": [
+      "backend/books/models.py"
+    ],
+    "backend/books/cache_utils.py": [],
+    "backend/books/management/commands/import_books.py": [
+      "backend/books/models.py"
+    ],
+    "backend/books/management/commands/seed_interactions.py": [
+      "backend/books/models.py"
+    ]
+  }
+}

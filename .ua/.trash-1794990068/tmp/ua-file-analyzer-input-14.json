@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "frontend/src/components/Layout.jsx",
+      "language": "javascript",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/index.css",
+      "language": "css",
+      "sizeLines": 25,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/vite.config.js",
+      "language": "javascript",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "frontend/src/components/Layout.jsx": [],
+    "frontend/src/index.css": [],
+    "frontend/vite.config.js": []
+  }
+}

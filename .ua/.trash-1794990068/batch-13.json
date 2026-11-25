@@ -1,0 +1,772 @@
+{
+  "nodes": [
+    {
+      "id": "file:backend/books/apps.py",
+      "type": "file",
+      "name": "apps.py",
+      "filePath": "backend/books/apps.py",
+      "summary": "Project code file providing core functionality and configuration for apps.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/apps.py:BooksConfig",
+      "type": "class",
+      "name": "BooksConfig",
+      "filePath": "backend/books/apps.py",
+      "lineRange": [
+        4,
+        5
+      ],
+      "summary": "Class `BooksConfig` implementing core behaviors and state for `apps.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/management/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/books/management/__init__.py",
+      "summary": "Python package initialization marker establishing backend/books/management as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/management/commands/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/books/management/commands/__init__.py",
+      "summary": "Python package initialization marker establishing backend/books/management/commands as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/migrations/0001_initial.py",
+      "type": "file",
+      "name": "0001_initial.py",
+      "filePath": "backend/books/migrations/0001_initial.py",
+      "summary": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/migrations/0001_initial.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/books/migrations/0001_initial.py",
+      "lineRange": [
+        9,
+        72
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0001_initial.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/books/migrations/0002_alter_bookinteraction_interaction_type.py",
+      "type": "file",
+      "name": "0002_alter_bookinteraction_interaction_type.py",
+      "filePath": "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py",
+      "summary": "Project code file providing core functionality and configuration for 0002_alter_bookinteraction_interaction_type.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/migrations/0002_alter_bookinteraction_interaction_type.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py",
+      "lineRange": [
+        6,
+        18
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0002_alter_bookinteraction_interaction_type.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+      "type": "file",
+      "name": "0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+      "filePath": "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+      "summary": "Project code file providing core functionality and configuration for 0003_alter_book_average_rating_alter_book_quantity_and_more.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+      "lineRange": [
+        7,
+        42
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0003_alter_book_average_rating_alter_book_quantity_and_more.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/migrations/0004_bookreview.py",
+      "type": "file",
+      "name": "0004_bookreview.py",
+      "filePath": "backend/books/migrations/0004_bookreview.py",
+      "summary": "Project code file providing core functionality and configuration for 0004_bookreview.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/migrations/0004_bookreview.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/books/migrations/0004_bookreview.py",
+      "lineRange": [
+        8,
+        33
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0004_bookreview.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/migrations/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/books/migrations/__init__.py",
+      "summary": "Python package initialization marker establishing backend/books/migrations as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/borrows/__init__.py",
+      "summary": "Python package initialization marker establishing backend/borrows as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/apps.py",
+      "type": "file",
+      "name": "apps.py",
+      "filePath": "backend/borrows/apps.py",
+      "summary": "Project code file providing core functionality and configuration for apps.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/borrows/apps.py:BorrowsConfig",
+      "type": "class",
+      "name": "BorrowsConfig",
+      "filePath": "backend/borrows/apps.py",
+      "lineRange": [
+        4,
+        5
+      ],
+      "summary": "Class `BorrowsConfig` implementing core behaviors and state for `apps.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/migrations/0001_initial.py",
+      "type": "file",
+      "name": "0001_initial.py",
+      "filePath": "backend/borrows/migrations/0001_initial.py",
+      "summary": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/borrows/migrations/0001_initial.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/borrows/migrations/0001_initial.py",
+      "lineRange": [
+        8,
+        33
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0001_initial.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py",
+      "type": "file",
+      "name": "0002_borrow_unique_active_or_requested_borrow.py",
+      "filePath": "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py",
+      "summary": "Project code file providing core functionality and configuration for 0002_borrow_unique_active_or_requested_borrow.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py",
+      "lineRange": [
+        7,
+        20
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0002_borrow_unique_active_or_requested_borrow.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/migrations/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/borrows/migrations/__init__.py",
+      "summary": "Python package initialization marker establishing backend/borrows/migrations as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/data/books_6k.csv",
+      "type": "file",
+      "name": "books_6k.csv",
+      "filePath": "backend/data/books_6k.csv",
+      "summary": "Sample dataset containing book records and borrowing logs for testing and seeding the catalog.",
+      "tags": [
+        "dataset",
+        "data-storage",
+        "demo-data"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/data/prog_book.csv",
+      "type": "file",
+      "name": "prog_book.csv",
+      "filePath": "backend/data/prog_book.csv",
+      "summary": "Sample dataset containing book records and borrowing logs for testing and seeding the catalog.",
+      "tags": [
+        "dataset",
+        "data-storage",
+        "demo-data"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/manage.py",
+      "type": "file",
+      "name": "manage.py",
+      "filePath": "backend/manage.py",
+      "summary": "Django command-line utility for administrative tasks, migrations, and development server execution.",
+      "tags": [
+        "entry-point",
+        "bootstrap",
+        "core"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/manage.py:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "backend/manage.py",
+      "lineRange": [
+        7,
+        18
+      ],
+      "summary": "Function `main` handling logic within `manage.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/messaging/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/messaging/__init__.py",
+      "summary": "Python package initialization marker establishing backend/messaging as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/messaging/apps.py",
+      "type": "file",
+      "name": "apps.py",
+      "filePath": "backend/messaging/apps.py",
+      "summary": "Project code file providing core functionality and configuration for apps.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/messaging/apps.py:MessagingConfig",
+      "type": "class",
+      "name": "MessagingConfig",
+      "filePath": "backend/messaging/apps.py",
+      "lineRange": [
+        4,
+        6
+      ],
+      "summary": "Class `MessagingConfig` implementing core behaviors and state for `apps.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/messaging/migrations/0001_initial.py",
+      "type": "file",
+      "name": "0001_initial.py",
+      "filePath": "backend/messaging/migrations/0001_initial.py",
+      "summary": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/messaging/migrations/0001_initial.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/messaging/migrations/0001_initial.py",
+      "lineRange": [
+        8,
+        35
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0001_initial.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/messaging/migrations/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/messaging/migrations/__init__.py",
+      "summary": "Python package initialization marker establishing backend/messaging/migrations as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/scripts/enrich_prog_books.py",
+      "type": "file",
+      "name": "enrich_prog_books.py",
+      "filePath": "backend/scripts/enrich_prog_books.py",
+      "summary": "Project code file providing core functionality and configuration for enrich_prog_books.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/scripts/enrich_prog_books.py:clean_description",
+      "type": "function",
+      "name": "clean_description",
+      "filePath": "backend/scripts/enrich_prog_books.py",
+      "lineRange": [
+        22,
+        29
+      ],
+      "summary": "Function `clean_description` handling logic within `enrich_prog_books.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/scripts/enrich_prog_books.py:search_openlibrary",
+      "type": "function",
+      "name": "search_openlibrary",
+      "filePath": "backend/scripts/enrich_prog_books.py",
+      "lineRange": [
+        31,
+        114
+      ],
+      "summary": "Function `search_openlibrary` handling logic within `enrich_prog_books.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/scripts/enrich_prog_books.py:process_item",
+      "type": "function",
+      "name": "process_item",
+      "filePath": "backend/scripts/enrich_prog_books.py",
+      "lineRange": [
+        120,
+        153
+      ],
+      "summary": "Function `process_item` handling logic within `enrich_prog_books.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:database/ER_DIAGRAM.md",
+      "type": "document",
+      "name": "ER_DIAGRAM.md",
+      "filePath": "database/ER_DIAGRAM.md",
+      "summary": "Entity-relationship schema documentation specifying tables, fields, foreign keys, and indexes.",
+      "tags": [
+        "documentation",
+        "guide",
+        "specification"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/eslint.config.js",
+      "type": "file",
+      "name": "eslint.config.js",
+      "filePath": "frontend/eslint.config.js",
+      "summary": "Project code file providing core functionality and configuration for eslint.config.js.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/nginx.conf",
+      "type": "file",
+      "name": "nginx.conf",
+      "filePath": "frontend/nginx.conf",
+      "summary": "Nginx web server configuration proxying API requests and serving static single-page application assets.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/App.css",
+      "type": "file",
+      "name": "App.css",
+      "filePath": "frontend/src/App.css",
+      "summary": "Cascading stylesheet defining global theme styling and Tailwind utilities for App.css.",
+      "tags": [
+        "styling",
+        "markup",
+        "ui"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:backend/books/apps.py",
+      "target": "class:backend/books/apps.py:BooksConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/apps.py",
+      "target": "class:backend/books/apps.py:BooksConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/migrations/0001_initial.py",
+      "target": "class:backend/books/migrations/0001_initial.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/migrations/0001_initial.py",
+      "target": "class:backend/books/migrations/0001_initial.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/migrations/0002_alter_bookinteraction_interaction_type.py",
+      "target": "class:backend/books/migrations/0002_alter_bookinteraction_interaction_type.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/migrations/0002_alter_bookinteraction_interaction_type.py",
+      "target": "class:backend/books/migrations/0002_alter_bookinteraction_interaction_type.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+      "target": "class:backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+      "target": "class:backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/migrations/0004_bookreview.py",
+      "target": "class:backend/books/migrations/0004_bookreview.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/migrations/0004_bookreview.py",
+      "target": "class:backend/books/migrations/0004_bookreview.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/apps.py",
+      "target": "class:backend/borrows/apps.py:BorrowsConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/apps.py",
+      "target": "class:backend/borrows/apps.py:BorrowsConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/migrations/0001_initial.py",
+      "target": "class:backend/borrows/migrations/0001_initial.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/migrations/0001_initial.py",
+      "target": "class:backend/borrows/migrations/0001_initial.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py",
+      "target": "class:backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py",
+      "target": "class:backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/manage.py",
+      "target": "function:backend/manage.py:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/manage.py",
+      "target": "function:backend/manage.py:main",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/messaging/apps.py",
+      "target": "class:backend/messaging/apps.py:MessagingConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/messaging/apps.py",
+      "target": "class:backend/messaging/apps.py:MessagingConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/messaging/migrations/0001_initial.py",
+      "target": "class:backend/messaging/migrations/0001_initial.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/messaging/migrations/0001_initial.py",
+      "target": "class:backend/messaging/migrations/0001_initial.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/scripts/enrich_prog_books.py",
+      "target": "function:backend/scripts/enrich_prog_books.py:clean_description",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/scripts/enrich_prog_books.py",
+      "target": "function:backend/scripts/enrich_prog_books.py:clean_description",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/scripts/enrich_prog_books.py",
+      "target": "function:backend/scripts/enrich_prog_books.py:search_openlibrary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/scripts/enrich_prog_books.py",
+      "target": "function:backend/scripts/enrich_prog_books.py:search_openlibrary",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/scripts/enrich_prog_books.py",
+      "target": "function:backend/scripts/enrich_prog_books.py:process_item",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/scripts/enrich_prog_books.py",
+      "target": "function:backend/scripts/enrich_prog_books.py:process_item",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/nginx.conf",
+      "target": "file:frontend/src/main.jsx",
+      "type": "routes",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

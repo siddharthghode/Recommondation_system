@@ -1,0 +1,61 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "backend/messaging/admin.py",
+      "language": "python",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/models.py",
+      "language": "python",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/serializers.py",
+      "language": "python",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/tests.py",
+      "language": "python",
+      "sizeLines": 177,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/urls.py",
+      "language": "python",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/views.py",
+      "language": "python",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "backend/messaging/admin.py": [
+      "backend/messaging/models.py"
+    ],
+    "backend/messaging/models.py": [],
+    "backend/messaging/serializers.py": [
+      "backend/messaging/models.py"
+    ],
+    "backend/messaging/tests.py": [
+      "backend/accounts/models.py",
+      "backend/messaging/models.py"
+    ],
+    "backend/messaging/urls.py": [
+      "backend/messaging/views.py"
+    ],
+    "backend/messaging/views.py": [
+      "backend/messaging/models.py",
+      "backend/messaging/serializers.py"
+    ]
+  }
+}

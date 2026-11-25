@@ -1,0 +1,1787 @@
+{
+  "nodes": [
+    {
+      "id": "file:frontend/src/App.jsx",
+      "type": "file",
+      "name": "App.jsx",
+      "filePath": "frontend/src/App.jsx",
+      "summary": "Main React router and top-level application layout coordinator.",
+      "tags": [
+        "entry-point",
+        "bootstrap",
+        "core"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/App.jsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "frontend/src/App.jsx",
+      "lineRange": [
+        36,
+        90
+      ],
+      "summary": "Function `App` handling logic within `App.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/components/ConfirmModal.jsx",
+      "type": "file",
+      "name": "ConfirmModal.jsx",
+      "filePath": "frontend/src/components/ConfirmModal.jsx",
+      "summary": "Project code file providing core functionality and configuration for ConfirmModal.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/ConfirmModal.jsx:ConfirmModal",
+      "type": "function",
+      "name": "ConfirmModal",
+      "filePath": "frontend/src/components/ConfirmModal.jsx",
+      "lineRange": [
+        3,
+        19
+      ],
+      "summary": "Function `ConfirmModal` handling logic within `ConfirmModal.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/components/Footer.jsx",
+      "type": "file",
+      "name": "Footer.jsx",
+      "filePath": "frontend/src/components/Footer.jsx",
+      "summary": "Project code file providing core functionality and configuration for Footer.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/components/Footer.jsx:Footer",
+      "type": "function",
+      "name": "Footer",
+      "filePath": "frontend/src/components/Footer.jsx",
+      "lineRange": [
+        3,
+        62
+      ],
+      "summary": "Function `Footer` handling logic within `Footer.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/components/Lightbox.jsx",
+      "type": "file",
+      "name": "Lightbox.jsx",
+      "filePath": "frontend/src/components/Lightbox.jsx",
+      "summary": "Project code file providing core functionality and configuration for Lightbox.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/components/Lightbox.jsx:Lightbox",
+      "type": "function",
+      "name": "Lightbox",
+      "filePath": "frontend/src/components/Lightbox.jsx",
+      "lineRange": [
+        4,
+        142
+      ],
+      "summary": "Function `Lightbox` handling logic within `Lightbox.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/components/Navbar.jsx",
+      "type": "file",
+      "name": "Navbar.jsx",
+      "filePath": "frontend/src/components/Navbar.jsx",
+      "summary": "Navigation header component adapting menu items and links according to user authentication and role.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/components/Navbar.jsx:Navbar",
+      "type": "function",
+      "name": "Navbar",
+      "filePath": "frontend/src/components/Navbar.jsx",
+      "lineRange": [
+        5,
+        192
+      ],
+      "summary": "Function `Navbar` handling logic within `Navbar.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/components/Notifications.jsx",
+      "type": "file",
+      "name": "Notifications.jsx",
+      "filePath": "frontend/src/components/Notifications.jsx",
+      "summary": "Project code file providing core functionality and configuration for Notifications.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/components/Notifications.jsx:Notifications",
+      "type": "function",
+      "name": "Notifications",
+      "filePath": "frontend/src/components/Notifications.jsx",
+      "lineRange": [
+        5,
+        162
+      ],
+      "summary": "Function `Notifications` handling logic within `Notifications.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/components/PageTransition.jsx",
+      "type": "file",
+      "name": "PageTransition.jsx",
+      "filePath": "frontend/src/components/PageTransition.jsx",
+      "summary": "Project code file providing core functionality and configuration for PageTransition.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/PageTransition.jsx:PageTransition",
+      "type": "function",
+      "name": "PageTransition",
+      "filePath": "frontend/src/components/PageTransition.jsx",
+      "lineRange": [
+        4,
+        20
+      ],
+      "summary": "Function `PageTransition` handling logic within `PageTransition.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/components/ProtectedRoute.jsx",
+      "type": "file",
+      "name": "ProtectedRoute.jsx",
+      "filePath": "frontend/src/components/ProtectedRoute.jsx",
+      "summary": "Project code file providing core functionality and configuration for ProtectedRoute.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/ProtectedRoute.jsx:ProtectedRoute",
+      "type": "function",
+      "name": "ProtectedRoute",
+      "filePath": "frontend/src/components/ProtectedRoute.jsx",
+      "lineRange": [
+        11,
+        45
+      ],
+      "summary": "Function `ProtectedRoute` handling logic within `ProtectedRoute.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/components/Toast.jsx",
+      "type": "file",
+      "name": "Toast.jsx",
+      "filePath": "frontend/src/components/Toast.jsx",
+      "summary": "Project code file providing core functionality and configuration for Toast.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/Toast.jsx:Toast",
+      "type": "function",
+      "name": "Toast",
+      "filePath": "frontend/src/components/Toast.jsx",
+      "lineRange": [
+        3,
+        19
+      ],
+      "summary": "Function `Toast` handling logic within `Toast.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "type": "file",
+      "name": "LibrarianDashboard.jsx",
+      "filePath": "frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "summary": "Administrative dashboard interface displaying inventory statistics, loan trends, and pending requests.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/components/dashboard/LibrarianDashboard.jsx:timeAgo",
+      "type": "function",
+      "name": "timeAgo",
+      "filePath": "frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "lineRange": [
+        16,
+        25
+      ],
+      "summary": "Function `timeAgo` handling logic within `LibrarianDashboard.jsx`.",
+      "tags": [
+        "function",
+        "utility",
+        "routine"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/dashboard/LibrarianDashboard.jsx:StatCard",
+      "type": "function",
+      "name": "StatCard",
+      "filePath": "frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "lineRange": [
+        27,
+        49
+      ],
+      "summary": "Function `StatCard` handling logic within `LibrarianDashboard.jsx`.",
+      "tags": [
+        "function",
+        "utility",
+        "routine"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/dashboard/LibrarianDashboard.jsx:LibrarianDashboard",
+      "type": "function",
+      "name": "LibrarianDashboard",
+      "filePath": "frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "lineRange": [
+        51,
+        517
+      ],
+      "summary": "Function `LibrarianDashboard` handling logic within `LibrarianDashboard.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/components/navigation/PublicNavbar.jsx",
+      "type": "file",
+      "name": "PublicNavbar.jsx",
+      "filePath": "frontend/src/components/navigation/PublicNavbar.jsx",
+      "summary": "Navigation header component adapting menu items and links according to user authentication and role.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/components/navigation/PublicNavbar.jsx:PublicNavbar",
+      "type": "function",
+      "name": "PublicNavbar",
+      "filePath": "frontend/src/components/navigation/PublicNavbar.jsx",
+      "lineRange": [
+        6,
+        229
+      ],
+      "summary": "Function `PublicNavbar` handling logic within `PublicNavbar.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/components/navigation/StudentNavbar.jsx",
+      "type": "file",
+      "name": "StudentNavbar.jsx",
+      "filePath": "frontend/src/components/navigation/StudentNavbar.jsx",
+      "summary": "Navigation header component adapting menu items and links according to user authentication and role.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/components/navigation/StudentNavbar.jsx:StudentNavbar",
+      "type": "function",
+      "name": "StudentNavbar",
+      "filePath": "frontend/src/components/navigation/StudentNavbar.jsx",
+      "lineRange": [
+        6,
+        171
+      ],
+      "summary": "Function `StudentNavbar` handling logic within `StudentNavbar.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/context/AuthContext.jsx",
+      "type": "file",
+      "name": "AuthContext.jsx",
+      "filePath": "frontend/src/context/AuthContext.jsx",
+      "summary": "Authentication state provider managing JWT tokens, user profiles, login, and session lifecycle.",
+      "tags": [
+        "context",
+        "state-management",
+        "hook"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/context/useAuth.js",
+      "type": "file",
+      "name": "useAuth.js",
+      "filePath": "frontend/src/context/useAuth.js",
+      "summary": "Authentication state provider managing JWT tokens, user profiles, login, and session lifecycle.",
+      "tags": [
+        "context",
+        "state-management",
+        "hook"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/context/useAuth.js:useAuth",
+      "type": "function",
+      "name": "useAuth",
+      "filePath": "frontend/src/context/useAuth.js",
+      "lineRange": [
+        4,
+        10
+      ],
+      "summary": "Function `useAuth` handling logic within `useAuth.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/layouts/LibrarianLayout.jsx",
+      "type": "file",
+      "name": "LibrarianLayout.jsx",
+      "filePath": "frontend/src/layouts/LibrarianLayout.jsx",
+      "summary": "Project code file providing core functionality and configuration for LibrarianLayout.jsx.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/layouts/LibrarianLayout.jsx:LibrarianLayout",
+      "type": "function",
+      "name": "LibrarianLayout",
+      "filePath": "frontend/src/layouts/LibrarianLayout.jsx",
+      "lineRange": [
+        6,
+        202
+      ],
+      "summary": "Function `LibrarianLayout` handling logic within `LibrarianLayout.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/layouts/PublicLayout.jsx",
+      "type": "file",
+      "name": "PublicLayout.jsx",
+      "filePath": "frontend/src/layouts/PublicLayout.jsx",
+      "summary": "Project code file providing core functionality and configuration for PublicLayout.jsx.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/layouts/PublicLayout.jsx:PublicLayout",
+      "type": "function",
+      "name": "PublicLayout",
+      "filePath": "frontend/src/layouts/PublicLayout.jsx",
+      "lineRange": [
+        6,
+        16
+      ],
+      "summary": "Function `PublicLayout` handling logic within `PublicLayout.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/layouts/StudentLayout.jsx",
+      "type": "file",
+      "name": "StudentLayout.jsx",
+      "filePath": "frontend/src/layouts/StudentLayout.jsx",
+      "summary": "Project code file providing core functionality and configuration for StudentLayout.jsx.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/layouts/StudentLayout.jsx:StudentLayout",
+      "type": "function",
+      "name": "StudentLayout",
+      "filePath": "frontend/src/layouts/StudentLayout.jsx",
+      "lineRange": [
+        6,
+        16
+      ],
+      "summary": "Function `StudentLayout` handling logic within `StudentLayout.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/main.jsx",
+      "type": "file",
+      "name": "main.jsx",
+      "filePath": "frontend/src/main.jsx",
+      "summary": "React client bootstrap script mounting the root component into the DOM.",
+      "tags": [
+        "entry-point",
+        "bootstrap",
+        "core"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/pages/AboutUs.jsx",
+      "type": "file",
+      "name": "AboutUs.jsx",
+      "filePath": "frontend/src/pages/AboutUs.jsx",
+      "summary": "Project code file providing core functionality and configuration for AboutUs.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/pages/AboutUs.jsx:AboutUs",
+      "type": "function",
+      "name": "AboutUs",
+      "filePath": "frontend/src/pages/AboutUs.jsx",
+      "lineRange": [
+        61,
+        189
+      ],
+      "summary": "Function `AboutUs` handling logic within `AboutUs.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/Gallery.jsx",
+      "type": "file",
+      "name": "Gallery.jsx",
+      "filePath": "frontend/src/pages/Gallery.jsx",
+      "summary": "Project code file providing core functionality and configuration for Gallery.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/pages/Gallery.jsx:Gallery",
+      "type": "function",
+      "name": "Gallery",
+      "filePath": "frontend/src/pages/Gallery.jsx",
+      "lineRange": [
+        52,
+        133
+      ],
+      "summary": "Function `Gallery` handling logic within `Gallery.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/Home.jsx",
+      "type": "file",
+      "name": "Home.jsx",
+      "filePath": "frontend/src/pages/Home.jsx",
+      "summary": "Project code file providing core functionality and configuration for Home.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/pages/Home.jsx:Home",
+      "type": "function",
+      "name": "Home",
+      "filePath": "frontend/src/pages/Home.jsx",
+      "lineRange": [
+        30,
+        191
+      ],
+      "summary": "Function `Home` handling logic within `Home.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/LibrarianDashboard.jsx",
+      "type": "file",
+      "name": "LibrarianDashboard.jsx",
+      "filePath": "frontend/src/pages/LibrarianDashboard.jsx",
+      "summary": "Administrative dashboard interface displaying inventory statistics, loan trends, and pending requests.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/pages/ManageBooks.jsx",
+      "type": "file",
+      "name": "ManageBooks.jsx",
+      "filePath": "frontend/src/pages/ManageBooks.jsx",
+      "summary": "Main catalog browser page supporting full-text search, genre filtering, and pagination.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/ManageBooks.jsx:ManageBooks",
+      "type": "function",
+      "name": "ManageBooks",
+      "filePath": "frontend/src/pages/ManageBooks.jsx",
+      "lineRange": [
+        8,
+        681
+      ],
+      "summary": "Function `ManageBooks` handling logic within `ManageBooks.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/MyBorrows.jsx",
+      "type": "file",
+      "name": "MyBorrows.jsx",
+      "filePath": "frontend/src/pages/MyBorrows.jsx",
+      "summary": "Student portal page tracking active book loans, history, due dates, and renewal status.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/MyBorrows.jsx:MyBorrows",
+      "type": "function",
+      "name": "MyBorrows",
+      "filePath": "frontend/src/pages/MyBorrows.jsx",
+      "lineRange": [
+        6,
+        264
+      ],
+      "summary": "Function `MyBorrows` handling logic within `MyBorrows.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/StudentsList.jsx",
+      "type": "file",
+      "name": "StudentsList.jsx",
+      "filePath": "frontend/src/pages/StudentsList.jsx",
+      "summary": "Project code file providing core functionality and configuration for StudentsList.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/StudentsList.jsx:StudentsList",
+      "type": "function",
+      "name": "StudentsList",
+      "filePath": "frontend/src/pages/StudentsList.jsx",
+      "lineRange": [
+        8,
+        837
+      ],
+      "summary": "Function `StudentsList` handling logic within `StudentsList.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/admin/AdminBooks.jsx",
+      "type": "file",
+      "name": "AdminBooks.jsx",
+      "filePath": "frontend/src/pages/admin/AdminBooks.jsx",
+      "summary": "Main catalog browser page supporting full-text search, genre filtering, and pagination.",
+      "tags": [
+        "admin",
+        "backoffice",
+        "configuration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/admin/AdminBooks.jsx:AdminBooks",
+      "type": "function",
+      "name": "AdminBooks",
+      "filePath": "frontend/src/pages/admin/AdminBooks.jsx",
+      "lineRange": [
+        5,
+        391
+      ],
+      "summary": "Function `AdminBooks` handling logic within `AdminBooks.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/admin/AdminDashboard.jsx",
+      "type": "file",
+      "name": "AdminDashboard.jsx",
+      "filePath": "frontend/src/pages/admin/AdminDashboard.jsx",
+      "summary": "Administrative dashboard interface displaying inventory statistics, loan trends, and pending requests.",
+      "tags": [
+        "admin",
+        "backoffice",
+        "configuration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/admin/AdminDashboard.jsx:AdminDashboard",
+      "type": "function",
+      "name": "AdminDashboard",
+      "filePath": "frontend/src/pages/admin/AdminDashboard.jsx",
+      "lineRange": [
+        22,
+        985
+      ],
+      "summary": "Function `AdminDashboard` handling logic within `AdminDashboard.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/admin/AdminStudents.jsx",
+      "type": "file",
+      "name": "AdminStudents.jsx",
+      "filePath": "frontend/src/pages/admin/AdminStudents.jsx",
+      "summary": "Project code file providing core functionality and configuration for AdminStudents.jsx.",
+      "tags": [
+        "admin",
+        "backoffice",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/pages/admin/AdminStudents.jsx:AdminStudents",
+      "type": "function",
+      "name": "AdminStudents",
+      "filePath": "frontend/src/pages/admin/AdminStudents.jsx",
+      "lineRange": [
+        1,
+        7
+      ],
+      "summary": "Function `AdminStudents` handling logic within `AdminStudents.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "type": "file",
+      "name": "LibrarianBorrowing.jsx",
+      "filePath": "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "summary": "Project code file providing core functionality and configuration for LibrarianBorrowing.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/librarian/LibrarianBorrowing.jsx:LibrarianBorrowing",
+      "type": "function",
+      "name": "LibrarianBorrowing",
+      "filePath": "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "lineRange": [
+        7,
+        249
+      ],
+      "summary": "Function `LibrarianBorrowing` handling logic within `LibrarianBorrowing.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/librarian/LibrarianReports.jsx",
+      "type": "file",
+      "name": "LibrarianReports.jsx",
+      "filePath": "frontend/src/pages/librarian/LibrarianReports.jsx",
+      "summary": "Project code file providing core functionality and configuration for LibrarianReports.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/librarian/LibrarianReports.jsx:LibrarianReports",
+      "type": "function",
+      "name": "LibrarianReports",
+      "filePath": "frontend/src/pages/librarian/LibrarianReports.jsx",
+      "lineRange": [
+        9,
+        222
+      ],
+      "summary": "Function `LibrarianReports` handling logic within `LibrarianReports.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "type": "file",
+      "name": "LibrarianReturns.jsx",
+      "filePath": "frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "summary": "Project code file providing core functionality and configuration for LibrarianReturns.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/librarian/LibrarianReturns.jsx:LibrarianReturns",
+      "type": "function",
+      "name": "LibrarianReturns",
+      "filePath": "frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "lineRange": [
+        7,
+        219
+      ],
+      "summary": "Function `LibrarianReturns` handling logic within `LibrarianReturns.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "function:frontend/src/App.jsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "function:frontend/src/App.jsx:App",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/components/PageTransition.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/components/ProtectedRoute.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/context/AuthContext.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/layouts/LibrarianLayout.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/layouts/PublicLayout.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/layouts/StudentLayout.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/AboutUs.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/AccountDetails.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/Books.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/Gallery.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/Home.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/LibrarianDashboard.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/Login.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/ManageBooks.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/MyBorrows.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/Recommendations.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/StudentsList.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/admin/AdminBooks.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/admin/AdminDashboard.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/admin/AdminStudents.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/librarian/LibrarianReports.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/App.jsx",
+      "target": "file:frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/ConfirmModal.jsx",
+      "target": "function:frontend/src/components/ConfirmModal.jsx:ConfirmModal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/ConfirmModal.jsx",
+      "target": "function:frontend/src/components/ConfirmModal.jsx:ConfirmModal",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/Footer.jsx",
+      "target": "function:frontend/src/components/Footer.jsx:Footer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/Footer.jsx",
+      "target": "function:frontend/src/components/Footer.jsx:Footer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/Lightbox.jsx",
+      "target": "function:frontend/src/components/Lightbox.jsx:Lightbox",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/Lightbox.jsx",
+      "target": "function:frontend/src/components/Lightbox.jsx:Lightbox",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/Navbar.jsx",
+      "target": "function:frontend/src/components/Navbar.jsx:Navbar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/Navbar.jsx",
+      "target": "function:frontend/src/components/Navbar.jsx:Navbar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/Navbar.jsx",
+      "target": "file:frontend/src/components/Notifications.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/Notifications.jsx",
+      "target": "function:frontend/src/components/Notifications.jsx:Notifications",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/Notifications.jsx",
+      "target": "function:frontend/src/components/Notifications.jsx:Notifications",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/Notifications.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/PageTransition.jsx",
+      "target": "function:frontend/src/components/PageTransition.jsx:PageTransition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/PageTransition.jsx",
+      "target": "function:frontend/src/components/PageTransition.jsx:PageTransition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/ProtectedRoute.jsx",
+      "target": "function:frontend/src/components/ProtectedRoute.jsx:ProtectedRoute",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/ProtectedRoute.jsx",
+      "target": "function:frontend/src/components/ProtectedRoute.jsx:ProtectedRoute",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/ProtectedRoute.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/Toast.jsx",
+      "target": "function:frontend/src/components/Toast.jsx:Toast",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/Toast.jsx",
+      "target": "function:frontend/src/components/Toast.jsx:Toast",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "target": "function:frontend/src/components/dashboard/LibrarianDashboard.jsx:timeAgo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "target": "function:frontend/src/components/dashboard/LibrarianDashboard.jsx:StatCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "target": "function:frontend/src/components/dashboard/LibrarianDashboard.jsx:LibrarianDashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "target": "function:frontend/src/components/dashboard/LibrarianDashboard.jsx:LibrarianDashboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/navigation/PublicNavbar.jsx",
+      "target": "function:frontend/src/components/navigation/PublicNavbar.jsx:PublicNavbar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/navigation/PublicNavbar.jsx",
+      "target": "function:frontend/src/components/navigation/PublicNavbar.jsx:PublicNavbar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/navigation/PublicNavbar.jsx",
+      "target": "file:frontend/src/components/Notifications.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/navigation/PublicNavbar.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/navigation/StudentNavbar.jsx",
+      "target": "function:frontend/src/components/navigation/StudentNavbar.jsx:StudentNavbar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/navigation/StudentNavbar.jsx",
+      "target": "function:frontend/src/components/navigation/StudentNavbar.jsx:StudentNavbar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/navigation/StudentNavbar.jsx",
+      "target": "file:frontend/src/components/Notifications.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/navigation/StudentNavbar.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/context/useAuth.js",
+      "target": "function:frontend/src/context/useAuth.js:useAuth",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/context/useAuth.js",
+      "target": "function:frontend/src/context/useAuth.js:useAuth",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/context/useAuth.js",
+      "target": "file:frontend/src/context/AuthContextCore.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/layouts/LibrarianLayout.jsx",
+      "target": "function:frontend/src/layouts/LibrarianLayout.jsx:LibrarianLayout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/layouts/LibrarianLayout.jsx",
+      "target": "function:frontend/src/layouts/LibrarianLayout.jsx:LibrarianLayout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/layouts/LibrarianLayout.jsx",
+      "target": "file:frontend/src/components/Notifications.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/layouts/LibrarianLayout.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/layouts/PublicLayout.jsx",
+      "target": "function:frontend/src/layouts/PublicLayout.jsx:PublicLayout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/layouts/PublicLayout.jsx",
+      "target": "function:frontend/src/layouts/PublicLayout.jsx:PublicLayout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/layouts/PublicLayout.jsx",
+      "target": "file:frontend/src/components/Footer.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/layouts/PublicLayout.jsx",
+      "target": "file:frontend/src/components/navigation/PublicNavbar.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/layouts/StudentLayout.jsx",
+      "target": "function:frontend/src/layouts/StudentLayout.jsx:StudentLayout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/layouts/StudentLayout.jsx",
+      "target": "function:frontend/src/layouts/StudentLayout.jsx:StudentLayout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/layouts/StudentLayout.jsx",
+      "target": "file:frontend/src/components/Footer.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/layouts/StudentLayout.jsx",
+      "target": "file:frontend/src/components/navigation/StudentNavbar.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/main.jsx",
+      "target": "file:frontend/src/App.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/main.jsx",
+      "target": "file:frontend/src/index.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/AboutUs.jsx",
+      "target": "function:frontend/src/pages/AboutUs.jsx:AboutUs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/AboutUs.jsx",
+      "target": "function:frontend/src/pages/AboutUs.jsx:AboutUs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/AboutUs.jsx",
+      "target": "file:frontend/src/components/Footer.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/AboutUs.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Gallery.jsx",
+      "target": "function:frontend/src/pages/Gallery.jsx:Gallery",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/Gallery.jsx",
+      "target": "function:frontend/src/pages/Gallery.jsx:Gallery",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/Gallery.jsx",
+      "target": "file:frontend/src/components/Footer.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Gallery.jsx",
+      "target": "file:frontend/src/components/Lightbox.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Gallery.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Home.jsx",
+      "target": "function:frontend/src/pages/Home.jsx:Home",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/Home.jsx",
+      "target": "function:frontend/src/pages/Home.jsx:Home",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/Home.jsx",
+      "target": "file:frontend/src/components/Footer.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Home.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/ManageBooks.jsx",
+      "target": "function:frontend/src/pages/ManageBooks.jsx:ManageBooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/ManageBooks.jsx",
+      "target": "function:frontend/src/pages/ManageBooks.jsx:ManageBooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/ManageBooks.jsx",
+      "target": "file:frontend/src/components/ConfirmModal.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/ManageBooks.jsx",
+      "target": "file:frontend/src/components/Toast.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/ManageBooks.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/ManageBooks.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/MyBorrows.jsx",
+      "target": "function:frontend/src/pages/MyBorrows.jsx:MyBorrows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/MyBorrows.jsx",
+      "target": "function:frontend/src/pages/MyBorrows.jsx:MyBorrows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/MyBorrows.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/StudentsList.jsx",
+      "target": "function:frontend/src/pages/StudentsList.jsx:StudentsList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/StudentsList.jsx",
+      "target": "function:frontend/src/pages/StudentsList.jsx:StudentsList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/StudentsList.jsx",
+      "target": "file:frontend/src/components/Toast.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/StudentsList.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/StudentsList.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/admin/AdminBooks.jsx",
+      "target": "function:frontend/src/pages/admin/AdminBooks.jsx:AdminBooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/admin/AdminBooks.jsx",
+      "target": "function:frontend/src/pages/admin/AdminBooks.jsx:AdminBooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/admin/AdminBooks.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/admin/AdminDashboard.jsx",
+      "target": "function:frontend/src/pages/admin/AdminDashboard.jsx:AdminDashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/admin/AdminDashboard.jsx",
+      "target": "function:frontend/src/pages/admin/AdminDashboard.jsx:AdminDashboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/admin/AdminDashboard.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/admin/AdminStudents.jsx",
+      "target": "function:frontend/src/pages/admin/AdminStudents.jsx:AdminStudents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/admin/AdminStudents.jsx",
+      "target": "function:frontend/src/pages/admin/AdminStudents.jsx:AdminStudents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "target": "function:frontend/src/pages/librarian/LibrarianBorrowing.jsx:LibrarianBorrowing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "target": "function:frontend/src/pages/librarian/LibrarianBorrowing.jsx:LibrarianBorrowing",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "target": "file:frontend/src/components/Toast.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReports.jsx",
+      "target": "function:frontend/src/pages/librarian/LibrarianReports.jsx:LibrarianReports",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReports.jsx",
+      "target": "function:frontend/src/pages/librarian/LibrarianReports.jsx:LibrarianReports",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReports.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReports.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "target": "function:frontend/src/pages/librarian/LibrarianReturns.jsx:LibrarianReturns",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "target": "function:frontend/src/pages/librarian/LibrarianReturns.jsx:LibrarianReturns",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "target": "file:frontend/src/components/Toast.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

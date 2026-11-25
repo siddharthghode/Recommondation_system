@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "backend/books/apps.py",
+      "language": "python",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/management/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/management/commands/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/migrations/0001_initial.py",
+      "language": "python",
+      "sizeLines": 72,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py",
+      "language": "python",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+      "language": "python",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/migrations/0004_bookreview.py",
+      "language": "python",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/migrations/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/apps.py",
+      "language": "python",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/migrations/0001_initial.py",
+      "language": "python",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py",
+      "language": "python",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/migrations/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/data/books_6k.csv",
+      "language": "csv",
+      "sizeLines": 6811,
+      "fileCategory": "data"
+    },
+    {
+      "path": "backend/data/prog_book.csv",
+      "language": "csv",
+      "sizeLines": 435,
+      "fileCategory": "data"
+    },
+    {
+      "path": "backend/manage.py",
+      "language": "python",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/apps.py",
+      "language": "python",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/migrations/0001_initial.py",
+      "language": "python",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/messaging/migrations/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/scripts/enrich_prog_books.py",
+      "language": "python",
+      "sizeLines": 183,
+      "fileCategory": "code"
+    },
+    {
+      "path": "database/ER_DIAGRAM.md",
+      "language": "markdown",
+      "sizeLines": 351,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frontend/eslint.config.js",
+      "language": "javascript",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/nginx.conf",
+      "language": "conf",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/App.css",
+      "language": "css",
+      "sizeLines": 42,
+      "fileCategory": "markup"
+    }
+  ],
+  "batchImportData": {
+    "backend/books/apps.py": [],
+    "backend/books/management/__init__.py": [],
+    "backend/books/management/commands/__init__.py": [],
+    "backend/books/migrations/0001_initial.py": [],
+    "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py": [],
+    "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py": [],
+    "backend/books/migrations/0004_bookreview.py": [],
+    "backend/books/migrations/__init__.py": [],
+    "backend/borrows/__init__.py": [],
+    "backend/borrows/apps.py": [],
+    "backend/borrows/migrations/0001_initial.py": [],
+    "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py": [],
+    "backend/borrows/migrations/__init__.py": [],
+    "backend/data/books_6k.csv": [],
+    "backend/data/prog_book.csv": [],
+    "backend/manage.py": [],
+    "backend/messaging/__init__.py": [],
+    "backend/messaging/apps.py": [],
+    "backend/messaging/migrations/0001_initial.py": [],
+    "backend/messaging/migrations/__init__.py": [],
+    "backend/scripts/enrich_prog_books.py": [],
+    "database/ER_DIAGRAM.md": [],
+    "frontend/eslint.config.js": [],
+    "frontend/nginx.conf": [],
+    "frontend/src/App.css": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "frontend/.env.example",
+      "language": "config",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frontend/README.md",
+      "language": "markdown",
+      "sizeLines": 142,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frontend/index.html",
+      "language": "html",
+      "sizeLines": 15,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/package.json",
+      "language": "json",
+      "sizeLines": 35,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "frontend/.env.example": [],
+    "frontend/README.md": [],
+    "frontend/index.html": [],
+    "frontend/package.json": []
+  }
+}

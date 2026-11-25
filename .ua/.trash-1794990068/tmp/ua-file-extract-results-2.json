@@ -1,0 +1,6625 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 21,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 21,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 21,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "backend/accounts/admin.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 54,
+      "classes": [
+        {
+          "name": "DepartmentAdmin",
+          "startLine": 9,
+          "endLine": 11,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "UserAdmin",
+          "startLine": 18,
+          "endLine": 32,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "UserProfileAdmin",
+          "startLine": 39,
+          "endLine": 43,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "NotificationAdmin",
+          "startLine": 50,
+          "endLine": 54,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "EmailOTPAdmin",
+          "startLine": 61,
+          "endLine": 65,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "DepartmentAdmin",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "UserAdmin",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "UserProfileAdmin",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "NotificationAdmin",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "EmailOTPAdmin",
+          "line": 60,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "backend/accounts/management/commands/clear_users.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 37,
+      "classes": [
+        {
+          "name": "Command",
+          "startLine": 15,
+          "endLine": 44,
+          "methods": [
+            "add_arguments",
+            "handle"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Command",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "add_arguments",
+          "callee": "parser.add_argument",
+          "lineNumber": 19
+        },
+        {
+          "caller": "handle",
+          "callee": "User.objects.all().delete",
+          "lineNumber": 26
+        },
+        {
+          "caller": "handle",
+          "callee": "User.objects.all",
+          "lineNumber": 26
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 27
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 27
+        },
+        {
+          "caller": "handle",
+          "callee": "User.objects.filter",
+          "lineNumber": 29
+        },
+        {
+          "caller": "handle",
+          "callee": "users.count",
+          "lineNumber": 30
+        },
+        {
+          "caller": "handle",
+          "callee": "Borrow.objects.filter(user__in=users).delete",
+          "lineNumber": 32
+        },
+        {
+          "caller": "handle",
+          "callee": "Borrow.objects.filter",
+          "lineNumber": 32
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.filter(user__in=users).delete",
+          "lineNumber": 33
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.filter",
+          "lineNumber": 33
+        },
+        {
+          "caller": "handle",
+          "callee": "users.delete",
+          "lineNumber": 34
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 35
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 35
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 40
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 41
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 42
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 43
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/management/commands/seed_demo.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 224,
+      "nonEmptyLines": 194,
+      "classes": [
+        {
+          "name": "Command",
+          "startLine": 30,
+          "endLine": 224,
+          "methods": [
+            "handle"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Command",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "handle",
+          "callee": "timezone.now",
+          "lineNumber": 34
+        },
+        {
+          "caller": "handle",
+          "callee": "Department.objects.get_or_create",
+          "lineNumber": 37
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 38
+        },
+        {
+          "caller": "handle",
+          "callee": "User.objects.get_or_create",
+          "lineNumber": 41
+        },
+        {
+          "caller": "handle",
+          "callee": "admin.set_password",
+          "lineNumber": 48
+        },
+        {
+          "caller": "handle",
+          "callee": "admin.save",
+          "lineNumber": 49
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 50
+        },
+        {
+          "caller": "handle",
+          "callee": "User.objects.get_or_create",
+          "lineNumber": 53
+        },
+        {
+          "caller": "handle",
+          "callee": "lib.set_password",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handle",
+          "callee": "lib.save",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handle",
+          "callee": "User.objects.get_or_create",
+          "lineNumber": 68
+        },
+        {
+          "caller": "handle",
+          "callee": "student.set_password",
+          "lineNumber": 72
+        },
+        {
+          "caller": "handle",
+          "callee": "student.save",
+          "lineNumber": 73
+        },
+        {
+          "caller": "handle",
+          "callee": "UserProfile.objects.get_or_create",
+          "lineNumber": 75
+        },
+        {
+          "caller": "handle",
+          "callee": "random.randint",
+          "lineNumber": 81
+        },
+        {
+          "caller": "handle",
+          "callee": "\",\".join",
+          "lineNumber": 82
+        },
+        {
+          "caller": "handle",
+          "callee": "random.sample",
+          "lineNumber": 82
+        },
+        {
+          "caller": "handle",
+          "callee": "profile.save",
+          "lineNumber": 83
+        },
+        {
+          "caller": "handle",
+          "callee": "students.append",
+          "lineNumber": 85
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handle",
+          "callee": "list",
+          "lineNumber": 90
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.filter",
+          "lineNumber": 90
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 92
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.WARNING",
+          "lineNumber": 92
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 97
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 97
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.filter(department=dept).count",
+          "lineNumber": 102
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.filter",
+          "lineNumber": 102
+        },
+        {
+          "caller": "handle",
+          "callee": "random.sample",
+          "lineNumber": 104
+        },
+        {
+          "caller": "handle",
+          "callee": "min",
+          "lineNumber": 104
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 104
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.filter(id__in=[b.id for b in cs_books]).update",
+          "lineNumber": 105
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.filter",
+          "lineNumber": 105
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 106
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 106
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 108
+        },
+        {
+          "caller": "handle",
+          "callee": "random.randint",
+          "lineNumber": 114
+        },
+        {
+          "caller": "handle",
+          "callee": "random.sample",
+          "lineNumber": 115
+        },
+        {
+          "caller": "handle",
+          "callee": "min",
+          "lineNumber": 115
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 115
+        },
+        {
+          "caller": "handle",
+          "callee": "enumerate",
+          "lineNumber": 116
+        },
+        {
+          "caller": "handle",
+          "callee": "random.randint",
+          "lineNumber": 117
+        },
+        {
+          "caller": "handle",
+          "callee": "timedelta",
+          "lineNumber": 118
+        },
+        {
+          "caller": "handle",
+          "callee": "timedelta",
+          "lineNumber": 119
+        },
+        {
+          "caller": "handle",
+          "callee": "random.randint",
+          "lineNumber": 119
+        },
+        {
+          "caller": "handle",
+          "callee": "timedelta",
+          "lineNumber": 121
+        },
+        {
+          "caller": "handle",
+          "callee": "random.random",
+          "lineNumber": 124
+        },
+        {
+          "caller": "handle",
+          "callee": "timedelta",
+          "lineNumber": 126
+        },
+        {
+          "caller": "handle",
+          "callee": "random.randint",
+          "lineNumber": 126
+        },
+        {
+          "caller": "handle",
+          "callee": "max",
+          "lineNumber": 131
+        },
+        {
+          "caller": "handle",
+          "callee": "book.save",
+          "lineNumber": 132
+        },
+        {
+          "caller": "handle",
+          "callee": "Borrow.objects.get_or_create",
+          "lineNumber": 134
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.get_or_create",
+          "lineNumber": 148
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 153
+        },
+        {
+          "caller": "handle",
+          "callee": "random.sample",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handle",
+          "callee": "min",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handle",
+          "callee": "random.sample",
+          "lineNumber": 158
+        },
+        {
+          "caller": "handle",
+          "callee": "min",
+          "lineNumber": 158
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 158
+        },
+        {
+          "caller": "handle",
+          "callee": "zip",
+          "lineNumber": 161
+        },
+        {
+          "caller": "handle",
+          "callee": "Borrow.objects.filter(\n                user=student, book=book, status__in=[\"requested\", \"approved\"]\n            ).exists",
+          "lineNumber": 163
+        },
+        {
+          "caller": "handle",
+          "callee": "Borrow.objects.filter",
+          "lineNumber": 163
+        },
+        {
+          "caller": "handle",
+          "callee": "random.randint",
+          "lineNumber": 169
+        },
+        {
+          "caller": "handle",
+          "callee": "Borrow.objects.create",
+          "lineNumber": 170
+        },
+        {
+          "caller": "handle",
+          "callee": "timedelta",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 178
+        },
+        {
+          "caller": "handle",
+          "callee": "random.sample",
+          "lineNumber": 184
+        },
+        {
+          "caller": "handle",
+          "callee": "min",
+          "lineNumber": 184
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 184
+        },
+        {
+          "caller": "handle",
+          "callee": "random.choices",
+          "lineNumber": 186
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.create",
+          "lineNumber": 189
+        },
+        {
+          "caller": "handle",
+          "callee": "timedelta",
+          "lineNumber": 193
+        },
+        {
+          "caller": "handle",
+          "callee": "random.randint",
+          "lineNumber": 193
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 197
+        },
+        {
+          "caller": "handle",
+          "callee": "invalidate_department_cache",
+          "lineNumber": 208
+        },
+        {
+          "caller": "handle",
+          "callee": "invalidate_categories_cache",
+          "lineNumber": 209
+        },
+        {
+          "caller": "handle",
+          "callee": "invalidate_catalog_cache",
+          "lineNumber": 210
+        },
+        {
+          "caller": "handle",
+          "callee": "invalidate_dashboard_cache",
+          "lineNumber": 211
+        },
+        {
+          "caller": "handle",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 212
+        },
+        {
+          "caller": "handle",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 213
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 214
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 216
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 219
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 219
+        },
+        {
+          "caller": "handle",
+          "callee": "', '.join",
+          "lineNumber": 223
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/models.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 138,
+      "nonEmptyLines": 114,
+      "classes": [
+        {
+          "name": "Department",
+          "startLine": 8,
+          "endLine": 12,
+          "methods": [
+            "__str__"
+          ],
+          "properties": []
+        },
+        {
+          "name": "User",
+          "startLine": 19,
+          "endLine": 46,
+          "methods": [
+            "save",
+            "__str__"
+          ],
+          "properties": []
+        },
+        {
+          "name": "UserProfile",
+          "startLine": 52,
+          "endLine": 81,
+          "methods": [
+            "__str__"
+          ],
+          "properties": []
+        },
+        {
+          "name": "Notification",
+          "startLine": 87,
+          "endLine": 115,
+          "methods": [
+            "__str__"
+          ],
+          "properties": []
+        },
+        {
+          "name": "EmailOTP",
+          "startLine": 121,
+          "endLine": 138,
+          "methods": [
+            "is_expired",
+            "__str__"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Department",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "User",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "UserProfile",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "Notification",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "EmailOTP",
+          "line": 121,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "save",
+          "callee": "super().save",
+          "lineNumber": 43
+        },
+        {
+          "caller": "save",
+          "callee": "super",
+          "lineNumber": 43
+        },
+        {
+          "caller": "is_expired",
+          "callee": "timezone.now",
+          "lineNumber": 135
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "backend/accounts/serializers.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 278,
+      "nonEmptyLines": 237,
+      "classes": [
+        {
+          "name": "RequestOTPSerializer",
+          "startLine": 12,
+          "endLine": 16,
+          "methods": [
+            "validate_email"
+          ],
+          "properties": []
+        },
+        {
+          "name": "VerifyOTPSerializer",
+          "startLine": 22,
+          "endLine": 33,
+          "methods": [
+            "validate_email",
+            "validate_otp"
+          ],
+          "properties": []
+        },
+        {
+          "name": "RegisterSerializer",
+          "startLine": 39,
+          "endLine": 197,
+          "methods": [
+            "validate",
+            "_resolve_department",
+            "create"
+          ],
+          "properties": []
+        },
+        {
+          "name": "LoginSerializer",
+          "startLine": 203,
+          "endLine": 224,
+          "methods": [
+            "validate"
+          ],
+          "properties": []
+        },
+        {
+          "name": "UserSerializer",
+          "startLine": 230,
+          "endLine": 268,
+          "methods": [
+            "get_profile",
+            "get_department",
+            "get_approval_status"
+          ],
+          "properties": []
+        },
+        {
+          "name": "NotificationSerializer",
+          "startLine": 274,
+          "endLine": 278,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RequestOTPSerializer",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "VerifyOTPSerializer",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "RegisterSerializer",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "LoginSerializer",
+          "line": 203,
+          "isDefault": false
+        },
+        {
+          "name": "UserSerializer",
+          "line": 230,
+          "isDefault": false
+        },
+        {
+          "name": "NotificationSerializer",
+          "line": 274,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "validate_email",
+          "callee": "value.strip().lower",
+          "lineNumber": 16
+        },
+        {
+          "caller": "validate_email",
+          "callee": "value.strip",
+          "lineNumber": 16
+        },
+        {
+          "caller": "validate_email",
+          "callee": "value.strip().lower",
+          "lineNumber": 27
+        },
+        {
+          "caller": "validate_email",
+          "callee": "value.strip",
+          "lineNumber": 27
+        },
+        {
+          "caller": "validate_otp",
+          "callee": "value.strip",
+          "lineNumber": 30
+        },
+        {
+          "caller": "validate_otp",
+          "callee": "val.isdigit",
+          "lineNumber": 31
+        },
+        {
+          "caller": "validate_otp",
+          "callee": "len",
+          "lineNumber": 31
+        },
+        {
+          "caller": "validate_otp",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 32
+        },
+        {
+          "caller": "validate",
+          "callee": "attrs.get",
+          "lineNumber": 70
+        },
+        {
+          "caller": "validate",
+          "callee": "self.context.get",
+          "lineNumber": 72
+        },
+        {
+          "caller": "validate",
+          "callee": "hasattr",
+          "lineNumber": 72
+        },
+        {
+          "caller": "validate",
+          "callee": "getattr",
+          "lineNumber": 73
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 75
+        },
+        {
+          "caller": "validate",
+          "callee": "attrs.get('email', '').strip().lower",
+          "lineNumber": 77
+        },
+        {
+          "caller": "validate",
+          "callee": "attrs.get('email', '').strip",
+          "lineNumber": 77
+        },
+        {
+          "caller": "validate",
+          "callee": "attrs.get",
+          "lineNumber": 77
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 79
+        },
+        {
+          "caller": "validate",
+          "callee": "User.objects.filter(email__iexact=email).exists",
+          "lineNumber": 81
+        },
+        {
+          "caller": "validate",
+          "callee": "User.objects.filter",
+          "lineNumber": 81
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 82
+        },
+        {
+          "caller": "validate",
+          "callee": "attrs.get",
+          "lineNumber": 86
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 88
+        },
+        {
+          "caller": "validate",
+          "callee": "EmailOTP.objects.filter(\n                email=email,\n                verification_token=token,\n                is_verified=True\n            ).first",
+          "lineNumber": 92
+        },
+        {
+          "caller": "validate",
+          "callee": "EmailOTP.objects.filter",
+          "lineNumber": 92
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 99
+        },
+        {
+          "caller": "validate",
+          "callee": "timezone.now",
+          "lineNumber": 104
+        },
+        {
+          "caller": "validate",
+          "callee": "timedelta",
+          "lineNumber": 104
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 105
+        },
+        {
+          "caller": "validate",
+          "callee": "attrs.get",
+          "lineNumber": 110
+        },
+        {
+          "caller": "validate",
+          "callee": "attrs.get",
+          "lineNumber": 111
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 113
+        },
+        {
+          "caller": "_resolve_department",
+          "callee": "isinstance",
+          "lineNumber": 123
+        },
+        {
+          "caller": "_resolve_department",
+          "callee": "value.isdigit",
+          "lineNumber": 123
+        },
+        {
+          "caller": "_resolve_department",
+          "callee": "Department.objects.get",
+          "lineNumber": 124
+        },
+        {
+          "caller": "_resolve_department",
+          "callee": "int",
+          "lineNumber": 124
+        },
+        {
+          "caller": "_resolve_department",
+          "callee": "Department.objects.get",
+          "lineNumber": 125
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.pop",
+          "lineNumber": 132
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.pop",
+          "lineNumber": 134
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.pop",
+          "lineNumber": 135
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.pop",
+          "lineNumber": 136
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.pop",
+          "lineNumber": 137
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.pop",
+          "lineNumber": 138
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.get",
+          "lineNumber": 141
+        },
+        {
+          "caller": "create",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 143
+        },
+        {
+          "caller": "create",
+          "callee": "self._resolve_department",
+          "lineNumber": 146
+        },
+        {
+          "caller": "create",
+          "callee": "transaction.atomic",
+          "lineNumber": 148
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.get('email', '').strip().lower",
+          "lineNumber": 151
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.get('email', '').strip",
+          "lineNumber": 151
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.get",
+          "lineNumber": 151
+        },
+        {
+          "caller": "create",
+          "callee": "EmailOTP.objects.filter(\n                    email=email_val,\n                    verification_token=token,\n                    is_verified=True\n                ).update",
+          "lineNumber": 152
+        },
+        {
+          "caller": "create",
+          "callee": "EmailOTP.objects.filter",
+          "lineNumber": 152
+        },
+        {
+          "caller": "create",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 158
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.get",
+          "lineNumber": 163
+        },
+        {
+          "caller": "create",
+          "callee": "User",
+          "lineNumber": 164
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.get",
+          "lineNumber": 166
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.get",
+          "lineNumber": 167
+        },
+        {
+          "caller": "create",
+          "callee": "validated_data.get",
+          "lineNumber": 168
+        },
+        {
+          "caller": "create",
+          "callee": "user.set_password",
+          "lineNumber": 172
+        },
+        {
+          "caller": "create",
+          "callee": "user.save",
+          "lineNumber": 173
+        },
+        {
+          "caller": "create",
+          "callee": "user.save",
+          "lineNumber": 179
+        },
+        {
+          "caller": "create",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 184
+        },
+        {
+          "caller": "create",
+          "callee": "user.save",
+          "lineNumber": 186
+        },
+        {
+          "caller": "create",
+          "callee": "profile.save",
+          "lineNumber": 195
+        },
+        {
+          "caller": "validate",
+          "callee": "authenticate",
+          "lineNumber": 209
+        },
+        {
+          "caller": "validate",
+          "callee": "AuthenticationFailed",
+          "lineNumber": 215
+        },
+        {
+          "caller": "validate",
+          "callee": "data.get",
+          "lineNumber": 217
+        },
+        {
+          "caller": "validate",
+          "callee": "getattr",
+          "lineNumber": 218
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 220
+        },
+        {
+          "caller": "validate",
+          "callee": "serializers.ValidationError",
+          "lineNumber": 222
+        },
+        {
+          "caller": "get_profile",
+          "callee": "hasattr",
+          "lineNumber": 251
+        },
+        {
+          "caller": "get_approval_status",
+          "callee": "hasattr",
+          "lineNumber": 266
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 6,
+        "functionCount": 0,
+        "classCount": 6
+      }
+    },
+    {
+      "path": "backend/accounts/services/otp.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 207,
+      "nonEmptyLines": 177,
+      "functions": [
+        {
+          "name": "generate_otp",
+          "startLine": 15,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "get_otp",
+          "startLine": 20,
+          "endLine": 30,
+          "params": [
+            "email",
+            "only_active"
+          ]
+        },
+        {
+          "name": "get_otp_status",
+          "startLine": 33,
+          "endLine": 73,
+          "params": [
+            "email"
+          ]
+        },
+        {
+          "name": "send_otp_email",
+          "startLine": 76,
+          "endLine": 110,
+          "params": [
+            "email",
+            "otp"
+          ]
+        },
+        {
+          "name": "request_otp",
+          "startLine": 113,
+          "endLine": 161,
+          "params": [
+            "email",
+            "purpose"
+          ]
+        },
+        {
+          "name": "verify_otp",
+          "startLine": 164,
+          "endLine": 207,
+          "params": [
+            "email",
+            "otp"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "generate_otp",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "get_otp",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "get_otp_status",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "send_otp_email",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "request_otp",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "verify_otp",
+          "line": 164,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "generate_otp",
+          "callee": "secrets.randbelow",
+          "lineNumber": 17
+        },
+        {
+          "caller": "get_otp",
+          "callee": "email.strip().lower",
+          "lineNumber": 25
+        },
+        {
+          "caller": "get_otp",
+          "callee": "email.strip",
+          "lineNumber": 25
+        },
+        {
+          "caller": "get_otp",
+          "callee": "EmailOTP.objects.filter(email=email).order_by",
+          "lineNumber": 26
+        },
+        {
+          "caller": "get_otp",
+          "callee": "EmailOTP.objects.filter",
+          "lineNumber": 26
+        },
+        {
+          "caller": "get_otp",
+          "callee": "timezone.now",
+          "lineNumber": 28
+        },
+        {
+          "caller": "get_otp",
+          "callee": "qs.filter",
+          "lineNumber": 29
+        },
+        {
+          "caller": "get_otp",
+          "callee": "qs.first",
+          "lineNumber": 30
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "email.strip().lower",
+          "lineNumber": 38
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "email.strip",
+          "lineNumber": 38
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "EmailOTP.objects.filter(email=email).order_by('-created_at').first",
+          "lineNumber": 39
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "EmailOTP.objects.filter(email=email).order_by",
+          "lineNumber": 39
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "EmailOTP.objects.filter",
+          "lineNumber": 39
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "timezone.now",
+          "lineNumber": 53
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "otp_record.is_expired",
+          "lineNumber": 54
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "(now - otp_record.created_at).total_seconds",
+          "lineNumber": 57
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "max",
+          "lineNumber": 58
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "int",
+          "lineNumber": 58
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "max",
+          "lineNumber": 59
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "int",
+          "lineNumber": 59
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "(otp_record.expires_at - now).total_seconds",
+          "lineNumber": 59
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "max",
+          "lineNumber": 67
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "otp_record.created_at.isoformat",
+          "lineNumber": 71
+        },
+        {
+          "caller": "get_otp_status",
+          "callee": "otp_record.verified_at.isoformat",
+          "lineNumber": 72
+        },
+        {
+          "caller": "send_otp_email",
+          "callee": "getattr",
+          "lineNumber": 102
+        },
+        {
+          "caller": "send_otp_email",
+          "callee": "send_mail",
+          "lineNumber": 103
+        },
+        {
+          "caller": "request_otp",
+          "callee": "email.strip().lower",
+          "lineNumber": 118
+        },
+        {
+          "caller": "request_otp",
+          "callee": "email.strip",
+          "lineNumber": 118
+        },
+        {
+          "caller": "request_otp",
+          "callee": "User.objects.filter(email__iexact=email).exists",
+          "lineNumber": 120
+        },
+        {
+          "caller": "request_otp",
+          "callee": "User.objects.filter",
+          "lineNumber": 120
+        },
+        {
+          "caller": "request_otp",
+          "callee": "transaction.atomic",
+          "lineNumber": 129
+        },
+        {
+          "caller": "request_otp",
+          "callee": "EmailOTP.objects.select_for_update().filter(email=email).order_by('-created_at').first",
+          "lineNumber": 131
+        },
+        {
+          "caller": "request_otp",
+          "callee": "EmailOTP.objects.select_for_update().filter(email=email).order_by",
+          "lineNumber": 131
+        },
+        {
+          "caller": "request_otp",
+          "callee": "EmailOTP.objects.select_for_update().filter",
+          "lineNumber": 131
+        },
+        {
+          "caller": "request_otp",
+          "callee": "EmailOTP.objects.select_for_update",
+          "lineNumber": 131
+        },
+        {
+          "caller": "request_otp",
+          "callee": "timezone.now",
+          "lineNumber": 132
+        },
+        {
+          "caller": "request_otp",
+          "callee": "timedelta",
+          "lineNumber": 132
+        },
+        {
+          "caller": "request_otp",
+          "callee": "max",
+          "lineNumber": 133
+        },
+        {
+          "caller": "request_otp",
+          "callee": "int",
+          "lineNumber": 133
+        },
+        {
+          "caller": "request_otp",
+          "callee": "(timezone.now() - last_otp.created_at).total_seconds",
+          "lineNumber": 133
+        },
+        {
+          "caller": "request_otp",
+          "callee": "timezone.now",
+          "lineNumber": 133
+        },
+        {
+          "caller": "request_otp",
+          "callee": "EmailOTP.objects.filter(email=email, is_verified=False).update",
+          "lineNumber": 137
+        },
+        {
+          "caller": "request_otp",
+          "callee": "EmailOTP.objects.filter",
+          "lineNumber": 137
+        },
+        {
+          "caller": "request_otp",
+          "callee": "timezone.now",
+          "lineNumber": 137
+        },
+        {
+          "caller": "request_otp",
+          "callee": "generate_otp",
+          "lineNumber": 140
+        },
+        {
+          "caller": "request_otp",
+          "callee": "make_password",
+          "lineNumber": 141
+        },
+        {
+          "caller": "request_otp",
+          "callee": "timezone.now",
+          "lineNumber": 142
+        },
+        {
+          "caller": "request_otp",
+          "callee": "timedelta",
+          "lineNumber": 142
+        },
+        {
+          "caller": "request_otp",
+          "callee": "EmailOTP.objects.create",
+          "lineNumber": 144
+        },
+        {
+          "caller": "request_otp",
+          "callee": "send_otp_email",
+          "lineNumber": 152
+        },
+        {
+          "caller": "request_otp",
+          "callee": "logger.exception",
+          "lineNumber": 154
+        },
+        {
+          "caller": "request_otp",
+          "callee": "cache.delete",
+          "lineNumber": 156
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "email.strip().lower",
+          "lineNumber": 170
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "email.strip",
+          "lineNumber": 170
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "str(otp).strip",
+          "lineNumber": 171
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "str",
+          "lineNumber": 171
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "transaction.atomic",
+          "lineNumber": 173
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "EmailOTP.objects\n            .select_for_update()\n            .filter(email=email, is_verified=False)\n            .order_by('-created_at')\n            .first",
+          "lineNumber": 175
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "EmailOTP.objects\n            .select_for_update()\n            .filter(email=email, is_verified=False)\n            .order_by",
+          "lineNumber": 175
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "EmailOTP.objects\n            .select_for_update()\n            .filter",
+          "lineNumber": 175
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "EmailOTP.objects\n            .select_for_update",
+          "lineNumber": 175
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "otp_record.is_expired",
+          "lineNumber": 187
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "check_password",
+          "lineNumber": 190
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "timezone.now",
+          "lineNumber": 193
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "otp_record.save",
+          "lineNumber": 194
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "max",
+          "lineNumber": 195
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "secrets.token_urlsafe",
+          "lineNumber": 201
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "timezone.now",
+          "lineNumber": 203
+        },
+        {
+          "caller": "verify_otp",
+          "callee": "otp_record.save",
+          "lineNumber": 205
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 6,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/accounts/signals.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "clear_department_cache",
+          "startLine": 9,
+          "endLine": 11,
+          "params": [
+            "sender",
+            "instance",
+            "**kwargs"
+          ]
+        },
+        {
+          "name": "create_user_profile",
+          "startLine": 14,
+          "endLine": 28,
+          "params": [
+            "sender",
+            "instance",
+            "created",
+            "**kwargs"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "clear_department_cache",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "create_user_profile",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "clear_department_cache",
+          "callee": "invalidate_department_cache",
+          "lineNumber": 10
+        },
+        {
+          "caller": "clear_department_cache",
+          "callee": "invalidate_categories_cache",
+          "lineNumber": 11
+        },
+        {
+          "caller": "create_user_profile",
+          "callee": "UserProfile.objects.get_or_create",
+          "lineNumber": 16
+        },
+        {
+          "caller": "create_user_profile",
+          "callee": "profile.save",
+          "lineNumber": 26
+        },
+        {
+          "caller": "create_user_profile",
+          "callee": "User.objects.filter(id=instance.id).update",
+          "lineNumber": 28
+        },
+        {
+          "caller": "create_user_profile",
+          "callee": "User.objects.filter",
+          "lineNumber": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/accounts/test_otp_pytest.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 129,
+      "nonEmptyLines": 104,
+      "classes": [
+        {
+          "name": "TestPytestOTPAuthentication",
+          "startLine": 13,
+          "endLine": 128,
+          "methods": [
+            "test_generate_otp_format",
+            "test_request_otp_dispatches_email_and_hashes_code",
+            "test_verify_otp_invalid_code_decrements_attempts",
+            "test_verify_otp_success_issues_single_use_token",
+            "test_get_otp_and_get_otp_status",
+            "test_verification_token_consumed_atomically"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TestPytestOTPAuthentication",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_generate_otp_format",
+          "callee": "generate_otp",
+          "lineNumber": 18
+        },
+        {
+          "caller": "test_generate_otp_format",
+          "callee": "otp.isdigit",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_generate_otp_format",
+          "callee": "len",
+          "lineNumber": 20
+        },
+        {
+          "caller": "test_generate_otp_format",
+          "callee": "int",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_request_otp_dispatches_email_and_hashes_code",
+          "callee": "mail.outbox.clear",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_request_otp_dispatches_email_and_hashes_code",
+          "callee": "request_otp",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_request_otp_dispatches_email_and_hashes_code",
+          "callee": "len",
+          "lineNumber": 30
+        },
+        {
+          "caller": "test_request_otp_dispatches_email_and_hashes_code",
+          "callee": "EmailOTP.objects.get",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_verify_otp_invalid_code_decrements_attempts",
+          "callee": "request_otp",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_verify_otp_invalid_code_decrements_attempts",
+          "callee": "verify_otp",
+          "lineNumber": 45
+        },
+        {
+          "caller": "test_verify_otp_invalid_code_decrements_attempts",
+          "callee": "EmailOTP.objects.get",
+          "lineNumber": 49
+        },
+        {
+          "caller": "test_verify_otp_success_issues_single_use_token",
+          "callee": "mail.outbox.clear",
+          "lineNumber": 54
+        },
+        {
+          "caller": "test_verify_otp_success_issues_single_use_token",
+          "callee": "request_otp",
+          "lineNumber": 56
+        },
+        {
+          "caller": "test_verify_otp_success_issues_single_use_token",
+          "callee": "re.search",
+          "lineNumber": 59
+        },
+        {
+          "caller": "test_verify_otp_success_issues_single_use_token",
+          "callee": "match.group",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_verify_otp_success_issues_single_use_token",
+          "callee": "verify_otp",
+          "lineNumber": 62
+        },
+        {
+          "caller": "test_verify_otp_success_issues_single_use_token",
+          "callee": "len",
+          "lineNumber": 65
+        },
+        {
+          "caller": "test_verify_otp_success_issues_single_use_token",
+          "callee": "EmailOTP.objects.get",
+          "lineNumber": 67
+        },
+        {
+          "caller": "test_get_otp_and_get_otp_status",
+          "callee": "get_otp_status",
+          "lineNumber": 77
+        },
+        {
+          "caller": "test_get_otp_and_get_otp_status",
+          "callee": "get_otp",
+          "lineNumber": 80
+        },
+        {
+          "caller": "test_get_otp_and_get_otp_status",
+          "callee": "request_otp",
+          "lineNumber": 83
+        },
+        {
+          "caller": "test_get_otp_and_get_otp_status",
+          "callee": "get_otp",
+          "lineNumber": 84
+        },
+        {
+          "caller": "test_get_otp_and_get_otp_status",
+          "callee": "get_otp_status",
+          "lineNumber": 88
+        },
+        {
+          "caller": "test_verification_token_consumed_atomically",
+          "callee": "request_otp",
+          "lineNumber": 100
+        },
+        {
+          "caller": "test_verification_token_consumed_atomically",
+          "callee": "re.search",
+          "lineNumber": 103
+        },
+        {
+          "caller": "test_verification_token_consumed_atomically",
+          "callee": "match.group",
+          "lineNumber": 104
+        },
+        {
+          "caller": "test_verification_token_consumed_atomically",
+          "callee": "verify_otp",
+          "lineNumber": 106
+        },
+        {
+          "caller": "test_verification_token_consumed_atomically",
+          "callee": "api_client.post",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test_verification_token_consumed_atomically",
+          "callee": "api_client.post",
+          "lineNumber": 126
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/tests.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 349,
+      "nonEmptyLines": 299,
+      "classes": [
+        {
+          "name": "AccountsDepartmentAuthorizationTests",
+          "startLine": 12,
+          "endLine": 347,
+          "methods": [
+            "setUp",
+            "_authenticate",
+            "_get_verified_token",
+            "test_student_me_profile_shows_correct_department",
+            "test_librarian_me_profile_shows_correct_department",
+            "test_notifications_isolation",
+            "test_student_registration_requires_department",
+            "test_student_registration_creates_pending_student",
+            "test_student_cannot_self_register_as_librarian",
+            "test_student_cannot_self_register_as_admin",
+            "test_pending_student_can_check_profile_and_status",
+            "test_pending_student_cannot_self_approve_via_me_update",
+            "test_otp_generation_format_and_hashing",
+            "test_request_otp_success_and_email_dispatched",
+            "test_request_otp_for_existing_account_is_enumeration_protected",
+            "test_request_otp_resend_cooldown",
+            "test_verify_otp_incorrect_code_decrements_attempts",
+            "test_verify_otp_max_attempts_lockout",
+            "test_verify_otp_expired_fails",
+            "test_student_registration_without_verification_token_fails",
+            "test_registration_token_cannot_be_reused",
+            "test_existing_users_can_login_without_otp",
+            "test_get_otp_status_api"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AccountsDepartmentAuthorizationTests",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setUp",
+          "callee": "APIClient",
+          "lineNumber": 14
+        },
+        {
+          "caller": "setUp",
+          "callee": "Department.objects.create",
+          "lineNumber": 17
+        },
+        {
+          "caller": "setUp",
+          "callee": "Department.objects.create",
+          "lineNumber": 18
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_superuser",
+          "lineNumber": 21
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 29
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 38
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 47
+        },
+        {
+          "caller": "setUp",
+          "callee": "self.student_a.profile.save",
+          "lineNumber": 56
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 59
+        },
+        {
+          "caller": "setUp",
+          "callee": "self.student_b.profile.save",
+          "lineNumber": 68
+        },
+        {
+          "caller": "_authenticate",
+          "callee": "RefreshToken.for_user",
+          "lineNumber": 71
+        },
+        {
+          "caller": "_authenticate",
+          "callee": "self.client.credentials",
+          "lineNumber": 72
+        },
+        {
+          "caller": "_get_verified_token",
+          "callee": "mail.outbox.clear",
+          "lineNumber": 75
+        },
+        {
+          "caller": "_get_verified_token",
+          "callee": "self.client.post",
+          "lineNumber": 76
+        },
+        {
+          "caller": "_get_verified_token",
+          "callee": "re.search",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_get_verified_token",
+          "callee": "match.group",
+          "lineNumber": 82
+        },
+        {
+          "caller": "_get_verified_token",
+          "callee": "self.client.post",
+          "lineNumber": 83
+        },
+        {
+          "caller": "_get_verified_token",
+          "callee": "resp.data.get",
+          "lineNumber": 84
+        },
+        {
+          "caller": "test_student_me_profile_shows_correct_department",
+          "callee": "self._authenticate",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_student_me_profile_shows_correct_department",
+          "callee": "self.client.get",
+          "lineNumber": 88
+        },
+        {
+          "caller": "test_student_me_profile_shows_correct_department",
+          "callee": "self.assertEqual",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_student_me_profile_shows_correct_department",
+          "callee": "self.assertEqual",
+          "lineNumber": 90
+        },
+        {
+          "caller": "test_student_me_profile_shows_correct_department",
+          "callee": "self.assertEqual",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_librarian_me_profile_shows_correct_department",
+          "callee": "self._authenticate",
+          "lineNumber": 94
+        },
+        {
+          "caller": "test_librarian_me_profile_shows_correct_department",
+          "callee": "self.client.get",
+          "lineNumber": 95
+        },
+        {
+          "caller": "test_librarian_me_profile_shows_correct_department",
+          "callee": "self.assertEqual",
+          "lineNumber": 96
+        },
+        {
+          "caller": "test_librarian_me_profile_shows_correct_department",
+          "callee": "self.assertEqual",
+          "lineNumber": 97
+        },
+        {
+          "caller": "test_librarian_me_profile_shows_correct_department",
+          "callee": "self.assertEqual",
+          "lineNumber": 98
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "Notification.objects.create",
+          "lineNumber": 101
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "Notification.objects.create",
+          "lineNumber": 102
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "self._authenticate",
+          "lineNumber": 104
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "self.client.get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "self.assertEqual",
+          "lineNumber": 106
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "self.assertIn",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "self.assertNotIn",
+          "lineNumber": 109
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "self.client.post",
+          "lineNumber": 112
+        },
+        {
+          "caller": "test_notifications_isolation",
+          "callee": "self.assertEqual",
+          "lineNumber": 113
+        },
+        {
+          "caller": "test_student_registration_requires_department",
+          "callee": "self._get_verified_token",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test_student_registration_requires_department",
+          "callee": "self.client.post",
+          "lineNumber": 125
+        },
+        {
+          "caller": "test_student_registration_requires_department",
+          "callee": "self.assertEqual",
+          "lineNumber": 126
+        },
+        {
+          "caller": "test_student_registration_requires_department",
+          "callee": "self.assertIn",
+          "lineNumber": 127
+        },
+        {
+          "caller": "test_student_registration_creates_pending_student",
+          "callee": "self._get_verified_token",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_student_registration_creates_pending_student",
+          "callee": "self.client.post",
+          "lineNumber": 139
+        },
+        {
+          "caller": "test_student_registration_creates_pending_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 140
+        },
+        {
+          "caller": "test_student_registration_creates_pending_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 141
+        },
+        {
+          "caller": "test_student_registration_creates_pending_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 142
+        },
+        {
+          "caller": "test_student_registration_creates_pending_student",
+          "callee": "User.objects.get",
+          "lineNumber": 144
+        },
+        {
+          "caller": "test_student_registration_creates_pending_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 145
+        },
+        {
+          "caller": "test_student_registration_creates_pending_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 146
+        },
+        {
+          "caller": "test_student_cannot_self_register_as_librarian",
+          "callee": "self.client.post",
+          "lineNumber": 156
+        },
+        {
+          "caller": "test_student_cannot_self_register_as_librarian",
+          "callee": "self.assertEqual",
+          "lineNumber": 157
+        },
+        {
+          "caller": "test_student_cannot_self_register_as_librarian",
+          "callee": "self.assertIn",
+          "lineNumber": 158
+        },
+        {
+          "caller": "test_student_cannot_self_register_as_admin",
+          "callee": "self.client.post",
+          "lineNumber": 168
+        },
+        {
+          "caller": "test_student_cannot_self_register_as_admin",
+          "callee": "self.assertEqual",
+          "lineNumber": 169
+        },
+        {
+          "caller": "test_student_cannot_self_register_as_admin",
+          "callee": "self.assertIn",
+          "lineNumber": 170
+        },
+        {
+          "caller": "test_pending_student_can_check_profile_and_status",
+          "callee": "User.objects.create_user",
+          "lineNumber": 173
+        },
+        {
+          "caller": "test_pending_student_can_check_profile_and_status",
+          "callee": "pending_user.profile.save",
+          "lineNumber": 181
+        },
+        {
+          "caller": "test_pending_student_can_check_profile_and_status",
+          "callee": "self._authenticate",
+          "lineNumber": 183
+        },
+        {
+          "caller": "test_pending_student_can_check_profile_and_status",
+          "callee": "self.client.get",
+          "lineNumber": 184
+        },
+        {
+          "caller": "test_pending_student_can_check_profile_and_status",
+          "callee": "self.assertEqual",
+          "lineNumber": 185
+        },
+        {
+          "caller": "test_pending_student_can_check_profile_and_status",
+          "callee": "self.assertEqual",
+          "lineNumber": 186
+        },
+        {
+          "caller": "test_pending_student_can_check_profile_and_status",
+          "callee": "self.assertEqual",
+          "lineNumber": 187
+        },
+        {
+          "caller": "test_pending_student_cannot_self_approve_via_me_update",
+          "callee": "User.objects.create_user",
+          "lineNumber": 190
+        },
+        {
+          "caller": "test_pending_student_cannot_self_approve_via_me_update",
+          "callee": "pending_user.profile.save",
+          "lineNumber": 198
+        },
+        {
+          "caller": "test_pending_student_cannot_self_approve_via_me_update",
+          "callee": "self._authenticate",
+          "lineNumber": 200
+        },
+        {
+          "caller": "test_pending_student_cannot_self_approve_via_me_update",
+          "callee": "self.client.put",
+          "lineNumber": 201
+        },
+        {
+          "caller": "test_pending_student_cannot_self_approve_via_me_update",
+          "callee": "self.assertEqual",
+          "lineNumber": 202
+        },
+        {
+          "caller": "test_pending_student_cannot_self_approve_via_me_update",
+          "callee": "pending_user.profile.refresh_from_db",
+          "lineNumber": 204
+        },
+        {
+          "caller": "test_pending_student_cannot_self_approve_via_me_update",
+          "callee": "self.assertEqual",
+          "lineNumber": 205
+        },
+        {
+          "caller": "test_otp_generation_format_and_hashing",
+          "callee": "generate_otp",
+          "lineNumber": 209
+        },
+        {
+          "caller": "test_otp_generation_format_and_hashing",
+          "callee": "self.assertTrue",
+          "lineNumber": 210
+        },
+        {
+          "caller": "test_otp_generation_format_and_hashing",
+          "callee": "otp.isdigit",
+          "lineNumber": 210
+        },
+        {
+          "caller": "test_otp_generation_format_and_hashing",
+          "callee": "self.assertEqual",
+          "lineNumber": 211
+        },
+        {
+          "caller": "test_otp_generation_format_and_hashing",
+          "callee": "len",
+          "lineNumber": 211
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "mail.outbox.clear",
+          "lineNumber": 214
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "self.client.post",
+          "lineNumber": 215
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "self.assertEqual",
+          "lineNumber": 216
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "self.assertIn",
+          "lineNumber": 217
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "self.assertNotIn",
+          "lineNumber": 218
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "self.assertEqual",
+          "lineNumber": 220
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "len",
+          "lineNumber": 220
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "self.assertIn",
+          "lineNumber": 221
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "EmailOTP.objects.get",
+          "lineNumber": 223
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "self.assertFalse",
+          "lineNumber": 224
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "self.assertGreater",
+          "lineNumber": 225
+        },
+        {
+          "caller": "test_request_otp_success_and_email_dispatched",
+          "callee": "timezone.now",
+          "lineNumber": 225
+        },
+        {
+          "caller": "test_request_otp_for_existing_account_is_enumeration_protected",
+          "callee": "mail.outbox.clear",
+          "lineNumber": 228
+        },
+        {
+          "caller": "test_request_otp_for_existing_account_is_enumeration_protected",
+          "callee": "self.client.post",
+          "lineNumber": 229
+        },
+        {
+          "caller": "test_request_otp_for_existing_account_is_enumeration_protected",
+          "callee": "self.assertEqual",
+          "lineNumber": 230
+        },
+        {
+          "caller": "test_request_otp_for_existing_account_is_enumeration_protected",
+          "callee": "self.assertEqual",
+          "lineNumber": 232
+        },
+        {
+          "caller": "test_request_otp_for_existing_account_is_enumeration_protected",
+          "callee": "len",
+          "lineNumber": 232
+        },
+        {
+          "caller": "test_request_otp_resend_cooldown",
+          "callee": "self.client.post",
+          "lineNumber": 235
+        },
+        {
+          "caller": "test_request_otp_resend_cooldown",
+          "callee": "self.client.post",
+          "lineNumber": 236
+        },
+        {
+          "caller": "test_request_otp_resend_cooldown",
+          "callee": "self.assertEqual",
+          "lineNumber": 237
+        },
+        {
+          "caller": "test_request_otp_resend_cooldown",
+          "callee": "self.assertIn",
+          "lineNumber": 238
+        },
+        {
+          "caller": "test_verify_otp_incorrect_code_decrements_attempts",
+          "callee": "mail.outbox.clear",
+          "lineNumber": 241
+        },
+        {
+          "caller": "test_verify_otp_incorrect_code_decrements_attempts",
+          "callee": "self.client.post",
+          "lineNumber": 242
+        },
+        {
+          "caller": "test_verify_otp_incorrect_code_decrements_attempts",
+          "callee": "self.client.post",
+          "lineNumber": 243
+        },
+        {
+          "caller": "test_verify_otp_incorrect_code_decrements_attempts",
+          "callee": "self.assertEqual",
+          "lineNumber": 244
+        },
+        {
+          "caller": "test_verify_otp_incorrect_code_decrements_attempts",
+          "callee": "self.assertIn",
+          "lineNumber": 245
+        },
+        {
+          "caller": "test_verify_otp_max_attempts_lockout",
+          "callee": "self.client.post",
+          "lineNumber": 248
+        },
+        {
+          "caller": "test_verify_otp_max_attempts_lockout",
+          "callee": "range",
+          "lineNumber": 249
+        },
+        {
+          "caller": "test_verify_otp_max_attempts_lockout",
+          "callee": "self.client.post",
+          "lineNumber": 250
+        },
+        {
+          "caller": "test_verify_otp_max_attempts_lockout",
+          "callee": "self.client.post",
+          "lineNumber": 252
+        },
+        {
+          "caller": "test_verify_otp_max_attempts_lockout",
+          "callee": "self.assertEqual",
+          "lineNumber": 253
+        },
+        {
+          "caller": "test_verify_otp_max_attempts_lockout",
+          "callee": "self.assertIn",
+          "lineNumber": 254
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "mail.outbox.clear",
+          "lineNumber": 257
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "self.client.post",
+          "lineNumber": 258
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "EmailOTP.objects.get",
+          "lineNumber": 259
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "timezone.now",
+          "lineNumber": 260
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "timedelta",
+          "lineNumber": 260
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "otp_record.save",
+          "lineNumber": 261
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "re.search",
+          "lineNumber": 264
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "match.group",
+          "lineNumber": 265
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "self.client.post",
+          "lineNumber": 267
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "self.assertEqual",
+          "lineNumber": 268
+        },
+        {
+          "caller": "test_verify_otp_expired_fails",
+          "callee": "self.assertIn",
+          "lineNumber": 269
+        },
+        {
+          "caller": "test_student_registration_without_verification_token_fails",
+          "callee": "self.client.post",
+          "lineNumber": 279
+        },
+        {
+          "caller": "test_student_registration_without_verification_token_fails",
+          "callee": "self.assertEqual",
+          "lineNumber": 280
+        },
+        {
+          "caller": "test_student_registration_without_verification_token_fails",
+          "callee": "self.assertIn",
+          "lineNumber": 281
+        },
+        {
+          "caller": "test_registration_token_cannot_be_reused",
+          "callee": "self._get_verified_token",
+          "lineNumber": 284
+        },
+        {
+          "caller": "test_registration_token_cannot_be_reused",
+          "callee": "self.client.post",
+          "lineNumber": 293
+        },
+        {
+          "caller": "test_registration_token_cannot_be_reused",
+          "callee": "self.assertEqual",
+          "lineNumber": 294
+        },
+        {
+          "caller": "test_registration_token_cannot_be_reused",
+          "callee": "self.client.post",
+          "lineNumber": 305
+        },
+        {
+          "caller": "test_registration_token_cannot_be_reused",
+          "callee": "self.assertEqual",
+          "lineNumber": 306
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.client.post",
+          "lineNumber": 309
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.assertEqual",
+          "lineNumber": 310
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.assertIn",
+          "lineNumber": 311
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.client.post",
+          "lineNumber": 313
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.assertEqual",
+          "lineNumber": 314
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.assertIn",
+          "lineNumber": 315
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.client.post",
+          "lineNumber": 317
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.assertEqual",
+          "lineNumber": 318
+        },
+        {
+          "caller": "test_existing_users_can_login_without_otp",
+          "callee": "self.assertIn",
+          "lineNumber": 319
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.client.get",
+          "lineNumber": 324
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertEqual",
+          "lineNumber": 325
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertFalse",
+          "lineNumber": 326
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertTrue",
+          "lineNumber": 327
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.client.post",
+          "lineNumber": 330
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.client.get",
+          "lineNumber": 333
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertEqual",
+          "lineNumber": 334
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertTrue",
+          "lineNumber": 335
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertTrue",
+          "lineNumber": 336
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertEqual",
+          "lineNumber": 337
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertEqual",
+          "lineNumber": 338
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.client.post",
+          "lineNumber": 341
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertEqual",
+          "lineNumber": 342
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertTrue",
+          "lineNumber": 343
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.client.get",
+          "lineNumber": 346
+        },
+        {
+          "caller": "test_get_otp_status_api",
+          "callee": "self.assertEqual",
+          "lineNumber": 347
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/urls.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 32,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/accounts/views.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 453,
+      "nonEmptyLines": 369,
+      "classes": [
+        {
+          "name": "DepartmentListView",
+          "startLine": 27,
+          "endLine": 39,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        },
+        {
+          "name": "GetOTPView",
+          "startLine": 45,
+          "endLine": 64,
+          "methods": [
+            "get",
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "RequestOTPView",
+          "startLine": 70,
+          "endLine": 83,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "VerifyOTPView",
+          "startLine": 89,
+          "endLine": 106,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "PasswordResetView",
+          "startLine": 112,
+          "endLine": 149,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "RegisterView",
+          "startLine": 155,
+          "endLine": 178,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "LoginView",
+          "startLine": 184,
+          "endLine": 206,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "GoogleLoginView",
+          "startLine": 212,
+          "endLine": 354,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "MeView",
+          "startLine": 361,
+          "endLine": 411,
+          "methods": [
+            "get",
+            "put"
+          ],
+          "properties": []
+        },
+        {
+          "name": "NotificationListView",
+          "startLine": 417,
+          "endLine": 429,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        },
+        {
+          "name": "MarkNotificationReadView",
+          "startLine": 432,
+          "endLine": 445,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "MarkAllNotificationsReadView",
+          "startLine": 448,
+          "endLine": 453,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "DepartmentListView",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "GetOTPView",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "RequestOTPView",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "VerifyOTPView",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "PasswordResetView",
+          "line": 112,
+          "isDefault": false
+        },
+        {
+          "name": "RegisterView",
+          "line": 155,
+          "isDefault": false
+        },
+        {
+          "name": "LoginView",
+          "line": 184,
+          "isDefault": false
+        },
+        {
+          "name": "GoogleLoginView",
+          "line": 212,
+          "isDefault": false
+        },
+        {
+          "name": "MeView",
+          "line": 361,
+          "isDefault": false
+        },
+        {
+          "name": "NotificationListView",
+          "line": 417,
+          "isDefault": false
+        },
+        {
+          "name": "MarkNotificationReadView",
+          "line": 432,
+          "isDefault": false
+        },
+        {
+          "name": "MarkAllNotificationsReadView",
+          "line": 448,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "department_list_key",
+          "lineNumber": 31
+        },
+        {
+          "caller": "get",
+          "callee": "safe_cache_get",
+          "lineNumber": 32
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 34
+        },
+        {
+          "caller": "get",
+          "callee": "Department.objects.all().order_by",
+          "lineNumber": 36
+        },
+        {
+          "caller": "get",
+          "callee": "Department.objects.all",
+          "lineNumber": 36
+        },
+        {
+          "caller": "get",
+          "callee": "safe_cache_set",
+          "lineNumber": 38
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 39
+        },
+        {
+          "caller": "get",
+          "callee": "request.query_params.get('email', '').strip().lower",
+          "lineNumber": 53
+        },
+        {
+          "caller": "get",
+          "callee": "request.query_params.get('email', '').strip",
+          "lineNumber": 53
+        },
+        {
+          "caller": "get",
+          "callee": "request.query_params.get",
+          "lineNumber": 53
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 55
+        },
+        {
+          "caller": "get",
+          "callee": "get_otp_status",
+          "lineNumber": 56
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 57
+        },
+        {
+          "caller": "post",
+          "callee": "RequestOTPSerializer",
+          "lineNumber": 60
+        },
+        {
+          "caller": "post",
+          "callee": "serializer.is_valid",
+          "lineNumber": 61
+        },
+        {
+          "caller": "post",
+          "callee": "get_otp_status",
+          "lineNumber": 63
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 64
+        },
+        {
+          "caller": "post",
+          "callee": "RequestOTPSerializer",
+          "lineNumber": 74
+        },
+        {
+          "caller": "post",
+          "callee": "serializer.is_valid",
+          "lineNumber": 75
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 77
+        },
+        {
+          "caller": "post",
+          "callee": "request_otp",
+          "lineNumber": 79
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 81
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 83
+        },
+        {
+          "caller": "post",
+          "callee": "VerifyOTPSerializer",
+          "lineNumber": 93
+        },
+        {
+          "caller": "post",
+          "callee": "serializer.is_valid",
+          "lineNumber": 94
+        },
+        {
+          "caller": "post",
+          "callee": "verify_otp",
+          "lineNumber": 98
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 100
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 102
+        },
+        {
+          "caller": "post",
+          "callee": "(request.data.get('email') or '').strip().lower",
+          "lineNumber": 116
+        },
+        {
+          "caller": "post",
+          "callee": "(request.data.get('email') or '').strip",
+          "lineNumber": 116
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 116
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 117
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 118
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 119
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 122
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 125
+        },
+        {
+          "caller": "post",
+          "callee": "len",
+          "lineNumber": 127
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 128
+        },
+        {
+          "caller": "post",
+          "callee": "EmailOTP.objects.filter(\n            email=email,\n            verification_token=token,\n            is_verified=True\n        ).first",
+          "lineNumber": 130
+        },
+        {
+          "caller": "post",
+          "callee": "EmailOTP.objects.filter",
+          "lineNumber": 130
+        },
+        {
+          "caller": "post",
+          "callee": "timezone.now",
+          "lineNumber": 136
+        },
+        {
+          "caller": "post",
+          "callee": "timedelta",
+          "lineNumber": 136
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 137
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.filter(email__iexact=email).first",
+          "lineNumber": 139
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.filter",
+          "lineNumber": 139
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 141
+        },
+        {
+          "caller": "post",
+          "callee": "user.set_password",
+          "lineNumber": 143
+        },
+        {
+          "caller": "post",
+          "callee": "user.save",
+          "lineNumber": 144
+        },
+        {
+          "caller": "post",
+          "callee": "EmailOTP.objects.filter(email=email).update",
+          "lineNumber": 147
+        },
+        {
+          "caller": "post",
+          "callee": "EmailOTP.objects.filter",
+          "lineNumber": 147
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 149
+        },
+        {
+          "caller": "post",
+          "callee": "RegisterSerializer",
+          "lineNumber": 159
+        },
+        {
+          "caller": "post",
+          "callee": "serializer.is_valid",
+          "lineNumber": 160
+        },
+        {
+          "caller": "post",
+          "callee": "serializer.save",
+          "lineNumber": 161
+        },
+        {
+          "caller": "post",
+          "callee": "RefreshToken.for_user",
+          "lineNumber": 164
+        },
+        {
+          "caller": "post",
+          "callee": "hasattr",
+          "lineNumber": 169
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 172
+        },
+        {
+          "caller": "post",
+          "callee": "str",
+          "lineNumber": 173
+        },
+        {
+          "caller": "post",
+          "callee": "str",
+          "lineNumber": 174
+        },
+        {
+          "caller": "post",
+          "callee": "LoginSerializer",
+          "lineNumber": 188
+        },
+        {
+          "caller": "post",
+          "callee": "serializer.is_valid",
+          "lineNumber": 189
+        },
+        {
+          "caller": "post",
+          "callee": "RefreshToken.for_user",
+          "lineNumber": 192
+        },
+        {
+          "caller": "post",
+          "callee": "hasattr",
+          "lineNumber": 198
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 201
+        },
+        {
+          "caller": "post",
+          "callee": "str",
+          "lineNumber": 202
+        },
+        {
+          "caller": "post",
+          "callee": "str",
+          "lineNumber": 203
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 222
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 222
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 222
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 224
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 227
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 228
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 229
+        },
+        {
+          "caller": "post",
+          "callee": "urllib.request.Request",
+          "lineNumber": 236
+        },
+        {
+          "caller": "post",
+          "callee": "urllib.request.urlopen",
+          "lineNumber": 237
+        },
+        {
+          "caller": "post",
+          "callee": "json.loads",
+          "lineNumber": 239
+        },
+        {
+          "caller": "post",
+          "callee": "resp.read().decode",
+          "lineNumber": 239
+        },
+        {
+          "caller": "post",
+          "callee": "resp.read",
+          "lineNumber": 239
+        },
+        {
+          "caller": "post",
+          "callee": "urllib.request.Request",
+          "lineNumber": 249
+        },
+        {
+          "caller": "post",
+          "callee": "urllib.request.urlopen",
+          "lineNumber": 250
+        },
+        {
+          "caller": "post",
+          "callee": "json.loads",
+          "lineNumber": 252
+        },
+        {
+          "caller": "post",
+          "callee": "resp.read().decode",
+          "lineNumber": 252
+        },
+        {
+          "caller": "post",
+          "callee": "resp.read",
+          "lineNumber": 252
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 258
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 259
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 264
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 264
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 266
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get('email', '').lower().strip",
+          "lineNumber": 268
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get('email', '').lower",
+          "lineNumber": 268
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 268
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 269
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get('name', '').split",
+          "lineNumber": 269
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 269
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 270
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get('name', '').split",
+          "lineNumber": 270
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 270
+        },
+        {
+          "caller": "post",
+          "callee": "google_user_info.get",
+          "lineNumber": 270
+        },
+        {
+          "caller": "post",
+          "callee": "transaction.atomic",
+          "lineNumber": 272
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.filter(email=email).first",
+          "lineNumber": 274
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.filter",
+          "lineNumber": 274
+        },
+        {
+          "caller": "post",
+          "callee": "email.split",
+          "lineNumber": 278
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.filter(username=username).exists",
+          "lineNumber": 281
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.filter",
+          "lineNumber": 281
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.create",
+          "lineNumber": 289
+        },
+        {
+          "caller": "post",
+          "callee": "user.set_unusable_password",
+          "lineNumber": 296
+        },
+        {
+          "caller": "post",
+          "callee": "user.save",
+          "lineNumber": 297
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.filter(email=email).first",
+          "lineNumber": 300
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.filter",
+          "lineNumber": 300
+        },
+        {
+          "caller": "post",
+          "callee": "hasattr",
+          "lineNumber": 303
+        },
+        {
+          "caller": "post",
+          "callee": "Department.objects.get_or_create",
+          "lineNumber": 310
+        },
+        {
+          "caller": "post",
+          "callee": "user.save",
+          "lineNumber": 313
+        },
+        {
+          "caller": "post",
+          "callee": "int",
+          "lineNumber": 317
+        },
+        {
+          "caller": "post",
+          "callee": "profile.save",
+          "lineNumber": 321
+        },
+        {
+          "caller": "post",
+          "callee": "hasattr",
+          "lineNumber": 324
+        },
+        {
+          "caller": "post",
+          "callee": "Department.objects.get_or_create",
+          "lineNumber": 327
+        },
+        {
+          "caller": "post",
+          "callee": "user.save",
+          "lineNumber": 330
+        },
+        {
+          "caller": "post",
+          "callee": "int",
+          "lineNumber": 333
+        },
+        {
+          "caller": "post",
+          "callee": "profile.save",
+          "lineNumber": 336
+        },
+        {
+          "caller": "post",
+          "callee": "RefreshToken.for_user",
+          "lineNumber": 339
+        },
+        {
+          "caller": "post",
+          "callee": "hasattr",
+          "lineNumber": 344
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 347
+        },
+        {
+          "caller": "post",
+          "callee": "str",
+          "lineNumber": 348
+        },
+        {
+          "caller": "post",
+          "callee": "str",
+          "lineNumber": 349
+        },
+        {
+          "caller": "get",
+          "callee": "UserSerializer",
+          "lineNumber": 365
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 366
+        },
+        {
+          "caller": "put",
+          "callee": "setattr",
+          "lineNumber": 374
+        },
+        {
+          "caller": "put",
+          "callee": "user.save",
+          "lineNumber": 375
+        },
+        {
+          "caller": "put",
+          "callee": "hasattr",
+          "lineNumber": 378
+        },
+        {
+          "caller": "put",
+          "callee": "Department.objects.get_or_create",
+          "lineNumber": 387
+        },
+        {
+          "caller": "put",
+          "callee": "user.save",
+          "lineNumber": 390
+        },
+        {
+          "caller": "put",
+          "callee": "user.save",
+          "lineNumber": 394
+        },
+        {
+          "caller": "put",
+          "callee": "profile.save",
+          "lineNumber": 399
+        },
+        {
+          "caller": "put",
+          "callee": "user.refresh_from_db",
+          "lineNumber": 402
+        },
+        {
+          "caller": "put",
+          "callee": "hasattr",
+          "lineNumber": 403
+        },
+        {
+          "caller": "put",
+          "callee": "user.profile.refresh_from_db",
+          "lineNumber": 404
+        },
+        {
+          "caller": "put",
+          "callee": "getattr",
+          "lineNumber": 407
+        },
+        {
+          "caller": "put",
+          "callee": "getattr",
+          "lineNumber": 407
+        },
+        {
+          "caller": "put",
+          "callee": "getattr",
+          "lineNumber": 407
+        },
+        {
+          "caller": "put",
+          "callee": "invalidate_user_recommendations",
+          "lineNumber": 408
+        },
+        {
+          "caller": "put",
+          "callee": "getattr",
+          "lineNumber": 408
+        },
+        {
+          "caller": "put",
+          "callee": "UserSerializer",
+          "lineNumber": 410
+        },
+        {
+          "caller": "put",
+          "callee": "Response",
+          "lineNumber": 411
+        },
+        {
+          "caller": "get",
+          "callee": "request.query_params.get",
+          "lineNumber": 421
+        },
+        {
+          "caller": "get",
+          "callee": "Notification.objects.filter",
+          "lineNumber": 422
+        },
+        {
+          "caller": "get",
+          "callee": "is_read.lower",
+          "lineNumber": 425
+        },
+        {
+          "caller": "get",
+          "callee": "notifications.filter",
+          "lineNumber": 426
+        },
+        {
+          "caller": "get",
+          "callee": "NotificationSerializer",
+          "lineNumber": 428
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 429
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 436
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 438
+        },
+        {
+          "caller": "post",
+          "callee": "Notification.objects.get",
+          "lineNumber": 440
+        },
+        {
+          "caller": "post",
+          "callee": "notification.save",
+          "lineNumber": 442
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 443
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 445
+        },
+        {
+          "caller": "post",
+          "callee": "Notification.objects.filter(user=request.user, is_read=False).update",
+          "lineNumber": 452
+        },
+        {
+          "caller": "post",
+          "callee": "Notification.objects.filter",
+          "lineNumber": 452
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 453
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 12,
+        "functionCount": 0,
+        "classCount": 12
+      }
+    },
+    {
+      "path": "backend/analytics/admin.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 10,
+      "classes": [
+        {
+          "name": "AnalyticsSnapshotAdmin",
+          "startLine": 6,
+          "endLine": 12,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AnalyticsSnapshotAdmin",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/analytics/models.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 34,
+      "classes": [
+        {
+          "name": "AnalyticsSnapshot",
+          "startLine": 5,
+          "endLine": 40,
+          "methods": [
+            "__str__"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AnalyticsSnapshot",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/analytics/tests.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 272,
+      "nonEmptyLines": 226,
+      "classes": [
+        {
+          "name": "AnalyticsDepartmentAuthorizationTests",
+          "startLine": 9,
+          "endLine": 272,
+          "methods": [
+            "setUp",
+            "_authenticate",
+            "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+            "test_librarian_a_student_list_strictly_scoped",
+            "test_librarian_a_cannot_access_department_b_student_analytics",
+            "test_admin_has_global_dashboard_and_student_access",
+            "test_student_cannot_access_librarian_dashboard",
+            "test_librarian_a_can_view_only_department_a_pending_students",
+            "test_librarian_a_can_approve_department_a_student",
+            "test_librarian_a_cannot_approve_department_b_student",
+            "test_librarian_a_can_reject_department_a_student",
+            "test_librarian_a_cannot_reject_department_b_student",
+            "test_scenario_a_student_registration_and_cs_librarian_approval",
+            "test_scenario_b_different_department_librarian_cannot_see_or_approve"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AnalyticsDepartmentAuthorizationTests",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setUp",
+          "callee": "APIClient",
+          "lineNumber": 11
+        },
+        {
+          "caller": "setUp",
+          "callee": "Department.objects.create",
+          "lineNumber": 14
+        },
+        {
+          "caller": "setUp",
+          "callee": "Department.objects.create",
+          "lineNumber": 15
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_superuser",
+          "lineNumber": 18
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 26
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 35
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 44
+        },
+        {
+          "caller": "setUp",
+          "callee": "self.student_a.profile.save",
+          "lineNumber": 53
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 56
+        },
+        {
+          "caller": "setUp",
+          "callee": "self.student_b.profile.save",
+          "lineNumber": 65
+        },
+        {
+          "caller": "setUp",
+          "callee": "Book.objects.create",
+          "lineNumber": 68
+        },
+        {
+          "caller": "setUp",
+          "callee": "Book.objects.create",
+          "lineNumber": 75
+        },
+        {
+          "caller": "setUp",
+          "callee": "Book.objects.create",
+          "lineNumber": 82
+        },
+        {
+          "caller": "setUp",
+          "callee": "Borrow.objects.create",
+          "lineNumber": 91
+        },
+        {
+          "caller": "setUp",
+          "callee": "Borrow.objects.create",
+          "lineNumber": 92
+        },
+        {
+          "caller": "setUp",
+          "callee": "BookInteraction.objects.create",
+          "lineNumber": 95
+        },
+        {
+          "caller": "setUp",
+          "callee": "BookInteraction.objects.create",
+          "lineNumber": 96
+        },
+        {
+          "caller": "_authenticate",
+          "callee": "RefreshToken.for_user",
+          "lineNumber": 99
+        },
+        {
+          "caller": "_authenticate",
+          "callee": "self.client.credentials",
+          "lineNumber": 100
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self._authenticate",
+          "lineNumber": 103
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.client.get",
+          "lineNumber": 104
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.assertEqual",
+          "lineNumber": 105
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.assertEqual",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.assertEqual",
+          "lineNumber": 109
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.assertEqual",
+          "lineNumber": 110
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.assertEqual",
+          "lineNumber": 113
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.assertEqual",
+          "lineNumber": 116
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.assertEqual",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test_librarian_a_dashboard_strictly_scoped_to_department_a",
+          "callee": "self.assertEqual",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_librarian_a_student_list_strictly_scoped",
+          "callee": "self._authenticate",
+          "lineNumber": 121
+        },
+        {
+          "caller": "test_librarian_a_student_list_strictly_scoped",
+          "callee": "self.client.get",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_librarian_a_student_list_strictly_scoped",
+          "callee": "self.assertEqual",
+          "lineNumber": 123
+        },
+        {
+          "caller": "test_librarian_a_student_list_strictly_scoped",
+          "callee": "self.assertIn",
+          "lineNumber": 125
+        },
+        {
+          "caller": "test_librarian_a_student_list_strictly_scoped",
+          "callee": "self.assertNotIn",
+          "lineNumber": 126
+        },
+        {
+          "caller": "test_librarian_a_cannot_access_department_b_student_analytics",
+          "callee": "self._authenticate",
+          "lineNumber": 129
+        },
+        {
+          "caller": "test_librarian_a_cannot_access_department_b_student_analytics",
+          "callee": "self.client.get",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_librarian_a_cannot_access_department_b_student_analytics",
+          "callee": "self.assertEqual",
+          "lineNumber": 131
+        },
+        {
+          "caller": "test_librarian_a_cannot_access_department_b_student_analytics",
+          "callee": "self.client.get",
+          "lineNumber": 133
+        },
+        {
+          "caller": "test_librarian_a_cannot_access_department_b_student_analytics",
+          "callee": "self.assertEqual",
+          "lineNumber": 134
+        },
+        {
+          "caller": "test_librarian_a_cannot_access_department_b_student_analytics",
+          "callee": "self.client.get",
+          "lineNumber": 136
+        },
+        {
+          "caller": "test_librarian_a_cannot_access_department_b_student_analytics",
+          "callee": "self.assertEqual",
+          "lineNumber": 137
+        },
+        {
+          "caller": "test_admin_has_global_dashboard_and_student_access",
+          "callee": "self._authenticate",
+          "lineNumber": 140
+        },
+        {
+          "caller": "test_admin_has_global_dashboard_and_student_access",
+          "callee": "self.client.get",
+          "lineNumber": 141
+        },
+        {
+          "caller": "test_admin_has_global_dashboard_and_student_access",
+          "callee": "self.assertEqual",
+          "lineNumber": 142
+        },
+        {
+          "caller": "test_admin_has_global_dashboard_and_student_access",
+          "callee": "self.assertEqual",
+          "lineNumber": 144
+        },
+        {
+          "caller": "test_admin_has_global_dashboard_and_student_access",
+          "callee": "self.assertEqual",
+          "lineNumber": 146
+        },
+        {
+          "caller": "test_admin_has_global_dashboard_and_student_access",
+          "callee": "self.client.get",
+          "lineNumber": 149
+        },
+        {
+          "caller": "test_admin_has_global_dashboard_and_student_access",
+          "callee": "self.assertEqual",
+          "lineNumber": 150
+        },
+        {
+          "caller": "test_student_cannot_access_librarian_dashboard",
+          "callee": "self._authenticate",
+          "lineNumber": 153
+        },
+        {
+          "caller": "test_student_cannot_access_librarian_dashboard",
+          "callee": "self.client.get",
+          "lineNumber": 154
+        },
+        {
+          "caller": "test_student_cannot_access_librarian_dashboard",
+          "callee": "self.assertEqual",
+          "lineNumber": 155
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "User.objects.create_user",
+          "lineNumber": 159
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "pending_a.profile.save",
+          "lineNumber": 162
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "User.objects.create_user",
+          "lineNumber": 164
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "pending_b.profile.save",
+          "lineNumber": 167
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "self._authenticate",
+          "lineNumber": 169
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "self.client.get",
+          "lineNumber": 170
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "self.assertEqual",
+          "lineNumber": 171
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "self.assertIn",
+          "lineNumber": 173
+        },
+        {
+          "caller": "test_librarian_a_can_view_only_department_a_pending_students",
+          "callee": "self.assertNotIn",
+          "lineNumber": 174
+        },
+        {
+          "caller": "test_librarian_a_can_approve_department_a_student",
+          "callee": "User.objects.create_user",
+          "lineNumber": 177
+        },
+        {
+          "caller": "test_librarian_a_can_approve_department_a_student",
+          "callee": "pending_a.profile.save",
+          "lineNumber": 180
+        },
+        {
+          "caller": "test_librarian_a_can_approve_department_a_student",
+          "callee": "self._authenticate",
+          "lineNumber": 182
+        },
+        {
+          "caller": "test_librarian_a_can_approve_department_a_student",
+          "callee": "self.client.post",
+          "lineNumber": 183
+        },
+        {
+          "caller": "test_librarian_a_can_approve_department_a_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 184
+        },
+        {
+          "caller": "test_librarian_a_can_approve_department_a_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 185
+        },
+        {
+          "caller": "test_librarian_a_can_approve_department_a_student",
+          "callee": "pending_a.profile.refresh_from_db",
+          "lineNumber": 187
+        },
+        {
+          "caller": "test_librarian_a_can_approve_department_a_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 188
+        },
+        {
+          "caller": "test_librarian_a_cannot_approve_department_b_student",
+          "callee": "User.objects.create_user",
+          "lineNumber": 191
+        },
+        {
+          "caller": "test_librarian_a_cannot_approve_department_b_student",
+          "callee": "pending_b.profile.save",
+          "lineNumber": 194
+        },
+        {
+          "caller": "test_librarian_a_cannot_approve_department_b_student",
+          "callee": "self._authenticate",
+          "lineNumber": 196
+        },
+        {
+          "caller": "test_librarian_a_cannot_approve_department_b_student",
+          "callee": "self.client.post",
+          "lineNumber": 197
+        },
+        {
+          "caller": "test_librarian_a_cannot_approve_department_b_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 198
+        },
+        {
+          "caller": "test_librarian_a_cannot_approve_department_b_student",
+          "callee": "pending_b.profile.refresh_from_db",
+          "lineNumber": 200
+        },
+        {
+          "caller": "test_librarian_a_cannot_approve_department_b_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 201
+        },
+        {
+          "caller": "test_librarian_a_can_reject_department_a_student",
+          "callee": "User.objects.create_user",
+          "lineNumber": 204
+        },
+        {
+          "caller": "test_librarian_a_can_reject_department_a_student",
+          "callee": "pending_a.profile.save",
+          "lineNumber": 207
+        },
+        {
+          "caller": "test_librarian_a_can_reject_department_a_student",
+          "callee": "self._authenticate",
+          "lineNumber": 209
+        },
+        {
+          "caller": "test_librarian_a_can_reject_department_a_student",
+          "callee": "self.client.post",
+          "lineNumber": 210
+        },
+        {
+          "caller": "test_librarian_a_can_reject_department_a_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 211
+        },
+        {
+          "caller": "test_librarian_a_can_reject_department_a_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 212
+        },
+        {
+          "caller": "test_librarian_a_can_reject_department_a_student",
+          "callee": "pending_a.profile.refresh_from_db",
+          "lineNumber": 214
+        },
+        {
+          "caller": "test_librarian_a_can_reject_department_a_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 215
+        },
+        {
+          "caller": "test_librarian_a_cannot_reject_department_b_student",
+          "callee": "User.objects.create_user",
+          "lineNumber": 218
+        },
+        {
+          "caller": "test_librarian_a_cannot_reject_department_b_student",
+          "callee": "pending_b.profile.save",
+          "lineNumber": 221
+        },
+        {
+          "caller": "test_librarian_a_cannot_reject_department_b_student",
+          "callee": "self._authenticate",
+          "lineNumber": 223
+        },
+        {
+          "caller": "test_librarian_a_cannot_reject_department_b_student",
+          "callee": "self.client.post",
+          "lineNumber": 224
+        },
+        {
+          "caller": "test_librarian_a_cannot_reject_department_b_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 225
+        },
+        {
+          "caller": "test_librarian_a_cannot_reject_department_b_student",
+          "callee": "pending_b.profile.refresh_from_db",
+          "lineNumber": 227
+        },
+        {
+          "caller": "test_librarian_a_cannot_reject_department_b_student",
+          "callee": "self.assertEqual",
+          "lineNumber": 228
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "User.objects.create_user",
+          "lineNumber": 232
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "cs_student.profile.save",
+          "lineNumber": 235
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "self._authenticate",
+          "lineNumber": 238
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "self.client.get",
+          "lineNumber": 239
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "self.assertEqual",
+          "lineNumber": 240
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "self.assertIn",
+          "lineNumber": 242
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "self.client.post",
+          "lineNumber": 245
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "self.assertEqual",
+          "lineNumber": 246
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "self.assertEqual",
+          "lineNumber": 247
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "cs_student.profile.refresh_from_db",
+          "lineNumber": 249
+        },
+        {
+          "caller": "test_scenario_a_student_registration_and_cs_librarian_approval",
+          "callee": "self.assertEqual",
+          "lineNumber": 250
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "User.objects.create_user",
+          "lineNumber": 254
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "cs_student.profile.save",
+          "lineNumber": 257
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "self._authenticate",
+          "lineNumber": 260
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "self.client.get",
+          "lineNumber": 261
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "self.assertEqual",
+          "lineNumber": 262
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "self.assertNotIn",
+          "lineNumber": 264
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "self.client.post",
+          "lineNumber": 267
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "self.assertEqual",
+          "lineNumber": 268
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "cs_student.profile.refresh_from_db",
+          "lineNumber": 271
+        },
+        {
+          "caller": "test_scenario_b_different_department_librarian_cannot_see_or_approve",
+          "callee": "self.assertEqual",
+          "lineNumber": 272
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/analytics/urls.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 21,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/analytics/views.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 458,
+      "nonEmptyLines": 380,
+      "classes": [
+        {
+          "name": "LibrarianDashboardView",
+          "startLine": 27,
+          "endLine": 205,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        },
+        {
+          "name": "StudentsListView",
+          "startLine": 208,
+          "endLine": 231,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        },
+        {
+          "name": "PendingStudentsView",
+          "startLine": 234,
+          "endLine": 256,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        },
+        {
+          "name": "ApproveStudentView",
+          "startLine": 259,
+          "endLine": 300,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "RejectStudentView",
+          "startLine": 303,
+          "endLine": 342,
+          "methods": [
+            "post"
+          ],
+          "properties": []
+        },
+        {
+          "name": "StudentRecommendationsView",
+          "startLine": 345,
+          "endLine": 380,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        },
+        {
+          "name": "StudentBorrowsView",
+          "startLine": 384,
+          "endLine": 399,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        },
+        {
+          "name": "StudentAnalyticsView",
+          "startLine": 402,
+          "endLine": 458,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LibrarianDashboardView",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "StudentsListView",
+          "line": 208,
+          "isDefault": false
+        },
+        {
+          "name": "PendingStudentsView",
+          "line": 234,
+          "isDefault": false
+        },
+        {
+          "name": "ApproveStudentView",
+          "line": 259,
+          "isDefault": false
+        },
+        {
+          "name": "RejectStudentView",
+          "line": 303,
+          "isDefault": false
+        },
+        {
+          "name": "StudentRecommendationsView",
+          "line": 345,
+          "isDefault": false
+        },
+        {
+          "name": "StudentBorrowsView",
+          "line": 384,
+          "isDefault": false
+        },
+        {
+          "name": "StudentAnalyticsView",
+          "line": 402,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 33
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 39
+        },
+        {
+          "caller": "get",
+          "callee": "dashboard_key",
+          "lineNumber": 54
+        },
+        {
+          "caller": "get",
+          "callee": "safe_cache_get",
+          "lineNumber": 55
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 57
+        },
+        {
+          "caller": "get",
+          "callee": "Book.objects.filter",
+          "lineNumber": 61
+        },
+        {
+          "caller": "get",
+          "callee": "Book.objects.all",
+          "lineNumber": 63
+        },
+        {
+          "caller": "get",
+          "callee": "all_books.aggregate",
+          "lineNumber": 65
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 66
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 67
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 67
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 68
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 68
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.filter(\n                role=\"student\",\n                profile__department=department\n            ).count",
+          "lineNumber": 73
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.filter",
+          "lineNumber": 73
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.filter(role=\"student\").count",
+          "lineNumber": 78
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.filter",
+          "lineNumber": 78
+        },
+        {
+          "caller": "get",
+          "callee": "Borrow.objects.select_related(\"user\", \"book\", \"user__profile\").filter",
+          "lineNumber": 82
+        },
+        {
+          "caller": "get",
+          "callee": "Borrow.objects.select_related",
+          "lineNumber": 82
+        },
+        {
+          "caller": "get",
+          "callee": "Borrow.objects.select_related(\"user\", \"book\", \"user__profile\").all",
+          "lineNumber": 86
+        },
+        {
+          "caller": "get",
+          "callee": "Borrow.objects.select_related",
+          "lineNumber": 86
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.aggregate",
+          "lineNumber": 89
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 90
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 90
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 91
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 91
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 92
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 92
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 93
+        },
+        {
+          "caller": "get",
+          "callee": "borrows\n            .values(\"book__title\")\n            .annotate(count=Count(\"id\"))\n            .order_by",
+          "lineNumber": 98
+        },
+        {
+          "caller": "get",
+          "callee": "borrows\n            .values(\"book__title\")\n            .annotate",
+          "lineNumber": 98
+        },
+        {
+          "caller": "get",
+          "callee": "borrows\n            .values",
+          "lineNumber": 98
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 100
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.values(\"user\").distinct().count",
+          "lineNumber": 105
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.values(\"user\").distinct",
+          "lineNumber": 105
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.values",
+          "lineNumber": 105
+        },
+        {
+          "caller": "get",
+          "callee": "timezone.now",
+          "lineNumber": 106
+        },
+        {
+          "caller": "get",
+          "callee": "timedelta",
+          "lineNumber": 106
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.filter(requested_at__gte=since).values(\"user\").distinct().count",
+          "lineNumber": 107
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.filter(requested_at__gte=since).values(\"user\").distinct",
+          "lineNumber": 107
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.filter(requested_at__gte=since).values",
+          "lineNumber": 107
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.filter",
+          "lineNumber": 107
+        },
+        {
+          "caller": "get",
+          "callee": "BookInteraction.objects.select_related(\"book\", \"user\").filter",
+          "lineNumber": 111
+        },
+        {
+          "caller": "get",
+          "callee": "BookInteraction.objects.select_related",
+          "lineNumber": 111
+        },
+        {
+          "caller": "get",
+          "callee": "BookInteraction.objects.select_related(\"book\", \"user\").filter",
+          "lineNumber": 116
+        },
+        {
+          "caller": "get",
+          "callee": "BookInteraction.objects.select_related",
+          "lineNumber": 116
+        },
+        {
+          "caller": "get",
+          "callee": "mv_qs\n            .values(\"book__title\")\n            .annotate(count=Count(\"id\"))\n            .order_by",
+          "lineNumber": 121
+        },
+        {
+          "caller": "get",
+          "callee": "mv_qs\n            .values(\"book__title\")\n            .annotate",
+          "lineNumber": 121
+        },
+        {
+          "caller": "get",
+          "callee": "mv_qs\n            .values",
+          "lineNumber": 121
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 123
+        },
+        {
+          "caller": "get",
+          "callee": "connection.cursor",
+          "lineNumber": 130
+        },
+        {
+          "caller": "get",
+          "callee": "cursor.execute",
+          "lineNumber": 132
+        },
+        {
+          "caller": "get",
+          "callee": "cursor.execute",
+          "lineNumber": 147
+        },
+        {
+          "caller": "get",
+          "callee": "cursor.fetchall",
+          "lineNumber": 159
+        },
+        {
+          "caller": "get",
+          "callee": "all_books.exclude(categories__isnull=True).exclude(categories=\"\").values_list",
+          "lineNumber": 162
+        },
+        {
+          "caller": "get",
+          "callee": "all_books.exclude(categories__isnull=True).exclude",
+          "lineNumber": 162
+        },
+        {
+          "caller": "get",
+          "callee": "all_books.exclude",
+          "lineNumber": 162
+        },
+        {
+          "caller": "get",
+          "callee": "cats.split",
+          "lineNumber": 163
+        },
+        {
+          "caller": "get",
+          "callee": "cat.strip",
+          "lineNumber": 164
+        },
+        {
+          "caller": "get",
+          "callee": "cat_counts.get",
+          "lineNumber": 166
+        },
+        {
+          "caller": "get",
+          "callee": "sorted",
+          "lineNumber": 167
+        },
+        {
+          "caller": "get",
+          "callee": "cat_counts.items",
+          "lineNumber": 167
+        },
+        {
+          "caller": "get",
+          "callee": "list",
+          "lineNumber": 171
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.annotate(day=TruncDate(\"requested_at\"))\n            .values(\"day\")\n            .annotate(\n                total=Count(\"id\"),\n                returned=Sum(\n                    Case(\n                        When(status=\"returned\", then=1),\n                        default=0,\n                        output_field=IntegerField(),\n                    )\n                ),\n            )\n            .order_by",
+          "lineNumber": 172
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.annotate(day=TruncDate(\"requested_at\"))\n            .values(\"day\")\n            .annotate",
+          "lineNumber": 172
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.annotate(day=TruncDate(\"requested_at\"))\n            .values",
+          "lineNumber": 172
+        },
+        {
+          "caller": "get",
+          "callee": "borrows.annotate",
+          "lineNumber": 172
+        },
+        {
+          "caller": "get",
+          "callee": "TruncDate",
+          "lineNumber": 172
+        },
+        {
+          "caller": "get",
+          "callee": "Count",
+          "lineNumber": 175
+        },
+        {
+          "caller": "get",
+          "callee": "Sum",
+          "lineNumber": 176
+        },
+        {
+          "caller": "get",
+          "callee": "Case",
+          "lineNumber": 177
+        },
+        {
+          "caller": "get",
+          "callee": "When",
+          "lineNumber": 178
+        },
+        {
+          "caller": "get",
+          "callee": "IntegerField",
+          "lineNumber": 180
+        },
+        {
+          "caller": "get",
+          "callee": "list",
+          "lineNumber": 195
+        },
+        {
+          "caller": "get",
+          "callee": "list",
+          "lineNumber": 196
+        },
+        {
+          "caller": "get",
+          "callee": "safe_cache_set",
+          "lineNumber": 204
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 205
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 213
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 217
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related(\"profile\", \"profile__department\", \"department\").filter(\n                role='student'\n            ).filter",
+          "lineNumber": 218
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related(\"profile\", \"profile__department\", \"department\").filter",
+          "lineNumber": 218
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related",
+          "lineNumber": 218
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 221
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 221
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related(\"profile\", \"profile__department\", \"department\").filter",
+          "lineNumber": 224
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related",
+          "lineNumber": 224
+        },
+        {
+          "caller": "get",
+          "callee": "request.query_params.get",
+          "lineNumber": 227
+        },
+        {
+          "caller": "get",
+          "callee": "qs.filter",
+          "lineNumber": 229
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 231
+        },
+        {
+          "caller": "get",
+          "callee": "UserSerializer",
+          "lineNumber": 231
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 239
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 243
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related(\"profile\", \"profile__department\", \"department\").filter(\n                role='student',\n                profile__approval_status='pending'\n            ).filter",
+          "lineNumber": 244
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related(\"profile\", \"profile__department\", \"department\").filter",
+          "lineNumber": 244
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related",
+          "lineNumber": 244
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 248
+        },
+        {
+          "caller": "get",
+          "callee": "Q",
+          "lineNumber": 248
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related(\"profile\", \"profile__department\", \"department\").filter",
+          "lineNumber": 251
+        },
+        {
+          "caller": "get",
+          "callee": "User.objects.select_related",
+          "lineNumber": 251
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 256
+        },
+        {
+          "caller": "get",
+          "callee": "UserSerializer",
+          "lineNumber": 256
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 264
+        },
+        {
+          "caller": "post",
+          "callee": "get_object_or_404",
+          "lineNumber": 266
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.select_related",
+          "lineNumber": 266
+        },
+        {
+          "caller": "post",
+          "callee": "getattr",
+          "lineNumber": 270
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 272
+        },
+        {
+          "caller": "post",
+          "callee": "hasattr",
+          "lineNumber": 274
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 275
+        },
+        {
+          "caller": "post",
+          "callee": "student.profile.save",
+          "lineNumber": 280
+        },
+        {
+          "caller": "post",
+          "callee": "student.save",
+          "lineNumber": 284
+        },
+        {
+          "caller": "post",
+          "callee": "Notification.objects.create",
+          "lineNumber": 287
+        },
+        {
+          "caller": "post",
+          "callee": "invalidate_dashboard_cache",
+          "lineNumber": 294
+        },
+        {
+          "caller": "post",
+          "callee": "getattr",
+          "lineNumber": 294
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 296
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 308
+        },
+        {
+          "caller": "post",
+          "callee": "get_object_or_404",
+          "lineNumber": 310
+        },
+        {
+          "caller": "post",
+          "callee": "User.objects.select_related",
+          "lineNumber": 310
+        },
+        {
+          "caller": "post",
+          "callee": "getattr",
+          "lineNumber": 314
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 316
+        },
+        {
+          "caller": "post",
+          "callee": "hasattr",
+          "lineNumber": 318
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 319
+        },
+        {
+          "caller": "post",
+          "callee": "student.profile.save",
+          "lineNumber": 322
+        },
+        {
+          "caller": "post",
+          "callee": "request.data.get",
+          "lineNumber": 324
+        },
+        {
+          "caller": "post",
+          "callee": "Notification.objects.create",
+          "lineNumber": 329
+        },
+        {
+          "caller": "post",
+          "callee": "invalidate_dashboard_cache",
+          "lineNumber": 336
+        },
+        {
+          "caller": "post",
+          "callee": "getattr",
+          "lineNumber": 336
+        },
+        {
+          "caller": "post",
+          "callee": "Response",
+          "lineNumber": 338
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 350
+        },
+        {
+          "caller": "get",
+          "callee": "get_object_or_404",
+          "lineNumber": 352
+        },
+        {
+          "caller": "get",
+          "callee": "getattr",
+          "lineNumber": 356
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 358
+        },
+        {
+          "caller": "get",
+          "callee": "getattr",
+          "lineNumber": 360
+        },
+        {
+          "caller": "get",
+          "callee": "int",
+          "lineNumber": 362
+        },
+        {
+          "caller": "get",
+          "callee": "request.GET.get",
+          "lineNumber": 362
+        },
+        {
+          "caller": "get",
+          "callee": "request.GET.get",
+          "lineNumber": 363
+        },
+        {
+          "caller": "get",
+          "callee": "recommendation_key",
+          "lineNumber": 366
+        },
+        {
+          "caller": "get",
+          "callee": "safe_cache_get",
+          "lineNumber": 367
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 369
+        },
+        {
+          "caller": "get",
+          "callee": "content_based",
+          "lineNumber": 372
+        },
+        {
+          "caller": "get",
+          "callee": "interaction_based",
+          "lineNumber": 374
+        },
+        {
+          "caller": "get",
+          "callee": "hybrid",
+          "lineNumber": 376
+        },
+        {
+          "caller": "get",
+          "callee": "BookSerializer",
+          "lineNumber": 378
+        },
+        {
+          "caller": "get",
+          "callee": "safe_cache_set",
+          "lineNumber": 379
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 380
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 389
+        },
+        {
+          "caller": "get",
+          "callee": "get_object_or_404",
+          "lineNumber": 391
+        },
+        {
+          "caller": "get",
+          "callee": "getattr",
+          "lineNumber": 394
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 396
+        },
+        {
+          "caller": "get",
+          "callee": "Borrow.objects.select_related(\"book\", \"user\").filter",
+          "lineNumber": 398
+        },
+        {
+          "caller": "get",
+          "callee": "Borrow.objects.select_related",
+          "lineNumber": 398
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 399
+        },
+        {
+          "caller": "get",
+          "callee": "BorrowSerializer",
+          "lineNumber": 399
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 407
+        },
+        {
+          "caller": "get",
+          "callee": "get_object_or_404",
+          "lineNumber": 409
+        },
+        {
+          "caller": "get",
+          "callee": "getattr",
+          "lineNumber": 412
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 414
+        },
+        {
+          "caller": "get",
+          "callee": "BookInteraction.objects.select_related(\"book\").filter",
+          "lineNumber": 417
+        },
+        {
+          "caller": "get",
+          "callee": "BookInteraction.objects.select_related",
+          "lineNumber": 417
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.count",
+          "lineNumber": 419
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.filter(interaction_type='view').count",
+          "lineNumber": 420
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.filter",
+          "lineNumber": 420
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.filter(interaction_type='like').count",
+          "lineNumber": 421
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.filter",
+          "lineNumber": 421
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.filter(interaction_type='borrow').count",
+          "lineNumber": 422
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.filter",
+          "lineNumber": 422
+        },
+        {
+          "caller": "get",
+          "callee": "hasattr",
+          "lineNumber": 427
+        },
+        {
+          "caller": "get",
+          "callee": "cat.strip",
+          "lineNumber": 428
+        },
+        {
+          "caller": "get",
+          "callee": "student.profile.preferred_categories.split",
+          "lineNumber": 428
+        },
+        {
+          "caller": "get",
+          "callee": "cat.strip",
+          "lineNumber": 428
+        },
+        {
+          "caller": "get",
+          "callee": "cat.strip",
+          "lineNumber": 434
+        },
+        {
+          "caller": "get",
+          "callee": "interaction.book.categories.split",
+          "lineNumber": 434
+        },
+        {
+          "caller": "get",
+          "callee": "category_interactions.get",
+          "lineNumber": 437
+        },
+        {
+          "caller": "get",
+          "callee": "sorted",
+          "lineNumber": 440
+        },
+        {
+          "caller": "get",
+          "callee": "category_interactions.items",
+          "lineNumber": 440
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.filter(interaction_type='borrow').select_related",
+          "lineNumber": 443
+        },
+        {
+          "caller": "get",
+          "callee": "interactions.filter",
+          "lineNumber": 443
+        },
+        {
+          "caller": "get",
+          "callee": "borrowed_books.append",
+          "lineNumber": 446
+        },
+        {
+          "caller": "get",
+          "callee": "Response",
+          "lineNumber": 453
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 8,
+        "functionCount": 0,
+        "classCount": 8
+      }
+    },
+    {
+      "path": "backend/book_recommondation/urls.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "health_check",
+          "startLine": 8,
+          "endLine": 9,
+          "params": [
+            "request"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "health_check",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "health_check",
+          "callee": "JsonResponse",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/books/admin.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 29,
+      "classes": [
+        {
+          "name": "BookAdmin",
+          "startLine": 6,
+          "endLine": 11,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "BookInteractionAdmin",
+          "startLine": 15,
+          "endLine": 20,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SearchHistoryAdmin",
+          "startLine": 24,
+          "endLine": 29,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "BookDwellTimeAdmin",
+          "startLine": 33,
+          "endLine": 37,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BookAdmin",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "BookInteractionAdmin",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "SearchHistoryAdmin",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "BookDwellTimeAdmin",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 4
+      }
+    },
+    {
+      "path": "backend/books/cache_utils.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 200,
+      "nonEmptyLines": 161,
+      "functions": [
+        {
+          "name": "department_list_key",
+          "startLine": 27,
+          "endLine": 29,
+          "params": []
+        },
+        {
+          "name": "categories_key",
+          "startLine": 32,
+          "endLine": 35,
+          "params": [
+            "dept_id_or_all"
+          ]
+        },
+        {
+          "name": "similar_books_key",
+          "startLine": 38,
+          "endLine": 41,
+          "params": [
+            "book_id",
+            "dept_id_or_all",
+            "limit"
+          ]
+        },
+        {
+          "name": "dashboard_key",
+          "startLine": 44,
+          "endLine": 46,
+          "params": [
+            "scope"
+          ]
+        },
+        {
+          "name": "recommendation_key",
+          "startLine": 49,
+          "endLine": 52,
+          "params": [
+            "rec_type",
+            "user_id",
+            "dept_id_or_all",
+            "limit"
+          ]
+        },
+        {
+          "name": "book_detail_key",
+          "startLine": 55,
+          "endLine": 57,
+          "params": [
+            "book_id"
+          ]
+        },
+        {
+          "name": "book_list_default_key",
+          "startLine": 60,
+          "endLine": 63,
+          "params": [
+            "dept_id_or_all"
+          ]
+        },
+        {
+          "name": "safe_cache_get",
+          "startLine": 70,
+          "endLine": 77,
+          "params": [
+            "key",
+            "default"
+          ]
+        },
+        {
+          "name": "safe_cache_set",
+          "startLine": 80,
+          "endLine": 85,
+          "params": [
+            "key",
+            "value",
+            "timeout"
+          ]
+        },
+        {
+          "name": "safe_delete_pattern",
+          "startLine": 88,
+          "endLine": 99,
+          "params": [
+            "pattern"
+          ]
+        },
+        {
+          "name": "invalidate_department_cache",
+          "startLine": 106,
+          "endLine": 111,
+          "params": []
+        },
+        {
+          "name": "invalidate_categories_cache",
+          "startLine": 114,
+          "endLine": 124,
+          "params": []
+        },
+        {
+          "name": "invalidate_book_cache",
+          "startLine": 127,
+          "endLine": 144,
+          "params": [
+            "book_id"
+          ]
+        },
+        {
+          "name": "invalidate_catalog_cache",
+          "startLine": 147,
+          "endLine": 156,
+          "params": []
+        },
+        {
+          "name": "invalidate_dashboard_cache",
+          "startLine": 159,
+          "endLine": 173,
+          "params": [
+            "dept_id"
+          ]
+        },
+        {
+          "name": "invalidate_user_recommendations",
+          "startLine": 176,
+          "endLine": 200,
+          "params": [
+            "user_id",
+            "dept_id"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "department_list_key",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "categories_key",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "similar_books_key",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "dashboard_key",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "recommendation_key",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "book_detail_key",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "book_list_default_key",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "safe_cache_get",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "safe_cache_set",
+          "line": 80,
+          "isDefault": false
+        },
+        {
+          "name": "safe_delete_pattern",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "invalidate_department_cache",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "invalidate_categories_cache",
+          "line": 114,
+          "isDefault": false
+        },
+        {
+          "name": "invalidate_book_cache",
+          "line": 127,
+          "isDefault": false
+        },
+        {
+          "name": "invalidate_catalog_cache",
+          "line": 147,
+          "isDefault": false
+        },
+        {
+          "name": "invalidate_dashboard_cache",
+          "line": 159,
+          "isDefault": false
+        },
+        {
+          "name": "invalidate_user_recommendations",
+          "line": 176,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "categories_key",
+          "callee": "str",
+          "lineNumber": 34
+        },
+        {
+          "caller": "similar_books_key",
+          "callee": "str",
+          "lineNumber": 40
+        },
+        {
+          "caller": "recommendation_key",
+          "callee": "str",
+          "lineNumber": 51
+        },
+        {
+          "caller": "book_list_default_key",
+          "callee": "str",
+          "lineNumber": 62
+        },
+        {
+          "caller": "safe_cache_get",
+          "callee": "cache.get",
+          "lineNumber": 73
+        },
+        {
+          "caller": "safe_cache_get",
+          "callee": "logger.warning",
+          "lineNumber": 76
+        },
+        {
+          "caller": "safe_cache_set",
+          "callee": "cache.set",
+          "lineNumber": 83
+        },
+        {
+          "caller": "safe_cache_set",
+          "callee": "logger.warning",
+          "lineNumber": 85
+        },
+        {
+          "caller": "safe_delete_pattern",
+          "callee": "hasattr",
+          "lineNumber": 93
+        },
+        {
+          "caller": "safe_delete_pattern",
+          "callee": "cache.delete_pattern",
+          "lineNumber": 95
+        },
+        {
+          "caller": "safe_delete_pattern",
+          "callee": "logger.warning",
+          "lineNumber": 97
+        },
+        {
+          "caller": "invalidate_department_cache",
+          "callee": "cache.delete",
+          "lineNumber": 109
+        },
+        {
+          "caller": "invalidate_department_cache",
+          "callee": "department_list_key",
+          "lineNumber": 109
+        },
+        {
+          "caller": "invalidate_department_cache",
+          "callee": "logger.warning",
+          "lineNumber": 111
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 117
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "cache.delete",
+          "lineNumber": 119
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "categories_key",
+          "lineNumber": 119
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "range",
+          "lineNumber": 120
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "cache.delete",
+          "lineNumber": 121
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "categories_key",
+          "lineNumber": 121
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "cache.delete",
+          "lineNumber": 122
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "categories_key",
+          "lineNumber": 122
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "str",
+          "lineNumber": 122
+        },
+        {
+          "caller": "invalidate_categories_cache",
+          "callee": "logger.warning",
+          "lineNumber": 124
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "cache.delete",
+          "lineNumber": 135
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "book_detail_key",
+          "lineNumber": 135
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 136
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "cache.delete",
+          "lineNumber": 139
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "range",
+          "lineNumber": 140
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "cache.delete",
+          "lineNumber": 141
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "cache.delete",
+          "lineNumber": 142
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "str",
+          "lineNumber": 142
+        },
+        {
+          "caller": "invalidate_book_cache",
+          "callee": "logger.warning",
+          "lineNumber": 144
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 150
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "cache.delete",
+          "lineNumber": 151
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "book_list_default_key",
+          "lineNumber": 151
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "range",
+          "lineNumber": 152
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "cache.delete",
+          "lineNumber": 153
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "book_list_default_key",
+          "lineNumber": 153
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "cache.delete",
+          "lineNumber": 154
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "book_list_default_key",
+          "lineNumber": 154
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "str",
+          "lineNumber": 154
+        },
+        {
+          "caller": "invalidate_catalog_cache",
+          "callee": "logger.warning",
+          "lineNumber": 156
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 165
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "cache.delete",
+          "lineNumber": 166
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "dashboard_key",
+          "lineNumber": 166
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "cache.delete",
+          "lineNumber": 168
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "dashboard_key",
+          "lineNumber": 168
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "range",
+          "lineNumber": 169
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "cache.delete",
+          "lineNumber": 170
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "dashboard_key",
+          "lineNumber": 170
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "cache.delete",
+          "lineNumber": 171
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "dashboard_key",
+          "lineNumber": 171
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "str",
+          "lineNumber": 171
+        },
+        {
+          "caller": "invalidate_dashboard_cache",
+          "callee": "logger.warning",
+          "lineNumber": 173
+        },
+        {
+          "caller": "invalidate_user_recommendations",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 184
+        },
+        {
+          "caller": "invalidate_user_recommendations",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 185
+        },
+        {
+          "caller": "invalidate_user_recommendations",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 186
+        },
+        {
+          "caller": "invalidate_user_recommendations",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 187
+        },
+        {
+          "caller": "invalidate_user_recommendations",
+          "callee": "cache.delete",
+          "lineNumber": 197
+        },
+        {
+          "caller": "invalidate_user_recommendations",
+          "callee": "cache.delete",
+          "lineNumber": 198
+        },
+        {
+          "caller": "invalidate_user_recommendations",
+          "callee": "logger.warning",
+          "lineNumber": 200
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 16,
+        "functionCount": 16,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/books/management/commands/import_books.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 111,
+      "nonEmptyLines": 89,
+      "functions": [
+        {
+          "name": "to_int",
+          "startLine": 9,
+          "endLine": 15,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "to_float",
+          "startLine": 18,
+          "endLine": 24,
+          "params": [
+            "value"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Command",
+          "startLine": 27,
+          "endLine": 111,
+          "methods": [
+            "add_arguments",
+            "handle"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "to_int",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "to_float",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "Command",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "to_int",
+          "callee": "int",
+          "lineNumber": 13
+        },
+        {
+          "caller": "to_int",
+          "callee": "float",
+          "lineNumber": 13
+        },
+        {
+          "caller": "to_float",
+          "callee": "float",
+          "lineNumber": 22
+        },
+        {
+          "caller": "add_arguments",
+          "callee": "parser.add_argument",
+          "lineNumber": 31
+        },
+        {
+          "caller": "handle",
+          "callee": "kwargs.get",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handle",
+          "callee": "Path",
+          "lineNumber": 40
+        },
+        {
+          "caller": "handle",
+          "callee": "Path",
+          "lineNumber": 40
+        },
+        {
+          "caller": "handle",
+          "callee": "csv_path.exists",
+          "lineNumber": 42
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stderr.write",
+          "lineNumber": 43
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.all().delete",
+          "lineNumber": 46
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.all",
+          "lineNumber": 46
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 47
+        },
+        {
+          "caller": "handle",
+          "callee": "open",
+          "lineNumber": 52
+        },
+        {
+          "caller": "handle",
+          "callee": "csv.DictReader",
+          "lineNumber": 53
+        },
+        {
+          "caller": "get_field",
+          "callee": "row.items",
+          "lineNumber": 57
+        },
+        {
+          "caller": "get_field",
+          "callee": "k.strip().lower",
+          "lineNumber": 58
+        },
+        {
+          "caller": "get_field",
+          "callee": "k.strip",
+          "lineNumber": 58
+        },
+        {
+          "caller": "get_field",
+          "callee": "a.lower",
+          "lineNumber": 58
+        },
+        {
+          "caller": "get_field",
+          "callee": "v.strip",
+          "lineNumber": 59
+        },
+        {
+          "caller": "get_field",
+          "callee": "isinstance",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handle",
+          "callee": "to_int",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handle",
+          "callee": "max",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handle",
+          "callee": "min",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 65
+        },
+        {
+          "caller": "handle",
+          "callee": "books_to_create.append",
+          "lineNumber": 69
+        },
+        {
+          "caller": "handle",
+          "callee": "Book",
+          "lineNumber": 69
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 71
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 72
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 73
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 74
+        },
+        {
+          "caller": "handle",
+          "callee": "to_int",
+          "lineNumber": 75
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 75
+        },
+        {
+          "caller": "handle",
+          "callee": "to_int",
+          "lineNumber": 76
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 76
+        },
+        {
+          "caller": "handle",
+          "callee": "to_float",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handle",
+          "callee": "to_int",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handle",
+          "callee": "get_field",
+          "lineNumber": 79
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 84
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.bulk_create",
+          "lineNumber": 85
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 86
+        },
+        {
+          "caller": "handle",
+          "callee": "len",
+          "lineNumber": 86
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.bulk_create",
+          "lineNumber": 91
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.count",
+          "lineNumber": 93
+        },
+        {
+          "caller": "handle",
+          "callee": "invalidate_catalog_cache",
+          "lineNumber": 103
+        },
+        {
+          "caller": "handle",
+          "callee": "invalidate_categories_cache",
+          "lineNumber": 104
+        },
+        {
+          "caller": "handle",
+          "callee": "invalidate_dashboard_cache",
+          "lineNumber": 105
+        },
+        {
+          "caller": "handle",
+          "callee": "safe_delete_pattern",
+          "lineNumber": 106
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 107
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 109
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 111
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 111
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/books/management/commands/seed_interactions.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 81,
+      "nonEmptyLines": 63,
+      "classes": [
+        {
+          "name": "Command",
+          "startLine": 16,
+          "endLine": 81,
+          "methods": [
+            "add_arguments",
+            "handle"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Command",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "add_arguments",
+          "callee": "parser.add_argument",
+          "lineNumber": 20
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stderr.write",
+          "lineNumber": 24
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.ERROR",
+          "lineNumber": 25
+        },
+        {
+          "caller": "handle",
+          "callee": "int",
+          "lineNumber": 31
+        },
+        {
+          "caller": "handle",
+          "callee": "kwargs.get",
+          "lineNumber": 31
+        },
+        {
+          "caller": "handle",
+          "callee": "Faker",
+          "lineNumber": 32
+        },
+        {
+          "caller": "handle",
+          "callee": "get_user_model",
+          "lineNumber": 33
+        },
+        {
+          "caller": "handle",
+          "callee": "list",
+          "lineNumber": 35
+        },
+        {
+          "caller": "handle",
+          "callee": "User.objects.all",
+          "lineNumber": 35
+        },
+        {
+          "caller": "handle",
+          "callee": "list",
+          "lineNumber": 36
+        },
+        {
+          "caller": "handle",
+          "callee": "Book.objects.all",
+          "lineNumber": 36
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stderr.write",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.ERROR",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handle",
+          "callee": "random.choice",
+          "lineNumber": 47
+        },
+        {
+          "caller": "handle",
+          "callee": "random.choice",
+          "lineNumber": 48
+        },
+        {
+          "caller": "handle",
+          "callee": "random.choices",
+          "lineNumber": 49
+        },
+        {
+          "caller": "handle",
+          "callee": "fake.date_time_between",
+          "lineNumber": 52
+        },
+        {
+          "caller": "handle",
+          "callee": "timezone.get_current_timezone",
+          "lineNumber": 55
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.filter(\n                    user=user, book=book, interaction_type=\"view\"\n                ).exists",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.filter",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handle",
+          "callee": "timedelta",
+          "lineNumber": 65
+        },
+        {
+          "caller": "handle",
+          "callee": "random.randint",
+          "lineNumber": 65
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.create",
+          "lineNumber": 66
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.filter(pk=view.pk).update",
+          "lineNumber": 69
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.filter",
+          "lineNumber": 69
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.create",
+          "lineNumber": 75
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.filter(pk=interaction.pk).update",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handle",
+          "callee": "BookInteraction.objects.filter",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 81
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    }
+  ]
+}

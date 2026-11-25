@@ -1,0 +1,212 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "backend/books/models.py",
+      "language": "python",
+      "sizeLines": 115,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/serializers.py",
+      "language": "python",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/services/csv_importer.py",
+      "language": "python",
+      "sizeLines": 350,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/services/recommender.py",
+      "language": "python",
+      "sizeLines": 513,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/test_recommender_pytest.py",
+      "language": "python",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/test_redis_caching_pytest.py",
+      "language": "python",
+      "sizeLines": 506,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/test_reviews_pytest.py",
+      "language": "python",
+      "sizeLines": 157,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/tests.py",
+      "language": "python",
+      "sizeLines": 674,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/urls.py",
+      "language": "python",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/views.py",
+      "language": "python",
+      "sizeLines": 626,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/admin.py",
+      "language": "python",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/models.py",
+      "language": "python",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/serializers.py",
+      "language": "python",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/test_borrows_pytest.py",
+      "language": "python",
+      "sizeLines": 150,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/tests.py",
+      "language": "python",
+      "sizeLines": 446,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/urls.py",
+      "language": "python",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/borrows/views.py",
+      "language": "python",
+      "sizeLines": 282,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/conftest.py",
+      "language": "python",
+      "sizeLines": 179,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/qa_tests/e2e_student_flow.py",
+      "language": "python",
+      "sizeLines": 124,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/qa_tests/librarian_e2e.py",
+      "language": "python",
+      "sizeLines": 136,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "backend/books/models.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/books/serializers.py": [
+      "backend/books/models.py"
+    ],
+    "backend/books/services/csv_importer.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py"
+    ],
+    "backend/books/services/recommender.py": [
+      "backend/books/cache_utils.py",
+      "backend/books/models.py"
+    ],
+    "backend/books/test_recommender_pytest.py": [
+      "backend/books/models.py",
+      "backend/books/services/recommender.py"
+    ],
+    "backend/books/test_redis_caching_pytest.py": [
+      "backend/accounts/models.py",
+      "backend/books/cache_utils.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/books/test_reviews_pytest.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py"
+    ],
+    "backend/books/tests.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py"
+    ],
+    "backend/books/urls.py": [
+      "backend/books/views.py"
+    ],
+    "backend/books/views.py": [
+      "backend/accounts/models.py",
+      "backend/books/cache_utils.py",
+      "backend/books/models.py",
+      "backend/books/serializers.py",
+      "backend/books/services/csv_importer.py",
+      "backend/books/services/recommender.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/admin.py": [
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/models.py": [
+      "backend/books/models.py"
+    ],
+    "backend/borrows/serializers.py": [
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/test_borrows_pytest.py": [
+      "backend/accounts/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/tests.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/urls.py": [
+      "backend/borrows/views.py"
+    ],
+    "backend/borrows/views.py": [
+      "backend/accounts/models.py",
+      "backend/books/cache_utils.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py",
+      "backend/borrows/serializers.py"
+    ],
+    "backend/conftest.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/qa_tests/e2e_student_flow.py": [
+      "backend/books/models.py"
+    ],
+    "backend/qa_tests/librarian_e2e.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ]
+  }
+}

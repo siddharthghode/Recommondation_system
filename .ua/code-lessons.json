@@ -1,0 +1,1357 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-18T08:18:05.861174+00:00",
+  "files": {
+    "README.md": {
+      "overview": "Comprehensive project documentation detailing features, architecture, installation, and deployment steps.",
+      "sections": [
+        {
+          "title": "Project Badges & Overview",
+          "lineRange": [
+            1,
+            25
+          ],
+          "explanation": "Introduces the project architecture, tech stack versions, and key system capabilities.",
+          "tourOrder": 1
+        },
+        {
+          "title": "Docker Setup & Quick Start",
+          "lineRange": [
+            26,
+            120
+          ],
+          "explanation": "Instructions for running containerized PostgreSQL, Redis, Django, and React services.",
+          "tourOrder": 1
+        },
+        {
+          "title": "Architecture & Features",
+          "lineRange": [
+            121,
+            355
+          ],
+          "explanation": "Details department-level catalog isolation, recommendation engine, and API design.",
+          "tourOrder": 1
+        }
+      ]
+    },
+    "PROJECT_RULES.md": {
+      "overview": "Developer guidelines, coding standards, branch conventions, and testing protocols for the repository.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            399
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for PROJECT_RULES.md.",
+          "tourOrder": 1
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            400,
+            799
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for PROJECT_RULES.md.",
+          "tourOrder": 1
+        }
+      ]
+    },
+    "database/ER_DIAGRAM.md": {
+      "overview": "Entity-relationship schema documentation specifying tables, fields, foreign keys, and indexes.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            175
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for ER_DIAGRAM.md.",
+          "tourOrder": 1
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            176,
+            351
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for ER_DIAGRAM.md.",
+          "tourOrder": 1
+        }
+      ]
+    },
+    "docker-compose.yml": {
+      "overview": "Multi-container orchestration defining PostgreSQL, Redis 7, Django backend, and React Nginx services.",
+      "sections": [
+        {
+          "title": "Database & Redis Services",
+          "lineRange": [
+            1,
+            35
+          ],
+          "explanation": "PostgreSQL 16 and Redis 7 in-memory cache container definitions with volume persistence.",
+          "tourOrder": 2
+        },
+        {
+          "title": "Backend API Service",
+          "lineRange": [
+            36,
+            60
+          ],
+          "explanation": "Gunicorn Django application container with environment variables and health checks.",
+          "tourOrder": 2
+        },
+        {
+          "title": "Frontend Nginx Service",
+          "lineRange": [
+            61,
+            82
+          ],
+          "explanation": "Production Nginx reverse proxy serving static assets and forwarding API calls.",
+          "tourOrder": 2
+        }
+      ]
+    },
+    "backend/Dockerfile": {
+      "overview": "Container build specification packaging the backend Django API.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            11
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for Dockerfile.",
+          "tourOrder": 2
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            12,
+            23
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for Dockerfile.",
+          "tourOrder": 2
+        }
+      ]
+    },
+    "frontend/Dockerfile": {
+      "overview": "Container build specification packaging the frontend React web app.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            17
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for Dockerfile.",
+          "tourOrder": 2
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            18,
+            34
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for Dockerfile.",
+          "tourOrder": 2
+        }
+      ]
+    },
+    "frontend/nginx.conf": {
+      "overview": "Nginx web server configuration proxying API requests and serving static single-page application assets.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            24
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for nginx.conf.",
+          "tourOrder": 2
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            25,
+            48
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for nginx.conf.",
+          "tourOrder": 2
+        }
+      ]
+    },
+    "backend/book_recommondation/settings.py": {
+      "overview": "Django project settings configuring database connections, JWT auth, Redis cache, CORS, and installed apps.",
+      "sections": [
+        {
+          "title": "Core Settings & Installed Apps",
+          "lineRange": [
+            1,
+            80
+          ],
+          "explanation": "Imports, secret key loading from environment, and Django app registrations.",
+          "tourOrder": 3
+        },
+        {
+          "title": "Authentication & Database",
+          "lineRange": [
+            81,
+            180
+          ],
+          "explanation": "SimpleJWT token lifetimes, password hashers, and PostgreSQL database connection.",
+          "tourOrder": 3
+        },
+        {
+          "title": "Redis Cache & Email Setup",
+          "lineRange": [
+            181,
+            289
+          ],
+          "explanation": "Django-Redis cache backend, CORS allowed origins, and Brevo email configuration.",
+          "tourOrder": 3
+        }
+      ]
+    },
+    "backend/book_recommondation/urls.py": {
+      "overview": "URL routing definitions mapping HTTP route paths to DRF views for the book_recommondation module.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            12
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for urls.py.",
+          "tourOrder": 3
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            13,
+            24
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for urls.py.",
+          "tourOrder": 3
+        }
+      ]
+    },
+    "backend/book_recommondation/wsgi.py": {
+      "overview": "Web server gateway interface entry point for serving the Django application in production.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            8
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for wsgi.py.",
+          "tourOrder": 3
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            9,
+            16
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for wsgi.py.",
+          "tourOrder": 3
+        }
+      ]
+    },
+    "backend/manage.py": {
+      "overview": "Django command-line utility for administrative tasks, migrations, and development server execution.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            11
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for manage.py.",
+          "tourOrder": 3
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            12,
+            23
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for manage.py.",
+          "tourOrder": 3
+        }
+      ]
+    },
+    "backend/accounts/models.py": {
+      "overview": "Django database models defining the schema and relationships for the accounts domain.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            69
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for models.py.",
+          "tourOrder": 4
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            70,
+            138
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for models.py.",
+          "tourOrder": 4
+        }
+      ]
+    },
+    "backend/accounts/views.py": {
+      "overview": "DRF API views and ViewSets implementing business endpoints and query handling for accounts.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            226
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for views.py.",
+          "tourOrder": 4
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            227,
+            453
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for views.py.",
+          "tourOrder": 4
+        }
+      ]
+    },
+    "backend/accounts/serializers.py": {
+      "overview": "Django REST framework serializers handling validation and data transformation for accounts entities.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            139
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for serializers.py.",
+          "tourOrder": 4
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            140,
+            278
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for serializers.py.",
+          "tourOrder": 4
+        }
+      ]
+    },
+    "backend/accounts/services/otp.py": {
+      "overview": "One-time password service generating and validating email verification codes for secure user activation.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            103
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for otp.py.",
+          "tourOrder": 4
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            104,
+            207
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for otp.py.",
+          "tourOrder": 4
+        }
+      ]
+    },
+    "backend/books/models.py": {
+      "overview": "Django database models defining the schema and relationships for the books domain.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            57
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for models.py.",
+          "tourOrder": 5
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            58,
+            115
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for models.py.",
+          "tourOrder": 5
+        }
+      ]
+    },
+    "backend/books/views.py": {
+      "overview": "DRF API views and ViewSets implementing business endpoints and query handling for books.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            313
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for views.py.",
+          "tourOrder": 5
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            314,
+            626
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for views.py.",
+          "tourOrder": 5
+        }
+      ]
+    },
+    "backend/books/cache_utils.py": {
+      "overview": "Redis caching helper module implementing cache key generation, TTL management, and invalidation hooks.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            100
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for cache_utils.py.",
+          "tourOrder": 5
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            101,
+            200
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for cache_utils.py.",
+          "tourOrder": 5
+        }
+      ]
+    },
+    "backend/borrows/models.py": {
+      "overview": "Django database models defining the schema and relationships for the borrows domain.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            18
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for models.py.",
+          "tourOrder": 5
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            19,
+            36
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for models.py.",
+          "tourOrder": 5
+        }
+      ]
+    },
+    "backend/borrows/views.py": {
+      "overview": "DRF API views and ViewSets implementing business endpoints and query handling for borrows.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            141
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for views.py.",
+          "tourOrder": 5
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            142,
+            282
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for views.py.",
+          "tourOrder": 5
+        }
+      ]
+    },
+    "backend/books/services/recommender.py": {
+      "overview": "Content-based and collaborative machine learning recommendation engine using scikit-learn TF-IDF and cosine similarity.",
+      "sections": [
+        {
+          "title": "Data Preparation & Vectorization",
+          "lineRange": [
+            1,
+            40
+          ],
+          "explanation": "Gathers catalog metadata and builds TF-IDF term matrices for content matching.",
+          "tourOrder": 6
+        },
+        {
+          "title": "Cosine Similarity Scoring",
+          "lineRange": [
+            41,
+            90
+          ],
+          "explanation": "Computes pairwise cosine distances to identify books matching user reading patterns.",
+          "tourOrder": 6
+        },
+        {
+          "title": "Hybrid Ranking & Filtering",
+          "lineRange": [
+            91,
+            513
+          ],
+          "explanation": "Combines content-based scores with collaborative borrow signals and department constraints.",
+          "tourOrder": 6
+        }
+      ]
+    },
+    "backend/books/services/csv_importer.py": {
+      "overview": "Service utility parsing CSV files to bulk import or update book catalog records transactionally.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            175
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for csv_importer.py.",
+          "tourOrder": 6
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            176,
+            350
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for csv_importer.py.",
+          "tourOrder": 6
+        }
+      ]
+    },
+    "backend/analytics/views.py": {
+      "overview": "DRF API views and ViewSets implementing business endpoints and query handling for analytics.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            229
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for views.py.",
+          "tourOrder": 6
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            230,
+            458
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for views.py.",
+          "tourOrder": 6
+        }
+      ]
+    },
+    "frontend/src/main.jsx": {
+      "overview": "React client bootstrap script mounting the root component into the DOM.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            5
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for main.jsx.",
+          "tourOrder": 7
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            6,
+            10
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for main.jsx.",
+          "tourOrder": 7
+        }
+      ]
+    },
+    "frontend/src/App.jsx": {
+      "overview": "Main React router and top-level application layout coordinator.",
+      "sections": [
+        {
+          "title": "Router Setup & Layouts",
+          "lineRange": [
+            1,
+            45
+          ],
+          "explanation": "Declares client-side routes and wraps page components in role-based layout shells.",
+          "tourOrder": 7
+        },
+        {
+          "title": "Protected Route Definitions",
+          "lineRange": [
+            46,
+            90
+          ],
+          "explanation": "Guards administrative and student routes using authentication context checks.",
+          "tourOrder": 7
+        }
+      ]
+    },
+    "frontend/src/context/AuthContext.jsx": {
+      "overview": "Authentication state provider managing JWT tokens, user profiles, login, and session lifecycle.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            1
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for AuthContext.jsx.",
+          "tourOrder": 7
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            1,
+            1
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for AuthContext.jsx.",
+          "tourOrder": 7
+        }
+      ]
+    },
+    "frontend/src/api/axios.js": {
+      "overview": "Pre-configured Axios HTTP client instance with automatic JWT authorization header injection and error interception.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            51
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for axios.js.",
+          "tourOrder": 7
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            52,
+            103
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for axios.js.",
+          "tourOrder": 7
+        }
+      ]
+    },
+    "frontend/src/api/bookApi.js": {
+      "overview": "API client module providing endpoints for book discovery, filtering, CRUD operations, and CSV upload.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            19
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for bookApi.js.",
+          "tourOrder": 7
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            20,
+            39
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for bookApi.js.",
+          "tourOrder": 7
+        }
+      ]
+    },
+    ".github/workflows/ci.yml": {
+      "overview": "GitHub Actions CI pipeline executing automated test suites, linting, and build checks on push.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            111
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for ci.yml.",
+          "tourOrder": 8
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            112,
+            222
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for ci.yml.",
+          "tourOrder": 8
+        }
+      ]
+    },
+    "backend/pytest.ini": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for pytest.ini.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            6
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for pytest.ini.",
+          "tourOrder": 8
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            7,
+            12
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for pytest.ini.",
+          "tourOrder": 8
+        }
+      ]
+    },
+    "backend/conftest.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for conftest.py.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            89
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for conftest.py.",
+          "tourOrder": 8
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            90,
+            179
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for conftest.py.",
+          "tourOrder": 8
+        }
+      ]
+    },
+    "backend/books/test_recommender_pytest.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_recommender_pytest.py.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            45
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for test_recommender_pytest.py.",
+          "tourOrder": 8
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            46,
+            91
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for test_recommender_pytest.py.",
+          "tourOrder": 8
+        }
+      ]
+    },
+    "backend/qa_tests/e2e_student_flow.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for e2e_student_flow.py.",
+      "sections": [
+        {
+          "title": "Module Initialization & Core Declarations",
+          "lineRange": [
+            1,
+            62
+          ],
+          "explanation": "Initializes imports, configuration, and primary logic for e2e_student_flow.py.",
+          "tourOrder": 8
+        },
+        {
+          "title": "Implementation & Handlers",
+          "lineRange": [
+            63,
+            124
+          ],
+          "explanation": "Executes operational methods, handlers, and output logic for e2e_student_flow.py.",
+          "tourOrder": 8
+        }
+      ]
+    },
+    "frontend/src/components/ConfirmModal.jsx": {
+      "overview": "Project code file providing core functionality and configuration for ConfirmModal.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/Footer.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Footer.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/Lightbox.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Lightbox.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/Navbar.jsx": {
+      "overview": "Navigation header component adapting menu items and links according to user authentication and role.",
+      "sections": []
+    },
+    "frontend/src/components/Notifications.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Notifications.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/PageTransition.jsx": {
+      "overview": "Project code file providing core functionality and configuration for PageTransition.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/ProtectedRoute.jsx": {
+      "overview": "Project code file providing core functionality and configuration for ProtectedRoute.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/Toast.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Toast.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/dashboard/LibrarianDashboard.jsx": {
+      "overview": "Administrative dashboard interface displaying inventory statistics, loan trends, and pending requests.",
+      "sections": []
+    },
+    "frontend/src/components/navigation/PublicNavbar.jsx": {
+      "overview": "Navigation header component adapting menu items and links according to user authentication and role.",
+      "sections": []
+    },
+    "frontend/src/components/navigation/StudentNavbar.jsx": {
+      "overview": "Navigation header component adapting menu items and links according to user authentication and role.",
+      "sections": []
+    },
+    "frontend/src/context/useAuth.js": {
+      "overview": "Authentication state provider managing JWT tokens, user profiles, login, and session lifecycle.",
+      "sections": []
+    },
+    "frontend/src/layouts/LibrarianLayout.jsx": {
+      "overview": "Project code file providing core functionality and configuration for LibrarianLayout.jsx.",
+      "sections": []
+    },
+    "frontend/src/layouts/PublicLayout.jsx": {
+      "overview": "Project code file providing core functionality and configuration for PublicLayout.jsx.",
+      "sections": []
+    },
+    "frontend/src/layouts/StudentLayout.jsx": {
+      "overview": "Project code file providing core functionality and configuration for StudentLayout.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/AboutUs.jsx": {
+      "overview": "Project code file providing core functionality and configuration for AboutUs.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/Gallery.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Gallery.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/Home.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Home.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/LibrarianDashboard.jsx": {
+      "overview": "Administrative dashboard interface displaying inventory statistics, loan trends, and pending requests.",
+      "sections": []
+    },
+    "frontend/src/pages/ManageBooks.jsx": {
+      "overview": "Main catalog browser page supporting full-text search, genre filtering, and pagination.",
+      "sections": []
+    },
+    "frontend/src/pages/MyBorrows.jsx": {
+      "overview": "Student portal page tracking active book loans, history, due dates, and renewal status.",
+      "sections": []
+    },
+    "frontend/src/pages/StudentsList.jsx": {
+      "overview": "Project code file providing core functionality and configuration for StudentsList.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/admin/AdminBooks.jsx": {
+      "overview": "Main catalog browser page supporting full-text search, genre filtering, and pagination.",
+      "sections": []
+    },
+    "frontend/src/pages/admin/AdminDashboard.jsx": {
+      "overview": "Administrative dashboard interface displaying inventory statistics, loan trends, and pending requests.",
+      "sections": []
+    },
+    "frontend/src/pages/admin/AdminStudents.jsx": {
+      "overview": "Project code file providing core functionality and configuration for AdminStudents.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/librarian/LibrarianBorrowing.jsx": {
+      "overview": "Project code file providing core functionality and configuration for LibrarianBorrowing.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/librarian/LibrarianReports.jsx": {
+      "overview": "Project code file providing core functionality and configuration for LibrarianReports.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/librarian/LibrarianReturns.jsx": {
+      "overview": "Project code file providing core functionality and configuration for LibrarianReturns.jsx.",
+      "sections": []
+    },
+    "backend/accounts/admin.py": {
+      "overview": "Django admin configuration registering accounts models with customized list displays and filters.",
+      "sections": []
+    },
+    "backend/accounts/management/commands/clear_users.py": {
+      "overview": "Project code file providing core functionality and configuration for clear_users.py.",
+      "sections": []
+    },
+    "backend/accounts/management/commands/seed_demo.py": {
+      "overview": "Project code file providing core functionality and configuration for seed_demo.py.",
+      "sections": []
+    },
+    "backend/accounts/signals.py": {
+      "overview": "Django signal receivers automating profile creation and notification dispatches upon user events.",
+      "sections": []
+    },
+    "backend/accounts/test_otp_pytest.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_otp_pytest.py.",
+      "sections": []
+    },
+    "backend/accounts/tests.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "sections": []
+    },
+    "backend/accounts/urls.py": {
+      "overview": "URL routing definitions mapping HTTP route paths to DRF views for the accounts module.",
+      "sections": []
+    },
+    "backend/analytics/admin.py": {
+      "overview": "Django admin configuration registering analytics models with customized list displays and filters.",
+      "sections": []
+    },
+    "backend/analytics/models.py": {
+      "overview": "Django database models defining the schema and relationships for the analytics domain.",
+      "sections": []
+    },
+    "backend/analytics/tests.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "sections": []
+    },
+    "backend/analytics/urls.py": {
+      "overview": "URL routing definitions mapping HTTP route paths to DRF views for the analytics module.",
+      "sections": []
+    },
+    "backend/books/admin.py": {
+      "overview": "Django admin configuration registering books models with customized list displays and filters.",
+      "sections": []
+    },
+    "backend/books/management/commands/import_books.py": {
+      "overview": "Project code file providing core functionality and configuration for import_books.py.",
+      "sections": []
+    },
+    "backend/books/management/commands/seed_interactions.py": {
+      "overview": "Project code file providing core functionality and configuration for seed_interactions.py.",
+      "sections": []
+    },
+    "backend/books/serializers.py": {
+      "overview": "Django REST framework serializers handling validation and data transformation for books entities.",
+      "sections": []
+    },
+    "backend/books/test_redis_caching_pytest.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_redis_caching_pytest.py.",
+      "sections": []
+    },
+    "backend/books/test_reviews_pytest.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_reviews_pytest.py.",
+      "sections": []
+    },
+    "backend/books/tests.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "sections": []
+    },
+    "backend/books/urls.py": {
+      "overview": "URL routing definitions mapping HTTP route paths to DRF views for the books module.",
+      "sections": []
+    },
+    "backend/borrows/admin.py": {
+      "overview": "Django admin configuration registering borrows models with customized list displays and filters.",
+      "sections": []
+    },
+    "backend/borrows/serializers.py": {
+      "overview": "Django REST framework serializers handling validation and data transformation for borrows entities.",
+      "sections": []
+    },
+    "backend/borrows/test_borrows_pytest.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_borrows_pytest.py.",
+      "sections": []
+    },
+    "backend/borrows/tests.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "sections": []
+    },
+    "backend/borrows/urls.py": {
+      "overview": "URL routing definitions mapping HTTP route paths to DRF views for the borrows module.",
+      "sections": []
+    },
+    "backend/qa_tests/librarian_e2e.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for librarian_e2e.py.",
+      "sections": []
+    },
+    "frontend/src/api/authApi.js": {
+      "overview": "API client module encapsulating authentication requests including login, register, OTP, and token refresh.",
+      "sections": []
+    },
+    "frontend/src/api/borrowApi.js": {
+      "overview": "API client module managing borrowing requests, renewals, approvals, and book return workflows.",
+      "sections": []
+    },
+    "frontend/src/api/index.js": {
+      "overview": "Project code file providing core functionality and configuration for index.js.",
+      "sections": []
+    },
+    "frontend/src/api/recommendationApi.js": {
+      "overview": "API client requesting personalized book recommendations computed by the machine learning recommender engine.",
+      "sections": []
+    },
+    "frontend/src/api/reviewApi.js": {
+      "overview": "API client providing endpoints for submitting, reading, and managing user book reviews and ratings.",
+      "sections": []
+    },
+    "frontend/src/api/userApi.js": {
+      "overview": "Project code file providing core functionality and configuration for userApi.js.",
+      "sections": []
+    },
+    "frontend/src/components/BookCard.jsx": {
+      "overview": "UI card component rendering book metadata, cover preview, and interaction buttons.",
+      "sections": []
+    },
+    "frontend/src/components/BookDetail.jsx": {
+      "overview": "Modal and page view displaying rich book information, availability status, and review form.",
+      "sections": []
+    },
+    "frontend/src/components/ErrorMessage.jsx": {
+      "overview": "Project code file providing core functionality and configuration for ErrorMessage.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/GoogleAuthButton.jsx": {
+      "overview": "Project code file providing core functionality and configuration for GoogleAuthButton.jsx.",
+      "sections": []
+    },
+    "frontend/src/components/Loading.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Loading.jsx.",
+      "sections": []
+    },
+    "frontend/src/context/AuthContextCore.js": {
+      "overview": "Authentication state provider managing JWT tokens, user profiles, login, and session lifecycle.",
+      "sections": []
+    },
+    "frontend/src/context/AuthProvider.jsx": {
+      "overview": "Authentication state provider managing JWT tokens, user profiles, login, and session lifecycle.",
+      "sections": []
+    },
+    "frontend/src/pages/AccountDetails.jsx": {
+      "overview": "Project code file providing core functionality and configuration for AccountDetails.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/Books.jsx": {
+      "overview": "Main catalog browser page supporting full-text search, genre filtering, and pagination.",
+      "sections": []
+    },
+    "frontend/src/pages/Login.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Login.jsx.",
+      "sections": []
+    },
+    "frontend/src/pages/Recommendations.jsx": {
+      "overview": "Personalized recommendation page showcasing content-based and collaborative book suggestions.",
+      "sections": []
+    },
+    "frontend/src/services/api.js": {
+      "overview": "Project code file providing core functionality and configuration for api.js.",
+      "sections": []
+    },
+    "backend/messaging/admin.py": {
+      "overview": "Django admin configuration registering messaging models with customized list displays and filters.",
+      "sections": []
+    },
+    "backend/messaging/models.py": {
+      "overview": "Django database models defining the schema and relationships for the messaging domain.",
+      "sections": []
+    },
+    "backend/messaging/serializers.py": {
+      "overview": "Django REST framework serializers handling validation and data transformation for messaging entities.",
+      "sections": []
+    },
+    "backend/messaging/tests.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "sections": []
+    },
+    "backend/messaging/urls.py": {
+      "overview": "URL routing definitions mapping HTTP route paths to DRF views for the messaging module.",
+      "sections": []
+    },
+    "backend/messaging/views.py": {
+      "overview": "DRF API views and ViewSets implementing business endpoints and query handling for messaging.",
+      "sections": []
+    },
+    "backend/.dockerignore": {
+      "overview": "Docker build context filter ignoring local caches, artifacts, and node modules.",
+      "sections": []
+    },
+    "frontend/.dockerignore": {
+      "overview": "Docker build context filter ignoring local caches, artifacts, and node modules.",
+      "sections": []
+    },
+    ".env.example": {
+      "overview": "Environment variable template specifying required secret keys, URLs, and credentials.",
+      "sections": []
+    },
+    "DEPLOYMENT.md": {
+      "overview": "Production deployment guide outlining server provisioning, SSL setup, Docker swarm, and cloud configurations.",
+      "sections": []
+    },
+    "pytest.ini": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for pytest.ini.",
+      "sections": []
+    },
+    "render.yaml": {
+      "overview": "Project config file providing core functionality and configuration for render.yaml.",
+      "sections": []
+    },
+    "backend/.env.example": {
+      "overview": "Environment variable template specifying required secret keys, URLs, and credentials.",
+      "sections": []
+    },
+    "backend/README.md": {
+      "overview": "Comprehensive project documentation detailing features, architecture, installation, and deployment steps.",
+      "sections": []
+    },
+    "backend/entrypoint.sh": {
+      "overview": "Docker container startup script running database migrations and launching Gunicorn.",
+      "sections": []
+    },
+    "backend/requirements.txt": {
+      "overview": "Project docs file providing core functionality and configuration for requirements.txt.",
+      "sections": []
+    },
+    "frontend/.env.example": {
+      "overview": "Environment variable template specifying required secret keys, URLs, and credentials.",
+      "sections": []
+    },
+    "frontend/README.md": {
+      "overview": "Comprehensive project documentation detailing features, architecture, installation, and deployment steps.",
+      "sections": []
+    },
+    "frontend/index.html": {
+      "overview": "Project markup file providing core functionality and configuration for index.html.",
+      "sections": []
+    },
+    "frontend/package.json": {
+      "overview": "Project config file providing core functionality and configuration for package.json.",
+      "sections": []
+    },
+    "Demo_csv_files/history.csv": {
+      "overview": "Sample dataset containing book records and borrowing logs for testing and seeding the catalog.",
+      "sections": []
+    },
+    "Demo_csv_files/prog_book.csv": {
+      "overview": "Sample dataset containing book records and borrowing logs for testing and seeding the catalog.",
+      "sections": []
+    },
+    "backend/accounts/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/accounts as an importable module.",
+      "sections": []
+    },
+    "backend/accounts/apps.py": {
+      "overview": "Project code file providing core functionality and configuration for apps.py.",
+      "sections": []
+    },
+    "backend/accounts/management/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/accounts/management as an importable module.",
+      "sections": []
+    },
+    "backend/accounts/management/commands/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/accounts/management/commands as an importable module.",
+      "sections": []
+    },
+    "backend/accounts/management/commands/check_redis.py": {
+      "overview": "Project code file providing core functionality and configuration for check_redis.py.",
+      "sections": []
+    },
+    "backend/accounts/management/commands/create_admin.py": {
+      "overview": "Django admin configuration registering accounts models with customized list displays and filters.",
+      "sections": []
+    },
+    "backend/accounts/migrations/0001_initial.py": {
+      "overview": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "sections": []
+    },
+    "backend/accounts/migrations/0002_userprofile_approval_status.py": {
+      "overview": "Project code file providing core functionality and configuration for 0002_userprofile_approval_status.py.",
+      "sections": []
+    },
+    "backend/accounts/migrations/0003_emailotp.py": {
+      "overview": "One-time password service generating and validating email verification codes for secure user activation.",
+      "sections": []
+    },
+    "backend/accounts/migrations/0004_alter_userprofile_approval_status.py": {
+      "overview": "Project code file providing core functionality and configuration for 0004_alter_userprofile_approval_status.py.",
+      "sections": []
+    },
+    "backend/accounts/migrations/0005_notification_notification_type_notification_title.py": {
+      "overview": "Project code file providing core functionality and configuration for 0005_notification_notification_type_notification_title.py.",
+      "sections": []
+    },
+    "backend/accounts/migrations/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/accounts/migrations as an importable module.",
+      "sections": []
+    },
+    "backend/accounts/services/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/accounts/services as an importable module.",
+      "sections": []
+    },
+    "backend/accounts/test_redis_pytest.py": {
+      "overview": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_redis_pytest.py.",
+      "sections": []
+    },
+    "backend/analytics/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/analytics as an importable module.",
+      "sections": []
+    },
+    "backend/analytics/apps.py": {
+      "overview": "Project code file providing core functionality and configuration for apps.py.",
+      "sections": []
+    },
+    "backend/analytics/migrations/0001_initial.py": {
+      "overview": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "sections": []
+    },
+    "backend/analytics/migrations/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/analytics/migrations as an importable module.",
+      "sections": []
+    },
+    "backend/book_recommondation/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/book_recommondation as an importable module.",
+      "sections": []
+    },
+    "backend/book_recommondation/asgi.py": {
+      "overview": "Web server gateway interface entry point for serving the Django application in production.",
+      "sections": []
+    },
+    "backend/books/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/books as an importable module.",
+      "sections": []
+    },
+    "backend/books/apps.py": {
+      "overview": "Project code file providing core functionality and configuration for apps.py.",
+      "sections": []
+    },
+    "backend/books/management/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/books/management as an importable module.",
+      "sections": []
+    },
+    "backend/books/management/commands/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/books/management/commands as an importable module.",
+      "sections": []
+    },
+    "backend/books/migrations/0001_initial.py": {
+      "overview": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "sections": []
+    },
+    "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py": {
+      "overview": "Project code file providing core functionality and configuration for 0002_alter_bookinteraction_interaction_type.py.",
+      "sections": []
+    },
+    "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py": {
+      "overview": "Project code file providing core functionality and configuration for 0003_alter_book_average_rating_alter_book_quantity_and_more.py.",
+      "sections": []
+    },
+    "backend/books/migrations/0004_bookreview.py": {
+      "overview": "Project code file providing core functionality and configuration for 0004_bookreview.py.",
+      "sections": []
+    },
+    "backend/books/migrations/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/books/migrations as an importable module.",
+      "sections": []
+    },
+    "backend/borrows/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/borrows as an importable module.",
+      "sections": []
+    },
+    "backend/borrows/apps.py": {
+      "overview": "Project code file providing core functionality and configuration for apps.py.",
+      "sections": []
+    },
+    "backend/borrows/migrations/0001_initial.py": {
+      "overview": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "sections": []
+    },
+    "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py": {
+      "overview": "Project code file providing core functionality and configuration for 0002_borrow_unique_active_or_requested_borrow.py.",
+      "sections": []
+    },
+    "backend/borrows/migrations/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/borrows/migrations as an importable module.",
+      "sections": []
+    },
+    "backend/data/books_6k.csv": {
+      "overview": "Sample dataset containing book records and borrowing logs for testing and seeding the catalog.",
+      "sections": []
+    },
+    "backend/data/prog_book.csv": {
+      "overview": "Sample dataset containing book records and borrowing logs for testing and seeding the catalog.",
+      "sections": []
+    },
+    "backend/messaging/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/messaging as an importable module.",
+      "sections": []
+    },
+    "backend/messaging/apps.py": {
+      "overview": "Project code file providing core functionality and configuration for apps.py.",
+      "sections": []
+    },
+    "backend/messaging/migrations/0001_initial.py": {
+      "overview": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "sections": []
+    },
+    "backend/messaging/migrations/__init__.py": {
+      "overview": "Python package initialization marker establishing backend/messaging/migrations as an importable module.",
+      "sections": []
+    },
+    "backend/scripts/enrich_prog_books.py": {
+      "overview": "Project code file providing core functionality and configuration for enrich_prog_books.py.",
+      "sections": []
+    },
+    "frontend/eslint.config.js": {
+      "overview": "Project code file providing core functionality and configuration for eslint.config.js.",
+      "sections": []
+    },
+    "frontend/src/App.css": {
+      "overview": "Cascading stylesheet defining global theme styling and Tailwind utilities for App.css.",
+      "sections": []
+    },
+    "frontend/src/components/Layout.jsx": {
+      "overview": "Project code file providing core functionality and configuration for Layout.jsx.",
+      "sections": []
+    },
+    "frontend/src/index.css": {
+      "overview": "Cascading stylesheet defining global theme styling and Tailwind utilities for index.css.",
+      "sections": []
+    },
+    "frontend/vite.config.js": {
+      "overview": "Project code file providing core functionality and configuration for vite.config.js.",
+      "sections": []
+    }
+  }
+}

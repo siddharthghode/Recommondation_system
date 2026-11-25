@@ -1,0 +1,454 @@
+{
+  "scriptCompleted": true,
+  "stats": {
+    "filesScanned": 172,
+    "filesWithImports": 83,
+    "totalEdges": 188
+  },
+  "failures": [],
+  "importMap": {
+    ".env.example": [],
+    ".github/workflows/ci.yml": [],
+    "DEPLOYMENT.md": [],
+    "Demo_csv_files/history.csv": [],
+    "Demo_csv_files/prog_book.csv": [],
+    "PROJECT_RULES.md": [],
+    "README.md": [],
+    "backend/.dockerignore": [],
+    "backend/.env.example": [],
+    "backend/Dockerfile": [],
+    "backend/README.md": [],
+    "backend/accounts/__init__.py": [],
+    "backend/accounts/admin.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/accounts/apps.py": [],
+    "backend/accounts/management/__init__.py": [],
+    "backend/accounts/management/commands/__init__.py": [],
+    "backend/accounts/management/commands/check_redis.py": [],
+    "backend/accounts/management/commands/clear_users.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/accounts/management/commands/create_admin.py": [],
+    "backend/accounts/management/commands/seed_demo.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/accounts/migrations/0001_initial.py": [],
+    "backend/accounts/migrations/0002_userprofile_approval_status.py": [],
+    "backend/accounts/migrations/0003_emailotp.py": [],
+    "backend/accounts/migrations/0004_alter_userprofile_approval_status.py": [],
+    "backend/accounts/migrations/0005_notification_notification_type_notification_title.py": [],
+    "backend/accounts/migrations/__init__.py": [],
+    "backend/accounts/models.py": [],
+    "backend/accounts/serializers.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/accounts/services/__init__.py": [],
+    "backend/accounts/services/otp.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/accounts/signals.py": [
+      "backend/accounts/models.py",
+      "backend/books/cache_utils.py"
+    ],
+    "backend/accounts/test_otp_pytest.py": [
+      "backend/accounts/models.py",
+      "backend/accounts/services/otp.py"
+    ],
+    "backend/accounts/test_redis_pytest.py": [
+      "backend/accounts/management/commands/check_redis.py"
+    ],
+    "backend/accounts/tests.py": [
+      "backend/accounts/models.py",
+      "backend/accounts/services/otp.py"
+    ],
+    "backend/accounts/urls.py": [
+      "backend/accounts/views.py"
+    ],
+    "backend/accounts/views.py": [
+      "backend/accounts/models.py",
+      "backend/accounts/serializers.py",
+      "backend/accounts/services/otp.py",
+      "backend/books/cache_utils.py"
+    ],
+    "backend/analytics/__init__.py": [],
+    "backend/analytics/admin.py": [
+      "backend/analytics/models.py"
+    ],
+    "backend/analytics/apps.py": [],
+    "backend/analytics/migrations/0001_initial.py": [],
+    "backend/analytics/migrations/__init__.py": [],
+    "backend/analytics/models.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/analytics/tests.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/analytics/urls.py": [
+      "backend/analytics/views.py"
+    ],
+    "backend/analytics/views.py": [
+      "backend/accounts/models.py",
+      "backend/accounts/serializers.py",
+      "backend/books/cache_utils.py",
+      "backend/books/models.py",
+      "backend/books/serializers.py",
+      "backend/books/services/recommender.py",
+      "backend/borrows/models.py",
+      "backend/borrows/serializers.py"
+    ],
+    "backend/book_recommondation/__init__.py": [],
+    "backend/book_recommondation/asgi.py": [],
+    "backend/book_recommondation/settings.py": [],
+    "backend/book_recommondation/urls.py": [
+      "backend/books/views.py"
+    ],
+    "backend/book_recommondation/wsgi.py": [],
+    "backend/books/__init__.py": [],
+    "backend/books/admin.py": [
+      "backend/books/models.py"
+    ],
+    "backend/books/apps.py": [],
+    "backend/books/cache_utils.py": [],
+    "backend/books/management/__init__.py": [],
+    "backend/books/management/commands/__init__.py": [],
+    "backend/books/management/commands/import_books.py": [
+      "backend/books/models.py"
+    ],
+    "backend/books/management/commands/seed_interactions.py": [
+      "backend/books/models.py"
+    ],
+    "backend/books/migrations/0001_initial.py": [],
+    "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py": [],
+    "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py": [],
+    "backend/books/migrations/0004_bookreview.py": [],
+    "backend/books/migrations/__init__.py": [],
+    "backend/books/models.py": [
+      "backend/accounts/models.py"
+    ],
+    "backend/books/serializers.py": [
+      "backend/books/models.py"
+    ],
+    "backend/books/services/csv_importer.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py"
+    ],
+    "backend/books/services/recommender.py": [
+      "backend/books/cache_utils.py",
+      "backend/books/models.py"
+    ],
+    "backend/books/test_recommender_pytest.py": [
+      "backend/books/models.py",
+      "backend/books/services/recommender.py"
+    ],
+    "backend/books/test_redis_caching_pytest.py": [
+      "backend/accounts/models.py",
+      "backend/books/cache_utils.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/books/test_reviews_pytest.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py"
+    ],
+    "backend/books/tests.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py"
+    ],
+    "backend/books/urls.py": [
+      "backend/books/views.py"
+    ],
+    "backend/books/views.py": [
+      "backend/accounts/models.py",
+      "backend/books/cache_utils.py",
+      "backend/books/models.py",
+      "backend/books/serializers.py",
+      "backend/books/services/csv_importer.py",
+      "backend/books/services/recommender.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/__init__.py": [],
+    "backend/borrows/admin.py": [
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/apps.py": [],
+    "backend/borrows/migrations/0001_initial.py": [],
+    "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py": [],
+    "backend/borrows/migrations/__init__.py": [],
+    "backend/borrows/models.py": [
+      "backend/books/models.py"
+    ],
+    "backend/borrows/serializers.py": [
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/test_borrows_pytest.py": [
+      "backend/accounts/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/tests.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/borrows/urls.py": [
+      "backend/borrows/views.py"
+    ],
+    "backend/borrows/views.py": [
+      "backend/accounts/models.py",
+      "backend/books/cache_utils.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py",
+      "backend/borrows/serializers.py"
+    ],
+    "backend/conftest.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/data/books_6k.csv": [],
+    "backend/data/prog_book.csv": [],
+    "backend/entrypoint.sh": [],
+    "backend/manage.py": [],
+    "backend/messaging/__init__.py": [],
+    "backend/messaging/admin.py": [
+      "backend/messaging/models.py"
+    ],
+    "backend/messaging/apps.py": [],
+    "backend/messaging/migrations/0001_initial.py": [],
+    "backend/messaging/migrations/__init__.py": [],
+    "backend/messaging/models.py": [],
+    "backend/messaging/serializers.py": [
+      "backend/messaging/models.py"
+    ],
+    "backend/messaging/tests.py": [
+      "backend/accounts/models.py",
+      "backend/messaging/models.py"
+    ],
+    "backend/messaging/urls.py": [
+      "backend/messaging/views.py"
+    ],
+    "backend/messaging/views.py": [
+      "backend/messaging/models.py",
+      "backend/messaging/serializers.py"
+    ],
+    "backend/pytest.ini": [],
+    "backend/qa_tests/e2e_student_flow.py": [
+      "backend/books/models.py"
+    ],
+    "backend/qa_tests/librarian_e2e.py": [
+      "backend/accounts/models.py",
+      "backend/books/models.py",
+      "backend/borrows/models.py"
+    ],
+    "backend/requirements.txt": [],
+    "backend/scripts/enrich_prog_books.py": [],
+    "database/ER_DIAGRAM.md": [],
+    "docker-compose.yml": [],
+    "frontend/.dockerignore": [],
+    "frontend/.env.example": [],
+    "frontend/Dockerfile": [],
+    "frontend/README.md": [],
+    "frontend/eslint.config.js": [],
+    "frontend/index.html": [],
+    "frontend/nginx.conf": [],
+    "frontend/package.json": [],
+    "frontend/src/App.css": [],
+    "frontend/src/App.jsx": [
+      "frontend/src/components/PageTransition.jsx",
+      "frontend/src/components/ProtectedRoute.jsx",
+      "frontend/src/context/AuthContext.jsx",
+      "frontend/src/layouts/LibrarianLayout.jsx",
+      "frontend/src/layouts/PublicLayout.jsx",
+      "frontend/src/layouts/StudentLayout.jsx",
+      "frontend/src/pages/AboutUs.jsx",
+      "frontend/src/pages/AccountDetails.jsx",
+      "frontend/src/pages/Books.jsx",
+      "frontend/src/pages/Gallery.jsx",
+      "frontend/src/pages/Home.jsx",
+      "frontend/src/pages/LibrarianDashboard.jsx",
+      "frontend/src/pages/Login.jsx",
+      "frontend/src/pages/ManageBooks.jsx",
+      "frontend/src/pages/MyBorrows.jsx",
+      "frontend/src/pages/Recommendations.jsx",
+      "frontend/src/pages/StudentsList.jsx",
+      "frontend/src/pages/admin/AdminBooks.jsx",
+      "frontend/src/pages/admin/AdminDashboard.jsx",
+      "frontend/src/pages/admin/AdminStudents.jsx",
+      "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "frontend/src/pages/librarian/LibrarianReports.jsx",
+      "frontend/src/pages/librarian/LibrarianReturns.jsx"
+    ],
+    "frontend/src/api/authApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/axios.js": [],
+    "frontend/src/api/bookApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/borrowApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/index.js": [],
+    "frontend/src/api/recommendationApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/reviewApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/userApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/components/BookCard.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/BookDetail.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/ConfirmModal.jsx": [],
+    "frontend/src/components/ErrorMessage.jsx": [],
+    "frontend/src/components/Footer.jsx": [],
+    "frontend/src/components/GoogleAuthButton.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/Layout.jsx": [],
+    "frontend/src/components/Lightbox.jsx": [],
+    "frontend/src/components/Loading.jsx": [],
+    "frontend/src/components/Navbar.jsx": [
+      "frontend/src/components/Notifications.jsx"
+    ],
+    "frontend/src/components/Notifications.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/PageTransition.jsx": [],
+    "frontend/src/components/ProtectedRoute.jsx": [
+      "frontend/src/context/useAuth.js"
+    ],
+    "frontend/src/components/Toast.jsx": [],
+    "frontend/src/components/dashboard/LibrarianDashboard.jsx": [
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/navigation/PublicNavbar.jsx": [
+      "frontend/src/components/Notifications.jsx",
+      "frontend/src/context/useAuth.js"
+    ],
+    "frontend/src/components/navigation/StudentNavbar.jsx": [
+      "frontend/src/components/Notifications.jsx",
+      "frontend/src/context/useAuth.js"
+    ],
+    "frontend/src/context/AuthContext.jsx": [],
+    "frontend/src/context/AuthContextCore.js": [],
+    "frontend/src/context/AuthProvider.jsx": [
+      "frontend/src/context/AuthContextCore.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/context/useAuth.js": [
+      "frontend/src/context/AuthContextCore.js"
+    ],
+    "frontend/src/index.css": [],
+    "frontend/src/layouts/LibrarianLayout.jsx": [
+      "frontend/src/components/Notifications.jsx",
+      "frontend/src/context/useAuth.js"
+    ],
+    "frontend/src/layouts/PublicLayout.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/components/navigation/PublicNavbar.jsx"
+    ],
+    "frontend/src/layouts/StudentLayout.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/components/navigation/StudentNavbar.jsx"
+    ],
+    "frontend/src/main.jsx": [
+      "frontend/src/App.jsx",
+      "frontend/src/index.css"
+    ],
+    "frontend/src/pages/AboutUs.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/AccountDetails.jsx": [
+      "frontend/src/components/BookCard.jsx",
+      "frontend/src/components/BookDetail.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Books.jsx": [
+      "frontend/src/components/BookCard.jsx",
+      "frontend/src/components/BookDetail.jsx",
+      "frontend/src/components/ErrorMessage.jsx",
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/components/Loading.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Gallery.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/components/Lightbox.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Home.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/LibrarianDashboard.jsx": [],
+    "frontend/src/pages/Login.jsx": [
+      "frontend/src/components/GoogleAuthButton.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/ManageBooks.jsx": [
+      "frontend/src/components/ConfirmModal.jsx",
+      "frontend/src/components/Toast.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/MyBorrows.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Recommendations.jsx": [
+      "frontend/src/components/BookCard.jsx",
+      "frontend/src/components/BookDetail.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/StudentsList.jsx": [
+      "frontend/src/components/Toast.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/admin/AdminBooks.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/admin/AdminDashboard.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/admin/AdminStudents.jsx": [],
+    "frontend/src/pages/librarian/LibrarianBorrowing.jsx": [
+      "frontend/src/components/Toast.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/librarian/LibrarianReports.jsx": [
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/librarian/LibrarianReturns.jsx": [
+      "frontend/src/components/Toast.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/services/api.js": [
+      "frontend/src/api/bookApi.js",
+      "frontend/src/api/borrowApi.js",
+      "frontend/src/api/index.js",
+      "frontend/src/api/recommendationApi.js",
+      "frontend/src/api/userApi.js"
+    ],
+    "frontend/vite.config.js": [],
+    "pytest.ini": [],
+    "render.yaml": []
+  }
+}

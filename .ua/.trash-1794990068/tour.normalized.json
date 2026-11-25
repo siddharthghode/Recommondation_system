@@ -1,0 +1,91 @@
+[
+  {
+    "order": 1,
+    "title": "System Overview & Architectural Foundation",
+    "description": "Start with the system documentation, project rules, and entity-relationship schema to understand the university library domain, user approval workflows, and relational data architecture.",
+    "nodeIds": [
+      "document:README.md",
+      "document:PROJECT_RULES.md",
+      "document:database/ER_DIAGRAM.md"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "Container Orchestration & Infrastructure",
+    "description": "Examine how Docker Compose coordinates PostgreSQL, Redis 7, the Django REST API, and Nginx frontend proxy for unified local and production deployments.",
+    "nodeIds": [
+      "service:docker-compose.yml",
+      "service:backend/Dockerfile",
+      "service:frontend/Dockerfile",
+      "file:frontend/nginx.conf"
+    ]
+  },
+  {
+    "order": 3,
+    "title": "Backend Bootstrap & Configuration",
+    "description": "Trace Django's startup sequence from settings configuration through WSGI/ASGI gateways and top-level URL routing to understand how middleware, database connections, and cache backends are initialized.",
+    "nodeIds": [
+      "file:backend/book_recommondation/settings.py",
+      "file:backend/book_recommondation/urls.py",
+      "file:backend/book_recommondation/wsgi.py",
+      "file:backend/manage.py"
+    ]
+  },
+  {
+    "order": 4,
+    "title": "User Authentication & Approval Workflows",
+    "description": "Explore role-based access control (Student, Librarian, Admin), email OTP verification, and JWT session handling in the accounts service.",
+    "nodeIds": [
+      "file:backend/accounts/models.py",
+      "file:backend/accounts/views.py",
+      "file:backend/accounts/serializers.py",
+      "file:backend/accounts/services/otp.py"
+    ]
+  },
+  {
+    "order": 5,
+    "title": "Book Catalog & Borrowing Workflows",
+    "description": "Dive into the books and borrowing management subsystems, featuring atomic database transactions, renewal state machines, and high-performance Redis cache layers.",
+    "nodeIds": [
+      "file:backend/books/models.py",
+      "file:backend/books/views.py",
+      "file:backend/books/cache_utils.py",
+      "file:backend/borrows/models.py",
+      "file:backend/borrows/views.py"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "Recommendation Engine & Data Ingestion",
+    "description": "Understand how scikit-learn computes TF-IDF content similarity and collaborative filtering recommendations, supported by bulk CSV catalog ingestion.",
+    "nodeIds": [
+      "file:backend/books/services/recommender.py",
+      "file:backend/books/services/csv_importer.py",
+      "file:backend/analytics/views.py"
+    ]
+  },
+  {
+    "order": 7,
+    "title": "Frontend React Single-Page Application",
+    "description": "Follow the React client from the main mounting point and router configuration to authentication context providers and Axios API client layers.",
+    "nodeIds": [
+      "file:frontend/src/main.jsx",
+      "file:frontend/src/App.jsx",
+      "file:frontend/src/context/AuthContext.jsx",
+      "file:frontend/src/api/axios.js",
+      "file:frontend/src/api/bookApi.js"
+    ]
+  },
+  {
+    "order": 8,
+    "title": "Automated Testing & Continuous Integration",
+    "description": "Review the comprehensive Pytest test suites, fixtures in conftest.py, end-to-end user journeys, and the automated GitHub Actions CI pipeline.",
+    "nodeIds": [
+      "pipeline:.github/workflows/ci.yml",
+      "config:backend/pytest.ini",
+      "file:backend/conftest.py",
+      "file:backend/books/test_recommender_pytest.py",
+      "file:backend/qa_tests/e2e_student_flow.py"
+    ]
+  }
+]

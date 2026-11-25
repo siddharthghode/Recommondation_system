@@ -1,0 +1,714 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [
+    "pytest.ini"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 6,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 6
+    }
+  },
+  "results": [
+    {
+      "path": ".env.example",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 90,
+      "nonEmptyLines": 75,
+      "definitions": [
+        {
+          "name": "POSTGRES_DB",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "POSTGRES_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 8,
+          "endLine": 8
+        },
+        {
+          "name": "POSTGRES_HOST",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 10,
+          "endLine": 10
+        },
+        {
+          "name": "POSTGRES_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 11,
+          "endLine": 11
+        },
+        {
+          "name": "POSTGRES_PORT_HOST",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 12,
+          "endLine": 12
+        },
+        {
+          "name": "POSTGRES_SSLMODE",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 13,
+          "endLine": 13
+        },
+        {
+          "name": "REDIS_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 24,
+          "endLine": 24
+        },
+        {
+          "name": "REDIS_PORT_HOST",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 25,
+          "endLine": 25
+        },
+        {
+          "name": "DEBUG",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 35,
+          "endLine": 35
+        },
+        {
+          "name": "DJANGO_SECRET_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 39,
+          "endLine": 39
+        },
+        {
+          "name": "DJANGO_ENV",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 42,
+          "endLine": 42
+        },
+        {
+          "name": "ALLOWED_HOSTS",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 45,
+          "endLine": 45
+        },
+        {
+          "name": "CORS_ALLOWED_ORIGINS",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 48,
+          "endLine": 48
+        },
+        {
+          "name": "CSRF_TRUSTED_ORIGINS",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 51,
+          "endLine": 51
+        },
+        {
+          "name": "FRONTEND_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 60,
+          "endLine": 60
+        },
+        {
+          "name": "GOOGLE_CLIENT_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 72,
+          "endLine": 72
+        },
+        {
+          "name": "EMAIL_BACKEND",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 78,
+          "endLine": 78
+        },
+        {
+          "name": "DEFAULT_FROM_EMAIL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 79,
+          "endLine": 79
+        },
+        {
+          "name": "VITE_API_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 89,
+          "endLine": 89
+        },
+        {
+          "name": "VITE_GOOGLE_CLIENT_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 90,
+          "endLine": 90
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 21
+      }
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 279,
+      "nonEmptyLines": 226,
+      "sections": [
+        {
+          "heading": "Production Deployment Guide",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Architecture Overview",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "2. Server Requirements & Sizing",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "Recommended Server Specifications",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "Enable Swap Memory (Crucial for 1–2 GB RAM instances)",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "3. Server Preparation & Docker Installation",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "Install Docker Engine & Docker Compose",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "4. Clone & Environment Configuration",
+          "level": 2,
+          "line": 90
+        },
+        {
+          "heading": "1. Clone the Repository",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "2. Configure Production `.env`",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "3. Generate a Secure Secret Key",
+          "level": 3,
+          "line": 105
+        },
+        {
+          "heading": "4. Edit `.env` and `backend/.env`",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "5. Build and Launch",
+          "level": 2,
+          "line": 163
+        },
+        {
+          "heading": "Verification Commands",
+          "level": 3,
+          "line": 170
+        },
+        {
+          "heading": "6. Initial Super Admin & Data Setup",
+          "level": 2,
+          "line": 189
+        },
+        {
+          "heading": "1. Create Initial Super Admin",
+          "level": 3,
+          "line": 191
+        },
+        {
+          "heading": "2. (Optional) Seed 6,000 Book Catalog",
+          "level": 3,
+          "line": 197
+        },
+        {
+          "heading": "3. Log in to Django Admin",
+          "level": 3,
+          "line": 202
+        },
+        {
+          "heading": "7. Domain & SSL / HTTPS Setup (Let's Encrypt)",
+          "level": 2,
+          "line": 209
+        },
+        {
+          "heading": "Option A: Using Certbot & Host Nginx",
+          "level": 3,
+          "line": 211
+        },
+        {
+          "heading": "Option B: Using Cloudflare SSL",
+          "level": 3,
+          "line": 243
+        },
+        {
+          "heading": "8. Database Backups & Maintenance",
+          "level": 2,
+          "line": 250
+        },
+        {
+          "heading": "1. Create a Database Backup",
+          "level": 3,
+          "line": 252
+        },
+        {
+          "heading": "2. Restore Database from Backup",
+          "level": 3,
+          "line": 257
+        },
+        {
+          "heading": "3. Automated Daily Cron Backup",
+          "level": 3,
+          "line": 262
+        },
+        {
+          "heading": "9. Production Troubleshooting",
+          "level": 2,
+          "line": 270
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 26
+      }
+    },
+    {
+      "path": "PROJECT_RULES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 799,
+      "nonEmptyLines": 578,
+      "sections": [
+        {
+          "heading": "Library Management & Book Recommendation System — Project Contract",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Project Goal",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "2. Core Business Workflow",
+          "level": 1,
+          "line": 31
+        },
+        {
+          "heading": "Super Admin",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "3. Librarian Workflow",
+          "level": 1,
+          "line": 61
+        },
+        {
+          "heading": "4. Student Registration",
+          "level": 1,
+          "line": 86
+        },
+        {
+          "heading": "Email OTP",
+          "level": 3,
+          "line": 90
+        },
+        {
+          "heading": "Google OAuth",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "5. Student Workflow",
+          "level": 1,
+          "line": 128
+        },
+        {
+          "heading": "6. Department Isolation — Critical Security Rule",
+          "level": 1,
+          "line": 155
+        },
+        {
+          "heading": "7. Book CSV Import",
+          "level": 1,
+          "line": 204
+        },
+        {
+          "heading": "8. Borrow Workflow",
+          "level": 1,
+          "line": 230
+        },
+        {
+          "heading": "9. Recommendation System",
+          "level": 1,
+          "line": 259
+        },
+        {
+          "heading": "10. Authentication",
+          "level": 1,
+          "line": 290
+        },
+        {
+          "heading": "11. API Change Rule",
+          "level": 1,
+          "line": 318
+        },
+        {
+          "heading": "12. API Contract Rule",
+          "level": 1,
+          "line": 356
+        },
+        {
+          "heading": "13. Database Rules",
+          "level": 1,
+          "line": 374
+        },
+        {
+          "heading": "14. Data Initialization",
+          "level": 1,
+          "line": 422
+        },
+        {
+          "heading": "15. Startup Rules",
+          "level": 1,
+          "line": 449
+        },
+        {
+          "heading": "16. Docker Rules",
+          "level": 1,
+          "line": 484
+        },
+        {
+          "heading": "17. Code Simplification Rule",
+          "level": 1,
+          "line": 525
+        },
+        {
+          "heading": "18. Feature Freeze",
+          "level": 1,
+          "line": 558
+        },
+        {
+          "heading": "19. Change Safety Protocol",
+          "level": 1,
+          "line": 593
+        },
+        {
+          "heading": "20. Regression Protection",
+          "level": 1,
+          "line": 623
+        },
+        {
+          "heading": "21. Handling Mistakes",
+          "level": 1,
+          "line": 644
+        },
+        {
+          "heading": "22. Task Boundary",
+          "level": 1,
+          "line": 670
+        },
+        {
+          "heading": "23. Completion Report",
+          "level": 1,
+          "line": 688
+        },
+        {
+          "heading": "24. Priority Order",
+          "level": 1,
+          "line": 731
+        },
+        {
+          "heading": "25. Final Definition of Done",
+          "level": 1,
+          "line": 750
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 29
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 355,
+      "nonEmptyLines": 280,
+      "sections": [
+        {
+          "heading": "Library Management & Book Recommendation System",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "⚡ Quick Start (Fastest Setup)",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "Option A: 🐳 Docker Compose (Recommended)",
+          "level": 3,
+          "line": 20
+        },
+        {
+          "heading": "Option B: 💻 Local Native Setup (Without Docker)",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "1. Backend (Django)",
+          "level": 4,
+          "line": 44
+        },
+        {
+          "heading": "2. Frontend (React + Vite)",
+          "level": 4,
+          "line": 66
+        },
+        {
+          "heading": "🌐 Access Points & Demo Credentials",
+          "level": 2,
+          "line": 81
+        },
+        {
+          "heading": "Application Endpoints",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "Pre-Seeded Demo Accounts",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "🌟 Key Features",
+          "level": 2,
+          "line": 107
+        },
+        {
+          "heading": "👑 Super Admin",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "📚 Librarian",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "🎓 Student",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "⚡ High-Performance In-Memory Caching (Redis 7)",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "🤖 Recommendation Engine Architecture",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "🛠️ Tech Stack",
+          "level": 2,
+          "line": 175
+        },
+        {
+          "heading": "📁 Project Structure",
+          "level": 2,
+          "line": 191
+        },
+        {
+          "heading": "🧪 Testing & Verification Baseline",
+          "level": 2,
+          "line": 225
+        },
+        {
+          "heading": "Run Tests in Docker:",
+          "level": 3,
+          "line": 229
+        },
+        {
+          "heading": "Run Tests Locally (Backend):",
+          "level": 3,
+          "line": 234
+        },
+        {
+          "heading": "Run Frontend Build & Lint:",
+          "level": 3,
+          "line": 241
+        },
+        {
+          "heading": "📋 Common Commands Reference",
+          "level": 2,
+          "line": 250
+        },
+        {
+          "heading": "⚙️ Environment Variables Reference",
+          "level": 2,
+          "line": 269
+        },
+        {
+          "heading": "🔧 Troubleshooting",
+          "level": 2,
+          "line": 299
+        },
+        {
+          "heading": "1. Port 80 is already in use",
+          "level": 3,
+          "line": 301
+        },
+        {
+          "heading": "2. Viewing OTP verification codes in local development",
+          "level": 3,
+          "line": 312
+        },
+        {
+          "heading": "3. Database reset to clean state",
+          "level": 3,
+          "line": 324
+        },
+        {
+          "heading": "4. Redis caching verification and fallback",
+          "level": 3,
+          "line": 333
+        },
+        {
+          "heading": "🚢 Production Deployment",
+          "level": 2,
+          "line": 346
+        },
+        {
+          "heading": "📄 License & Authors",
+          "level": 2,
+          "line": 352
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 30
+      }
+    },
+    {
+      "path": "docker-compose.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 82,
+      "nonEmptyLines": 77,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "volumes",
+          "level": 1,
+          "line": 73
+        },
+        {
+          "heading": "networks",
+          "level": 1,
+          "line": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "render.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 57,
+      "nonEmptyLines": 56,
+      "sections": [
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    }
+  ]
+}

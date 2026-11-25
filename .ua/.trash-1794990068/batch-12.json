@@ -1,0 +1,855 @@
+{
+  "nodes": [
+    {
+      "id": "file:Demo_csv_files/history.csv",
+      "type": "file",
+      "name": "history.csv",
+      "filePath": "Demo_csv_files/history.csv",
+      "summary": "Sample dataset containing book records and borrowing logs for testing and seeding the catalog.",
+      "tags": [
+        "dataset",
+        "data-storage",
+        "demo-data"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:Demo_csv_files/prog_book.csv",
+      "type": "file",
+      "name": "prog_book.csv",
+      "filePath": "Demo_csv_files/prog_book.csv",
+      "summary": "Sample dataset containing book records and borrowing logs for testing and seeding the catalog.",
+      "tags": [
+        "dataset",
+        "data-storage",
+        "demo-data"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/accounts/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/accounts/__init__.py",
+      "summary": "Python package initialization marker establishing backend/accounts as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/apps.py",
+      "type": "file",
+      "name": "apps.py",
+      "filePath": "backend/accounts/apps.py",
+      "summary": "Project code file providing core functionality and configuration for apps.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/apps.py:AccountsConfig",
+      "type": "class",
+      "name": "AccountsConfig",
+      "filePath": "backend/accounts/apps.py",
+      "lineRange": [
+        4,
+        5
+      ],
+      "summary": "Class `AccountsConfig` implementing core behaviors and state for `apps.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/management/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/accounts/management/__init__.py",
+      "summary": "Python package initialization marker establishing backend/accounts/management as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/management/commands/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/accounts/management/commands/__init__.py",
+      "summary": "Python package initialization marker establishing backend/accounts/management/commands as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/management/commands/check_redis.py",
+      "type": "file",
+      "name": "check_redis.py",
+      "filePath": "backend/accounts/management/commands/check_redis.py",
+      "summary": "Project code file providing core functionality and configuration for check_redis.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/accounts/management/commands/check_redis.py:mask_redis_url",
+      "type": "function",
+      "name": "mask_redis_url",
+      "filePath": "backend/accounts/management/commands/check_redis.py",
+      "lineRange": [
+        9,
+        27
+      ],
+      "summary": "Function `mask_redis_url` handling logic within `check_redis.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/management/commands/check_redis.py:Command",
+      "type": "class",
+      "name": "Command",
+      "filePath": "backend/accounts/management/commands/check_redis.py",
+      "lineRange": [
+        30,
+        104
+      ],
+      "summary": "Class `Command` implementing core behaviors and state for `check_redis.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/accounts/management/commands/create_admin.py",
+      "type": "file",
+      "name": "create_admin.py",
+      "filePath": "backend/accounts/management/commands/create_admin.py",
+      "summary": "Django admin configuration registering accounts models with customized list displays and filters.",
+      "tags": [
+        "admin",
+        "backoffice",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/management/commands/create_admin.py:Command",
+      "type": "class",
+      "name": "Command",
+      "filePath": "backend/accounts/management/commands/create_admin.py",
+      "lineRange": [
+        7,
+        51
+      ],
+      "summary": "Class `Command` implementing core behaviors and state for `create_admin.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/accounts/migrations/0001_initial.py",
+      "type": "file",
+      "name": "0001_initial.py",
+      "filePath": "backend/accounts/migrations/0001_initial.py",
+      "summary": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/accounts/migrations/0001_initial.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/accounts/migrations/0001_initial.py",
+      "lineRange": [
+        11,
+        79
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0001_initial.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/accounts/migrations/0002_userprofile_approval_status.py",
+      "type": "file",
+      "name": "0002_userprofile_approval_status.py",
+      "filePath": "backend/accounts/migrations/0002_userprofile_approval_status.py",
+      "summary": "Project code file providing core functionality and configuration for 0002_userprofile_approval_status.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/migrations/0002_userprofile_approval_status.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/accounts/migrations/0002_userprofile_approval_status.py",
+      "lineRange": [
+        6,
+        18
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0002_userprofile_approval_status.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/migrations/0003_emailotp.py",
+      "type": "file",
+      "name": "0003_emailotp.py",
+      "filePath": "backend/accounts/migrations/0003_emailotp.py",
+      "summary": "One-time password service generating and validating email verification codes for secure user activation.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/migrations/0003_emailotp.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/accounts/migrations/0003_emailotp.py",
+      "lineRange": [
+        6,
+        30
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0003_emailotp.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/migrations/0004_alter_userprofile_approval_status.py",
+      "type": "file",
+      "name": "0004_alter_userprofile_approval_status.py",
+      "filePath": "backend/accounts/migrations/0004_alter_userprofile_approval_status.py",
+      "summary": "Project code file providing core functionality and configuration for 0004_alter_userprofile_approval_status.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/migrations/0004_alter_userprofile_approval_status.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/accounts/migrations/0004_alter_userprofile_approval_status.py",
+      "lineRange": [
+        6,
+        18
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0004_alter_userprofile_approval_status.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/migrations/0005_notification_notification_type_notification_title.py",
+      "type": "file",
+      "name": "0005_notification_notification_type_notification_title.py",
+      "filePath": "backend/accounts/migrations/0005_notification_notification_type_notification_title.py",
+      "summary": "Project code file providing core functionality and configuration for 0005_notification_notification_type_notification_title.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/migrations/0005_notification_notification_type_notification_title.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/accounts/migrations/0005_notification_notification_type_notification_title.py",
+      "lineRange": [
+        6,
+        23
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0005_notification_notification_type_notification_title.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/migrations/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/accounts/migrations/__init__.py",
+      "summary": "Python package initialization marker establishing backend/accounts/migrations as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/services/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/accounts/services/__init__.py",
+      "summary": "Python package initialization marker establishing backend/accounts/services as an importable module.",
+      "tags": [
+        "service",
+        "business-logic",
+        "algorithm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/test_redis_pytest.py",
+      "type": "file",
+      "name": "test_redis_pytest.py",
+      "filePath": "backend/accounts/test_redis_pytest.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_redis_pytest.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/test_redis_pytest.py:test_mask_redis_url_masks_password",
+      "type": "function",
+      "name": "test_mask_redis_url_masks_password",
+      "filePath": "backend/accounts/test_redis_pytest.py",
+      "lineRange": [
+        7,
+        12
+      ],
+      "summary": "Function `test_mask_redis_url_masks_password` handling logic within `test_redis_pytest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/test_redis_pytest.py:test_mask_redis_url_handles_local_and_empty",
+      "type": "function",
+      "name": "test_mask_redis_url_handles_local_and_empty",
+      "filePath": "backend/accounts/test_redis_pytest.py",
+      "lineRange": [
+        15,
+        17
+      ],
+      "summary": "Function `test_mask_redis_url_handles_local_and_empty` handling logic within `test_redis_pytest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_execution",
+      "type": "function",
+      "name": "test_check_redis_command_execution",
+      "filePath": "backend/accounts/test_redis_pytest.py",
+      "lineRange": [
+        24,
+        32
+      ],
+      "summary": "Function `test_check_redis_command_execution` handling logic within `test_redis_pytest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_mocked_success",
+      "type": "function",
+      "name": "test_check_redis_command_mocked_success",
+      "filePath": "backend/accounts/test_redis_pytest.py",
+      "lineRange": [
+        36,
+        47
+      ],
+      "summary": "Function `test_check_redis_command_mocked_success` handling logic within `test_redis_pytest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_mocked_failure",
+      "type": "function",
+      "name": "test_check_redis_command_mocked_failure",
+      "filePath": "backend/accounts/test_redis_pytest.py",
+      "lineRange": [
+        51,
+        61
+      ],
+      "summary": "Function `test_check_redis_command_mocked_failure` handling logic within `test_redis_pytest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/analytics/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/analytics/__init__.py",
+      "summary": "Python package initialization marker establishing backend/analytics as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/analytics/apps.py",
+      "type": "file",
+      "name": "apps.py",
+      "filePath": "backend/analytics/apps.py",
+      "summary": "Project code file providing core functionality and configuration for apps.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/analytics/apps.py:AnalyticsConfig",
+      "type": "class",
+      "name": "AnalyticsConfig",
+      "filePath": "backend/analytics/apps.py",
+      "lineRange": [
+        4,
+        5
+      ],
+      "summary": "Class `AnalyticsConfig` implementing core behaviors and state for `apps.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/analytics/migrations/0001_initial.py",
+      "type": "file",
+      "name": "0001_initial.py",
+      "filePath": "backend/analytics/migrations/0001_initial.py",
+      "summary": "Project code file providing core functionality and configuration for 0001_initial.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/analytics/migrations/0001_initial.py:Migration",
+      "type": "class",
+      "name": "Migration",
+      "filePath": "backend/analytics/migrations/0001_initial.py",
+      "lineRange": [
+        7,
+        40
+      ],
+      "summary": "Class `Migration` implementing core behaviors and state for `0001_initial.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/analytics/migrations/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/analytics/migrations/__init__.py",
+      "summary": "Python package initialization marker establishing backend/analytics/migrations as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/book_recommondation/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/book_recommondation/__init__.py",
+      "summary": "Python package initialization marker establishing backend/book_recommondation as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/book_recommondation/asgi.py",
+      "type": "file",
+      "name": "asgi.py",
+      "filePath": "backend/book_recommondation/asgi.py",
+      "summary": "Web server gateway interface entry point for serving the Django application in production.",
+      "tags": [
+        "entry-point",
+        "bootstrap",
+        "core"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/book_recommondation/settings.py",
+      "type": "file",
+      "name": "settings.py",
+      "filePath": "backend/book_recommondation/settings.py",
+      "summary": "Django project settings configuring database connections, JWT auth, Redis cache, CORS, and installed apps.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/book_recommondation/wsgi.py",
+      "type": "file",
+      "name": "wsgi.py",
+      "filePath": "backend/book_recommondation/wsgi.py",
+      "summary": "Web server gateway interface entry point for serving the Django application in production.",
+      "tags": [
+        "entry-point",
+        "bootstrap",
+        "core"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "filePath": "backend/books/__init__.py",
+      "summary": "Python package initialization marker establishing backend/books as an importable module.",
+      "tags": [
+        "entry-point",
+        "barrel",
+        "module"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:backend/accounts/apps.py",
+      "target": "class:backend/accounts/apps.py:AccountsConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/apps.py",
+      "target": "class:backend/accounts/apps.py:AccountsConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/apps.py",
+      "target": "class:backend/accounts/apps.py:AccountsConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/apps.py",
+      "target": "class:backend/accounts/apps.py:AccountsConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/management/commands/check_redis.py",
+      "target": "function:backend/accounts/management/commands/check_redis.py:mask_redis_url",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/management/commands/check_redis.py",
+      "target": "function:backend/accounts/management/commands/check_redis.py:mask_redis_url",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/management/commands/check_redis.py",
+      "target": "class:backend/accounts/management/commands/check_redis.py:Command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/management/commands/check_redis.py",
+      "target": "class:backend/accounts/management/commands/check_redis.py:Command",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/management/commands/create_admin.py",
+      "target": "class:backend/accounts/management/commands/create_admin.py:Command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/management/commands/create_admin.py",
+      "target": "class:backend/accounts/management/commands/create_admin.py:Command",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/migrations/0001_initial.py",
+      "target": "class:backend/accounts/migrations/0001_initial.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/migrations/0001_initial.py",
+      "target": "class:backend/accounts/migrations/0001_initial.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/migrations/0002_userprofile_approval_status.py",
+      "target": "class:backend/accounts/migrations/0002_userprofile_approval_status.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/migrations/0002_userprofile_approval_status.py",
+      "target": "class:backend/accounts/migrations/0002_userprofile_approval_status.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/migrations/0003_emailotp.py",
+      "target": "class:backend/accounts/migrations/0003_emailotp.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/migrations/0003_emailotp.py",
+      "target": "class:backend/accounts/migrations/0003_emailotp.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/migrations/0004_alter_userprofile_approval_status.py",
+      "target": "class:backend/accounts/migrations/0004_alter_userprofile_approval_status.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/migrations/0004_alter_userprofile_approval_status.py",
+      "target": "class:backend/accounts/migrations/0004_alter_userprofile_approval_status.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/migrations/0005_notification_notification_type_notification_title.py",
+      "target": "class:backend/accounts/migrations/0005_notification_notification_type_notification_title.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/migrations/0005_notification_notification_type_notification_title.py",
+      "target": "class:backend/accounts/migrations/0005_notification_notification_type_notification_title.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_mask_redis_url_masks_password",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_mask_redis_url_masks_password",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_mask_redis_url_handles_local_and_empty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_mask_redis_url_handles_local_and_empty",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_execution",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_execution",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_mocked_success",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_mocked_success",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_mocked_failure",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "function:backend/accounts/test_redis_pytest.py:test_check_redis_command_mocked_failure",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/test_redis_pytest.py",
+      "target": "file:backend/accounts/management/commands/check_redis.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/management/commands/check_redis.py",
+      "target": "file:backend/accounts/test_redis_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/analytics/apps.py",
+      "target": "class:backend/analytics/apps.py:AnalyticsConfig",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/apps.py",
+      "target": "class:backend/analytics/apps.py:AnalyticsConfig",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/migrations/0001_initial.py",
+      "target": "class:backend/analytics/migrations/0001_initial.py:Migration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/migrations/0001_initial.py",
+      "target": "class:backend/analytics/migrations/0001_initial.py:Migration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

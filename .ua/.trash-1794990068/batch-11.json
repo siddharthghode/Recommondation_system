@@ -1,0 +1,57 @@
+{
+  "nodes": [
+    {
+      "id": "config:frontend/.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": "frontend/.env.example",
+      "summary": "Environment variable template specifying required secret keys, URLs, and credentials.",
+      "tags": [
+        "configuration",
+        "settings",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:frontend/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "frontend/README.md",
+      "summary": "Comprehensive project documentation detailing features, architecture, installation, and deployment steps.",
+      "tags": [
+        "documentation",
+        "guide",
+        "specification"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "frontend/index.html",
+      "summary": "Project markup file providing core functionality and configuration for index.html.",
+      "tags": [
+        "styling",
+        "markup",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:frontend/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "frontend/package.json",
+      "summary": "Project config file providing core functionality and configuration for package.json.",
+      "tags": [
+        "configuration",
+        "settings",
+        "build-system"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

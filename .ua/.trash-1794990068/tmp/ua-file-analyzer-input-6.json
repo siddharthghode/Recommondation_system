@@ -1,0 +1,21 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "backend/.dockerignore",
+      "language": "unknown",
+      "sizeLines": 16,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "backend/Dockerfile",
+      "language": "dockerfile",
+      "sizeLines": 23,
+      "fileCategory": "infra"
+    }
+  ],
+  "batchImportData": {
+    "backend/.dockerignore": [],
+    "backend/Dockerfile": []
+  }
+}

@@ -1,0 +1,6138 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 20,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 20,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 20,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "frontend/src/api/authApi.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "login",
+          "startLine": 3,
+          "endLine": 10,
+          "params": [
+            "username",
+            "password",
+            "role"
+          ]
+        },
+        {
+          "name": "register",
+          "startLine": 12,
+          "endLine": 12,
+          "params": [
+            "userData"
+          ]
+        },
+        {
+          "name": "googleLogin",
+          "startLine": 14,
+          "endLine": 20,
+          "params": [
+            "payload"
+          ]
+        },
+        {
+          "name": "requestOTP",
+          "startLine": 22,
+          "endLine": 23,
+          "params": [
+            "email"
+          ]
+        },
+        {
+          "name": "verifyOTP",
+          "startLine": 25,
+          "endLine": 26,
+          "params": [
+            "email",
+            "otp"
+          ]
+        },
+        {
+          "name": "getOTPStatus",
+          "startLine": 28,
+          "endLine": 29,
+          "params": [
+            "email"
+          ]
+        },
+        {
+          "name": "resetPassword",
+          "startLine": 31,
+          "endLine": 32,
+          "params": [
+            "resetData"
+          ]
+        },
+        {
+          "name": "refreshToken",
+          "startLine": 34,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "getDepartments",
+          "startLine": 42,
+          "endLine": 42,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "login",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "register",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "googleLogin",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "requestOTP",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "verifyOTP",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "getOTPStatus",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "resetPassword",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "refreshToken",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "getDepartments",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "login",
+          "callee": "apiClient.post",
+          "lineNumber": 6
+        },
+        {
+          "caller": "login",
+          "callee": "localStorage.setItem",
+          "lineNumber": 7
+        },
+        {
+          "caller": "login",
+          "callee": "localStorage.setItem",
+          "lineNumber": 8
+        },
+        {
+          "caller": "register",
+          "callee": "apiClient.post",
+          "lineNumber": 12
+        },
+        {
+          "caller": "googleLogin",
+          "callee": "apiClient.post",
+          "lineNumber": 16
+        },
+        {
+          "caller": "googleLogin",
+          "callee": "localStorage.setItem",
+          "lineNumber": 17
+        },
+        {
+          "caller": "googleLogin",
+          "callee": "localStorage.setItem",
+          "lineNumber": 18
+        },
+        {
+          "caller": "requestOTP",
+          "callee": "apiClient.post",
+          "lineNumber": 23
+        },
+        {
+          "caller": "verifyOTP",
+          "callee": "apiClient.post",
+          "lineNumber": 26
+        },
+        {
+          "caller": "getOTPStatus",
+          "callee": "apiClient.get",
+          "lineNumber": 29
+        },
+        {
+          "caller": "getOTPStatus",
+          "callee": "encodeURIComponent",
+          "lineNumber": 29
+        },
+        {
+          "caller": "resetPassword",
+          "callee": "apiClient.post",
+          "lineNumber": 32
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "localStorage.getItem",
+          "lineNumber": 35
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "apiClient.post",
+          "lineNumber": 37
+        },
+        {
+          "caller": "refreshToken",
+          "callee": "localStorage.setItem",
+          "lineNumber": 38
+        },
+        {
+          "caller": "getDepartments",
+          "callee": "apiClient.get",
+          "lineNumber": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 9,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/api/axios.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 103,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "processQueue",
+          "startLine": 15,
+          "endLine": 24,
+          "params": [
+            "error"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BASE_URL",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "apiClient",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "processQueue",
+          "callee": "failedQueue.forEach",
+          "lineNumber": 16
+        },
+        {
+          "caller": "processQueue",
+          "callee": "prom.reject",
+          "lineNumber": 18
+        },
+        {
+          "caller": "processQueue",
+          "callee": "prom.resolve",
+          "lineNumber": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/api/bookApi.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 28,
+      "functions": [
+        {
+          "name": "fetchBooks",
+          "startLine": 3,
+          "endLine": 4,
+          "params": []
+        },
+        {
+          "name": "getBookCategories",
+          "startLine": 6,
+          "endLine": 7,
+          "params": []
+        },
+        {
+          "name": "getCategories",
+          "startLine": 9,
+          "endLine": 10,
+          "params": []
+        },
+        {
+          "name": "createCategory",
+          "startLine": 12,
+          "endLine": 13,
+          "params": [
+            "categoryData"
+          ]
+        },
+        {
+          "name": "updateCategory",
+          "startLine": 15,
+          "endLine": 16,
+          "params": [
+            "categoryId",
+            "categoryData"
+          ]
+        },
+        {
+          "name": "deleteCategory",
+          "startLine": 18,
+          "endLine": 19,
+          "params": [
+            "categoryId"
+          ]
+        },
+        {
+          "name": "createBook",
+          "startLine": 21,
+          "endLine": 22,
+          "params": [
+            "bookData"
+          ]
+        },
+        {
+          "name": "updateBook",
+          "startLine": 24,
+          "endLine": 25,
+          "params": [
+            "bookId",
+            "bookData"
+          ]
+        },
+        {
+          "name": "deleteBook",
+          "startLine": 27,
+          "endLine": 28,
+          "params": [
+            "bookId"
+          ]
+        },
+        {
+          "name": "importBooksCSV",
+          "startLine": 30,
+          "endLine": 36,
+          "params": [
+            "file"
+          ]
+        },
+        {
+          "name": "getSimilarBooks",
+          "startLine": 38,
+          "endLine": 39,
+          "params": [
+            "bookId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "fetchBooks",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "getBookCategories",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "getCategories",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "createCategory",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "updateCategory",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "deleteCategory",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "createBook",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "updateBook",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "deleteBook",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "importBooksCSV",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "getSimilarBooks",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchBooks",
+          "callee": "apiClient.get",
+          "lineNumber": 4
+        },
+        {
+          "caller": "getBookCategories",
+          "callee": "apiClient.get(\"/books/categories/\", { params: department ? { department } : {} }).catch",
+          "lineNumber": 7
+        },
+        {
+          "caller": "getBookCategories",
+          "callee": "apiClient.get",
+          "lineNumber": 7
+        },
+        {
+          "caller": "getCategories",
+          "callee": "apiClient.get(\"/books/categories/\").catch",
+          "lineNumber": 10
+        },
+        {
+          "caller": "getCategories",
+          "callee": "apiClient.get",
+          "lineNumber": 10
+        },
+        {
+          "caller": "createCategory",
+          "callee": "apiClient.post",
+          "lineNumber": 13
+        },
+        {
+          "caller": "updateCategory",
+          "callee": "apiClient.put",
+          "lineNumber": 16
+        },
+        {
+          "caller": "deleteCategory",
+          "callee": "apiClient.delete",
+          "lineNumber": 19
+        },
+        {
+          "caller": "createBook",
+          "callee": "apiClient.post",
+          "lineNumber": 22
+        },
+        {
+          "caller": "updateBook",
+          "callee": "apiClient.put",
+          "lineNumber": 25
+        },
+        {
+          "caller": "deleteBook",
+          "callee": "apiClient.delete",
+          "lineNumber": 28
+        },
+        {
+          "caller": "importBooksCSV",
+          "callee": "formData.append",
+          "lineNumber": 32
+        },
+        {
+          "caller": "importBooksCSV",
+          "callee": "apiClient.post",
+          "lineNumber": 33
+        },
+        {
+          "caller": "getSimilarBooks",
+          "callee": "apiClient.get",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 11,
+        "functionCount": 11,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/api/borrowApi.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "requestBorrow",
+          "startLine": 3,
+          "endLine": 4,
+          "params": [
+            "bookId"
+          ]
+        },
+        {
+          "name": "returnBook",
+          "startLine": 6,
+          "endLine": 7,
+          "params": [
+            "borrowId"
+          ]
+        },
+        {
+          "name": "getMyBorrows",
+          "startLine": 9,
+          "endLine": 10,
+          "params": []
+        },
+        {
+          "name": "getBorrowRequests",
+          "startLine": 12,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "approveBorrow",
+          "startLine": 14,
+          "endLine": 15,
+          "params": [
+            "borrowId"
+          ]
+        },
+        {
+          "name": "rejectBorrow",
+          "startLine": 17,
+          "endLine": 18,
+          "params": [
+            "borrowId"
+          ]
+        },
+        {
+          "name": "getBorrowHistory",
+          "startLine": 20,
+          "endLine": 21,
+          "params": []
+        },
+        {
+          "name": "getOverdueBooks",
+          "startLine": 23,
+          "endLine": 24,
+          "params": []
+        },
+        {
+          "name": "getDepartmentBorrows",
+          "startLine": 26,
+          "endLine": 27,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "requestBorrow",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "returnBook",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "getMyBorrows",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "getBorrowRequests",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "approveBorrow",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "rejectBorrow",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "getBorrowHistory",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "getOverdueBooks",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "getDepartmentBorrows",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "requestBorrow",
+          "callee": "apiClient.post",
+          "lineNumber": 4
+        },
+        {
+          "caller": "returnBook",
+          "callee": "apiClient.post",
+          "lineNumber": 7
+        },
+        {
+          "caller": "getMyBorrows",
+          "callee": "apiClient.get",
+          "lineNumber": 10
+        },
+        {
+          "caller": "getBorrowRequests",
+          "callee": "apiClient.get",
+          "lineNumber": 12
+        },
+        {
+          "caller": "approveBorrow",
+          "callee": "apiClient.post",
+          "lineNumber": 15
+        },
+        {
+          "caller": "rejectBorrow",
+          "callee": "apiClient.post",
+          "lineNumber": 18
+        },
+        {
+          "caller": "getBorrowHistory",
+          "callee": "apiClient.get",
+          "lineNumber": 21
+        },
+        {
+          "caller": "getOverdueBooks",
+          "callee": "apiClient.get(\"/borrows/my/?status=overdue\").catch",
+          "lineNumber": 24
+        },
+        {
+          "caller": "getOverdueBooks",
+          "callee": "apiClient.get",
+          "lineNumber": 24
+        },
+        {
+          "caller": "getDepartmentBorrows",
+          "callee": "apiClient.get",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 9,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/api/index.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 7,
+      "exports": [
+        {
+          "name": "apiClient",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "BASE_URL",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/api/recommendationApi.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "fetchRecommendations",
+          "startLine": 3,
+          "endLine": 7,
+          "params": []
+        },
+        {
+          "name": "trackInteraction",
+          "startLine": 9,
+          "endLine": 10,
+          "params": [
+            "bookId"
+          ]
+        },
+        {
+          "name": "trackDwellTime",
+          "startLine": 12,
+          "endLine": 13,
+          "params": [
+            "bookId",
+            "durationSeconds"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "fetchRecommendations",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "trackInteraction",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "trackDwellTime",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchRecommendations",
+          "callee": "apiClient.get",
+          "lineNumber": 4
+        },
+        {
+          "caller": "trackInteraction",
+          "callee": "apiClient.post",
+          "lineNumber": 10
+        },
+        {
+          "caller": "trackDwellTime",
+          "callee": "apiClient.post",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/api/reviewApi.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "getBookReviews",
+          "startLine": 3,
+          "endLine": 4,
+          "params": [
+            "bookId"
+          ]
+        },
+        {
+          "name": "submitReview",
+          "startLine": 6,
+          "endLine": 7,
+          "params": [
+            "bookId",
+            "reviewData"
+          ]
+        },
+        {
+          "name": "updateReview",
+          "startLine": 9,
+          "endLine": 10,
+          "params": [
+            "bookId",
+            "reviewId",
+            "reviewData"
+          ]
+        },
+        {
+          "name": "deleteReview",
+          "startLine": 12,
+          "endLine": 13,
+          "params": [
+            "bookId",
+            "reviewId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getBookReviews",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "submitReview",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "updateReview",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "deleteReview",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getBookReviews",
+          "callee": "apiClient.get(`/books/${bookId}/reviews/`).catch",
+          "lineNumber": 4
+        },
+        {
+          "caller": "getBookReviews",
+          "callee": "apiClient.get",
+          "lineNumber": 4
+        },
+        {
+          "caller": "submitReview",
+          "callee": "apiClient.post",
+          "lineNumber": 7
+        },
+        {
+          "caller": "updateReview",
+          "callee": "apiClient.put",
+          "lineNumber": 10
+        },
+        {
+          "caller": "deleteReview",
+          "callee": "apiClient.delete",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/api/userApi.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 75,
+      "nonEmptyLines": 52,
+      "functions": [
+        {
+          "name": "getStudents",
+          "startLine": 4,
+          "endLine": 7,
+          "params": []
+        },
+        {
+          "name": "getStudentList",
+          "startLine": 9,
+          "endLine": 9,
+          "params": []
+        },
+        {
+          "name": "getPendingStudents",
+          "startLine": 11,
+          "endLine": 11,
+          "params": []
+        },
+        {
+          "name": "getStudent",
+          "startLine": 13,
+          "endLine": 14,
+          "params": [
+            "studentId"
+          ]
+        },
+        {
+          "name": "updateStudent",
+          "startLine": 16,
+          "endLine": 17,
+          "params": [
+            "studentId",
+            "studentData"
+          ]
+        },
+        {
+          "name": "deleteStudent",
+          "startLine": 19,
+          "endLine": 20,
+          "params": [
+            "studentId"
+          ]
+        },
+        {
+          "name": "approveStudent",
+          "startLine": 22,
+          "endLine": 23,
+          "params": [
+            "studentId"
+          ]
+        },
+        {
+          "name": "rejectStudent",
+          "startLine": 25,
+          "endLine": 26,
+          "params": [
+            "studentId"
+          ]
+        },
+        {
+          "name": "getStudentBorrows",
+          "startLine": 28,
+          "endLine": 29,
+          "params": [
+            "studentId"
+          ]
+        },
+        {
+          "name": "getStudentAnalytics",
+          "startLine": 31,
+          "endLine": 32,
+          "params": [
+            "studentId"
+          ]
+        },
+        {
+          "name": "fetchLibrarianDashboard",
+          "startLine": 35,
+          "endLine": 36,
+          "params": []
+        },
+        {
+          "name": "getAdminStats",
+          "startLine": 38,
+          "endLine": 38,
+          "params": []
+        },
+        {
+          "name": "getAdminStudents",
+          "startLine": 40,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "getAdminBooks",
+          "startLine": 42,
+          "endLine": 43,
+          "params": []
+        },
+        {
+          "name": "sendMessageToStudent",
+          "startLine": 46,
+          "endLine": 47,
+          "params": [
+            "studentId",
+            "title",
+            "message"
+          ]
+        },
+        {
+          "name": "getNotifications",
+          "startLine": 50,
+          "endLine": 53,
+          "params": []
+        },
+        {
+          "name": "markNotificationRead",
+          "startLine": 55,
+          "endLine": 56,
+          "params": [
+            "notificationId"
+          ]
+        },
+        {
+          "name": "markAllNotificationsRead",
+          "startLine": 58,
+          "endLine": 59,
+          "params": []
+        },
+        {
+          "name": "getPageContent",
+          "startLine": 62,
+          "endLine": 63,
+          "params": [
+            "page"
+          ]
+        },
+        {
+          "name": "listPageContents",
+          "startLine": 65,
+          "endLine": 66,
+          "params": []
+        },
+        {
+          "name": "createPageContent",
+          "startLine": 68,
+          "endLine": 69,
+          "params": [
+            "pageData"
+          ]
+        },
+        {
+          "name": "updatePageContent",
+          "startLine": 71,
+          "endLine": 72,
+          "params": [
+            "page",
+            "pageData"
+          ]
+        },
+        {
+          "name": "deletePageContent",
+          "startLine": 74,
+          "endLine": 75,
+          "params": [
+            "page"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getStudents",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "getStudentList",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "getPendingStudents",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "getStudent",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "updateStudent",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "deleteStudent",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "approveStudent",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "rejectStudent",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "getStudentBorrows",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "getStudentAnalytics",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "fetchLibrarianDashboard",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "getAdminStats",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "getAdminStudents",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "getAdminBooks",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "sendMessageToStudent",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "getNotifications",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "markNotificationRead",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "markAllNotificationsRead",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "getPageContent",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "listPageContents",
+          "line": 65,
+          "isDefault": false
+        },
+        {
+          "name": "createPageContent",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "updatePageContent",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "deletePageContent",
+          "line": 74,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getStudents",
+          "callee": "apiClient.get",
+          "lineNumber": 5
+        },
+        {
+          "caller": "getStudentList",
+          "callee": "apiClient.get",
+          "lineNumber": 9
+        },
+        {
+          "caller": "getPendingStudents",
+          "callee": "apiClient.get",
+          "lineNumber": 11
+        },
+        {
+          "caller": "getStudent",
+          "callee": "apiClient.get",
+          "lineNumber": 14
+        },
+        {
+          "caller": "updateStudent",
+          "callee": "apiClient.put",
+          "lineNumber": 17
+        },
+        {
+          "caller": "deleteStudent",
+          "callee": "apiClient.delete",
+          "lineNumber": 20
+        },
+        {
+          "caller": "approveStudent",
+          "callee": "apiClient.post",
+          "lineNumber": 23
+        },
+        {
+          "caller": "rejectStudent",
+          "callee": "apiClient.post",
+          "lineNumber": 26
+        },
+        {
+          "caller": "getStudentBorrows",
+          "callee": "apiClient.get",
+          "lineNumber": 29
+        },
+        {
+          "caller": "getStudentAnalytics",
+          "callee": "apiClient.get",
+          "lineNumber": 32
+        },
+        {
+          "caller": "fetchLibrarianDashboard",
+          "callee": "apiClient.get",
+          "lineNumber": 36
+        },
+        {
+          "caller": "getAdminStats",
+          "callee": "apiClient.get",
+          "lineNumber": 38
+        },
+        {
+          "caller": "getAdminStudents",
+          "callee": "apiClient.get",
+          "lineNumber": 40
+        },
+        {
+          "caller": "getAdminBooks",
+          "callee": "apiClient.get",
+          "lineNumber": 43
+        },
+        {
+          "caller": "sendMessageToStudent",
+          "callee": "apiClient.post",
+          "lineNumber": 47
+        },
+        {
+          "caller": "getNotifications",
+          "callee": "apiClient.get",
+          "lineNumber": 51
+        },
+        {
+          "caller": "markNotificationRead",
+          "callee": "apiClient.post",
+          "lineNumber": 56
+        },
+        {
+          "caller": "markAllNotificationsRead",
+          "callee": "apiClient.post",
+          "lineNumber": 59
+        },
+        {
+          "caller": "getPageContent",
+          "callee": "apiClient.get(`/pages/${page}/`).catch",
+          "lineNumber": 63
+        },
+        {
+          "caller": "getPageContent",
+          "callee": "apiClient.get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "listPageContents",
+          "callee": "apiClient.get(\"/admin/pages/\").catch",
+          "lineNumber": 66
+        },
+        {
+          "caller": "listPageContents",
+          "callee": "apiClient.get",
+          "lineNumber": 66
+        },
+        {
+          "caller": "createPageContent",
+          "callee": "apiClient.post(\"/admin/pages/create/\", pageData).catch",
+          "lineNumber": 69
+        },
+        {
+          "caller": "createPageContent",
+          "callee": "apiClient.post",
+          "lineNumber": 69
+        },
+        {
+          "caller": "updatePageContent",
+          "callee": "apiClient.put(`/admin/pages/${page}/`, pageData).catch",
+          "lineNumber": 72
+        },
+        {
+          "caller": "updatePageContent",
+          "callee": "apiClient.put",
+          "lineNumber": 72
+        },
+        {
+          "caller": "deletePageContent",
+          "callee": "apiClient.delete(`/admin/pages/${page}/`).catch",
+          "lineNumber": 75
+        },
+        {
+          "caller": "deletePageContent",
+          "callee": "apiClient.delete",
+          "lineNumber": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 23,
+        "functionCount": 23,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/BookCard.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 83,
+      "functions": [
+        {
+          "name": "BookCard",
+          "startLine": 13,
+          "endLine": 89,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BookCard",
+          "line": 13,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "BookCard",
+          "callee": "useEffect",
+          "lineNumber": 16
+        },
+        {
+          "caller": "BookCard",
+          "callee": "localStorage.getItem",
+          "lineNumber": 18
+        },
+        {
+          "caller": "BookCard",
+          "callee": "trackInteraction(token, book.id, 'view').catch",
+          "lineNumber": 20
+        },
+        {
+          "caller": "BookCard",
+          "callee": "trackInteraction",
+          "lineNumber": 20
+        },
+        {
+          "caller": "BookCard",
+          "callee": "onClick",
+          "lineNumber": 31
+        },
+        {
+          "caller": "BookCard",
+          "callee": "book.categories?.toString().split(/[,;|]/)[0].trim",
+          "lineNumber": 70
+        },
+        {
+          "caller": "BookCard",
+          "callee": "book.categories?.toString().split",
+          "lineNumber": 70
+        },
+        {
+          "caller": "BookCard",
+          "callee": "book.categories?.toString",
+          "lineNumber": 70
+        },
+        {
+          "caller": "BookCard",
+          "callee": "Number(book.average_rating).toFixed",
+          "lineNumber": 73
+        },
+        {
+          "caller": "BookCard",
+          "callee": "Number",
+          "lineNumber": 73
+        },
+        {
+          "caller": "BookCard",
+          "callee": "e.stopPropagation",
+          "lineNumber": 81
+        },
+        {
+          "caller": "BookCard",
+          "callee": "onClick",
+          "lineNumber": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/BookDetail.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 438,
+      "nonEmptyLines": 399,
+      "functions": [
+        {
+          "name": "BookDetail",
+          "startLine": 13,
+          "endLine": 438,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BookDetail",
+          "line": 13,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "BookDetail",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "localStorage.getItem",
+          "lineNumber": 23
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "localStorage.getItem",
+          "lineNumber": 24
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useNavigate",
+          "lineNumber": 25
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useRef",
+          "lineNumber": 29
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useRef",
+          "lineNumber": 30
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useRef",
+          "lineNumber": 31
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "book.categories.toString().split(/[,;|]/).map(c => c.trim()).filter",
+          "lineNumber": 38
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "book.categories.toString().split(/[,;|]/).map",
+          "lineNumber": 38
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "book.categories.toString().split",
+          "lineNumber": 38
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "book.categories.toString",
+          "lineNumber": 38
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "c.trim",
+          "lineNumber": 38
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useEffect",
+          "lineNumber": 42
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "trackInteraction(token, book.id, 'view').catch",
+          "lineNumber": 45
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "trackInteraction",
+          "lineNumber": 45
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useEffect",
+          "lineNumber": 50
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "setBorrowing",
+          "lineNumber": 51
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "setBorrowError",
+          "lineNumber": 52
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "setBorrowSuccess",
+          "lineNumber": 53
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "Date.now",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handleVisibilityChange",
+          "callee": "Date.now",
+          "lineNumber": 69
+        },
+        {
+          "caller": "handleVisibilityChange",
+          "callee": "Date.now",
+          "lineNumber": 74
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "document.addEventListener",
+          "lineNumber": 78
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "document.removeEventListener",
+          "lineNumber": 82
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "Date.now",
+          "lineNumber": 87
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "Math.round",
+          "lineNumber": 96
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "trackDwellTime(token, book.id, roundedSeconds).catch",
+          "lineNumber": 97
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "trackDwellTime",
+          "lineNumber": 97
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useEffect",
+          "lineNumber": 103
+        },
+        {
+          "caller": "onEsc",
+          "callee": "onClose",
+          "lineNumber": 105
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "window.addEventListener",
+          "lineNumber": 107
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "window.removeEventListener",
+          "lineNumber": 108
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "useEffect",
+          "lineNumber": 112
+        },
+        {
+          "caller": "handleLike",
+          "callee": "navigate",
+          "lineNumber": 123
+        },
+        {
+          "caller": "handleLike",
+          "callee": "setLiked",
+          "lineNumber": 127
+        },
+        {
+          "caller": "handleLike",
+          "callee": "setLikeFeedback",
+          "lineNumber": 129
+        },
+        {
+          "caller": "handleLike",
+          "callee": "setTimeout",
+          "lineNumber": 130
+        },
+        {
+          "caller": "handleLike",
+          "callee": "setLikeFeedback",
+          "lineNumber": 130
+        },
+        {
+          "caller": "handleLike",
+          "callee": "trackInteraction",
+          "lineNumber": 132
+        },
+        {
+          "caller": "handleLike",
+          "callee": "console.warn",
+          "lineNumber": 134
+        },
+        {
+          "caller": "handleRate",
+          "callee": "navigate",
+          "lineNumber": 142
+        },
+        {
+          "caller": "handleRate",
+          "callee": "setUserRating",
+          "lineNumber": 145
+        },
+        {
+          "caller": "handleRate",
+          "callee": "trackInteraction",
+          "lineNumber": 147
+        },
+        {
+          "caller": "handleRate",
+          "callee": "setRatedSuccess",
+          "lineNumber": 148
+        },
+        {
+          "caller": "handleRate",
+          "callee": "setTimeout",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handleRate",
+          "callee": "setRatedSuccess",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handleRate",
+          "callee": "console.warn",
+          "lineNumber": 151
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "navigate",
+          "lineNumber": 159
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setBorrowError",
+          "lineNumber": 163
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setBorrowError",
+          "lineNumber": 167
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setBorrowError",
+          "lineNumber": 171
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "window.confirm",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setBorrowing",
+          "lineNumber": 177
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setBorrowError",
+          "lineNumber": 178
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "requestBorrow",
+          "lineNumber": 179
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setBorrowSuccess",
+          "lineNumber": 180
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setTimeout",
+          "lineNumber": 181
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "onClose",
+          "lineNumber": 182
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setBorrowError",
+          "lineNumber": 185
+        },
+        {
+          "caller": "handleBorrow",
+          "callee": "setBorrowing",
+          "lineNumber": 187
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "e.stopPropagation",
+          "lineNumber": 215
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "Number(book.average_rating).toFixed",
+          "lineNumber": 262
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "Number",
+          "lineNumber": 262
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "categories.map",
+          "lineNumber": 303
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "[1, 2, 3, 4, 5].map",
+          "lineNumber": 373
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "handleRate",
+          "lineNumber": 377
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "setHoverRating",
+          "lineNumber": 378
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "setHoverRating",
+          "lineNumber": 379
+        },
+        {
+          "caller": "BookDetail",
+          "callee": "navigate",
+          "lineNumber": 427
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ErrorMessage.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "ErrorMessage",
+          "startLine": 3,
+          "endLine": 22,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ErrorMessage",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/GoogleAuthButton.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 172,
+      "nonEmptyLines": 158,
+      "functions": [
+        {
+          "name": "GoogleAuthButton",
+          "startLine": 8,
+          "endLine": 172,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "GoogleAuthButton",
+          "line": 8,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "useRef",
+          "lineNumber": 15
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "JSON.stringify",
+          "lineNumber": 19
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "useCallback",
+          "lineNumber": 21
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "onError",
+          "lineNumber": 24
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "setLoading",
+          "lineNumber": 28
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "JSON.parse",
+          "lineNumber": 32
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "googleLogin",
+          "lineNumber": 35
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "onSuccess",
+          "lineNumber": 37
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "console.error",
+          "lineNumber": 40
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "onError",
+          "lineNumber": 42
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "setLoading",
+          "lineNumber": 50
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "useEffect",
+          "lineNumber": 56
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "document.getElementById",
+          "lineNumber": 57
+        },
+        {
+          "caller": "initializeGoogle",
+          "callee": "setScriptLoaded",
+          "lineNumber": 60
+        },
+        {
+          "caller": "initializeGoogle",
+          "callee": "window.google.accounts.id.initialize",
+          "lineNumber": 63
+        },
+        {
+          "caller": "initializeGoogle",
+          "callee": "window.google.accounts.id.renderButton",
+          "lineNumber": 71
+        },
+        {
+          "caller": "initializeGoogle",
+          "callee": "console.warn",
+          "lineNumber": 82
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "initializeGoogle",
+          "lineNumber": 88
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "document.createElement",
+          "lineNumber": 91
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "document.body.appendChild",
+          "lineNumber": 97
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "script.addEventListener",
+          "lineNumber": 99
+        },
+        {
+          "caller": "GoogleAuthButton",
+          "callee": "script.removeEventListener",
+          "lineNumber": 105
+        },
+        {
+          "caller": "handleCustomClick",
+          "callee": "window.google.accounts.id.prompt",
+          "lineNumber": 112
+        },
+        {
+          "caller": "handleCustomClick",
+          "callee": "notification.isNotDisplayed",
+          "lineNumber": 113
+        },
+        {
+          "caller": "handleCustomClick",
+          "callee": "notification.isSkippedMoment",
+          "lineNumber": 113
+        },
+        {
+          "caller": "handleCustomClick",
+          "callee": "console.log",
+          "lineNumber": 114
+        },
+        {
+          "caller": "handleCustomClick",
+          "callee": "notification.getNotDisplayedReason",
+          "lineNumber": 114
+        },
+        {
+          "caller": "handleCustomClick",
+          "callee": "onError",
+          "lineNumber": 119
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/Loading.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "Loading",
+          "startLine": 3,
+          "endLine": 10,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Loading",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/context/AuthContextCore.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "exports": [
+        {
+          "name": "AuthContext",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/context/AuthProvider.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 165,
+      "nonEmptyLines": 142,
+      "functions": [
+        {
+          "name": "AuthProvider",
+          "startLine": 5,
+          "endLine": 163,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AuthProvider",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AuthProvider",
+          "callee": "useState",
+          "lineNumber": 6
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.getItem",
+          "lineNumber": 6
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "useState",
+          "lineNumber": 7
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.getItem",
+          "lineNumber": 7
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "useState",
+          "lineNumber": 8
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.getItem",
+          "lineNumber": 8
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "useCallback",
+          "lineNumber": 13
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "setUser",
+          "lineNumber": 15
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "setIsLoading",
+          "lineNumber": 16
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "fetch",
+          "lineNumber": 21
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "apiRefreshToken",
+          "lineNumber": 31
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "setToken",
+          "lineNumber": 34
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "fetchUserProfile",
+          "lineNumber": 35
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "logout",
+          "lineNumber": 38
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "res.json",
+          "lineNumber": 47
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "setUser",
+          "lineNumber": 48
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "setRole",
+          "lineNumber": 53
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "setApprovalStatus",
+          "lineNumber": 54
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.setItem",
+          "lineNumber": 56
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.setItem",
+          "lineNumber": 57
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.setItem",
+          "lineNumber": 59
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.setItem",
+          "lineNumber": 61
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "console.error",
+          "lineNumber": 66
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "setIsLoading",
+          "lineNumber": 69
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "useEffect",
+          "lineNumber": 74
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.getItem",
+          "lineNumber": 75
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "fetchUserProfile",
+          "lineNumber": 77
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "setIsLoading",
+          "lineNumber": 79
+        },
+        {
+          "caller": "handleStorageChange",
+          "callee": "setToken",
+          "lineNumber": 85
+        },
+        {
+          "caller": "handleStorageChange",
+          "callee": "fetchUserProfile",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handleStorageChange",
+          "callee": "setUser",
+          "lineNumber": 89
+        },
+        {
+          "caller": "handleStorageChange",
+          "callee": "setRole",
+          "lineNumber": 90
+        },
+        {
+          "caller": "handleStorageChange",
+          "callee": "setApprovalStatus",
+          "lineNumber": 91
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "window.addEventListener",
+          "lineNumber": 96
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "window.removeEventListener",
+          "lineNumber": 97
+        },
+        {
+          "caller": "login",
+          "callee": "localStorage.setItem",
+          "lineNumber": 104
+        },
+        {
+          "caller": "login",
+          "callee": "setToken",
+          "lineNumber": 105
+        },
+        {
+          "caller": "login",
+          "callee": "localStorage.setItem",
+          "lineNumber": 108
+        },
+        {
+          "caller": "login",
+          "callee": "localStorage.setItem",
+          "lineNumber": 111
+        },
+        {
+          "caller": "login",
+          "callee": "setRole",
+          "lineNumber": 112
+        },
+        {
+          "caller": "login",
+          "callee": "localStorage.setItem",
+          "lineNumber": 115
+        },
+        {
+          "caller": "login",
+          "callee": "setApprovalStatus",
+          "lineNumber": 116
+        },
+        {
+          "caller": "login",
+          "callee": "fetchUserProfile",
+          "lineNumber": 121
+        },
+        {
+          "caller": "logout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 126
+        },
+        {
+          "caller": "logout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 127
+        },
+        {
+          "caller": "logout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 128
+        },
+        {
+          "caller": "logout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 129
+        },
+        {
+          "caller": "logout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 130
+        },
+        {
+          "caller": "logout",
+          "callee": "setToken",
+          "lineNumber": 132
+        },
+        {
+          "caller": "logout",
+          "callee": "setRole",
+          "lineNumber": 133
+        },
+        {
+          "caller": "logout",
+          "callee": "setApprovalStatus",
+          "lineNumber": 134
+        },
+        {
+          "caller": "logout",
+          "callee": "setUser",
+          "lineNumber": 135
+        },
+        {
+          "caller": "refreshProfile",
+          "callee": "localStorage.getItem",
+          "lineNumber": 139
+        },
+        {
+          "caller": "refreshProfile",
+          "callee": "fetchUserProfile",
+          "lineNumber": 141
+        },
+        {
+          "caller": "AuthProvider",
+          "callee": "localStorage.getItem",
+          "lineNumber": 147
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/AccountDetails.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 749,
+      "nonEmptyLines": 712,
+      "functions": [
+        {
+          "name": "AccountDetails",
+          "startLine": 37,
+          "endLine": 749,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AccountDetails",
+          "line": 37,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 38
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 46
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 47
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 49
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 52
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 53
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 54
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 55
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useState",
+          "lineNumber": 56
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "localStorage.getItem",
+          "lineNumber": 57
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useNavigate",
+          "lineNumber": 58
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useCallback",
+          "lineNumber": 60
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setLoading",
+          "lineNumber": 62
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "fetch",
+          "lineNumber": 63
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "navigate",
+          "lineNumber": 69
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "res.json",
+          "lineNumber": 75
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setProfile",
+          "lineNumber": 76
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 77
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setError",
+          "lineNumber": 86
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setError",
+          "lineNumber": 88
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setLoading",
+          "lineNumber": 90
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useCallback",
+          "lineNumber": 94
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "getMyBorrows",
+          "lineNumber": 96
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "data.filter",
+          "lineNumber": 99
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "data.filter",
+          "lineNumber": 100
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "data.filter",
+          "lineNumber": 101
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setBorrowStats",
+          "lineNumber": 103
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "console.error",
+          "lineNumber": 105
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useCallback",
+          "lineNumber": 109
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setRecLoading",
+          "lineNumber": 111
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "fetchRecommendations(token, 6, 'hybrid')\n      .then(data => {\n        setRecommendations(data);\n        setRecLoading(false);\n      })\n      .catch",
+          "lineNumber": 112
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "fetchRecommendations(token, 6, 'hybrid')\n      .then",
+          "lineNumber": 112
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "fetchRecommendations",
+          "lineNumber": 112
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setRecommendations",
+          "lineNumber": 114
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setRecLoading",
+          "lineNumber": 115
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "console.error",
+          "lineNumber": 118
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setRecLoading",
+          "lineNumber": 119
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useEffect",
+          "lineNumber": 123
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "getDepartments()\n      .then((data) => {\n        if (Array.isArray(data)) {\n          setDepartments(data);\n        }\n      })\n      .catch",
+          "lineNumber": 124
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "getDepartments()\n      .then",
+          "lineNumber": 124
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "getDepartments",
+          "lineNumber": 124
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "Array.isArray",
+          "lineNumber": 126
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setDepartments",
+          "lineNumber": 127
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "console.error",
+          "lineNumber": 130
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useEffect",
+          "lineNumber": 133
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "getBookCategories(dept)\n      .then((data) => {\n        if (Array.isArray(data) && data.length > 0) {\n          const merged = Array.from(new Set([...data, ...POPULAR_CATEGORIES]));\n          setAvailableCategories(merged);\n        }\n      })\n      .catch",
+          "lineNumber": 135
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "getBookCategories(dept)\n      .then",
+          "lineNumber": 135
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "getBookCategories",
+          "lineNumber": 135
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "Array.isArray",
+          "lineNumber": 137
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "Array.from",
+          "lineNumber": 138
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setAvailableCategories",
+          "lineNumber": 139
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "console.error",
+          "lineNumber": 142
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useEffect",
+          "lineNumber": 145
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "navigate",
+          "lineNumber": 147
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "loadProfile",
+          "lineNumber": 150
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "loadBorrowStats",
+          "lineNumber": 151
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "loadRecommendations",
+          "lineNumber": 152
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useEffect",
+          "lineNumber": 156
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 158
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "useCallback",
+          "lineNumber": 170
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 172
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "(formData.preferred_categories || \"\")\n      .split(/[,;|]/)\n      .map((c) => c.trim())\n      .filter",
+          "lineNumber": 185
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "(formData.preferred_categories || \"\")\n      .split(/[,;|]/)\n      .map",
+          "lineNumber": 185
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "(formData.preferred_categories || \"\")\n      .split",
+          "lineNumber": 185
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "c.trim",
+          "lineNumber": 187
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "current.includes",
+          "lineNumber": 191
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "current.filter",
+          "lineNumber": 192
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "setFormData",
+          "lineNumber": 196
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "updated.join",
+          "lineNumber": 196
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "e.preventDefault",
+          "lineNumber": 200
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "customCategory.trim",
+          "lineNumber": 201
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "(formData.preferred_categories || \"\")\n      .split(/[,;|]/)\n      .map((c) => c.trim())\n      .filter",
+          "lineNumber": 203
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "(formData.preferred_categories || \"\")\n      .split(/[,;|]/)\n      .map",
+          "lineNumber": 203
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "(formData.preferred_categories || \"\")\n      .split",
+          "lineNumber": 203
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "c.trim",
+          "lineNumber": 205
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "current.includes",
+          "lineNumber": 207
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "setFormData",
+          "lineNumber": 209
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "updated.join",
+          "lineNumber": 209
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "setCustomCategory",
+          "lineNumber": 211
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "e.preventDefault",
+          "lineNumber": 215
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setSaveLoading",
+          "lineNumber": 216
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setSaveSuccess",
+          "lineNumber": 217
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setError",
+          "lineNumber": 219
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "fetch",
+          "lineNumber": 220
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "JSON.stringify",
+          "lineNumber": 226
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "parseInt",
+          "lineNumber": 231
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "res.json",
+          "lineNumber": 238
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "loadProfile",
+          "lineNumber": 242
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "loadRecommendations",
+          "lineNumber": 243
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setEditMode",
+          "lineNumber": 244
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setSaveSuccess",
+          "lineNumber": 245
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setTimeout",
+          "lineNumber": 246
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setSaveSuccess",
+          "lineNumber": 246
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setError",
+          "lineNumber": 248
+        },
+        {
+          "caller": "handleUpdate",
+          "callee": "setSaveLoading",
+          "lineNumber": 250
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "window.confirm",
+          "lineNumber": 256
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 257
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 258
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 259
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "navigate",
+          "lineNumber": 260
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setEditMode",
+          "lineNumber": 299
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setEditMode",
+          "lineNumber": 333
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "Object.keys",
+          "lineNumber": 425
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 438
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 447
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 458
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 469
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 487
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "departments.map",
+          "lineNumber": 492
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setFormData",
+          "lineNumber": 527
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "(() => {\n                    const currentSelected = (formData.preferred_categories || \"\")\n                      .split(/[,;|]/)\n                      .map((c) => c.trim())\n                      .filter(Boolean);\n                    const allCats = Array.from(new Set([...availableCategories, ...currentSelected]));\n                    return allCats.map((cat) => {\n                      const isSelected = currentSelected.includes(cat);\n                      return (\n                        <button\n                          key={cat}\n                          type=\"button\"\n                          onClick={() => toggleCategory(cat)}\n                          className={`px-3 py-1 text-xs rounded-full font-medium transition-all ${\n                            isSelected\n                              ? 'bg-blue-600 text-white shadow-sm'\n                              : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300'\n                          }`}\n                        >\n                          {isSelected ? `✓ ${cat}` : `+ ${cat}`}\n                        </button>\n                      );\n                    });\n                  })",
+          "lineNumber": 538
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "(formData.preferred_categories || \"\")\n                      .split(/[,;|]/)\n                      .map((c) => c.trim())\n                      .filter",
+          "lineNumber": 539
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "(formData.preferred_categories || \"\")\n                      .split(/[,;|]/)\n                      .map",
+          "lineNumber": 539
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "(formData.preferred_categories || \"\")\n                      .split",
+          "lineNumber": 539
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "c.trim",
+          "lineNumber": 541
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "Array.from",
+          "lineNumber": 543
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "allCats.map",
+          "lineNumber": 544
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "currentSelected.includes",
+          "lineNumber": 545
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "toggleCategory",
+          "lineNumber": 550
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setCustomCategory",
+          "lineNumber": 567
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "e.preventDefault",
+          "lineNumber": 570
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "handleAddCustomCategory",
+          "lineNumber": 571
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "customCategory.trim",
+          "lineNumber": 580
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "handleReset",
+          "lineNumber": 606
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setEditMode",
+          "lineNumber": 607
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setEditMode",
+          "lineNumber": 648
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "profile.profile.preferred_categories\n                      .split(/[,;|]/)\n                      .map((c) => c.trim())\n                      .filter(Boolean)\n                      .map",
+          "lineNumber": 672
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "profile.profile.preferred_categories\n                      .split(/[,;|]/)\n                      .map((c) => c.trim())\n                      .filter",
+          "lineNumber": 672
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "profile.profile.preferred_categories\n                      .split(/[,;|]/)\n                      .map",
+          "lineNumber": 672
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "profile.profile.preferred_categories\n                      .split",
+          "lineNumber": 672
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "c.trim",
+          "lineNumber": 674
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "recommendations.map",
+          "lineNumber": 726
+        },
+        {
+          "caller": "AccountDetails",
+          "callee": "setSelectedBook",
+          "lineNumber": 743
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/Books.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 359,
+      "nonEmptyLines": 338,
+      "functions": [
+        {
+          "name": "Books",
+          "startLine": 13,
+          "endLine": 359,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Books",
+          "line": 13,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 25
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Books",
+          "callee": "useState",
+          "lineNumber": 27
+        },
+        {
+          "caller": "Books",
+          "callee": "localStorage.getItem",
+          "lineNumber": 27
+        },
+        {
+          "caller": "Books",
+          "callee": "localStorage.getItem",
+          "lineNumber": 29
+        },
+        {
+          "caller": "Books",
+          "callee": "localStorage.getItem",
+          "lineNumber": 30
+        },
+        {
+          "caller": "Books",
+          "callee": "useEffect",
+          "lineNumber": 33
+        },
+        {
+          "caller": "Books",
+          "callee": "setTimeout",
+          "lineNumber": 34
+        },
+        {
+          "caller": "Books",
+          "callee": "setDebouncedQuery",
+          "lineNumber": 35
+        },
+        {
+          "caller": "Books",
+          "callee": "clearTimeout",
+          "lineNumber": 37
+        },
+        {
+          "caller": "Books",
+          "callee": "useEffect",
+          "lineNumber": 41
+        },
+        {
+          "caller": "Books",
+          "callee": "getDepartments()\n      .then(data => {\n        if (Array.isArray(data)) setDepartments(data);\n      })\n      .catch",
+          "lineNumber": 42
+        },
+        {
+          "caller": "Books",
+          "callee": "getDepartments()\n      .then",
+          "lineNumber": 42
+        },
+        {
+          "caller": "Books",
+          "callee": "getDepartments",
+          "lineNumber": 42
+        },
+        {
+          "caller": "Books",
+          "callee": "Array.isArray",
+          "lineNumber": 44
+        },
+        {
+          "caller": "Books",
+          "callee": "setDepartments",
+          "lineNumber": 44
+        },
+        {
+          "caller": "Books",
+          "callee": "useEffect",
+          "lineNumber": 50
+        },
+        {
+          "caller": "Books",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then(res => res.ok ? res.json() : null)\n        .then(data => {\n          if (data) {\n            setUserProfile(data);\n            const status = data.profile?.approval_status || data.approval_status || 'approved';\n            setApprovalStatus(status);\n            localStorage.setItem('approval_status', status);\n          }\n        })\n        .catch",
+          "lineNumber": 52
+        },
+        {
+          "caller": "Books",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then(res => res.ok ? res.json() : null)\n        .then",
+          "lineNumber": 52
+        },
+        {
+          "caller": "Books",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then",
+          "lineNumber": 52
+        },
+        {
+          "caller": "Books",
+          "callee": "fetch",
+          "lineNumber": 52
+        },
+        {
+          "caller": "Books",
+          "callee": "res.json",
+          "lineNumber": 55
+        },
+        {
+          "caller": "Books",
+          "callee": "setUserProfile",
+          "lineNumber": 58
+        },
+        {
+          "caller": "Books",
+          "callee": "setApprovalStatus",
+          "lineNumber": 60
+        },
+        {
+          "caller": "Books",
+          "callee": "localStorage.setItem",
+          "lineNumber": 61
+        },
+        {
+          "caller": "Books",
+          "callee": "useEffect",
+          "lineNumber": 69
+        },
+        {
+          "caller": "Books",
+          "callee": "setPage",
+          "lineNumber": 70
+        },
+        {
+          "caller": "Books",
+          "callee": "useEffect",
+          "lineNumber": 74
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setLoading",
+          "lineNumber": 80
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setError",
+          "lineNumber": 81
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "encodeURIComponent",
+          "lineNumber": 83
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "encodeURIComponent",
+          "lineNumber": 84
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "debouncedQuery.trim",
+          "lineNumber": 85
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "encodeURIComponent",
+          "lineNumber": 85
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "debouncedQuery.trim",
+          "lineNumber": 85
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "localStorage.getItem",
+          "lineNumber": 87
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "fetch",
+          "lineNumber": 89
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "res.json",
+          "lineNumber": 91
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setBooks",
+          "lineNumber": 94
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setTotalCount",
+          "lineNumber": 95
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setTotalPages",
+          "lineNumber": 96
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "Math.ceil",
+          "lineNumber": 96
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "Array.isArray",
+          "lineNumber": 97
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setBooks",
+          "lineNumber": 98
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setTotalCount",
+          "lineNumber": 99
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setTotalPages",
+          "lineNumber": 100
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setBooks",
+          "lineNumber": 102
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setError",
+          "lineNumber": 106
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setBooks",
+          "lineNumber": 107
+        },
+        {
+          "caller": "fetchBooks",
+          "callee": "setLoading",
+          "lineNumber": 110
+        },
+        {
+          "caller": "Books",
+          "callee": "fetchBooks",
+          "lineNumber": 115
+        },
+        {
+          "caller": "Books",
+          "callee": "window.scrollTo",
+          "lineNumber": 116
+        },
+        {
+          "caller": "Books",
+          "callee": "controller.abort",
+          "lineNumber": 119
+        },
+        {
+          "caller": "Books",
+          "callee": "setSearchQuery",
+          "lineNumber": 144
+        },
+        {
+          "caller": "Books",
+          "callee": "setSearchQuery",
+          "lineNumber": 149
+        },
+        {
+          "caller": "Books",
+          "callee": "setSelectedDept",
+          "lineNumber": 168
+        },
+        {
+          "caller": "Books",
+          "callee": "departments.map",
+          "lineNumber": 177
+        },
+        {
+          "caller": "Books",
+          "callee": "setSelectedDept",
+          "lineNumber": 183
+        },
+        {
+          "caller": "Books",
+          "callee": "setSearchQuery",
+          "lineNumber": 291
+        },
+        {
+          "caller": "Books",
+          "callee": "setCategory",
+          "lineNumber": 291
+        },
+        {
+          "caller": "Books",
+          "callee": "books.map",
+          "lineNumber": 307
+        },
+        {
+          "caller": "Books",
+          "callee": "setPage",
+          "lineNumber": 322
+        },
+        {
+          "caller": "Books",
+          "callee": "Math.max",
+          "lineNumber": 322
+        },
+        {
+          "caller": "Books",
+          "callee": "setPage",
+          "lineNumber": 332
+        },
+        {
+          "caller": "Books",
+          "callee": "Math.min",
+          "lineNumber": 332
+        },
+        {
+          "caller": "Books",
+          "callee": "setSelectedBook",
+          "lineNumber": 353
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/Login.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 1394,
+      "nonEmptyLines": 1295,
+      "functions": [
+        {
+          "name": "Login",
+          "startLine": 38,
+          "endLine": 1394,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Login",
+          "line": 38,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Login",
+          "callee": "useAuth",
+          "lineNumber": 39
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 43
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 46
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 47
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 49
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 52
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 53
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 54
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 55
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 56
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 57
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 58
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 59
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 60
+        },
+        {
+          "caller": "Login",
+          "callee": "useEffect",
+          "lineNumber": 63
+        },
+        {
+          "caller": "Login",
+          "callee": "getDepartments()\n      .then((data) => {\n        if (Array.isArray(data)) {\n          setDepartments(data);\n        }\n      })\n      .catch",
+          "lineNumber": 64
+        },
+        {
+          "caller": "Login",
+          "callee": "getDepartments()\n      .then",
+          "lineNumber": 64
+        },
+        {
+          "caller": "Login",
+          "callee": "getDepartments",
+          "lineNumber": 64
+        },
+        {
+          "caller": "Login",
+          "callee": "Array.isArray",
+          "lineNumber": 66
+        },
+        {
+          "caller": "Login",
+          "callee": "setDepartments",
+          "lineNumber": 67
+        },
+        {
+          "caller": "Login",
+          "callee": "console.error",
+          "lineNumber": 70
+        },
+        {
+          "caller": "Login",
+          "callee": "useEffect",
+          "lineNumber": 74
+        },
+        {
+          "caller": "Login",
+          "callee": "getBookCategories(department || null)\n      .then((data) => {\n        if (Array.isArray(data) && data.length > 0) {\n          const merged = Array.from(new Set([...data, ...POPULAR_CATEGORIES]));\n          setAvailableCategories(merged);\n        }\n      })\n      .catch",
+          "lineNumber": 75
+        },
+        {
+          "caller": "Login",
+          "callee": "getBookCategories(department || null)\n      .then",
+          "lineNumber": 75
+        },
+        {
+          "caller": "Login",
+          "callee": "getBookCategories",
+          "lineNumber": 75
+        },
+        {
+          "caller": "Login",
+          "callee": "Array.isArray",
+          "lineNumber": 77
+        },
+        {
+          "caller": "Login",
+          "callee": "Array.from",
+          "lineNumber": 78
+        },
+        {
+          "caller": "Login",
+          "callee": "setAvailableCategories",
+          "lineNumber": 79
+        },
+        {
+          "caller": "Login",
+          "callee": "console.error",
+          "lineNumber": 82
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 86
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 87
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 88
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 89
+        },
+        {
+          "caller": "Login",
+          "callee": "useState",
+          "lineNumber": 90
+        },
+        {
+          "caller": "Login",
+          "callee": "useNavigate",
+          "lineNumber": 92
+        },
+        {
+          "caller": "Login",
+          "callee": "useEffect",
+          "lineNumber": 97
+        },
+        {
+          "caller": "Login",
+          "callee": "setInterval",
+          "lineNumber": 99
+        },
+        {
+          "caller": "Login",
+          "callee": "setCooldown",
+          "lineNumber": 100
+        },
+        {
+          "caller": "Login",
+          "callee": "clearInterval",
+          "lineNumber": 102
+        },
+        {
+          "caller": "handleGoogleSuccess",
+          "callee": "authLogin",
+          "lineNumber": 107
+        },
+        {
+          "caller": "handleGoogleSuccess",
+          "callee": "setSuccess",
+          "lineNumber": 108
+        },
+        {
+          "caller": "handleGoogleSuccess",
+          "callee": "setTimeout",
+          "lineNumber": 109
+        },
+        {
+          "caller": "handleGoogleSuccess",
+          "callee": "navigate",
+          "lineNumber": 110
+        },
+        {
+          "caller": "handleGoogleError",
+          "callee": "setError",
+          "lineNumber": 115
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "setSelectedCategories",
+          "lineNumber": 119
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "prev.includes",
+          "lineNumber": 120
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "prev.filter",
+          "lineNumber": 120
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "e.preventDefault",
+          "lineNumber": 125
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "customCategory.trim",
+          "lineNumber": 126
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "selectedCategories.includes",
+          "lineNumber": 127
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "setSelectedCategories",
+          "lineNumber": 128
+        },
+        {
+          "caller": "handleAddCustomCategory",
+          "callee": "setCustomCategory",
+          "lineNumber": 129
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "e.preventDefault",
+          "lineNumber": 134
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setError",
+          "lineNumber": 135
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setSuccess",
+          "lineNumber": 136
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "email.trim",
+          "lineNumber": 138
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setError",
+          "lineNumber": 139
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "emailRegex.test",
+          "lineNumber": 143
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "email.trim",
+          "lineNumber": 143
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setError",
+          "lineNumber": 144
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setOtpLoading",
+          "lineNumber": 148
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "requestOTP",
+          "lineNumber": 150
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "email.trim",
+          "lineNumber": 150
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setOtpStep",
+          "lineNumber": 151
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setCooldown",
+          "lineNumber": 152
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setSuccess",
+          "lineNumber": 153
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setError",
+          "lineNumber": 155
+        },
+        {
+          "caller": "handleSendOTP",
+          "callee": "setOtpLoading",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "e.preventDefault",
+          "lineNumber": 162
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setError",
+          "lineNumber": 163
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setSuccess",
+          "lineNumber": 164
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setError",
+          "lineNumber": 167
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setOtpStep",
+          "lineNumber": 168
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setError",
+          "lineNumber": 173
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setError",
+          "lineNumber": 178
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setLoading",
+          "lineNumber": 182
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "resetPassword",
+          "lineNumber": 184
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "email.trim().toLowerCase",
+          "lineNumber": 185
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "email.trim",
+          "lineNumber": 185
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setSuccess",
+          "lineNumber": 191
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setTimeout",
+          "lineNumber": 192
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setIsForgotPassword",
+          "lineNumber": 193
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setIsRegister",
+          "lineNumber": 194
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setOtpStep",
+          "lineNumber": 195
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setOtpCode",
+          "lineNumber": 196
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setVerificationToken",
+          "lineNumber": 197
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setNewPassword",
+          "lineNumber": 198
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setNewPasswordConfirm",
+          "lineNumber": 199
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setSuccess",
+          "lineNumber": 200
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setError",
+          "lineNumber": 203
+        },
+        {
+          "caller": "handleResetPassword",
+          "callee": "setLoading",
+          "lineNumber": 205
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "e.preventDefault",
+          "lineNumber": 210
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setError",
+          "lineNumber": 211
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setSuccess",
+          "lineNumber": 212
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "otpCode.trim",
+          "lineNumber": 214
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setError",
+          "lineNumber": 215
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setOtpLoading",
+          "lineNumber": 219
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "verifyOTP",
+          "lineNumber": 221
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "email.trim",
+          "lineNumber": 221
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "otpCode.trim",
+          "lineNumber": 221
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setVerificationToken",
+          "lineNumber": 222
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setOtpStep",
+          "lineNumber": 223
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setSuccess",
+          "lineNumber": 224
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setError",
+          "lineNumber": 226
+        },
+        {
+          "caller": "handleVerifyOTP",
+          "callee": "setOtpLoading",
+          "lineNumber": 228
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "setError",
+          "lineNumber": 234
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "setSuccess",
+          "lineNumber": 235
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "setOtpLoading",
+          "lineNumber": 236
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "requestOTP",
+          "lineNumber": 238
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "email.trim",
+          "lineNumber": 238
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "setCooldown",
+          "lineNumber": 239
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "setSuccess",
+          "lineNumber": 240
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "setError",
+          "lineNumber": 242
+        },
+        {
+          "caller": "handleResendOTP",
+          "callee": "setOtpLoading",
+          "lineNumber": 244
+        },
+        {
+          "caller": "handleChangeEmail",
+          "callee": "setOtpStep",
+          "lineNumber": 249
+        },
+        {
+          "caller": "handleChangeEmail",
+          "callee": "setOtpCode",
+          "lineNumber": 250
+        },
+        {
+          "caller": "handleChangeEmail",
+          "callee": "setVerificationToken",
+          "lineNumber": 251
+        },
+        {
+          "caller": "handleChangeEmail",
+          "callee": "setError",
+          "lineNumber": 252
+        },
+        {
+          "caller": "handleChangeEmail",
+          "callee": "setSuccess",
+          "lineNumber": 253
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "e.preventDefault",
+          "lineNumber": 257
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setError",
+          "lineNumber": 258
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setSuccess",
+          "lineNumber": 259
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setError",
+          "lineNumber": 262
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setLoading",
+          "lineNumber": 266
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "login",
+          "lineNumber": 268
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "username.trim",
+          "lineNumber": 268
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "authenticatedFetch",
+          "lineNumber": 277
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "res.json().catch",
+          "lineNumber": 281
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "res.json",
+          "lineNumber": 281
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "res.json",
+          "lineNumber": 284
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setError",
+          "lineNumber": 290
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setError",
+          "lineNumber": 295
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "authLogin",
+          "lineNumber": 299
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setSuccess",
+          "lineNumber": 306
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "navigate",
+          "lineNumber": 307
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setError",
+          "lineNumber": 312
+        },
+        {
+          "caller": "handleLogin",
+          "callee": "setLoading",
+          "lineNumber": 314
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "e.preventDefault",
+          "lineNumber": 319
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 320
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setSuccess",
+          "lineNumber": 321
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 324
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setOtpStep",
+          "lineNumber": 325
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "studentId.trim",
+          "lineNumber": 329
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 330
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 335
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "department.trim",
+          "lineNumber": 339
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 340
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "firstName.trim",
+          "lineNumber": 344
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 345
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "lastName.trim",
+          "lineNumber": 349
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 350
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "email.trim",
+          "lineNumber": 354
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 355
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 360
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 365
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setLoading",
+          "lineNumber": 369
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "email.trim().toLowerCase",
+          "lineNumber": 375
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "email.trim",
+          "lineNumber": 375
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "firstName.trim",
+          "lineNumber": 376
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "lastName.trim",
+          "lineNumber": 377
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "department.trim",
+          "lineNumber": 378
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "studentId.trim",
+          "lineNumber": 381
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "studentId.trim",
+          "lineNumber": 382
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "parseInt",
+          "lineNumber": 385
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "selectedCategories.join",
+          "lineNumber": 389
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "console.log",
+          "lineNumber": 392
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "register",
+          "lineNumber": 393
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "localStorage.setItem",
+          "lineNumber": 396
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "localStorage.setItem",
+          "lineNumber": 397
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "authenticatedFetch",
+          "lineNumber": 400
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "res.headers.get",
+          "lineNumber": 406
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "contentType.includes",
+          "lineNumber": 407
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "res.json",
+          "lineNumber": 408
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "res.text",
+          "lineNumber": 410
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "res.headers.get",
+          "lineNumber": 415
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "contentType.includes",
+          "lineNumber": 416
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "res.json",
+          "lineNumber": 420
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "authLogin",
+          "lineNumber": 434
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setSuccess",
+          "lineNumber": 442
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setSuccess",
+          "lineNumber": 444
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setTimeout",
+          "lineNumber": 447
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "navigate",
+          "lineNumber": 449
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "navigate",
+          "lineNumber": 451
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "console.error",
+          "lineNumber": 455
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "Array.isArray",
+          "lineNumber": 468
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "Array.isArray",
+          "lineNumber": 479
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "Array.isArray",
+          "lineNumber": 486
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setError",
+          "lineNumber": 497
+        },
+        {
+          "caller": "handleRegister",
+          "callee": "setLoading",
+          "lineNumber": 499
+        },
+        {
+          "caller": "Login",
+          "callee": "setLoginRole",
+          "lineNumber": 621
+        },
+        {
+          "caller": "Login",
+          "callee": "setError",
+          "lineNumber": 622
+        },
+        {
+          "caller": "Login",
+          "callee": "setSuccess",
+          "lineNumber": 623
+        },
+        {
+          "caller": "Login",
+          "callee": "setLoginRole",
+          "lineNumber": 637
+        },
+        {
+          "caller": "Login",
+          "callee": "setError",
+          "lineNumber": 638
+        },
+        {
+          "caller": "Login",
+          "callee": "setSuccess",
+          "lineNumber": 639
+        },
+        {
+          "caller": "Login",
+          "callee": "setIsRegister",
+          "lineNumber": 655
+        },
+        {
+          "caller": "Login",
+          "callee": "setIsForgotPassword",
+          "lineNumber": 656
+        },
+        {
+          "caller": "Login",
+          "callee": "setError",
+          "lineNumber": 657
+        },
+        {
+          "caller": "Login",
+          "callee": "setSuccess",
+          "lineNumber": 658
+        },
+        {
+          "caller": "Login",
+          "callee": "setOtpStep",
+          "lineNumber": 659
+        },
+        {
+          "caller": "Login",
+          "callee": "setIsRegister",
+          "lineNumber": 675
+        },
+        {
+          "caller": "Login",
+          "callee": "setError",
+          "lineNumber": 676
+        },
+        {
+          "caller": "Login",
+          "callee": "setSuccess",
+          "lineNumber": 677
+        },
+        {
+          "caller": "Login",
+          "callee": "setOtpStep",
+          "lineNumber": 678
+        },
+        {
+          "caller": "Login",
+          "callee": "setEmail",
+          "lineNumber": 803
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.trim",
+          "lineNumber": 803
+        },
+        {
+          "caller": "Login",
+          "callee": "email.trim",
+          "lineNumber": 810
+        },
+        {
+          "caller": "Login",
+          "callee": "setOtpCode",
+          "lineNumber": 842
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.replace(/\\D/g, \"\").slice",
+          "lineNumber": 842
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.replace",
+          "lineNumber": 842
+        },
+        {
+          "caller": "Login",
+          "callee": "setNewPassword",
+          "lineNumber": 879
+        },
+        {
+          "caller": "Login",
+          "callee": "setNewPasswordConfirm",
+          "lineNumber": 893
+        },
+        {
+          "caller": "Login",
+          "callee": "setEmail",
+          "lineNumber": 965
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.trim",
+          "lineNumber": 965
+        },
+        {
+          "caller": "Login",
+          "callee": "email.trim",
+          "lineNumber": 976
+        },
+        {
+          "caller": "Login",
+          "callee": "setDepartment",
+          "lineNumber": 997
+        },
+        {
+          "caller": "Login",
+          "callee": "departments.map",
+          "lineNumber": 1001
+        },
+        {
+          "caller": "Login",
+          "callee": "setOtpCode",
+          "lineNumber": 1047
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.replace(/\\D/g, \"\").slice",
+          "lineNumber": 1047
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.replace",
+          "lineNumber": 1047
+        },
+        {
+          "caller": "Login",
+          "callee": "setStudentId",
+          "lineNumber": 1085
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.trim",
+          "lineNumber": 1085
+        },
+        {
+          "caller": "Login",
+          "callee": "setFirstName",
+          "lineNumber": 1099
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.trim",
+          "lineNumber": 1099
+        },
+        {
+          "caller": "Login",
+          "callee": "setLastName",
+          "lineNumber": 1111
+        },
+        {
+          "caller": "Login",
+          "callee": "e.target.value.trim",
+          "lineNumber": 1111
+        },
+        {
+          "caller": "Login",
+          "callee": "setDepartment",
+          "lineNumber": 1126
+        },
+        {
+          "caller": "Login",
+          "callee": "departments.map",
+          "lineNumber": 1131
+        },
+        {
+          "caller": "Login",
+          "callee": "setYear",
+          "lineNumber": 1148
+        },
+        {
+          "caller": "Login",
+          "callee": "YEARS.map",
+          "lineNumber": 1152
+        },
+        {
+          "caller": "Login",
+          "callee": "Array.from(new Set([...availableCategories, ...selectedCategories])).map",
+          "lineNumber": 1170
+        },
+        {
+          "caller": "Login",
+          "callee": "Array.from",
+          "lineNumber": 1170
+        },
+        {
+          "caller": "Login",
+          "callee": "selectedCategories.includes",
+          "lineNumber": 1171
+        },
+        {
+          "caller": "Login",
+          "callee": "toggleCategory",
+          "lineNumber": 1176
+        },
+        {
+          "caller": "Login",
+          "callee": "setCustomCategory",
+          "lineNumber": 1192
+        },
+        {
+          "caller": "Login",
+          "callee": "e.preventDefault",
+          "lineNumber": 1195
+        },
+        {
+          "caller": "Login",
+          "callee": "handleAddCustomCategory",
+          "lineNumber": 1196
+        },
+        {
+          "caller": "Login",
+          "callee": "customCategory.trim",
+          "lineNumber": 1205
+        },
+        {
+          "caller": "Login",
+          "callee": "setPassword",
+          "lineNumber": 1221
+        },
+        {
+          "caller": "Login",
+          "callee": "setPasswordConfirm",
+          "lineNumber": 1235
+        },
+        {
+          "caller": "Login",
+          "callee": "setUsername",
+          "lineNumber": 1279
+        },
+        {
+          "caller": "Login",
+          "callee": "setIsForgotPassword",
+          "lineNumber": 1300
+        },
+        {
+          "caller": "Login",
+          "callee": "setIsRegister",
+          "lineNumber": 1301
+        },
+        {
+          "caller": "Login",
+          "callee": "setError",
+          "lineNumber": 1302
+        },
+        {
+          "caller": "Login",
+          "callee": "setSuccess",
+          "lineNumber": 1303
+        },
+        {
+          "caller": "Login",
+          "callee": "setOtpStep",
+          "lineNumber": 1304
+        },
+        {
+          "caller": "Login",
+          "callee": "setOtpCode",
+          "lineNumber": 1305
+        },
+        {
+          "caller": "Login",
+          "callee": "setVerificationToken",
+          "lineNumber": 1306
+        },
+        {
+          "caller": "Login",
+          "callee": "setPassword",
+          "lineNumber": 1330
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 249,
+      "nonEmptyLines": 231,
+      "functions": [
+        {
+          "name": "Recommendations",
+          "startLine": 7,
+          "endLine": 249,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Recommendations",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 8
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 11
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "localStorage.getItem",
+          "lineNumber": 13
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "localStorage.getItem",
+          "lineNumber": 16
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "localStorage.getItem",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useNavigate",
+          "lineNumber": 18
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "loadRecommendations",
+          "callee": "setRefreshTrigger",
+          "lineNumber": 22
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useEffect",
+          "lineNumber": 25
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "navigate",
+          "lineNumber": 27
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then(res => res.ok ? res.json() : null)\n        .then(data => {\n          if (data) {\n            setUserProfile(data);\n            const status = data.profile?.approval_status || data.approval_status || \"approved\";\n            setApprovalStatus(status);\n            localStorage.setItem(\"approval_status\", status);\n          }\n        })\n        .catch",
+          "lineNumber": 32
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then(res => res.ok ? res.json() : null)\n        .then",
+          "lineNumber": 32
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then",
+          "lineNumber": 32
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "fetch",
+          "lineNumber": 32
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "res.json",
+          "lineNumber": 35
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "setUserProfile",
+          "lineNumber": 38
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "setApprovalStatus",
+          "lineNumber": 40
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "localStorage.setItem",
+          "lineNumber": 41
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "useEffect",
+          "lineNumber": 48
+        },
+        {
+          "caller": "fetchRecs",
+          "callee": "setLoading",
+          "lineNumber": 53
+        },
+        {
+          "caller": "fetchRecs",
+          "callee": "setError",
+          "lineNumber": 54
+        },
+        {
+          "caller": "fetchRecs",
+          "callee": "fetchRecommendations",
+          "lineNumber": 56
+        },
+        {
+          "caller": "fetchRecs",
+          "callee": "setRecommendations",
+          "lineNumber": 58
+        },
+        {
+          "caller": "fetchRecs",
+          "callee": "Array.isArray",
+          "lineNumber": 58
+        },
+        {
+          "caller": "fetchRecs",
+          "callee": "setError",
+          "lineNumber": 62
+        },
+        {
+          "caller": "fetchRecs",
+          "callee": "console.error",
+          "lineNumber": 63
+        },
+        {
+          "caller": "fetchRecs",
+          "callee": "setLoading",
+          "lineNumber": 67
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "fetchRecs",
+          "lineNumber": 72
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "setMethod",
+          "lineNumber": 100
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "setN",
+          "lineNumber": 116
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "parseInt",
+          "lineNumber": 116
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "recommendations.map",
+          "lineNumber": 214
+        },
+        {
+          "caller": "Recommendations",
+          "callee": "setSelectedBook",
+          "lineNumber": 231
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/services/api.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 291,
+      "nonEmptyLines": 243,
+      "functions": [
+        {
+          "name": "isLegacyToken",
+          "startLine": 67,
+          "endLine": 67,
+          "params": [
+            "v"
+          ]
+        },
+        {
+          "name": "fetchRecommendations",
+          "startLine": 69,
+          "endLine": 77,
+          "params": [
+            "tokenOrLimit",
+            "limitOrMethod",
+            "maybeMethod"
+          ]
+        },
+        {
+          "name": "trackInteraction",
+          "startLine": 79,
+          "endLine": 84,
+          "params": [
+            "tokenOrBookId",
+            "bookIdOrType",
+            "typeOrRating",
+            "maybeRating"
+          ]
+        },
+        {
+          "name": "trackDwellTime",
+          "startLine": 86,
+          "endLine": 91,
+          "params": [
+            "tokenOrBookId",
+            "bookIdOrDuration",
+            "maybeDuration"
+          ]
+        },
+        {
+          "name": "getMyBorrows",
+          "startLine": 93,
+          "endLine": 96,
+          "params": [
+            "tokenOrStatus",
+            "maybeStatus"
+          ]
+        },
+        {
+          "name": "returnBook",
+          "startLine": 98,
+          "endLine": 101,
+          "params": [
+            "tokenOrBorrowId",
+            "maybeBorrowId"
+          ]
+        },
+        {
+          "name": "getDepartmentBorrows",
+          "startLine": 103,
+          "endLine": 106,
+          "params": [
+            "tokenOrStatus",
+            "maybeStatus"
+          ]
+        },
+        {
+          "name": "requestBorrow",
+          "startLine": 108,
+          "endLine": 111,
+          "params": [
+            "tokenOrBookId",
+            "maybeBookId"
+          ]
+        },
+        {
+          "name": "getBorrowRequests",
+          "startLine": 113,
+          "endLine": 113,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "approveBorrow",
+          "startLine": 115,
+          "endLine": 118,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "rejectBorrow",
+          "startLine": 120,
+          "endLine": 123,
+          "params": [
+            "tokenOrId"
+          ]
+        },
+        {
+          "name": "getStudents",
+          "startLine": 125,
+          "endLine": 128,
+          "params": [
+            "tokenOrStatus",
+            "maybeStatus"
+          ]
+        },
+        {
+          "name": "approveStudent",
+          "startLine": 130,
+          "endLine": 133,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "rejectStudent",
+          "startLine": 135,
+          "endLine": 138,
+          "params": [
+            "tokenOrId"
+          ]
+        },
+        {
+          "name": "getStudentBorrows",
+          "startLine": 140,
+          "endLine": 143,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "getStudentAnalytics",
+          "startLine": 145,
+          "endLine": 148,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "fetchLibrarianDashboard",
+          "startLine": 150,
+          "endLine": 150,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "getNotifications",
+          "startLine": 152,
+          "endLine": 155,
+          "params": [
+            "tokenOrIsRead",
+            "maybeIsRead"
+          ]
+        },
+        {
+          "name": "markNotificationRead",
+          "startLine": 157,
+          "endLine": 160,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "markAllNotificationsRead",
+          "startLine": 162,
+          "endLine": 162,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "getBorrowHistory",
+          "startLine": 164,
+          "endLine": 167,
+          "params": [
+            "tokenOrStatus",
+            "maybeStatus"
+          ]
+        },
+        {
+          "name": "getOverdueBooks",
+          "startLine": 169,
+          "endLine": 169,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "createBook",
+          "startLine": 171,
+          "endLine": 174,
+          "params": [
+            "tokenOrData",
+            "maybeData"
+          ]
+        },
+        {
+          "name": "updateBook",
+          "startLine": 176,
+          "endLine": 180,
+          "params": [
+            "tokenOrId",
+            "idOrData",
+            "maybeData"
+          ]
+        },
+        {
+          "name": "deleteBook",
+          "startLine": 182,
+          "endLine": 185,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "getCategories",
+          "startLine": 187,
+          "endLine": 187,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "createCategory",
+          "startLine": 189,
+          "endLine": 192,
+          "params": [
+            "tokenOrData",
+            "maybeData"
+          ]
+        },
+        {
+          "name": "updateCategory",
+          "startLine": 194,
+          "endLine": 198,
+          "params": [
+            "tokenOrId",
+            "idOrData",
+            "maybeData"
+          ]
+        },
+        {
+          "name": "deleteCategory",
+          "startLine": 200,
+          "endLine": 203,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "importBooksCSV",
+          "startLine": 205,
+          "endLine": 208,
+          "params": [
+            "tokenOrFile",
+            "maybeFile"
+          ]
+        },
+        {
+          "name": "getStudentList",
+          "startLine": 210,
+          "endLine": 210,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "getPendingStudents",
+          "startLine": 211,
+          "endLine": 211,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "getStudent",
+          "startLine": 213,
+          "endLine": 216,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "updateStudent",
+          "startLine": 218,
+          "endLine": 222,
+          "params": [
+            "tokenOrId",
+            "idOrData",
+            "maybeData"
+          ]
+        },
+        {
+          "name": "deleteStudent",
+          "startLine": 224,
+          "endLine": 227,
+          "params": [
+            "tokenOrId",
+            "maybeId"
+          ]
+        },
+        {
+          "name": "getAdminStats",
+          "startLine": 229,
+          "endLine": 229,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "getAdminStudents",
+          "startLine": 230,
+          "endLine": 230,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "getAdminBooks",
+          "startLine": 231,
+          "endLine": 231,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "sendMessageToStudent",
+          "startLine": 233,
+          "endLine": 247,
+          "params": [
+            "tokenOrId",
+            "idOrTitle",
+            "titleOrMessage",
+            "maybeMessage"
+          ]
+        },
+        {
+          "name": "getPageContent",
+          "startLine": 249,
+          "endLine": 249,
+          "params": [
+            "page"
+          ]
+        },
+        {
+          "name": "listPageContents",
+          "startLine": 250,
+          "endLine": 250,
+          "params": [
+            "_token"
+          ]
+        },
+        {
+          "name": "createPageContent",
+          "startLine": 252,
+          "endLine": 255,
+          "params": [
+            "tokenOrData",
+            "maybeData"
+          ]
+        },
+        {
+          "name": "updatePageContent",
+          "startLine": 257,
+          "endLine": 261,
+          "params": [
+            "tokenOrPage",
+            "pageOrData",
+            "maybeData"
+          ]
+        },
+        {
+          "name": "deletePageContent",
+          "startLine": 263,
+          "endLine": 266,
+          "params": [
+            "tokenOrPage",
+            "maybePage"
+          ]
+        },
+        {
+          "name": "authenticatedFetch",
+          "startLine": 269,
+          "endLine": 288,
+          "params": [
+            "url"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "fetchRecommendations",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "trackInteraction",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "trackDwellTime",
+          "line": 86,
+          "isDefault": false
+        },
+        {
+          "name": "getMyBorrows",
+          "line": 93,
+          "isDefault": false
+        },
+        {
+          "name": "returnBook",
+          "line": 98,
+          "isDefault": false
+        },
+        {
+          "name": "getDepartmentBorrows",
+          "line": 103,
+          "isDefault": false
+        },
+        {
+          "name": "requestBorrow",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "getBorrowRequests",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "approveBorrow",
+          "line": 115,
+          "isDefault": false
+        },
+        {
+          "name": "rejectBorrow",
+          "line": 120,
+          "isDefault": false
+        },
+        {
+          "name": "getStudents",
+          "line": 125,
+          "isDefault": false
+        },
+        {
+          "name": "approveStudent",
+          "line": 130,
+          "isDefault": false
+        },
+        {
+          "name": "rejectStudent",
+          "line": 135,
+          "isDefault": false
+        },
+        {
+          "name": "getStudentBorrows",
+          "line": 140,
+          "isDefault": false
+        },
+        {
+          "name": "getStudentAnalytics",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "fetchLibrarianDashboard",
+          "line": 150,
+          "isDefault": false
+        },
+        {
+          "name": "getNotifications",
+          "line": 152,
+          "isDefault": false
+        },
+        {
+          "name": "markNotificationRead",
+          "line": 157,
+          "isDefault": false
+        },
+        {
+          "name": "markAllNotificationsRead",
+          "line": 162,
+          "isDefault": false
+        },
+        {
+          "name": "getBorrowHistory",
+          "line": 164,
+          "isDefault": false
+        },
+        {
+          "name": "getOverdueBooks",
+          "line": 169,
+          "isDefault": false
+        },
+        {
+          "name": "createBook",
+          "line": 171,
+          "isDefault": false
+        },
+        {
+          "name": "updateBook",
+          "line": 176,
+          "isDefault": false
+        },
+        {
+          "name": "deleteBook",
+          "line": 182,
+          "isDefault": false
+        },
+        {
+          "name": "getCategories",
+          "line": 187,
+          "isDefault": false
+        },
+        {
+          "name": "createCategory",
+          "line": 189,
+          "isDefault": false
+        },
+        {
+          "name": "updateCategory",
+          "line": 194,
+          "isDefault": false
+        },
+        {
+          "name": "deleteCategory",
+          "line": 200,
+          "isDefault": false
+        },
+        {
+          "name": "importBooksCSV",
+          "line": 205,
+          "isDefault": false
+        },
+        {
+          "name": "getStudentList",
+          "line": 210,
+          "isDefault": false
+        },
+        {
+          "name": "getPendingStudents",
+          "line": 211,
+          "isDefault": false
+        },
+        {
+          "name": "getStudent",
+          "line": 213,
+          "isDefault": false
+        },
+        {
+          "name": "updateStudent",
+          "line": 218,
+          "isDefault": false
+        },
+        {
+          "name": "deleteStudent",
+          "line": 224,
+          "isDefault": false
+        },
+        {
+          "name": "getAdminStats",
+          "line": 229,
+          "isDefault": false
+        },
+        {
+          "name": "getAdminStudents",
+          "line": 230,
+          "isDefault": false
+        },
+        {
+          "name": "getAdminBooks",
+          "line": 231,
+          "isDefault": false
+        },
+        {
+          "name": "sendMessageToStudent",
+          "line": 233,
+          "isDefault": false
+        },
+        {
+          "name": "getPageContent",
+          "line": 249,
+          "isDefault": false
+        },
+        {
+          "name": "listPageContents",
+          "line": 250,
+          "isDefault": false
+        },
+        {
+          "name": "createPageContent",
+          "line": 252,
+          "isDefault": false
+        },
+        {
+          "name": "updatePageContent",
+          "line": 257,
+          "isDefault": false
+        },
+        {
+          "name": "deletePageContent",
+          "line": 263,
+          "isDefault": false
+        },
+        {
+          "name": "authenticatedFetch",
+          "line": 269,
+          "isDefault": false
+        },
+        {
+          "name": "BASE_URL",
+          "line": 290,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchRecommendations",
+          "callee": "isLegacyToken",
+          "lineNumber": 70
+        },
+        {
+          "caller": "fetchRecommendations",
+          "callee": "_fetchRecommendations",
+          "lineNumber": 71
+        },
+        {
+          "caller": "fetchRecommendations",
+          "callee": "_fetchRecommendations",
+          "lineNumber": 76
+        },
+        {
+          "caller": "trackInteraction",
+          "callee": "isLegacyToken",
+          "lineNumber": 80
+        },
+        {
+          "caller": "trackInteraction",
+          "callee": "_trackInteraction",
+          "lineNumber": 81
+        },
+        {
+          "caller": "trackInteraction",
+          "callee": "_trackInteraction",
+          "lineNumber": 83
+        },
+        {
+          "caller": "trackDwellTime",
+          "callee": "isLegacyToken",
+          "lineNumber": 87
+        },
+        {
+          "caller": "trackDwellTime",
+          "callee": "_trackDwellTime",
+          "lineNumber": 88
+        },
+        {
+          "caller": "trackDwellTime",
+          "callee": "_trackDwellTime",
+          "lineNumber": 90
+        },
+        {
+          "caller": "getMyBorrows",
+          "callee": "isLegacyToken",
+          "lineNumber": 94
+        },
+        {
+          "caller": "getMyBorrows",
+          "callee": "_getMyBorrows",
+          "lineNumber": 94
+        },
+        {
+          "caller": "getMyBorrows",
+          "callee": "_getMyBorrows",
+          "lineNumber": 95
+        },
+        {
+          "caller": "returnBook",
+          "callee": "isLegacyToken",
+          "lineNumber": 99
+        },
+        {
+          "caller": "returnBook",
+          "callee": "_returnBook",
+          "lineNumber": 99
+        },
+        {
+          "caller": "returnBook",
+          "callee": "_returnBook",
+          "lineNumber": 100
+        },
+        {
+          "caller": "getDepartmentBorrows",
+          "callee": "isLegacyToken",
+          "lineNumber": 104
+        },
+        {
+          "caller": "getDepartmentBorrows",
+          "callee": "_getDepartmentBorrows",
+          "lineNumber": 104
+        },
+        {
+          "caller": "getDepartmentBorrows",
+          "callee": "_getDepartmentBorrows",
+          "lineNumber": 105
+        },
+        {
+          "caller": "requestBorrow",
+          "callee": "isLegacyToken",
+          "lineNumber": 109
+        },
+        {
+          "caller": "requestBorrow",
+          "callee": "_requestBorrow",
+          "lineNumber": 109
+        },
+        {
+          "caller": "requestBorrow",
+          "callee": "_requestBorrow",
+          "lineNumber": 110
+        },
+        {
+          "caller": "getBorrowRequests",
+          "callee": "_getBorrowRequests",
+          "lineNumber": 113
+        },
+        {
+          "caller": "approveBorrow",
+          "callee": "isLegacyToken",
+          "lineNumber": 116
+        },
+        {
+          "caller": "approveBorrow",
+          "callee": "_approveBorrow",
+          "lineNumber": 116
+        },
+        {
+          "caller": "approveBorrow",
+          "callee": "_approveBorrow",
+          "lineNumber": 117
+        },
+        {
+          "caller": "rejectBorrow",
+          "callee": "isLegacyToken",
+          "lineNumber": 121
+        },
+        {
+          "caller": "rejectBorrow",
+          "callee": "_rejectBorrow",
+          "lineNumber": 121
+        },
+        {
+          "caller": "rejectBorrow",
+          "callee": "_rejectBorrow",
+          "lineNumber": 122
+        },
+        {
+          "caller": "getStudents",
+          "callee": "isLegacyToken",
+          "lineNumber": 126
+        },
+        {
+          "caller": "getStudents",
+          "callee": "_getStudents",
+          "lineNumber": 126
+        },
+        {
+          "caller": "getStudents",
+          "callee": "_getStudents",
+          "lineNumber": 127
+        },
+        {
+          "caller": "approveStudent",
+          "callee": "isLegacyToken",
+          "lineNumber": 131
+        },
+        {
+          "caller": "approveStudent",
+          "callee": "_approveStudent",
+          "lineNumber": 131
+        },
+        {
+          "caller": "approveStudent",
+          "callee": "_approveStudent",
+          "lineNumber": 132
+        },
+        {
+          "caller": "rejectStudent",
+          "callee": "isLegacyToken",
+          "lineNumber": 136
+        },
+        {
+          "caller": "rejectStudent",
+          "callee": "_rejectStudent",
+          "lineNumber": 136
+        },
+        {
+          "caller": "rejectStudent",
+          "callee": "_rejectStudent",
+          "lineNumber": 137
+        },
+        {
+          "caller": "getStudentBorrows",
+          "callee": "isLegacyToken",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getStudentBorrows",
+          "callee": "_getStudentBorrows",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getStudentBorrows",
+          "callee": "_getStudentBorrows",
+          "lineNumber": 142
+        },
+        {
+          "caller": "getStudentAnalytics",
+          "callee": "isLegacyToken",
+          "lineNumber": 146
+        },
+        {
+          "caller": "getStudentAnalytics",
+          "callee": "_getStudentAnalytics",
+          "lineNumber": 146
+        },
+        {
+          "caller": "getStudentAnalytics",
+          "callee": "_getStudentAnalytics",
+          "lineNumber": 147
+        },
+        {
+          "caller": "fetchLibrarianDashboard",
+          "callee": "_fetchLibrarianDashboard",
+          "lineNumber": 150
+        },
+        {
+          "caller": "getNotifications",
+          "callee": "isLegacyToken",
+          "lineNumber": 153
+        },
+        {
+          "caller": "getNotifications",
+          "callee": "_getNotifications",
+          "lineNumber": 153
+        },
+        {
+          "caller": "getNotifications",
+          "callee": "_getNotifications",
+          "lineNumber": 154
+        },
+        {
+          "caller": "markNotificationRead",
+          "callee": "isLegacyToken",
+          "lineNumber": 158
+        },
+        {
+          "caller": "markNotificationRead",
+          "callee": "_markNotificationRead",
+          "lineNumber": 158
+        },
+        {
+          "caller": "markNotificationRead",
+          "callee": "_markNotificationRead",
+          "lineNumber": 159
+        },
+        {
+          "caller": "markAllNotificationsRead",
+          "callee": "_markAllNotificationsRead",
+          "lineNumber": 162
+        },
+        {
+          "caller": "getBorrowHistory",
+          "callee": "isLegacyToken",
+          "lineNumber": 165
+        },
+        {
+          "caller": "getBorrowHistory",
+          "callee": "_getBorrowHistory",
+          "lineNumber": 165
+        },
+        {
+          "caller": "getBorrowHistory",
+          "callee": "_getBorrowHistory",
+          "lineNumber": 166
+        },
+        {
+          "caller": "getOverdueBooks",
+          "callee": "_getOverdueBooks",
+          "lineNumber": 169
+        },
+        {
+          "caller": "createBook",
+          "callee": "_createBook",
+          "lineNumber": 173
+        },
+        {
+          "caller": "updateBook",
+          "callee": "_updateBook",
+          "lineNumber": 179
+        },
+        {
+          "caller": "deleteBook",
+          "callee": "_deleteBook",
+          "lineNumber": 184
+        },
+        {
+          "caller": "getCategories",
+          "callee": "_getCategories",
+          "lineNumber": 187
+        },
+        {
+          "caller": "createCategory",
+          "callee": "_createCategory",
+          "lineNumber": 191
+        },
+        {
+          "caller": "updateCategory",
+          "callee": "_updateCategory",
+          "lineNumber": 197
+        },
+        {
+          "caller": "deleteCategory",
+          "callee": "_deleteCategory",
+          "lineNumber": 202
+        },
+        {
+          "caller": "importBooksCSV",
+          "callee": "_importBooksCSV",
+          "lineNumber": 207
+        },
+        {
+          "caller": "getStudentList",
+          "callee": "_getStudentList",
+          "lineNumber": 210
+        },
+        {
+          "caller": "getPendingStudents",
+          "callee": "_getPendingStudents",
+          "lineNumber": 211
+        },
+        {
+          "caller": "getStudent",
+          "callee": "_getStudent",
+          "lineNumber": 215
+        },
+        {
+          "caller": "updateStudent",
+          "callee": "_updateStudent",
+          "lineNumber": 221
+        },
+        {
+          "caller": "deleteStudent",
+          "callee": "_deleteStudent",
+          "lineNumber": 226
+        },
+        {
+          "caller": "getAdminStats",
+          "callee": "_getAdminStats",
+          "lineNumber": 229
+        },
+        {
+          "caller": "getAdminStudents",
+          "callee": "_getAdminStudents",
+          "lineNumber": 230
+        },
+        {
+          "caller": "getAdminBooks",
+          "callee": "_getAdminBooks",
+          "lineNumber": 231
+        },
+        {
+          "caller": "sendMessageToStudent",
+          "callee": "_sendMessageToStudent",
+          "lineNumber": 246
+        },
+        {
+          "caller": "getPageContent",
+          "callee": "_getPageContent",
+          "lineNumber": 249
+        },
+        {
+          "caller": "listPageContents",
+          "callee": "_listPageContents",
+          "lineNumber": 250
+        },
+        {
+          "caller": "createPageContent",
+          "callee": "_createPageContent",
+          "lineNumber": 254
+        },
+        {
+          "caller": "updatePageContent",
+          "callee": "_updatePageContent",
+          "lineNumber": 260
+        },
+        {
+          "caller": "deletePageContent",
+          "callee": "_deletePageContent",
+          "lineNumber": 265
+        },
+        {
+          "caller": "authenticatedFetch",
+          "callee": "(options.method || \"GET\").toLowerCase",
+          "lineNumber": 270
+        },
+        {
+          "caller": "authenticatedFetch",
+          "callee": "JSON.parse",
+          "lineNumber": 274
+        },
+        {
+          "caller": "authenticatedFetch",
+          "callee": "url.startsWith",
+          "lineNumber": 279
+        },
+        {
+          "caller": "authenticatedFetch",
+          "callee": "url.slice",
+          "lineNumber": 279
+        },
+        {
+          "caller": "authenticatedFetch",
+          "callee": "apiClient",
+          "lineNumber": 281
+        },
+        {
+          "caller": "authenticatedFetch",
+          "callee": "JSON.stringify",
+          "lineNumber": 282
+        },
+        {
+          "caller": "authenticatedFetch",
+          "callee": "JSON.stringify",
+          "lineNumber": 286
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 45,
+        "functionCount": 45,
+        "classCount": 0
+      }
+    }
+  ]
+}

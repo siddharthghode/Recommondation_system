@@ -1,0 +1,184 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "Demo_csv_files/history.csv",
+      "language": "csv",
+      "sizeLines": 483,
+      "fileCategory": "data"
+    },
+    {
+      "path": "Demo_csv_files/prog_book.csv",
+      "language": "csv",
+      "sizeLines": 435,
+      "fileCategory": "data"
+    },
+    {
+      "path": "backend/accounts/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/apps.py",
+      "language": "python",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/management/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/management/commands/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/management/commands/check_redis.py",
+      "language": "python",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/management/commands/create_admin.py",
+      "language": "python",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/migrations/0001_initial.py",
+      "language": "python",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/migrations/0002_userprofile_approval_status.py",
+      "language": "python",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/migrations/0003_emailotp.py",
+      "language": "python",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/migrations/0004_alter_userprofile_approval_status.py",
+      "language": "python",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/migrations/0005_notification_notification_type_notification_title.py",
+      "language": "python",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/migrations/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/services/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/accounts/test_redis_pytest.py",
+      "language": "python",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/apps.py",
+      "language": "python",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/migrations/0001_initial.py",
+      "language": "python",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/analytics/migrations/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/book_recommondation/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/book_recommondation/asgi.py",
+      "language": "python",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/book_recommondation/settings.py",
+      "language": "python",
+      "sizeLines": 289,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/book_recommondation/wsgi.py",
+      "language": "python",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/books/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "Demo_csv_files/history.csv": [],
+    "Demo_csv_files/prog_book.csv": [],
+    "backend/accounts/__init__.py": [],
+    "backend/accounts/apps.py": [],
+    "backend/accounts/management/__init__.py": [],
+    "backend/accounts/management/commands/__init__.py": [],
+    "backend/accounts/management/commands/check_redis.py": [],
+    "backend/accounts/management/commands/create_admin.py": [],
+    "backend/accounts/migrations/0001_initial.py": [],
+    "backend/accounts/migrations/0002_userprofile_approval_status.py": [],
+    "backend/accounts/migrations/0003_emailotp.py": [],
+    "backend/accounts/migrations/0004_alter_userprofile_approval_status.py": [],
+    "backend/accounts/migrations/0005_notification_notification_type_notification_title.py": [],
+    "backend/accounts/migrations/__init__.py": [],
+    "backend/accounts/services/__init__.py": [],
+    "backend/accounts/test_redis_pytest.py": [
+      "backend/accounts/management/commands/check_redis.py"
+    ],
+    "backend/analytics/__init__.py": [],
+    "backend/analytics/apps.py": [],
+    "backend/analytics/migrations/0001_initial.py": [],
+    "backend/analytics/migrations/__init__.py": [],
+    "backend/book_recommondation/__init__.py": [],
+    "backend/book_recommondation/asgi.py": [],
+    "backend/book_recommondation/settings.py": [],
+    "backend/book_recommondation/wsgi.py": [],
+    "backend/books/__init__.py": []
+  }
+}

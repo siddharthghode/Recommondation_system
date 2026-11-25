@@ -1,0 +1,897 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 6,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 6,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "backend/messaging/admin.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "classes": [
+        {
+          "name": "MessageAdmin",
+          "startLine": 6,
+          "endLine": 11,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MessageAdmin",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/messaging/models.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 38,
+      "classes": [
+        {
+          "name": "Message",
+          "startLine": 5,
+          "endLine": 44,
+          "methods": [
+            "__str__",
+            "mark_as_read"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Message",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mark_as_read",
+          "callee": "self.save",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/messaging/serializers.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 37,
+      "classes": [
+        {
+          "name": "UserBriefSerializer",
+          "startLine": 6,
+          "endLine": 16,
+          "methods": [
+            "get_full_name"
+          ],
+          "properties": []
+        },
+        {
+          "name": "MessageSerializer",
+          "startLine": 19,
+          "endLine": 39,
+          "methods": [
+            "get_reply_count",
+            "create"
+          ],
+          "properties": []
+        },
+        {
+          "name": "MessageCreateSerializer",
+          "startLine": 42,
+          "endLine": 51,
+          "methods": [
+            "create"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "UserBriefSerializer",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "MessageSerializer",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "MessageCreateSerializer",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get_full_name",
+          "callee": "f\"{obj.first_name} {obj.last_name}\".strip",
+          "lineNumber": 16
+        },
+        {
+          "caller": "get_reply_count",
+          "callee": "obj.replies.count",
+          "lineNumber": 34
+        },
+        {
+          "caller": "create",
+          "callee": "super().create",
+          "lineNumber": 39
+        },
+        {
+          "caller": "create",
+          "callee": "super",
+          "lineNumber": 39
+        },
+        {
+          "caller": "create",
+          "callee": "super().create",
+          "lineNumber": 51
+        },
+        {
+          "caller": "create",
+          "callee": "super",
+          "lineNumber": 51
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "backend/messaging/tests.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 177,
+      "nonEmptyLines": 150,
+      "classes": [
+        {
+          "name": "MessagingAPITests",
+          "startLine": 8,
+          "endLine": 177,
+          "methods": [
+            "setUp",
+            "_auth",
+            "test_unauthenticated_access_denied",
+            "test_send_message",
+            "test_inbox_and_sent",
+            "test_mark_read_and_permissions",
+            "test_mark_all_read_and_unread_count",
+            "test_librarians_list_accessible_to_students",
+            "test_students_list_librarian_only",
+            "test_conversation_thread",
+            "test_conversation_nonexistent_user"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MessagingAPITests",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setUp",
+          "callee": "APIClient",
+          "lineNumber": 10
+        },
+        {
+          "caller": "setUp",
+          "callee": "Department.objects.create",
+          "lineNumber": 12
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_superuser",
+          "lineNumber": 14
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 21
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 29
+        },
+        {
+          "caller": "setUp",
+          "callee": "User.objects.create_user",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_auth",
+          "callee": "str",
+          "lineNumber": 46
+        },
+        {
+          "caller": "_auth",
+          "callee": "RefreshToken.for_user",
+          "lineNumber": 46
+        },
+        {
+          "caller": "_auth",
+          "callee": "self.client.credentials",
+          "lineNumber": 47
+        },
+        {
+          "caller": "test_unauthenticated_access_denied",
+          "callee": "self.client.get",
+          "lineNumber": 50
+        },
+        {
+          "caller": "test_unauthenticated_access_denied",
+          "callee": "self.assertEqual",
+          "lineNumber": 51
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "self._auth",
+          "lineNumber": 54
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "self.client.post",
+          "lineNumber": 55
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "self.assertEqual",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "self.assertEqual",
+          "lineNumber": 61
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "Message.objects.count",
+          "lineNumber": 61
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "Message.objects.first",
+          "lineNumber": 62
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "self.assertEqual",
+          "lineNumber": 63
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "self.assertEqual",
+          "lineNumber": 64
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "self.assertEqual",
+          "lineNumber": 65
+        },
+        {
+          "caller": "test_send_message",
+          "callee": "self.assertFalse",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "Message.objects.create",
+          "lineNumber": 69
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "Message.objects.create",
+          "lineNumber": 75
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self._auth",
+          "lineNumber": 83
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self.client.get",
+          "lineNumber": 84
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self.assertEqual",
+          "lineNumber": 85
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self.assertEqual",
+          "lineNumber": 86
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "len",
+          "lineNumber": 86
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self.assertEqual",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self.client.get",
+          "lineNumber": 90
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self.assertEqual",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self.assertEqual",
+          "lineNumber": 92
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "len",
+          "lineNumber": 92
+        },
+        {
+          "caller": "test_inbox_and_sent",
+          "callee": "self.assertEqual",
+          "lineNumber": 93
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "Message.objects.create",
+          "lineNumber": 96
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "self._auth",
+          "lineNumber": 104
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "self.client.post",
+          "lineNumber": 105
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "self.assertEqual",
+          "lineNumber": 106
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "self._auth",
+          "lineNumber": 109
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "self.client.post",
+          "lineNumber": 110
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "self.assertEqual",
+          "lineNumber": 111
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "msg.refresh_from_db",
+          "lineNumber": 112
+        },
+        {
+          "caller": "test_mark_read_and_permissions",
+          "callee": "self.assertTrue",
+          "lineNumber": 113
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "Message.objects.create",
+          "lineNumber": 116
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "Message.objects.create",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "self._auth",
+          "lineNumber": 119
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "self.client.get",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "self.assertEqual",
+          "lineNumber": 121
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "self.assertEqual",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "self.client.post",
+          "lineNumber": 124
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "self.assertEqual",
+          "lineNumber": 125
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "self.client.get",
+          "lineNumber": 127
+        },
+        {
+          "caller": "test_mark_all_read_and_unread_count",
+          "callee": "self.assertEqual",
+          "lineNumber": 128
+        },
+        {
+          "caller": "test_librarians_list_accessible_to_students",
+          "callee": "self._auth",
+          "lineNumber": 131
+        },
+        {
+          "caller": "test_librarians_list_accessible_to_students",
+          "callee": "self.client.get",
+          "lineNumber": 132
+        },
+        {
+          "caller": "test_librarians_list_accessible_to_students",
+          "callee": "self.assertEqual",
+          "lineNumber": 133
+        },
+        {
+          "caller": "test_librarians_list_accessible_to_students",
+          "callee": "self.assertIn",
+          "lineNumber": 135
+        },
+        {
+          "caller": "test_students_list_librarian_only",
+          "callee": "self._auth",
+          "lineNumber": 139
+        },
+        {
+          "caller": "test_students_list_librarian_only",
+          "callee": "self.client.get",
+          "lineNumber": 140
+        },
+        {
+          "caller": "test_students_list_librarian_only",
+          "callee": "self.assertEqual",
+          "lineNumber": 141
+        },
+        {
+          "caller": "test_students_list_librarian_only",
+          "callee": "self._auth",
+          "lineNumber": 144
+        },
+        {
+          "caller": "test_students_list_librarian_only",
+          "callee": "self.client.get",
+          "lineNumber": 145
+        },
+        {
+          "caller": "test_students_list_librarian_only",
+          "callee": "self.assertEqual",
+          "lineNumber": 146
+        },
+        {
+          "caller": "test_students_list_librarian_only",
+          "callee": "self.assertIn",
+          "lineNumber": 148
+        },
+        {
+          "caller": "test_students_list_librarian_only",
+          "callee": "self.assertIn",
+          "lineNumber": 149
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "Message.objects.create",
+          "lineNumber": 152
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "Message.objects.create",
+          "lineNumber": 158
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "self._auth",
+          "lineNumber": 165
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "self.client.get",
+          "lineNumber": 166
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "self.assertEqual",
+          "lineNumber": 167
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "self.assertEqual",
+          "lineNumber": 168
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "len",
+          "lineNumber": 168
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "m1.refresh_from_db",
+          "lineNumber": 171
+        },
+        {
+          "caller": "test_conversation_thread",
+          "callee": "self.assertTrue",
+          "lineNumber": 172
+        },
+        {
+          "caller": "test_conversation_nonexistent_user",
+          "callee": "self._auth",
+          "lineNumber": 175
+        },
+        {
+          "caller": "test_conversation_nonexistent_user",
+          "callee": "self.client.get",
+          "lineNumber": 176
+        },
+        {
+          "caller": "test_conversation_nonexistent_user",
+          "callee": "self.assertEqual",
+          "lineNumber": 177
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/messaging/urls.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 8,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/messaging/views.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 145,
+      "nonEmptyLines": 120,
+      "classes": [
+        {
+          "name": "MessageViewSet",
+          "startLine": 11,
+          "endLine": 145,
+          "methods": [
+            "get_queryset",
+            "get_serializer_class",
+            "inbox",
+            "sent",
+            "mark_read",
+            "mark_all_read",
+            "unread_count",
+            "librarians",
+            "students",
+            "conversation"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MessageViewSet",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get_queryset",
+          "callee": "Message.objects.filter(\n            Q(sender=user) | Q(recipient=user)\n        ).select_related",
+          "lineNumber": 18
+        },
+        {
+          "caller": "get_queryset",
+          "callee": "Message.objects.filter",
+          "lineNumber": 18
+        },
+        {
+          "caller": "get_queryset",
+          "callee": "Q",
+          "lineNumber": 19
+        },
+        {
+          "caller": "get_queryset",
+          "callee": "Q",
+          "lineNumber": 19
+        },
+        {
+          "caller": "inbox",
+          "callee": "Message.objects.filter(\n            recipient=request.user\n        ).select_related",
+          "lineNumber": 30
+        },
+        {
+          "caller": "inbox",
+          "callee": "Message.objects.filter",
+          "lineNumber": 30
+        },
+        {
+          "caller": "inbox",
+          "callee": "request.query_params.get",
+          "lineNumber": 35
+        },
+        {
+          "caller": "inbox",
+          "callee": "messages.filter",
+          "lineNumber": 37
+        },
+        {
+          "caller": "inbox",
+          "callee": "is_read.lower",
+          "lineNumber": 37
+        },
+        {
+          "caller": "inbox",
+          "callee": "self.get_serializer",
+          "lineNumber": 39
+        },
+        {
+          "caller": "inbox",
+          "callee": "Response",
+          "lineNumber": 40
+        },
+        {
+          "caller": "sent",
+          "callee": "Message.objects.filter(\n            sender=request.user\n        ).select_related",
+          "lineNumber": 45
+        },
+        {
+          "caller": "sent",
+          "callee": "Message.objects.filter",
+          "lineNumber": 45
+        },
+        {
+          "caller": "sent",
+          "callee": "self.get_serializer",
+          "lineNumber": 48
+        },
+        {
+          "caller": "sent",
+          "callee": "Response",
+          "lineNumber": 49
+        },
+        {
+          "caller": "mark_read",
+          "callee": "self.get_object",
+          "lineNumber": 54
+        },
+        {
+          "caller": "mark_read",
+          "callee": "Response",
+          "lineNumber": 58
+        },
+        {
+          "caller": "mark_read",
+          "callee": "message.mark_as_read",
+          "lineNumber": 63
+        },
+        {
+          "caller": "mark_read",
+          "callee": "Response",
+          "lineNumber": 64
+        },
+        {
+          "caller": "mark_all_read",
+          "callee": "Message.objects.filter(\n            recipient=request.user,\n            is_read=False\n        ).update",
+          "lineNumber": 69
+        },
+        {
+          "caller": "mark_all_read",
+          "callee": "Message.objects.filter",
+          "lineNumber": 69
+        },
+        {
+          "caller": "mark_all_read",
+          "callee": "Response",
+          "lineNumber": 73
+        },
+        {
+          "caller": "unread_count",
+          "callee": "Message.objects.filter(\n            recipient=request.user,\n            is_read=False\n        ).count",
+          "lineNumber": 78
+        },
+        {
+          "caller": "unread_count",
+          "callee": "Message.objects.filter",
+          "lineNumber": 78
+        },
+        {
+          "caller": "unread_count",
+          "callee": "Response",
+          "lineNumber": 82
+        },
+        {
+          "caller": "librarians",
+          "callee": "CustomUser.objects.filter(\n            role='librarian'\n        ).distinct",
+          "lineNumber": 90
+        },
+        {
+          "caller": "librarians",
+          "callee": "CustomUser.objects.filter",
+          "lineNumber": 90
+        },
+        {
+          "caller": "librarians",
+          "callee": "UserBriefSerializer",
+          "lineNumber": 94
+        },
+        {
+          "caller": "librarians",
+          "callee": "Response",
+          "lineNumber": 95
+        },
+        {
+          "caller": "students",
+          "callee": "Response",
+          "lineNumber": 104
+        },
+        {
+          "caller": "students",
+          "callee": "CustomUser.objects.filter(\n            role='student'\n        ).distinct",
+          "lineNumber": 110
+        },
+        {
+          "caller": "students",
+          "callee": "CustomUser.objects.filter",
+          "lineNumber": 110
+        },
+        {
+          "caller": "students",
+          "callee": "UserBriefSerializer",
+          "lineNumber": 114
+        },
+        {
+          "caller": "students",
+          "callee": "Response",
+          "lineNumber": 115
+        },
+        {
+          "caller": "conversation",
+          "callee": "CustomUser.objects.get",
+          "lineNumber": 124
+        },
+        {
+          "caller": "conversation",
+          "callee": "Response",
+          "lineNumber": 126
+        },
+        {
+          "caller": "conversation",
+          "callee": "Message.objects.filter(\n            (Q(sender=request.user) & Q(recipient=other_user)) |\n            (Q(sender=other_user) & Q(recipient=request.user))\n        ).select_related('sender', 'recipient').order_by",
+          "lineNumber": 132
+        },
+        {
+          "caller": "conversation",
+          "callee": "Message.objects.filter(\n            (Q(sender=request.user) & Q(recipient=other_user)) |\n            (Q(sender=other_user) & Q(recipient=request.user))\n        ).select_related",
+          "lineNumber": 132
+        },
+        {
+          "caller": "conversation",
+          "callee": "Message.objects.filter",
+          "lineNumber": 132
+        },
+        {
+          "caller": "conversation",
+          "callee": "Q",
+          "lineNumber": 133
+        },
+        {
+          "caller": "conversation",
+          "callee": "Q",
+          "lineNumber": 133
+        },
+        {
+          "caller": "conversation",
+          "callee": "Q",
+          "lineNumber": 134
+        },
+        {
+          "caller": "conversation",
+          "callee": "Q",
+          "lineNumber": 134
+        },
+        {
+          "caller": "conversation",
+          "callee": "Message.objects.filter(\n            sender=other_user,\n            recipient=request.user,\n            is_read=False\n        ).update",
+          "lineNumber": 138
+        },
+        {
+          "caller": "conversation",
+          "callee": "Message.objects.filter",
+          "lineNumber": 138
+        },
+        {
+          "caller": "conversation",
+          "callee": "self.get_serializer",
+          "lineNumber": 144
+        },
+        {
+          "caller": "conversation",
+          "callee": "Response",
+          "lineNumber": 145
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    }
+  ]
+}

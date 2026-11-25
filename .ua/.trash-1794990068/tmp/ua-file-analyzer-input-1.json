@@ -1,0 +1,313 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "frontend/src/App.jsx",
+      "language": "javascript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ConfirmModal.jsx",
+      "language": "javascript",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/Footer.jsx",
+      "language": "javascript",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/Lightbox.jsx",
+      "language": "javascript",
+      "sizeLines": 142,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/Navbar.jsx",
+      "language": "javascript",
+      "sizeLines": 192,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/Notifications.jsx",
+      "language": "javascript",
+      "sizeLines": 162,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/PageTransition.jsx",
+      "language": "javascript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ProtectedRoute.jsx",
+      "language": "javascript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/Toast.jsx",
+      "language": "javascript",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "language": "javascript",
+      "sizeLines": 517,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/navigation/PublicNavbar.jsx",
+      "language": "javascript",
+      "sizeLines": 229,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/navigation/StudentNavbar.jsx",
+      "language": "javascript",
+      "sizeLines": 171,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/context/AuthContext.jsx",
+      "language": "javascript",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/context/useAuth.js",
+      "language": "javascript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/layouts/LibrarianLayout.jsx",
+      "language": "javascript",
+      "sizeLines": 202,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/layouts/PublicLayout.jsx",
+      "language": "javascript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/layouts/StudentLayout.jsx",
+      "language": "javascript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/main.jsx",
+      "language": "javascript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/AboutUs.jsx",
+      "language": "javascript",
+      "sizeLines": 189,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/Gallery.jsx",
+      "language": "javascript",
+      "sizeLines": 133,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/Home.jsx",
+      "language": "javascript",
+      "sizeLines": 191,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/LibrarianDashboard.jsx",
+      "language": "javascript",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/ManageBooks.jsx",
+      "language": "javascript",
+      "sizeLines": 681,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/MyBorrows.jsx",
+      "language": "javascript",
+      "sizeLines": 264,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/StudentsList.jsx",
+      "language": "javascript",
+      "sizeLines": 837,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminBooks.jsx",
+      "language": "javascript",
+      "sizeLines": 391,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminDashboard.jsx",
+      "language": "javascript",
+      "sizeLines": 985,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminStudents.jsx",
+      "language": "javascript",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "language": "javascript",
+      "sizeLines": 249,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/librarian/LibrarianReports.jsx",
+      "language": "javascript",
+      "sizeLines": 222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "language": "javascript",
+      "sizeLines": 219,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "frontend/src/App.jsx": [
+      "frontend/src/components/PageTransition.jsx",
+      "frontend/src/components/ProtectedRoute.jsx",
+      "frontend/src/context/AuthContext.jsx",
+      "frontend/src/layouts/LibrarianLayout.jsx",
+      "frontend/src/layouts/PublicLayout.jsx",
+      "frontend/src/layouts/StudentLayout.jsx",
+      "frontend/src/pages/AboutUs.jsx",
+      "frontend/src/pages/AccountDetails.jsx",
+      "frontend/src/pages/Books.jsx",
+      "frontend/src/pages/Gallery.jsx",
+      "frontend/src/pages/Home.jsx",
+      "frontend/src/pages/LibrarianDashboard.jsx",
+      "frontend/src/pages/Login.jsx",
+      "frontend/src/pages/ManageBooks.jsx",
+      "frontend/src/pages/MyBorrows.jsx",
+      "frontend/src/pages/Recommendations.jsx",
+      "frontend/src/pages/StudentsList.jsx",
+      "frontend/src/pages/admin/AdminBooks.jsx",
+      "frontend/src/pages/admin/AdminDashboard.jsx",
+      "frontend/src/pages/admin/AdminStudents.jsx",
+      "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "frontend/src/pages/librarian/LibrarianReports.jsx",
+      "frontend/src/pages/librarian/LibrarianReturns.jsx"
+    ],
+    "frontend/src/components/ConfirmModal.jsx": [],
+    "frontend/src/components/Footer.jsx": [],
+    "frontend/src/components/Lightbox.jsx": [],
+    "frontend/src/components/Navbar.jsx": [
+      "frontend/src/components/Notifications.jsx"
+    ],
+    "frontend/src/components/Notifications.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/PageTransition.jsx": [],
+    "frontend/src/components/ProtectedRoute.jsx": [
+      "frontend/src/context/useAuth.js"
+    ],
+    "frontend/src/components/Toast.jsx": [],
+    "frontend/src/components/dashboard/LibrarianDashboard.jsx": [
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/navigation/PublicNavbar.jsx": [
+      "frontend/src/components/Notifications.jsx",
+      "frontend/src/context/useAuth.js"
+    ],
+    "frontend/src/components/navigation/StudentNavbar.jsx": [
+      "frontend/src/components/Notifications.jsx",
+      "frontend/src/context/useAuth.js"
+    ],
+    "frontend/src/context/AuthContext.jsx": [],
+    "frontend/src/context/useAuth.js": [
+      "frontend/src/context/AuthContextCore.js"
+    ],
+    "frontend/src/layouts/LibrarianLayout.jsx": [
+      "frontend/src/components/Notifications.jsx",
+      "frontend/src/context/useAuth.js"
+    ],
+    "frontend/src/layouts/PublicLayout.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/components/navigation/PublicNavbar.jsx"
+    ],
+    "frontend/src/layouts/StudentLayout.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/components/navigation/StudentNavbar.jsx"
+    ],
+    "frontend/src/main.jsx": [
+      "frontend/src/App.jsx",
+      "frontend/src/index.css"
+    ],
+    "frontend/src/pages/AboutUs.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Gallery.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/components/Lightbox.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Home.jsx": [
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/LibrarianDashboard.jsx": [],
+    "frontend/src/pages/ManageBooks.jsx": [
+      "frontend/src/components/ConfirmModal.jsx",
+      "frontend/src/components/Toast.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/MyBorrows.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/StudentsList.jsx": [
+      "frontend/src/components/Toast.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/admin/AdminBooks.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/admin/AdminDashboard.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/admin/AdminStudents.jsx": [],
+    "frontend/src/pages/librarian/LibrarianBorrowing.jsx": [
+      "frontend/src/components/Toast.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/librarian/LibrarianReports.jsx": [
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/librarian/LibrarianReturns.jsx": [
+      "frontend/src/components/Toast.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ]
+  }
+}

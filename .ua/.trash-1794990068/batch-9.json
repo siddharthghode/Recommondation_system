@@ -1,0 +1,132 @@
+{
+  "nodes": [
+    {
+      "id": "config:.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": ".env.example",
+      "summary": "Environment variable template specifying required secret keys, URLs, and credentials.",
+      "tags": [
+        "configuration",
+        "settings",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:DEPLOYMENT.md",
+      "type": "document",
+      "name": "DEPLOYMENT.md",
+      "filePath": "DEPLOYMENT.md",
+      "summary": "Production deployment guide outlining server provisioning, SSL setup, Docker swarm, and cloud configurations.",
+      "tags": [
+        "documentation",
+        "guide",
+        "specification"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:PROJECT_RULES.md",
+      "type": "document",
+      "name": "PROJECT_RULES.md",
+      "filePath": "PROJECT_RULES.md",
+      "summary": "Developer guidelines, coding standards, branch conventions, and testing protocols for the repository.",
+      "tags": [
+        "documentation",
+        "guide",
+        "specification"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Comprehensive project documentation detailing features, architecture, installation, and deployment steps.",
+      "tags": [
+        "documentation",
+        "guide",
+        "specification"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "service:docker-compose.yml",
+      "type": "service",
+      "name": "docker-compose.yml",
+      "filePath": "docker-compose.yml",
+      "summary": "Multi-container orchestration defining PostgreSQL, Redis 7, Django backend, and React Nginx services.",
+      "tags": [
+        "infrastructure",
+        "containerization",
+        "deployment"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:pytest.ini",
+      "type": "config",
+      "name": "pytest.ini",
+      "filePath": "pytest.ini",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for pytest.ini.",
+      "tags": [
+        "configuration",
+        "settings",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:render.yaml",
+      "type": "config",
+      "name": "render.yaml",
+      "filePath": "render.yaml",
+      "summary": "Project config file providing core functionality and configuration for render.yaml.",
+      "tags": [
+        "configuration",
+        "settings",
+        "build-system"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:README.md",
+      "target": "file:backend/book_recommondation/settings.py",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:frontend/src/App.jsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:backend/Dockerfile",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "service:docker-compose.yml",
+      "target": "service:frontend/Dockerfile",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "config:pytest.ini",
+      "target": "file:backend/conftest.py",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

@@ -1,0 +1,4010 @@
+{
+  "nodes": [
+    {
+      "id": "file:frontend/src/api/authApi.js",
+      "type": "file",
+      "name": "authApi.js",
+      "filePath": "frontend/src/api/authApi.js",
+      "summary": "API client module encapsulating authentication requests including login, register, OTP, and token refresh.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:login",
+      "type": "function",
+      "name": "login",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        3,
+        10
+      ],
+      "summary": "Function `login` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:register",
+      "type": "function",
+      "name": "register",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        12,
+        12
+      ],
+      "summary": "Function `register` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:googleLogin",
+      "type": "function",
+      "name": "googleLogin",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        14,
+        20
+      ],
+      "summary": "Function `googleLogin` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:requestOTP",
+      "type": "function",
+      "name": "requestOTP",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        22,
+        23
+      ],
+      "summary": "Function `requestOTP` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:verifyOTP",
+      "type": "function",
+      "name": "verifyOTP",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        25,
+        26
+      ],
+      "summary": "Function `verifyOTP` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:getOTPStatus",
+      "type": "function",
+      "name": "getOTPStatus",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        28,
+        29
+      ],
+      "summary": "Function `getOTPStatus` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:resetPassword",
+      "type": "function",
+      "name": "resetPassword",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        31,
+        32
+      ],
+      "summary": "Function `resetPassword` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:refreshToken",
+      "type": "function",
+      "name": "refreshToken",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        34,
+        40
+      ],
+      "summary": "Function `refreshToken` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/authApi.js:getDepartments",
+      "type": "function",
+      "name": "getDepartments",
+      "filePath": "frontend/src/api/authApi.js",
+      "lineRange": [
+        42,
+        42
+      ],
+      "summary": "Function `getDepartments` handling logic within `authApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/api/axios.js",
+      "type": "file",
+      "name": "axios.js",
+      "filePath": "frontend/src/api/axios.js",
+      "summary": "Pre-configured Axios HTTP client instance with automatic JWT authorization header injection and error interception.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/api/axios.js:processQueue",
+      "type": "function",
+      "name": "processQueue",
+      "filePath": "frontend/src/api/axios.js",
+      "lineRange": [
+        15,
+        24
+      ],
+      "summary": "Function `processQueue` handling logic within `axios.js`.",
+      "tags": [
+        "function",
+        "utility",
+        "routine"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/api/bookApi.js",
+      "type": "file",
+      "name": "bookApi.js",
+      "filePath": "frontend/src/api/bookApi.js",
+      "summary": "API client module providing endpoints for book discovery, filtering, CRUD operations, and CSV upload.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:fetchBooks",
+      "type": "function",
+      "name": "fetchBooks",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        3,
+        4
+      ],
+      "summary": "Function `fetchBooks` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:getBookCategories",
+      "type": "function",
+      "name": "getBookCategories",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        6,
+        7
+      ],
+      "summary": "Function `getBookCategories` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:getCategories",
+      "type": "function",
+      "name": "getCategories",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        9,
+        10
+      ],
+      "summary": "Function `getCategories` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:createCategory",
+      "type": "function",
+      "name": "createCategory",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        12,
+        13
+      ],
+      "summary": "Function `createCategory` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:updateCategory",
+      "type": "function",
+      "name": "updateCategory",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        15,
+        16
+      ],
+      "summary": "Function `updateCategory` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:deleteCategory",
+      "type": "function",
+      "name": "deleteCategory",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        18,
+        19
+      ],
+      "summary": "Function `deleteCategory` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:createBook",
+      "type": "function",
+      "name": "createBook",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        21,
+        22
+      ],
+      "summary": "Function `createBook` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:updateBook",
+      "type": "function",
+      "name": "updateBook",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        24,
+        25
+      ],
+      "summary": "Function `updateBook` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:deleteBook",
+      "type": "function",
+      "name": "deleteBook",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        27,
+        28
+      ],
+      "summary": "Function `deleteBook` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:importBooksCSV",
+      "type": "function",
+      "name": "importBooksCSV",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        30,
+        36
+      ],
+      "summary": "Function `importBooksCSV` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/bookApi.js:getSimilarBooks",
+      "type": "function",
+      "name": "getSimilarBooks",
+      "filePath": "frontend/src/api/bookApi.js",
+      "lineRange": [
+        38,
+        39
+      ],
+      "summary": "Function `getSimilarBooks` handling logic within `bookApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/api/borrowApi.js",
+      "type": "file",
+      "name": "borrowApi.js",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "summary": "API client module managing borrowing requests, renewals, approvals, and book return workflows.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:requestBorrow",
+      "type": "function",
+      "name": "requestBorrow",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        3,
+        4
+      ],
+      "summary": "Function `requestBorrow` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:returnBook",
+      "type": "function",
+      "name": "returnBook",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        6,
+        7
+      ],
+      "summary": "Function `returnBook` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:getMyBorrows",
+      "type": "function",
+      "name": "getMyBorrows",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        9,
+        10
+      ],
+      "summary": "Function `getMyBorrows` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:getBorrowRequests",
+      "type": "function",
+      "name": "getBorrowRequests",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        12,
+        12
+      ],
+      "summary": "Function `getBorrowRequests` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:approveBorrow",
+      "type": "function",
+      "name": "approveBorrow",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        14,
+        15
+      ],
+      "summary": "Function `approveBorrow` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:rejectBorrow",
+      "type": "function",
+      "name": "rejectBorrow",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        17,
+        18
+      ],
+      "summary": "Function `rejectBorrow` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:getBorrowHistory",
+      "type": "function",
+      "name": "getBorrowHistory",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        20,
+        21
+      ],
+      "summary": "Function `getBorrowHistory` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:getOverdueBooks",
+      "type": "function",
+      "name": "getOverdueBooks",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        23,
+        24
+      ],
+      "summary": "Function `getOverdueBooks` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/borrowApi.js:getDepartmentBorrows",
+      "type": "function",
+      "name": "getDepartmentBorrows",
+      "filePath": "frontend/src/api/borrowApi.js",
+      "lineRange": [
+        26,
+        27
+      ],
+      "summary": "Function `getDepartmentBorrows` handling logic within `borrowApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/api/index.js",
+      "type": "file",
+      "name": "index.js",
+      "filePath": "frontend/src/api/index.js",
+      "summary": "Project code file providing core functionality and configuration for index.js.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/api/recommendationApi.js",
+      "type": "file",
+      "name": "recommendationApi.js",
+      "filePath": "frontend/src/api/recommendationApi.js",
+      "summary": "API client requesting personalized book recommendations computed by the machine learning recommender engine.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/recommendationApi.js:fetchRecommendations",
+      "type": "function",
+      "name": "fetchRecommendations",
+      "filePath": "frontend/src/api/recommendationApi.js",
+      "lineRange": [
+        3,
+        7
+      ],
+      "summary": "Function `fetchRecommendations` handling logic within `recommendationApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/recommendationApi.js:trackInteraction",
+      "type": "function",
+      "name": "trackInteraction",
+      "filePath": "frontend/src/api/recommendationApi.js",
+      "lineRange": [
+        9,
+        10
+      ],
+      "summary": "Function `trackInteraction` handling logic within `recommendationApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/recommendationApi.js:trackDwellTime",
+      "type": "function",
+      "name": "trackDwellTime",
+      "filePath": "frontend/src/api/recommendationApi.js",
+      "lineRange": [
+        12,
+        13
+      ],
+      "summary": "Function `trackDwellTime` handling logic within `recommendationApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/api/reviewApi.js",
+      "type": "file",
+      "name": "reviewApi.js",
+      "filePath": "frontend/src/api/reviewApi.js",
+      "summary": "API client providing endpoints for submitting, reading, and managing user book reviews and ratings.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/reviewApi.js:getBookReviews",
+      "type": "function",
+      "name": "getBookReviews",
+      "filePath": "frontend/src/api/reviewApi.js",
+      "lineRange": [
+        3,
+        4
+      ],
+      "summary": "Function `getBookReviews` handling logic within `reviewApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/reviewApi.js:submitReview",
+      "type": "function",
+      "name": "submitReview",
+      "filePath": "frontend/src/api/reviewApi.js",
+      "lineRange": [
+        6,
+        7
+      ],
+      "summary": "Function `submitReview` handling logic within `reviewApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/reviewApi.js:updateReview",
+      "type": "function",
+      "name": "updateReview",
+      "filePath": "frontend/src/api/reviewApi.js",
+      "lineRange": [
+        9,
+        10
+      ],
+      "summary": "Function `updateReview` handling logic within `reviewApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/reviewApi.js:deleteReview",
+      "type": "function",
+      "name": "deleteReview",
+      "filePath": "frontend/src/api/reviewApi.js",
+      "lineRange": [
+        12,
+        13
+      ],
+      "summary": "Function `deleteReview` handling logic within `reviewApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/api/userApi.js",
+      "type": "file",
+      "name": "userApi.js",
+      "filePath": "frontend/src/api/userApi.js",
+      "summary": "Project code file providing core functionality and configuration for userApi.js.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getStudents",
+      "type": "function",
+      "name": "getStudents",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        4,
+        7
+      ],
+      "summary": "Function `getStudents` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getStudentList",
+      "type": "function",
+      "name": "getStudentList",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        9,
+        9
+      ],
+      "summary": "Function `getStudentList` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getPendingStudents",
+      "type": "function",
+      "name": "getPendingStudents",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        11,
+        11
+      ],
+      "summary": "Function `getPendingStudents` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getStudent",
+      "type": "function",
+      "name": "getStudent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        13,
+        14
+      ],
+      "summary": "Function `getStudent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:updateStudent",
+      "type": "function",
+      "name": "updateStudent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        16,
+        17
+      ],
+      "summary": "Function `updateStudent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:deleteStudent",
+      "type": "function",
+      "name": "deleteStudent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        19,
+        20
+      ],
+      "summary": "Function `deleteStudent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:approveStudent",
+      "type": "function",
+      "name": "approveStudent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        22,
+        23
+      ],
+      "summary": "Function `approveStudent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:rejectStudent",
+      "type": "function",
+      "name": "rejectStudent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        25,
+        26
+      ],
+      "summary": "Function `rejectStudent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getStudentBorrows",
+      "type": "function",
+      "name": "getStudentBorrows",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        28,
+        29
+      ],
+      "summary": "Function `getStudentBorrows` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getStudentAnalytics",
+      "type": "function",
+      "name": "getStudentAnalytics",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        31,
+        32
+      ],
+      "summary": "Function `getStudentAnalytics` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:fetchLibrarianDashboard",
+      "type": "function",
+      "name": "fetchLibrarianDashboard",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        35,
+        36
+      ],
+      "summary": "Function `fetchLibrarianDashboard` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getAdminStats",
+      "type": "function",
+      "name": "getAdminStats",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        38,
+        38
+      ],
+      "summary": "Function `getAdminStats` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getAdminStudents",
+      "type": "function",
+      "name": "getAdminStudents",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        40,
+        40
+      ],
+      "summary": "Function `getAdminStudents` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getAdminBooks",
+      "type": "function",
+      "name": "getAdminBooks",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        42,
+        43
+      ],
+      "summary": "Function `getAdminBooks` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:sendMessageToStudent",
+      "type": "function",
+      "name": "sendMessageToStudent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        46,
+        47
+      ],
+      "summary": "Function `sendMessageToStudent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getNotifications",
+      "type": "function",
+      "name": "getNotifications",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        50,
+        53
+      ],
+      "summary": "Function `getNotifications` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:markNotificationRead",
+      "type": "function",
+      "name": "markNotificationRead",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        55,
+        56
+      ],
+      "summary": "Function `markNotificationRead` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:markAllNotificationsRead",
+      "type": "function",
+      "name": "markAllNotificationsRead",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        58,
+        59
+      ],
+      "summary": "Function `markAllNotificationsRead` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:getPageContent",
+      "type": "function",
+      "name": "getPageContent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        62,
+        63
+      ],
+      "summary": "Function `getPageContent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:listPageContents",
+      "type": "function",
+      "name": "listPageContents",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        65,
+        66
+      ],
+      "summary": "Function `listPageContents` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:createPageContent",
+      "type": "function",
+      "name": "createPageContent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        68,
+        69
+      ],
+      "summary": "Function `createPageContent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:updatePageContent",
+      "type": "function",
+      "name": "updatePageContent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        71,
+        72
+      ],
+      "summary": "Function `updatePageContent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/api/userApi.js:deletePageContent",
+      "type": "function",
+      "name": "deletePageContent",
+      "filePath": "frontend/src/api/userApi.js",
+      "lineRange": [
+        74,
+        75
+      ],
+      "summary": "Function `deletePageContent` handling logic within `userApi.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/components/BookCard.jsx",
+      "type": "file",
+      "name": "BookCard.jsx",
+      "filePath": "frontend/src/components/BookCard.jsx",
+      "summary": "UI card component rendering book metadata, cover preview, and interaction buttons.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/components/BookCard.jsx:BookCard",
+      "type": "function",
+      "name": "BookCard",
+      "filePath": "frontend/src/components/BookCard.jsx",
+      "lineRange": [
+        13,
+        89
+      ],
+      "summary": "Function `BookCard` handling logic within `BookCard.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/src/components/BookDetail.jsx",
+      "type": "file",
+      "name": "BookDetail.jsx",
+      "filePath": "frontend/src/components/BookDetail.jsx",
+      "summary": "Modal and page view displaying rich book information, availability status, and review form.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/components/BookDetail.jsx:BookDetail",
+      "type": "function",
+      "name": "BookDetail",
+      "filePath": "frontend/src/components/BookDetail.jsx",
+      "lineRange": [
+        13,
+        438
+      ],
+      "summary": "Function `BookDetail` handling logic within `BookDetail.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/components/ErrorMessage.jsx",
+      "type": "file",
+      "name": "ErrorMessage.jsx",
+      "filePath": "frontend/src/components/ErrorMessage.jsx",
+      "summary": "Project code file providing core functionality and configuration for ErrorMessage.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/ErrorMessage.jsx:ErrorMessage",
+      "type": "function",
+      "name": "ErrorMessage",
+      "filePath": "frontend/src/components/ErrorMessage.jsx",
+      "lineRange": [
+        3,
+        22
+      ],
+      "summary": "Function `ErrorMessage` handling logic within `ErrorMessage.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/components/GoogleAuthButton.jsx",
+      "type": "file",
+      "name": "GoogleAuthButton.jsx",
+      "filePath": "frontend/src/components/GoogleAuthButton.jsx",
+      "summary": "Project code file providing core functionality and configuration for GoogleAuthButton.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/components/GoogleAuthButton.jsx:GoogleAuthButton",
+      "type": "function",
+      "name": "GoogleAuthButton",
+      "filePath": "frontend/src/components/GoogleAuthButton.jsx",
+      "lineRange": [
+        8,
+        172
+      ],
+      "summary": "Function `GoogleAuthButton` handling logic within `GoogleAuthButton.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/components/Loading.jsx",
+      "type": "file",
+      "name": "Loading.jsx",
+      "filePath": "frontend/src/components/Loading.jsx",
+      "summary": "Project code file providing core functionality and configuration for Loading.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/Loading.jsx:Loading",
+      "type": "function",
+      "name": "Loading",
+      "filePath": "frontend/src/components/Loading.jsx",
+      "lineRange": [
+        3,
+        10
+      ],
+      "summary": "Function `Loading` handling logic within `Loading.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/context/AuthContextCore.js",
+      "type": "file",
+      "name": "AuthContextCore.js",
+      "filePath": "frontend/src/context/AuthContextCore.js",
+      "summary": "Authentication state provider managing JWT tokens, user profiles, login, and session lifecycle.",
+      "tags": [
+        "context",
+        "state-management",
+        "hook"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/context/AuthProvider.jsx",
+      "type": "file",
+      "name": "AuthProvider.jsx",
+      "filePath": "frontend/src/context/AuthProvider.jsx",
+      "summary": "Authentication state provider managing JWT tokens, user profiles, login, and session lifecycle.",
+      "tags": [
+        "context",
+        "state-management",
+        "hook"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/src/context/AuthProvider.jsx:AuthProvider",
+      "type": "function",
+      "name": "AuthProvider",
+      "filePath": "frontend/src/context/AuthProvider.jsx",
+      "lineRange": [
+        5,
+        163
+      ],
+      "summary": "Function `AuthProvider` handling logic within `AuthProvider.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/AccountDetails.jsx",
+      "type": "file",
+      "name": "AccountDetails.jsx",
+      "filePath": "frontend/src/pages/AccountDetails.jsx",
+      "summary": "Project code file providing core functionality and configuration for AccountDetails.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/AccountDetails.jsx:AccountDetails",
+      "type": "function",
+      "name": "AccountDetails",
+      "filePath": "frontend/src/pages/AccountDetails.jsx",
+      "lineRange": [
+        37,
+        749
+      ],
+      "summary": "Function `AccountDetails` handling logic within `AccountDetails.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/Books.jsx",
+      "type": "file",
+      "name": "Books.jsx",
+      "filePath": "frontend/src/pages/Books.jsx",
+      "summary": "Main catalog browser page supporting full-text search, genre filtering, and pagination.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/Books.jsx:Books",
+      "type": "function",
+      "name": "Books",
+      "filePath": "frontend/src/pages/Books.jsx",
+      "lineRange": [
+        13,
+        359
+      ],
+      "summary": "Function `Books` handling logic within `Books.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/Login.jsx",
+      "type": "file",
+      "name": "Login.jsx",
+      "filePath": "frontend/src/pages/Login.jsx",
+      "summary": "Project code file providing core functionality and configuration for Login.jsx.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/Login.jsx:Login",
+      "type": "function",
+      "name": "Login",
+      "filePath": "frontend/src/pages/Login.jsx",
+      "lineRange": [
+        38,
+        1394
+      ],
+      "summary": "Function `Login` handling logic within `Login.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/pages/Recommendations.jsx",
+      "type": "file",
+      "name": "Recommendations.jsx",
+      "filePath": "frontend/src/pages/Recommendations.jsx",
+      "summary": "Personalized recommendation page showcasing content-based and collaborative book suggestions.",
+      "tags": [
+        "page",
+        "view",
+        "route-target"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/pages/Recommendations.jsx:Recommendations",
+      "type": "function",
+      "name": "Recommendations",
+      "filePath": "frontend/src/pages/Recommendations.jsx",
+      "lineRange": [
+        7,
+        249
+      ],
+      "summary": "Function `Recommendations` handling logic within `Recommendations.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/src/services/api.js",
+      "type": "file",
+      "name": "api.js",
+      "filePath": "frontend/src/services/api.js",
+      "summary": "Project code file providing core functionality and configuration for api.js.",
+      "tags": [
+        "api-client",
+        "http",
+        "service"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:fetchRecommendations",
+      "type": "function",
+      "name": "fetchRecommendations",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        69,
+        77
+      ],
+      "summary": "Function `fetchRecommendations` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:trackInteraction",
+      "type": "function",
+      "name": "trackInteraction",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        79,
+        84
+      ],
+      "summary": "Function `trackInteraction` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:trackDwellTime",
+      "type": "function",
+      "name": "trackDwellTime",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        86,
+        91
+      ],
+      "summary": "Function `trackDwellTime` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getMyBorrows",
+      "type": "function",
+      "name": "getMyBorrows",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        93,
+        96
+      ],
+      "summary": "Function `getMyBorrows` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:returnBook",
+      "type": "function",
+      "name": "returnBook",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        98,
+        101
+      ],
+      "summary": "Function `returnBook` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getDepartmentBorrows",
+      "type": "function",
+      "name": "getDepartmentBorrows",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        103,
+        106
+      ],
+      "summary": "Function `getDepartmentBorrows` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:requestBorrow",
+      "type": "function",
+      "name": "requestBorrow",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        108,
+        111
+      ],
+      "summary": "Function `requestBorrow` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getBorrowRequests",
+      "type": "function",
+      "name": "getBorrowRequests",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        113,
+        113
+      ],
+      "summary": "Function `getBorrowRequests` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:approveBorrow",
+      "type": "function",
+      "name": "approveBorrow",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        115,
+        118
+      ],
+      "summary": "Function `approveBorrow` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:rejectBorrow",
+      "type": "function",
+      "name": "rejectBorrow",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        120,
+        123
+      ],
+      "summary": "Function `rejectBorrow` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getStudents",
+      "type": "function",
+      "name": "getStudents",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        125,
+        128
+      ],
+      "summary": "Function `getStudents` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:approveStudent",
+      "type": "function",
+      "name": "approveStudent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        130,
+        133
+      ],
+      "summary": "Function `approveStudent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:rejectStudent",
+      "type": "function",
+      "name": "rejectStudent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        135,
+        138
+      ],
+      "summary": "Function `rejectStudent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getStudentBorrows",
+      "type": "function",
+      "name": "getStudentBorrows",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        140,
+        143
+      ],
+      "summary": "Function `getStudentBorrows` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getStudentAnalytics",
+      "type": "function",
+      "name": "getStudentAnalytics",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        145,
+        148
+      ],
+      "summary": "Function `getStudentAnalytics` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:fetchLibrarianDashboard",
+      "type": "function",
+      "name": "fetchLibrarianDashboard",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        150,
+        150
+      ],
+      "summary": "Function `fetchLibrarianDashboard` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getNotifications",
+      "type": "function",
+      "name": "getNotifications",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        152,
+        155
+      ],
+      "summary": "Function `getNotifications` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:markNotificationRead",
+      "type": "function",
+      "name": "markNotificationRead",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        157,
+        160
+      ],
+      "summary": "Function `markNotificationRead` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:markAllNotificationsRead",
+      "type": "function",
+      "name": "markAllNotificationsRead",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        162,
+        162
+      ],
+      "summary": "Function `markAllNotificationsRead` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getBorrowHistory",
+      "type": "function",
+      "name": "getBorrowHistory",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        164,
+        167
+      ],
+      "summary": "Function `getBorrowHistory` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getOverdueBooks",
+      "type": "function",
+      "name": "getOverdueBooks",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        169,
+        169
+      ],
+      "summary": "Function `getOverdueBooks` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:createBook",
+      "type": "function",
+      "name": "createBook",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        171,
+        174
+      ],
+      "summary": "Function `createBook` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:updateBook",
+      "type": "function",
+      "name": "updateBook",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        176,
+        180
+      ],
+      "summary": "Function `updateBook` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:deleteBook",
+      "type": "function",
+      "name": "deleteBook",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        182,
+        185
+      ],
+      "summary": "Function `deleteBook` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getCategories",
+      "type": "function",
+      "name": "getCategories",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        187,
+        187
+      ],
+      "summary": "Function `getCategories` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:createCategory",
+      "type": "function",
+      "name": "createCategory",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        189,
+        192
+      ],
+      "summary": "Function `createCategory` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:updateCategory",
+      "type": "function",
+      "name": "updateCategory",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        194,
+        198
+      ],
+      "summary": "Function `updateCategory` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:deleteCategory",
+      "type": "function",
+      "name": "deleteCategory",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        200,
+        203
+      ],
+      "summary": "Function `deleteCategory` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:importBooksCSV",
+      "type": "function",
+      "name": "importBooksCSV",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        205,
+        208
+      ],
+      "summary": "Function `importBooksCSV` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getStudentList",
+      "type": "function",
+      "name": "getStudentList",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        210,
+        210
+      ],
+      "summary": "Function `getStudentList` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getPendingStudents",
+      "type": "function",
+      "name": "getPendingStudents",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        211,
+        211
+      ],
+      "summary": "Function `getPendingStudents` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getStudent",
+      "type": "function",
+      "name": "getStudent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        213,
+        216
+      ],
+      "summary": "Function `getStudent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:updateStudent",
+      "type": "function",
+      "name": "updateStudent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        218,
+        222
+      ],
+      "summary": "Function `updateStudent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:deleteStudent",
+      "type": "function",
+      "name": "deleteStudent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        224,
+        227
+      ],
+      "summary": "Function `deleteStudent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getAdminStats",
+      "type": "function",
+      "name": "getAdminStats",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        229,
+        229
+      ],
+      "summary": "Function `getAdminStats` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getAdminStudents",
+      "type": "function",
+      "name": "getAdminStudents",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        230,
+        230
+      ],
+      "summary": "Function `getAdminStudents` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getAdminBooks",
+      "type": "function",
+      "name": "getAdminBooks",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        231,
+        231
+      ],
+      "summary": "Function `getAdminBooks` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:sendMessageToStudent",
+      "type": "function",
+      "name": "sendMessageToStudent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        233,
+        247
+      ],
+      "summary": "Function `sendMessageToStudent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:getPageContent",
+      "type": "function",
+      "name": "getPageContent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        249,
+        249
+      ],
+      "summary": "Function `getPageContent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:listPageContents",
+      "type": "function",
+      "name": "listPageContents",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        250,
+        250
+      ],
+      "summary": "Function `listPageContents` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:createPageContent",
+      "type": "function",
+      "name": "createPageContent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        252,
+        255
+      ],
+      "summary": "Function `createPageContent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:updatePageContent",
+      "type": "function",
+      "name": "updatePageContent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        257,
+        261
+      ],
+      "summary": "Function `updatePageContent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:deletePageContent",
+      "type": "function",
+      "name": "deletePageContent",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        263,
+        266
+      ],
+      "summary": "Function `deletePageContent` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/services/api.js:authenticatedFetch",
+      "type": "function",
+      "name": "authenticatedFetch",
+      "filePath": "frontend/src/services/api.js",
+      "lineRange": [
+        269,
+        288
+      ],
+      "summary": "Function `authenticatedFetch` handling logic within `api.js`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:login",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:login",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:register",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:register",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:googleLogin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:googleLogin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:requestOTP",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:requestOTP",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:verifyOTP",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:verifyOTP",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:getOTPStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:getOTPStatus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:resetPassword",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:resetPassword",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:refreshToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:refreshToken",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:getDepartments",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "function:frontend/src/api/authApi.js:getDepartments",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/authApi.js",
+      "target": "file:frontend/src/api/axios.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/api/axios.js",
+      "target": "function:frontend/src/api/axios.js:processQueue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:fetchBooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:fetchBooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:getBookCategories",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:getBookCategories",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:getCategories",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:getCategories",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:createCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:createCategory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:updateCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:updateCategory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:deleteCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:deleteCategory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:createBook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:createBook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:updateBook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:updateBook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:deleteBook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:deleteBook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:importBooksCSV",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:importBooksCSV",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:getSimilarBooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "function:frontend/src/api/bookApi.js:getSimilarBooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/bookApi.js",
+      "target": "file:frontend/src/api/axios.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:requestBorrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:requestBorrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:returnBook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:returnBook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getMyBorrows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getMyBorrows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getBorrowRequests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getBorrowRequests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:approveBorrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:approveBorrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:rejectBorrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:rejectBorrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getBorrowHistory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getBorrowHistory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getOverdueBooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getOverdueBooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getDepartmentBorrows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "function:frontend/src/api/borrowApi.js:getDepartmentBorrows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/borrowApi.js",
+      "target": "file:frontend/src/api/axios.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/api/recommendationApi.js",
+      "target": "function:frontend/src/api/recommendationApi.js:fetchRecommendations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/recommendationApi.js",
+      "target": "function:frontend/src/api/recommendationApi.js:fetchRecommendations",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/recommendationApi.js",
+      "target": "function:frontend/src/api/recommendationApi.js:trackInteraction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/recommendationApi.js",
+      "target": "function:frontend/src/api/recommendationApi.js:trackInteraction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/recommendationApi.js",
+      "target": "function:frontend/src/api/recommendationApi.js:trackDwellTime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/recommendationApi.js",
+      "target": "function:frontend/src/api/recommendationApi.js:trackDwellTime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/recommendationApi.js",
+      "target": "file:frontend/src/api/axios.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "function:frontend/src/api/reviewApi.js:getBookReviews",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "function:frontend/src/api/reviewApi.js:getBookReviews",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "function:frontend/src/api/reviewApi.js:submitReview",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "function:frontend/src/api/reviewApi.js:submitReview",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "function:frontend/src/api/reviewApi.js:updateReview",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "function:frontend/src/api/reviewApi.js:updateReview",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "function:frontend/src/api/reviewApi.js:deleteReview",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "function:frontend/src/api/reviewApi.js:deleteReview",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/reviewApi.js",
+      "target": "file:frontend/src/api/axios.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudentList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudentList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getPendingStudents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getPendingStudents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:updateStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:updateStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:deleteStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:deleteStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:approveStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:approveStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:rejectStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:rejectStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudentBorrows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudentBorrows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudentAnalytics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getStudentAnalytics",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:fetchLibrarianDashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:fetchLibrarianDashboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getAdminStats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getAdminStats",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getAdminStudents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getAdminStudents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getAdminBooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getAdminBooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:sendMessageToStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:sendMessageToStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getNotifications",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getNotifications",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:markNotificationRead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:markNotificationRead",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:markAllNotificationsRead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:markAllNotificationsRead",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getPageContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:getPageContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:listPageContents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:listPageContents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:createPageContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:createPageContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:updatePageContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:updatePageContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:deletePageContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "function:frontend/src/api/userApi.js:deletePageContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/api/userApi.js",
+      "target": "file:frontend/src/api/axios.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/BookCard.jsx",
+      "target": "function:frontend/src/components/BookCard.jsx:BookCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/BookCard.jsx",
+      "target": "function:frontend/src/components/BookCard.jsx:BookCard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/BookCard.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/BookDetail.jsx",
+      "target": "function:frontend/src/components/BookDetail.jsx:BookDetail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/BookDetail.jsx",
+      "target": "function:frontend/src/components/BookDetail.jsx:BookDetail",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/BookDetail.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/ErrorMessage.jsx",
+      "target": "function:frontend/src/components/ErrorMessage.jsx:ErrorMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/ErrorMessage.jsx",
+      "target": "function:frontend/src/components/ErrorMessage.jsx:ErrorMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/GoogleAuthButton.jsx",
+      "target": "function:frontend/src/components/GoogleAuthButton.jsx:GoogleAuthButton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/GoogleAuthButton.jsx",
+      "target": "function:frontend/src/components/GoogleAuthButton.jsx:GoogleAuthButton",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/components/GoogleAuthButton.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/components/Loading.jsx",
+      "target": "function:frontend/src/components/Loading.jsx:Loading",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/Loading.jsx",
+      "target": "function:frontend/src/components/Loading.jsx:Loading",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/context/AuthProvider.jsx",
+      "target": "function:frontend/src/context/AuthProvider.jsx:AuthProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/context/AuthProvider.jsx",
+      "target": "function:frontend/src/context/AuthProvider.jsx:AuthProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/context/AuthProvider.jsx",
+      "target": "file:frontend/src/context/AuthContextCore.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/context/AuthProvider.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/AccountDetails.jsx",
+      "target": "function:frontend/src/pages/AccountDetails.jsx:AccountDetails",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/AccountDetails.jsx",
+      "target": "function:frontend/src/pages/AccountDetails.jsx:AccountDetails",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/AccountDetails.jsx",
+      "target": "file:frontend/src/components/BookCard.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/AccountDetails.jsx",
+      "target": "file:frontend/src/components/BookDetail.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/AccountDetails.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Books.jsx",
+      "target": "function:frontend/src/pages/Books.jsx:Books",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/Books.jsx",
+      "target": "function:frontend/src/pages/Books.jsx:Books",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/Books.jsx",
+      "target": "file:frontend/src/components/BookCard.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Books.jsx",
+      "target": "file:frontend/src/components/BookDetail.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Books.jsx",
+      "target": "file:frontend/src/components/ErrorMessage.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Books.jsx",
+      "target": "file:frontend/src/components/Footer.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Books.jsx",
+      "target": "file:frontend/src/components/Loading.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Books.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Login.jsx",
+      "target": "function:frontend/src/pages/Login.jsx:Login",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/Login.jsx",
+      "target": "function:frontend/src/pages/Login.jsx:Login",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/Login.jsx",
+      "target": "file:frontend/src/components/GoogleAuthButton.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Login.jsx",
+      "target": "file:frontend/src/context/useAuth.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Login.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Recommendations.jsx",
+      "target": "function:frontend/src/pages/Recommendations.jsx:Recommendations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/pages/Recommendations.jsx",
+      "target": "function:frontend/src/pages/Recommendations.jsx:Recommendations",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/pages/Recommendations.jsx",
+      "target": "file:frontend/src/components/BookCard.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Recommendations.jsx",
+      "target": "file:frontend/src/components/BookDetail.jsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/pages/Recommendations.jsx",
+      "target": "file:frontend/src/services/api.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:fetchRecommendations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:fetchRecommendations",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:trackInteraction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:trackInteraction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:trackDwellTime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:trackDwellTime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getMyBorrows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getMyBorrows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:returnBook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:returnBook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getDepartmentBorrows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getDepartmentBorrows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:requestBorrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:requestBorrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getBorrowRequests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getBorrowRequests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:approveBorrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:approveBorrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:rejectBorrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:rejectBorrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:approveStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:approveStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:rejectStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:rejectStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudentBorrows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudentBorrows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudentAnalytics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudentAnalytics",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:fetchLibrarianDashboard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:fetchLibrarianDashboard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getNotifications",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getNotifications",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:markNotificationRead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:markNotificationRead",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:markAllNotificationsRead",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:markAllNotificationsRead",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getBorrowHistory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getBorrowHistory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getOverdueBooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getOverdueBooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:createBook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:createBook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:updateBook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:updateBook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:deleteBook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:deleteBook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getCategories",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getCategories",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:createCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:createCategory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:updateCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:updateCategory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:deleteCategory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:deleteCategory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:importBooksCSV",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:importBooksCSV",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudentList",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudentList",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getPendingStudents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getPendingStudents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:updateStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:updateStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:deleteStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:deleteStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getAdminStats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getAdminStats",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getAdminStudents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getAdminStudents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getAdminBooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getAdminBooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:sendMessageToStudent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:sendMessageToStudent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getPageContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:getPageContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:listPageContents",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:listPageContents",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:createPageContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:createPageContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:updatePageContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:updatePageContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:deletePageContent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:deletePageContent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:authenticatedFetch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "function:frontend/src/services/api.js:authenticatedFetch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "file:frontend/src/api/bookApi.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "file:frontend/src/api/borrowApi.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "file:frontend/src/api/index.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "file:frontend/src/api/recommendationApi.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frontend/src/services/api.js",
+      "target": "file:frontend/src/api/userApi.js",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

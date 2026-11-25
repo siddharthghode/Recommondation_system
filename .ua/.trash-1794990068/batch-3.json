@@ -1,0 +1,3153 @@
+{
+  "nodes": [
+    {
+      "id": "file:backend/books/models.py",
+      "type": "file",
+      "name": "models.py",
+      "filePath": "backend/books/models.py",
+      "summary": "Django database models defining the schema and relationships for the books domain.",
+      "tags": [
+        "data-model",
+        "database",
+        "orm"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/models.py:Book",
+      "type": "class",
+      "name": "Book",
+      "filePath": "backend/books/models.py",
+      "lineRange": [
+        10,
+        49
+      ],
+      "summary": "Class `Book` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/models.py:BookInteraction",
+      "type": "class",
+      "name": "BookInteraction",
+      "filePath": "backend/books/models.py",
+      "lineRange": [
+        52,
+        79
+      ],
+      "summary": "Class `BookInteraction` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/models.py:SearchHistory",
+      "type": "class",
+      "name": "SearchHistory",
+      "filePath": "backend/books/models.py",
+      "lineRange": [
+        82,
+        88
+      ],
+      "summary": "Class `SearchHistory` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/models.py:BookDwellTime",
+      "type": "class",
+      "name": "BookDwellTime",
+      "filePath": "backend/books/models.py",
+      "lineRange": [
+        91,
+        98
+      ],
+      "summary": "Class `BookDwellTime` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/models.py:BookReview",
+      "type": "class",
+      "name": "BookReview",
+      "filePath": "backend/books/models.py",
+      "lineRange": [
+        101,
+        115
+      ],
+      "summary": "Class `BookReview` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/serializers.py",
+      "type": "file",
+      "name": "serializers.py",
+      "filePath": "backend/books/serializers.py",
+      "summary": "Django REST framework serializers handling validation and data transformation for books entities.",
+      "tags": [
+        "serialization",
+        "validation",
+        "api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/serializers.py:BookSerializer",
+      "type": "class",
+      "name": "BookSerializer",
+      "filePath": "backend/books/serializers.py",
+      "lineRange": [
+        4,
+        9
+      ],
+      "summary": "Class `BookSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/serializers.py:BookInteractionSerializer",
+      "type": "class",
+      "name": "BookInteractionSerializer",
+      "filePath": "backend/books/serializers.py",
+      "lineRange": [
+        11,
+        14
+      ],
+      "summary": "Class `BookInteractionSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/serializers.py:SearchHistorySerializer",
+      "type": "class",
+      "name": "SearchHistorySerializer",
+      "filePath": "backend/books/serializers.py",
+      "lineRange": [
+        17,
+        20
+      ],
+      "summary": "Class `SearchHistorySerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/serializers.py:BookDwellTimeSerializer",
+      "type": "class",
+      "name": "BookDwellTimeSerializer",
+      "filePath": "backend/books/serializers.py",
+      "lineRange": [
+        23,
+        26
+      ],
+      "summary": "Class `BookDwellTimeSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/serializers.py:BookReviewSerializer",
+      "type": "class",
+      "name": "BookReviewSerializer",
+      "filePath": "backend/books/serializers.py",
+      "lineRange": [
+        29,
+        40
+      ],
+      "summary": "Class `BookReviewSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/services/csv_importer.py",
+      "type": "file",
+      "name": "csv_importer.py",
+      "filePath": "backend/books/services/csv_importer.py",
+      "summary": "Service utility parsing CSV files to bulk import or update book catalog records transactionally.",
+      "tags": [
+        "service",
+        "business-logic",
+        "algorithm"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/books/services/csv_importer.py:_to_int",
+      "type": "function",
+      "name": "_to_int",
+      "filePath": "backend/books/services/csv_importer.py",
+      "lineRange": [
+        9,
+        15
+      ],
+      "summary": "Function `_to_int` handling logic within `csv_importer.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/csv_importer.py:_to_float",
+      "type": "function",
+      "name": "_to_float",
+      "filePath": "backend/books/services/csv_importer.py",
+      "lineRange": [
+        18,
+        24
+      ],
+      "summary": "Function `_to_float` handling logic within `csv_importer.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/csv_importer.py:_clean_str",
+      "type": "function",
+      "name": "_clean_str",
+      "filePath": "backend/books/services/csv_importer.py",
+      "lineRange": [
+        27,
+        31
+      ],
+      "summary": "Function `_clean_str` handling logic within `csv_importer.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/csv_importer.py:import_books_from_csv",
+      "type": "function",
+      "name": "import_books_from_csv",
+      "filePath": "backend/books/services/csv_importer.py",
+      "lineRange": [
+        34,
+        88
+      ],
+      "summary": "Function `import_books_from_csv` handling logic within `csv_importer.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/books/services/csv_importer.py:_do_import_books",
+      "type": "function",
+      "name": "_do_import_books",
+      "filePath": "backend/books/services/csv_importer.py",
+      "lineRange": [
+        91,
+        350
+      ],
+      "summary": "Function `_do_import_books` handling logic within `csv_importer.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/books/services/recommender.py",
+      "type": "file",
+      "name": "recommender.py",
+      "filePath": "backend/books/services/recommender.py",
+      "summary": "Content-based and collaborative machine learning recommendation engine using scikit-learn TF-IDF and cosine similarity.",
+      "tags": [
+        "service",
+        "business-logic",
+        "algorithm"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_get_department_for_user",
+      "type": "function",
+      "name": "_get_department_for_user",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        14,
+        26
+      ],
+      "summary": "Function `_get_department_for_user` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_ids_to_books",
+      "type": "function",
+      "name": "_ids_to_books",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        38,
+        44
+      ],
+      "summary": "Function `_ids_to_books` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_get_cache_key",
+      "type": "function",
+      "name": "_get_cache_key",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        47,
+        51
+      ],
+      "summary": "Function `_get_cache_key` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:invalidate_user_recommendations",
+      "type": "function",
+      "name": "invalidate_user_recommendations",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        54,
+        56
+      ],
+      "summary": "Function `invalidate_user_recommendations` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:invalidate_book_similar_cache",
+      "type": "function",
+      "name": "invalidate_book_similar_cache",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        59,
+        61
+      ],
+      "summary": "Function `invalidate_book_similar_cache` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_acquire_stampede_lock",
+      "type": "function",
+      "name": "_acquire_stampede_lock",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        64,
+        69
+      ],
+      "summary": "Function `_acquire_stampede_lock` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_release_stampede_lock",
+      "type": "function",
+      "name": "_release_stampede_lock",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        72,
+        77
+      ],
+      "summary": "Function `_release_stampede_lock` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:content_based",
+      "type": "function",
+      "name": "content_based",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        80,
+        113
+      ],
+      "summary": "Function `content_based` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_compute_content_based",
+      "type": "function",
+      "name": "_compute_content_based",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        116,
+        161
+      ],
+      "summary": "Function `_compute_content_based` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:interaction_based",
+      "type": "function",
+      "name": "interaction_based",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        164,
+        197
+      ],
+      "summary": "Function `interaction_based` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_compute_interaction_based",
+      "type": "function",
+      "name": "_compute_interaction_based",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        200,
+        313
+      ],
+      "summary": "Function `_compute_interaction_based` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:hybrid",
+      "type": "function",
+      "name": "hybrid",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        316,
+        368
+      ],
+      "summary": "Function `hybrid` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_category_fallback",
+      "type": "function",
+      "name": "_category_fallback",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        371,
+        376
+      ],
+      "summary": "Function `_category_fallback` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_author_fallback",
+      "type": "function",
+      "name": "_author_fallback",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        379,
+        384
+      ],
+      "summary": "Function `_author_fallback` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:get_similar_books",
+      "type": "function",
+      "name": "get_similar_books",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        387,
+        420
+      ],
+      "summary": "Function `get_similar_books` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "api-handler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/books/services/recommender.py:_compute_similar_books",
+      "type": "function",
+      "name": "_compute_similar_books",
+      "filePath": "backend/books/services/recommender.py",
+      "lineRange": [
+        423,
+        512
+      ],
+      "summary": "Function `_compute_similar_books` handling logic within `recommender.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/books/test_recommender_pytest.py",
+      "type": "file",
+      "name": "test_recommender_pytest.py",
+      "filePath": "backend/books/test_recommender_pytest.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_recommender_pytest.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/test_recommender_pytest.py:TestPytestRecommenderEngine",
+      "type": "class",
+      "name": "TestPytestRecommenderEngine",
+      "filePath": "backend/books/test_recommender_pytest.py",
+      "lineRange": [
+        13,
+        91
+      ],
+      "summary": "Class `TestPytestRecommenderEngine` implementing core behaviors and state for `test_recommender_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/books/test_redis_caching_pytest.py",
+      "type": "file",
+      "name": "test_redis_caching_pytest.py",
+      "filePath": "backend/books/test_redis_caching_pytest.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_redis_caching_pytest.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/books/test_redis_caching_pytest.py:clear_cache_before_each_test",
+      "type": "function",
+      "name": "clear_cache_before_each_test",
+      "filePath": "backend/books/test_redis_caching_pytest.py",
+      "lineRange": [
+        26,
+        30
+      ],
+      "summary": "Function `clear_cache_before_each_test` handling logic within `test_redis_caching_pytest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/test_redis_caching_pytest.py:TestCacheMissHitLifecycle",
+      "type": "class",
+      "name": "TestCacheMissHitLifecycle",
+      "filePath": "backend/books/test_redis_caching_pytest.py",
+      "lineRange": [
+        34,
+        189
+      ],
+      "summary": "Class `TestCacheMissHitLifecycle` implementing core behaviors and state for `test_redis_caching_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/books/test_redis_caching_pytest.py:TestCacheInvalidation",
+      "type": "class",
+      "name": "TestCacheInvalidation",
+      "filePath": "backend/books/test_redis_caching_pytest.py",
+      "lineRange": [
+        193,
+        319
+      ],
+      "summary": "Class `TestCacheInvalidation` implementing core behaviors and state for `test_redis_caching_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/books/test_redis_caching_pytest.py:TestDepartmentAndUserIsolation",
+      "type": "class",
+      "name": "TestDepartmentAndUserIsolation",
+      "filePath": "backend/books/test_redis_caching_pytest.py",
+      "lineRange": [
+        323,
+        387
+      ],
+      "summary": "Class `TestDepartmentAndUserIsolation` implementing core behaviors and state for `test_redis_caching_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/test_redis_caching_pytest.py:TestRedisFailureGracefulFallback",
+      "type": "class",
+      "name": "TestRedisFailureGracefulFallback",
+      "filePath": "backend/books/test_redis_caching_pytest.py",
+      "lineRange": [
+        391,
+        427
+      ],
+      "summary": "Class `TestRedisFailureGracefulFallback` implementing core behaviors and state for `test_redis_caching_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/test_redis_caching_pytest.py:TestBookCacheTTL",
+      "type": "class",
+      "name": "TestBookCacheTTL",
+      "filePath": "backend/books/test_redis_caching_pytest.py",
+      "lineRange": [
+        431,
+        506
+      ],
+      "summary": "Class `TestBookCacheTTL` implementing core behaviors and state for `test_redis_caching_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/books/test_reviews_pytest.py",
+      "type": "file",
+      "name": "test_reviews_pytest.py",
+      "filePath": "backend/books/test_reviews_pytest.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_reviews_pytest.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/test_reviews_pytest.py:TestBookReviewsAndNotifications",
+      "type": "class",
+      "name": "TestBookReviewsAndNotifications",
+      "filePath": "backend/books/test_reviews_pytest.py",
+      "lineRange": [
+        8,
+        157
+      ],
+      "summary": "Class `TestBookReviewsAndNotifications` implementing core behaviors and state for `test_reviews_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/books/tests.py",
+      "type": "file",
+      "name": "tests.py",
+      "filePath": "backend/books/tests.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/books/tests.py:BooksDepartmentAuthorizationTests",
+      "type": "class",
+      "name": "BooksDepartmentAuthorizationTests",
+      "filePath": "backend/books/tests.py",
+      "lineRange": [
+        10,
+        672
+      ],
+      "summary": "Class `BooksDepartmentAuthorizationTests` implementing core behaviors and state for `tests.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/books/urls.py",
+      "type": "file",
+      "name": "urls.py",
+      "filePath": "backend/books/urls.py",
+      "summary": "URL routing definitions mapping HTTP route paths to DRF views for the books module.",
+      "tags": [
+        "routing",
+        "url-dispatch",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/views.py",
+      "type": "file",
+      "name": "views.py",
+      "filePath": "backend/books/views.py",
+      "summary": "DRF API views and ViewSets implementing business endpoints and query handling for books.",
+      "tags": [
+        "api-handler",
+        "views",
+        "controller"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:backend/books/views.py:_get_user_department",
+      "type": "function",
+      "name": "_get_user_department",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        58,
+        70
+      ],
+      "summary": "Function `_get_user_department` handling logic within `views.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/views.py:IsLibrarianOrAdmin",
+      "type": "class",
+      "name": "IsLibrarianOrAdmin",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        48,
+        50
+      ],
+      "summary": "Class `IsLibrarianOrAdmin` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/views.py:BookPagination",
+      "type": "class",
+      "name": "BookPagination",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        52,
+        55
+      ],
+      "summary": "Class `BookPagination` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/views.py:BookListView",
+      "type": "class",
+      "name": "BookListView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        73,
+        162
+      ],
+      "summary": "Class `BookListView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/views.py:BookDetailView",
+      "type": "class",
+      "name": "BookDetailView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        165,
+        211
+      ],
+      "summary": "Class `BookDetailView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/views.py:TrackBookView",
+      "type": "class",
+      "name": "TrackBookView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        214,
+        240
+      ],
+      "summary": "Class `TrackBookView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/views.py:InteractionCreateView",
+      "type": "class",
+      "name": "InteractionCreateView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        243,
+        297
+      ],
+      "summary": "Class `InteractionCreateView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/views.py:BookDwellTimeView",
+      "type": "class",
+      "name": "BookDwellTimeView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        300,
+        344
+      ],
+      "summary": "Class `BookDwellTimeView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/views.py:RecommendationView",
+      "type": "class",
+      "name": "RecommendationView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        347,
+        374
+      ],
+      "summary": "Class `RecommendationView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/views.py:BookManageView",
+      "type": "class",
+      "name": "BookManageView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        377,
+        445
+      ],
+      "summary": "Class `BookManageView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/views.py:SimilarBooksView",
+      "type": "class",
+      "name": "SimilarBooksView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        448,
+        484
+      ],
+      "summary": "Class `SimilarBooksView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/views.py:BookCSVImportView",
+      "type": "class",
+      "name": "BookCSVImportView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        487,
+        532
+      ],
+      "summary": "Class `BookCSVImportView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/views.py:BookCategoriesView",
+      "type": "class",
+      "name": "BookCategoriesView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        535,
+        578
+      ],
+      "summary": "Class `BookCategoriesView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/views.py:BookReviewView",
+      "type": "class",
+      "name": "BookReviewView",
+      "filePath": "backend/books/views.py",
+      "lineRange": [
+        581,
+        626
+      ],
+      "summary": "Class `BookReviewView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/borrows/admin.py",
+      "type": "file",
+      "name": "admin.py",
+      "filePath": "backend/borrows/admin.py",
+      "summary": "Django admin configuration registering borrows models with customized list displays and filters.",
+      "tags": [
+        "admin",
+        "backoffice",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/borrows/admin.py:BorrowAdmin",
+      "type": "class",
+      "name": "BorrowAdmin",
+      "filePath": "backend/borrows/admin.py",
+      "lineRange": [
+        6,
+        13
+      ],
+      "summary": "Class `BorrowAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/models.py",
+      "type": "file",
+      "name": "models.py",
+      "filePath": "backend/borrows/models.py",
+      "summary": "Django database models defining the schema and relationships for the borrows domain.",
+      "tags": [
+        "data-model",
+        "database",
+        "orm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/borrows/models.py:Borrow",
+      "type": "class",
+      "name": "Borrow",
+      "filePath": "backend/borrows/models.py",
+      "lineRange": [
+        8,
+        36
+      ],
+      "summary": "Class `Borrow` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/serializers.py",
+      "type": "file",
+      "name": "serializers.py",
+      "filePath": "backend/borrows/serializers.py",
+      "summary": "Django REST framework serializers handling validation and data transformation for borrows entities.",
+      "tags": [
+        "serialization",
+        "validation",
+        "api"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/borrows/serializers.py:BorrowSerializer",
+      "type": "class",
+      "name": "BorrowSerializer",
+      "filePath": "backend/borrows/serializers.py",
+      "lineRange": [
+        4,
+        22
+      ],
+      "summary": "Class `BorrowSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/test_borrows_pytest.py",
+      "type": "file",
+      "name": "test_borrows_pytest.py",
+      "filePath": "backend/borrows/test_borrows_pytest.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_borrows_pytest.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/borrows/test_borrows_pytest.py:TestPytestBorrowingWorkflows",
+      "type": "class",
+      "name": "TestPytestBorrowingWorkflows",
+      "filePath": "backend/borrows/test_borrows_pytest.py",
+      "lineRange": [
+        7,
+        150
+      ],
+      "summary": "Class `TestPytestBorrowingWorkflows` implementing core behaviors and state for `test_borrows_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/borrows/tests.py",
+      "type": "file",
+      "name": "tests.py",
+      "filePath": "backend/borrows/tests.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/borrows/tests.py:BorrowsDepartmentAuthorizationTests",
+      "type": "class",
+      "name": "BorrowsDepartmentAuthorizationTests",
+      "filePath": "backend/borrows/tests.py",
+      "lineRange": [
+        10,
+        445
+      ],
+      "summary": "Class `BorrowsDepartmentAuthorizationTests` implementing core behaviors and state for `tests.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/borrows/urls.py",
+      "type": "file",
+      "name": "urls.py",
+      "filePath": "backend/borrows/urls.py",
+      "summary": "URL routing definitions mapping HTTP route paths to DRF views for the borrows module.",
+      "tags": [
+        "routing",
+        "url-dispatch",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/borrows/views.py",
+      "type": "file",
+      "name": "views.py",
+      "filePath": "backend/borrows/views.py",
+      "summary": "DRF API views and ViewSets implementing business endpoints and query handling for borrows.",
+      "tags": [
+        "api-handler",
+        "views",
+        "controller"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/borrows/views.py:BorrowRequestView",
+      "type": "class",
+      "name": "BorrowRequestView",
+      "filePath": "backend/borrows/views.py",
+      "lineRange": [
+        21,
+        71
+      ],
+      "summary": "Class `BorrowRequestView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/borrows/views.py:MyBorrowsView",
+      "type": "class",
+      "name": "MyBorrowsView",
+      "filePath": "backend/borrows/views.py",
+      "lineRange": [
+        74,
+        88
+      ],
+      "summary": "Class `MyBorrowsView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/borrows/views.py:PendingBorrowsView",
+      "type": "class",
+      "name": "PendingBorrowsView",
+      "filePath": "backend/borrows/views.py",
+      "lineRange": [
+        91,
+        109
+      ],
+      "summary": "Class `PendingBorrowsView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/borrows/views.py:ApproveBorrowView",
+      "type": "class",
+      "name": "ApproveBorrowView",
+      "filePath": "backend/borrows/views.py",
+      "lineRange": [
+        112,
+        166
+      ],
+      "summary": "Class `ApproveBorrowView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/borrows/views.py:ReturnBookView",
+      "type": "class",
+      "name": "ReturnBookView",
+      "filePath": "backend/borrows/views.py",
+      "lineRange": [
+        169,
+        213
+      ],
+      "summary": "Class `ReturnBookView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/borrows/views.py:RejectBorrowView",
+      "type": "class",
+      "name": "RejectBorrowView",
+      "filePath": "backend/borrows/views.py",
+      "lineRange": [
+        216,
+        255
+      ],
+      "summary": "Class `RejectBorrowView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/borrows/views.py:DepartmentBorrowsView",
+      "type": "class",
+      "name": "DepartmentBorrowsView",
+      "filePath": "backend/borrows/views.py",
+      "lineRange": [
+        258,
+        282
+      ],
+      "summary": "Class `DepartmentBorrowsView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/conftest.py",
+      "type": "file",
+      "name": "conftest.py",
+      "filePath": "backend/conftest.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for conftest.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/conftest.py:api_client",
+      "type": "function",
+      "name": "api_client",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        10,
+        12
+      ],
+      "summary": "Function `api_client` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:cs_dept",
+      "type": "function",
+      "name": "cs_dept",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        16,
+        18
+      ],
+      "summary": "Function `cs_dept` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:mech_dept",
+      "type": "function",
+      "name": "mech_dept",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        22,
+        24
+      ],
+      "summary": "Function `mech_dept` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:super_admin",
+      "type": "function",
+      "name": "super_admin",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        28,
+        35
+      ],
+      "summary": "Function `super_admin` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:cs_librarian",
+      "type": "function",
+      "name": "cs_librarian",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        39,
+        47
+      ],
+      "summary": "Function `cs_librarian` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:mech_librarian",
+      "type": "function",
+      "name": "mech_librarian",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        51,
+        59
+      ],
+      "summary": "Function `mech_librarian` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:approved_cs_student",
+      "type": "function",
+      "name": "approved_cs_student",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        63,
+        79
+      ],
+      "summary": "Function `approved_cs_student` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:pending_cs_student",
+      "type": "function",
+      "name": "pending_cs_student",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        83,
+        98
+      ],
+      "summary": "Function `pending_cs_student` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:approved_mech_student",
+      "type": "function",
+      "name": "approved_mech_student",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        102,
+        118
+      ],
+      "summary": "Function `approved_mech_student` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:cs_sample_books",
+      "type": "function",
+      "name": "cs_sample_books",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        122,
+        154
+      ],
+      "summary": "Function `cs_sample_books` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/conftest.py:mech_sample_books",
+      "type": "function",
+      "name": "mech_sample_books",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        158,
+        170
+      ],
+      "summary": "Function `mech_sample_books` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/conftest.py:auth_headers",
+      "type": "function",
+      "name": "auth_headers",
+      "filePath": "backend/conftest.py",
+      "lineRange": [
+        174,
+        179
+      ],
+      "summary": "Function `auth_headers` handling logic within `conftest.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/qa_tests/e2e_student_flow.py",
+      "type": "file",
+      "name": "e2e_student_flow.py",
+      "filePath": "backend/qa_tests/e2e_student_flow.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for e2e_student_flow.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/qa_tests/librarian_e2e.py",
+      "type": "file",
+      "name": "librarian_e2e.py",
+      "filePath": "backend/qa_tests/librarian_e2e.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for librarian_e2e.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:Book",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:Book",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:BookInteraction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:BookInteraction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:SearchHistory",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:SearchHistory",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:BookDwellTime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:BookDwellTime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:BookReview",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "class:backend/books/models.py:BookReview",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:BookSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:BookSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:BookInteractionSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:BookInteractionSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:SearchHistorySerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:SearchHistorySerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:BookDwellTimeSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:BookDwellTimeSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:BookReviewSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "class:backend/books/serializers.py:BookReviewSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/serializers.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:_to_int",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:_to_int",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:_to_float",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:_to_float",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:_clean_str",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:_clean_str",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:import_books_from_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:import_books_from_csv",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:_do_import_books",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "function:backend/books/services/csv_importer.py:_do_import_books",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/services/csv_importer.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_get_department_for_user",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_get_department_for_user",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_ids_to_books",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_ids_to_books",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_get_cache_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_get_cache_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:invalidate_user_recommendations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:invalidate_user_recommendations",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:invalidate_book_similar_cache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:invalidate_book_similar_cache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_acquire_stampede_lock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_acquire_stampede_lock",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_release_stampede_lock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_release_stampede_lock",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:content_based",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:content_based",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_compute_content_based",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_compute_content_based",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:interaction_based",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:interaction_based",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_compute_interaction_based",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_compute_interaction_based",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:hybrid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:hybrid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_category_fallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_category_fallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_author_fallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_author_fallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:get_similar_books",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:get_similar_books",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_compute_similar_books",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "function:backend/books/services/recommender.py:_compute_similar_books",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "file:backend/books/cache_utils.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/test_recommender_pytest.py",
+      "target": "class:backend/books/test_recommender_pytest.py:TestPytestRecommenderEngine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/test_recommender_pytest.py",
+      "target": "class:backend/books/test_recommender_pytest.py:TestPytestRecommenderEngine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/test_recommender_pytest.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/test_recommender_pytest.py",
+      "target": "file:backend/books/services/recommender.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/books/test_recommender_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/services/recommender.py",
+      "target": "file:backend/books/test_recommender_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "function:backend/books/test_redis_caching_pytest.py:clear_cache_before_each_test",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "function:backend/books/test_redis_caching_pytest.py:clear_cache_before_each_test",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestCacheMissHitLifecycle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestCacheMissHitLifecycle",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestCacheInvalidation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestCacheInvalidation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestDepartmentAndUserIsolation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestDepartmentAndUserIsolation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestRedisFailureGracefulFallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestRedisFailureGracefulFallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestBookCacheTTL",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "class:backend/books/test_redis_caching_pytest.py:TestBookCacheTTL",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "file:backend/books/cache_utils.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/test_redis_caching_pytest.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/books/test_redis_caching_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "file:backend/books/test_redis_caching_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/books/test_redis_caching_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "file:backend/books/test_redis_caching_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/test_reviews_pytest.py",
+      "target": "class:backend/books/test_reviews_pytest.py:TestBookReviewsAndNotifications",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/test_reviews_pytest.py",
+      "target": "class:backend/books/test_reviews_pytest.py:TestBookReviewsAndNotifications",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/test_reviews_pytest.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/test_reviews_pytest.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/books/test_reviews_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/books/test_reviews_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/tests.py",
+      "target": "class:backend/books/tests.py:BooksDepartmentAuthorizationTests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/tests.py",
+      "target": "class:backend/books/tests.py:BooksDepartmentAuthorizationTests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/tests.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/tests.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/books/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/books/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/urls.py",
+      "target": "file:backend/books/views.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "function:backend/books/views.py:_get_user_department",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "function:backend/books/views.py:_get_user_department",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:IsLibrarianOrAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:IsLibrarianOrAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookPagination",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookPagination",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookListView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookListView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookDetailView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookDetailView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:TrackBookView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:TrackBookView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:InteractionCreateView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:InteractionCreateView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookDwellTimeView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookDwellTimeView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:RecommendationView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:RecommendationView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookManageView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookManageView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:SimilarBooksView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:SimilarBooksView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookCSVImportView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookCSVImportView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookCategoriesView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookCategoriesView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookReviewView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "class:backend/books/views.py:BookReviewView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "file:backend/books/cache_utils.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "file:backend/books/serializers.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "file:backend/books/services/csv_importer.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "file:backend/books/services/recommender.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/views.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/admin.py",
+      "target": "class:backend/borrows/admin.py:BorrowAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/admin.py",
+      "target": "class:backend/borrows/admin.py:BorrowAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/admin.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "class:backend/borrows/models.py:Borrow",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "class:backend/borrows/models.py:Borrow",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/serializers.py",
+      "target": "class:backend/borrows/serializers.py:BorrowSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/serializers.py",
+      "target": "class:backend/borrows/serializers.py:BorrowSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/serializers.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/test_borrows_pytest.py",
+      "target": "class:backend/borrows/test_borrows_pytest.py:TestPytestBorrowingWorkflows",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/test_borrows_pytest.py",
+      "target": "class:backend/borrows/test_borrows_pytest.py:TestPytestBorrowingWorkflows",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/test_borrows_pytest.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/test_borrows_pytest.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/borrows/test_borrows_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "file:backend/borrows/test_borrows_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/borrows/tests.py",
+      "target": "class:backend/borrows/tests.py:BorrowsDepartmentAuthorizationTests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/tests.py",
+      "target": "class:backend/borrows/tests.py:BorrowsDepartmentAuthorizationTests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/tests.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/tests.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/tests.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/borrows/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/borrows/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "file:backend/borrows/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/borrows/urls.py",
+      "target": "file:backend/borrows/views.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:BorrowRequestView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:BorrowRequestView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:MyBorrowsView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:MyBorrowsView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:PendingBorrowsView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:PendingBorrowsView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:ApproveBorrowView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:ApproveBorrowView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:ReturnBookView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:ReturnBookView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:RejectBorrowView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:RejectBorrowView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:DepartmentBorrowsView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "class:backend/borrows/views.py:DepartmentBorrowsView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "file:backend/books/cache_utils.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/borrows/views.py",
+      "target": "file:backend/borrows/serializers.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:api_client",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:api_client",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:cs_dept",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:cs_dept",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:mech_dept",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:mech_dept",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:super_admin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:super_admin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:cs_librarian",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:cs_librarian",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:mech_librarian",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:mech_librarian",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:approved_cs_student",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:approved_cs_student",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:pending_cs_student",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:pending_cs_student",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:approved_mech_student",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:approved_mech_student",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:cs_sample_books",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:cs_sample_books",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:mech_sample_books",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:mech_sample_books",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:auth_headers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "function:backend/conftest.py:auth_headers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/conftest.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/conftest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/conftest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "file:backend/conftest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/qa_tests/e2e_student_flow.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/qa_tests/e2e_student_flow.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/qa_tests/librarian_e2e.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/qa_tests/librarian_e2e.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/qa_tests/librarian_e2e.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/qa_tests/librarian_e2e.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/qa_tests/librarian_e2e.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "file:backend/qa_tests/librarian_e2e.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

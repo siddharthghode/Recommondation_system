@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "id": "file:frontend/src/components/Layout.jsx",
+      "type": "file",
+      "name": "Layout.jsx",
+      "filePath": "frontend/src/components/Layout.jsx",
+      "summary": "Project code file providing core functionality and configuration for Layout.jsx.",
+      "tags": [
+        "component",
+        "ui",
+        "react"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/src/components/Layout.jsx:Layout",
+      "type": "function",
+      "name": "Layout",
+      "filePath": "frontend/src/components/Layout.jsx",
+      "lineRange": [
+        3,
+        11
+      ],
+      "summary": "Function `Layout` handling logic within `Layout.jsx`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/src/index.css",
+      "type": "file",
+      "name": "index.css",
+      "filePath": "frontend/src/index.css",
+      "summary": "Cascading stylesheet defining global theme styling and Tailwind utilities for index.css.",
+      "tags": [
+        "styling",
+        "markup",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/vite.config.js",
+      "type": "file",
+      "name": "vite.config.js",
+      "filePath": "frontend/vite.config.js",
+      "summary": "Project code file providing core functionality and configuration for vite.config.js.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frontend/src/components/Layout.jsx",
+      "target": "function:frontend/src/components/Layout.jsx:Layout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frontend/src/components/Layout.jsx",
+      "target": "function:frontend/src/components/Layout.jsx:Layout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frontend/vite.config.js",
+      "target": "file:frontend/src/main.jsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

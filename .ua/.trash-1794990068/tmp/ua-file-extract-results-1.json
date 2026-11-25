@@ -1,0 +1,5443 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 31,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 31,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 31,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "frontend/src/App.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 80,
+      "functions": [
+        {
+          "name": "App",
+          "startLine": 36,
+          "endLine": 90,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "App",
+          "line": 36,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 23,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ConfirmModal.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "ConfirmModal",
+          "startLine": 3,
+          "endLine": 19,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ConfirmModal",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/Footer.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "Footer",
+          "startLine": 3,
+          "endLine": 62,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Footer",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Footer",
+          "callee": "[\n                { to: \"/\", label: \"Home\" },\n                { to: \"/about\", label: \"About\" },\n                { to: \"/gallery\", label: \"Gallery\" },\n                { to: \"/books\", label: \"Books\" },\n                { to: \"/recommendations\", label: \"Recommendations\" },\n                { to: \"/my-borrows\", label: \"My Borrows\" },\n                { to: \"/account\", label: \"Account\" },\n                { to: \"/login\", label: \"Student Login\" },\n              ].map",
+          "lineNumber": 25
+        },
+        {
+          "caller": "Footer",
+          "callee": "new Date().getFullYear",
+          "lineNumber": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/Lightbox.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 142,
+      "nonEmptyLines": 130,
+      "functions": [
+        {
+          "name": "Lightbox",
+          "startLine": 4,
+          "endLine": 142,
+          "params": [
+            "props"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Lightbox",
+          "line": 4,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Lightbox",
+          "callee": "useEffect",
+          "lineNumber": 10
+        },
+        {
+          "caller": "onKey",
+          "callee": "onClose",
+          "lineNumber": 12
+        },
+        {
+          "caller": "onKey",
+          "callee": "onPrev",
+          "lineNumber": 14
+        },
+        {
+          "caller": "onKey",
+          "callee": "onNext",
+          "lineNumber": 15
+        },
+        {
+          "caller": "Lightbox",
+          "callee": "window.addEventListener",
+          "lineNumber": 18
+        },
+        {
+          "caller": "Lightbox",
+          "callee": "window.removeEventListener",
+          "lineNumber": 19
+        },
+        {
+          "caller": "Lightbox",
+          "callee": "useEffect",
+          "lineNumber": 22
+        },
+        {
+          "caller": "Lightbox",
+          "callee": "e.stopPropagation",
+          "lineNumber": 49
+        },
+        {
+          "caller": "Lightbox",
+          "callee": "e.stopPropagation",
+          "lineNumber": 97
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/Navbar.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 192,
+      "nonEmptyLines": 180,
+      "functions": [
+        {
+          "name": "Navbar",
+          "startLine": 5,
+          "endLine": 192,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Navbar",
+          "line": 5,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Navbar",
+          "callee": "localStorage.getItem",
+          "lineNumber": 6
+        },
+        {
+          "caller": "Navbar",
+          "callee": "localStorage.getItem",
+          "lineNumber": 7
+        },
+        {
+          "caller": "Navbar",
+          "callee": "useNavigate",
+          "lineNumber": 8
+        },
+        {
+          "caller": "Navbar",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 12
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 13
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 14
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "navigate",
+          "lineNumber": 15
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "setMobileMenuOpen",
+          "lineNumber": 16
+        },
+        {
+          "caller": "closeMobileMenu",
+          "callee": "setMobileMenuOpen",
+          "lineNumber": 19
+        },
+        {
+          "caller": "Navbar",
+          "callee": "setMobileMenuOpen",
+          "lineNumber": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/Notifications.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 162,
+      "nonEmptyLines": 151,
+      "functions": [
+        {
+          "name": "Notifications",
+          "startLine": 5,
+          "endLine": 162,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Notifications",
+          "line": 5,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Notifications",
+          "callee": "useState",
+          "lineNumber": 6
+        },
+        {
+          "caller": "Notifications",
+          "callee": "useState",
+          "lineNumber": 7
+        },
+        {
+          "caller": "Notifications",
+          "callee": "useState",
+          "lineNumber": 8
+        },
+        {
+          "caller": "Notifications",
+          "callee": "localStorage.getItem",
+          "lineNumber": 9
+        },
+        {
+          "caller": "Notifications",
+          "callee": "useCallback",
+          "lineNumber": 11
+        },
+        {
+          "caller": "Notifications",
+          "callee": "getNotifications",
+          "lineNumber": 14
+        },
+        {
+          "caller": "Notifications",
+          "callee": "Array.isArray",
+          "lineNumber": 15
+        },
+        {
+          "caller": "Notifications",
+          "callee": "Array.isArray",
+          "lineNumber": 15
+        },
+        {
+          "caller": "Notifications",
+          "callee": "setNotifications",
+          "lineNumber": 16
+        },
+        {
+          "caller": "Notifications",
+          "callee": "setUnreadCount",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Notifications",
+          "callee": "notifs.filter",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Notifications",
+          "callee": "console.error",
+          "lineNumber": 19
+        },
+        {
+          "caller": "Notifications",
+          "callee": "useEffect",
+          "lineNumber": 23
+        },
+        {
+          "caller": "Notifications",
+          "callee": "loadNotifications",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Notifications",
+          "callee": "setInterval",
+          "lineNumber": 28
+        },
+        {
+          "caller": "Notifications",
+          "callee": "clearInterval",
+          "lineNumber": 29
+        },
+        {
+          "caller": "handleMarkRead",
+          "callee": "markNotificationRead",
+          "lineNumber": 35
+        },
+        {
+          "caller": "handleMarkRead",
+          "callee": "loadNotifications",
+          "lineNumber": 36
+        },
+        {
+          "caller": "handleMarkRead",
+          "callee": "console.error",
+          "lineNumber": 38
+        },
+        {
+          "caller": "handleMarkAllRead",
+          "callee": "markAllNotificationsRead",
+          "lineNumber": 44
+        },
+        {
+          "caller": "handleMarkAllRead",
+          "callee": "loadNotifications",
+          "lineNumber": 45
+        },
+        {
+          "caller": "handleMarkAllRead",
+          "callee": "console.error",
+          "lineNumber": 47
+        },
+        {
+          "caller": "formatDate",
+          "callee": "Math.floor",
+          "lineNumber": 55
+        },
+        {
+          "caller": "formatDate",
+          "callee": "Math.floor",
+          "lineNumber": 58
+        },
+        {
+          "caller": "formatDate",
+          "callee": "Math.floor",
+          "lineNumber": 59
+        },
+        {
+          "caller": "formatDate",
+          "callee": "Math.floor",
+          "lineNumber": 60
+        },
+        {
+          "caller": "formatDate",
+          "callee": "date.toLocaleDateString",
+          "lineNumber": 61
+        },
+        {
+          "caller": "Notifications",
+          "callee": "setIsOpen",
+          "lineNumber": 84
+        },
+        {
+          "caller": "Notifications",
+          "callee": "setIsOpen",
+          "lineNumber": 102
+        },
+        {
+          "caller": "Notifications",
+          "callee": "notifications.map",
+          "lineNumber": 127
+        },
+        {
+          "caller": "Notifications",
+          "callee": "handleMarkRead",
+          "lineNumber": 137
+        },
+        {
+          "caller": "Notifications",
+          "callee": "getNotificationIcon",
+          "lineNumber": 142
+        },
+        {
+          "caller": "Notifications",
+          "callee": "formatDate",
+          "lineNumber": 146
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/PageTransition.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "PageTransition",
+          "startLine": 4,
+          "endLine": 20,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PageTransition",
+          "line": 4,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PageTransition",
+          "callee": "useEffect",
+          "lineNumber": 5
+        },
+        {
+          "caller": "PageTransition",
+          "callee": "window.scrollTo",
+          "lineNumber": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ProtectedRoute.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "ProtectedRoute",
+          "startLine": 11,
+          "endLine": 45,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProtectedRoute",
+          "line": 11,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProtectedRoute",
+          "callee": "useAuth",
+          "lineNumber": 12
+        },
+        {
+          "caller": "ProtectedRoute",
+          "callee": "Array.isArray",
+          "lineNumber": 33
+        },
+        {
+          "caller": "ProtectedRoute",
+          "callee": "allowed.includes",
+          "lineNumber": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/Toast.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "Toast",
+          "startLine": 3,
+          "endLine": 19,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Toast",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Toast",
+          "callee": "useEffect",
+          "lineNumber": 4
+        },
+        {
+          "caller": "Toast",
+          "callee": "setTimeout",
+          "lineNumber": 6
+        },
+        {
+          "caller": "Toast",
+          "callee": "onClose",
+          "lineNumber": 6
+        },
+        {
+          "caller": "Toast",
+          "callee": "clearTimeout",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/dashboard/LibrarianDashboard.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 517,
+      "nonEmptyLines": 483,
+      "functions": [
+        {
+          "name": "timeAgo",
+          "startLine": 16,
+          "endLine": 25,
+          "params": [
+            "iso"
+          ]
+        },
+        {
+          "name": "StatCard",
+          "startLine": 27,
+          "endLine": 49,
+          "params": []
+        },
+        {
+          "name": "LibrarianDashboard",
+          "startLine": 51,
+          "endLine": 517,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LibrarianDashboard",
+          "line": 51,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "timeAgo",
+          "callee": "Date.now",
+          "lineNumber": 18
+        },
+        {
+          "caller": "timeAgo",
+          "callee": "new Date(iso).getTime",
+          "lineNumber": 18
+        },
+        {
+          "caller": "timeAgo",
+          "callee": "Math.floor",
+          "lineNumber": 19
+        },
+        {
+          "caller": "timeAgo",
+          "callee": "Math.floor",
+          "lineNumber": 22
+        },
+        {
+          "caller": "timeAgo",
+          "callee": "Math.floor",
+          "lineNumber": 24
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useNavigate",
+          "lineNumber": 52
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useAuth",
+          "lineNumber": 53
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 55
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 56
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 57
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 58
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 59
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 60
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 61
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 62
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 63
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 64
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useState",
+          "lineNumber": 65
+        },
+        {
+          "caller": "showToast",
+          "callee": "setToast",
+          "lineNumber": 68
+        },
+        {
+          "caller": "showToast",
+          "callee": "setTimeout",
+          "lineNumber": 69
+        },
+        {
+          "caller": "showToast",
+          "callee": "setToast",
+          "lineNumber": 69
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useCallback",
+          "lineNumber": 72
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "localStorage.getItem",
+          "lineNumber": 73
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "navigate",
+          "lineNumber": 75
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setLoadingStats",
+          "lineNumber": 80
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setLoadingRequests",
+          "lineNumber": 81
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "Promise.all",
+          "lineNumber": 82
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "fetchLibrarianDashboard(activeToken).catch",
+          "lineNumber": 83
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "fetchLibrarianDashboard",
+          "lineNumber": 83
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "getBorrowRequests(activeToken).catch",
+          "lineNumber": 84
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "getBorrowRequests",
+          "lineNumber": 84
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "getStudents(activeToken).catch",
+          "lineNumber": 85
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "getStudents",
+          "lineNumber": 85
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setStats",
+          "lineNumber": 88
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "Array.isArray",
+          "lineNumber": 95
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setRequests",
+          "lineNumber": 96
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "Array.isArray",
+          "lineNumber": 98
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setStudents",
+          "lineNumber": 99
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setPendingStudents",
+          "lineNumber": 100
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "stuList.filter",
+          "lineNumber": 101
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setError",
+          "lineNumber": 106
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setLoadingStats",
+          "lineNumber": 108
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setLoadingRequests",
+          "lineNumber": 109
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "useEffect",
+          "lineNumber": 113
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "loadAll",
+          "lineNumber": 114
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "localStorage.getItem",
+          "lineNumber": 118
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setActionLoading",
+          "lineNumber": 119
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "approveBorrow",
+          "lineNumber": 121
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setRequests",
+          "lineNumber": 122
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "r.filter",
+          "lineNumber": 122
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setStats",
+          "lineNumber": 123
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "Math.max",
+          "lineNumber": 129
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "showToast",
+          "lineNumber": 135
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "showToast",
+          "lineNumber": 137
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setActionLoading",
+          "lineNumber": 139
+        },
+        {
+          "caller": "handleReject",
+          "callee": "localStorage.getItem",
+          "lineNumber": 145
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setActionLoading",
+          "lineNumber": 146
+        },
+        {
+          "caller": "handleReject",
+          "callee": "rejectBorrow",
+          "lineNumber": 148
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setRequests",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handleReject",
+          "callee": "r.filter",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setStats",
+          "lineNumber": 150
+        },
+        {
+          "caller": "handleReject",
+          "callee": "Math.max",
+          "lineNumber": 156
+        },
+        {
+          "caller": "handleReject",
+          "callee": "showToast",
+          "lineNumber": 161
+        },
+        {
+          "caller": "handleReject",
+          "callee": "showToast",
+          "lineNumber": 163
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setActionLoading",
+          "lineNumber": 165
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setRejectModal",
+          "lineNumber": 166
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setRejectReason",
+          "lineNumber": 167
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "(stats?.borrow_trends || []).map",
+          "lineNumber": 172
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "String(d.day).slice",
+          "lineNumber": 173
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "String",
+          "lineNumber": 173
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setRejectReason",
+          "lineNumber": 212
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setRejectModal",
+          "lineNumber": 220
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setRejectReason",
+          "lineNumber": 221
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "requests.map",
+          "lineNumber": 355
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "timeAgo",
+          "lineNumber": 373
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "handleApprove",
+          "lineNumber": 390
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "setRejectModal",
+          "lineNumber": 397
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "(stats.most_borrowed_books || []).slice(0, 5).map",
+          "lineNumber": 484
+        },
+        {
+          "caller": "LibrarianDashboard",
+          "callee": "(stats.most_borrowed_books || []).slice",
+          "lineNumber": 484
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/navigation/PublicNavbar.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 229,
+      "nonEmptyLines": 214,
+      "functions": [
+        {
+          "name": "PublicNavbar",
+          "startLine": 6,
+          "endLine": 229,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PublicNavbar",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PublicNavbar",
+          "callee": "useAuth",
+          "lineNumber": 7
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "useNavigate",
+          "lineNumber": 8
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "useLocation",
+          "lineNumber": 9
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "closeMobileMenu",
+          "callee": "setMobileMenuOpen",
+          "lineNumber": 12
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "logout",
+          "lineNumber": 15
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "navigate",
+          "lineNumber": 16
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "closeMobileMenu",
+          "lineNumber": 17
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "isActive",
+          "lineNumber": 43
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "isActive",
+          "lineNumber": 51
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "isActive",
+          "lineNumber": 59
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "isActive",
+          "lineNumber": 67
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "isActive",
+          "lineNumber": 79
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "isActive",
+          "lineNumber": 87
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "isActive",
+          "lineNumber": 95
+        },
+        {
+          "caller": "PublicNavbar",
+          "callee": "setMobileMenuOpen",
+          "lineNumber": 146
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/navigation/StudentNavbar.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 171,
+      "nonEmptyLines": 158,
+      "functions": [
+        {
+          "name": "StudentNavbar",
+          "startLine": 6,
+          "endLine": 171,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "StudentNavbar",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StudentNavbar",
+          "callee": "useAuth",
+          "lineNumber": 7
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "useNavigate",
+          "lineNumber": 8
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "useLocation",
+          "lineNumber": 9
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "closeMobileMenu",
+          "callee": "setMobileMenuOpen",
+          "lineNumber": 12
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "logout",
+          "lineNumber": 15
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "navigate",
+          "lineNumber": 16
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "closeMobileMenu",
+          "lineNumber": 17
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "isActive",
+          "lineNumber": 52
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "isActive",
+          "lineNumber": 60
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "isActive",
+          "lineNumber": 68
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "isActive",
+          "lineNumber": 76
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "isActive",
+          "lineNumber": 90
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "(user?.first_name?.[0] || user?.username?.[0] || \"S\").toUpperCase",
+          "lineNumber": 96
+        },
+        {
+          "caller": "StudentNavbar",
+          "callee": "setMobileMenuOpen",
+          "lineNumber": 115
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/context/AuthContext.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "exports": [
+        {
+          "name": "AuthProvider",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/context/useAuth.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "useAuth",
+          "startLine": 4,
+          "endLine": 10,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAuth",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAuth",
+          "callee": "useContext",
+          "lineNumber": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/layouts/LibrarianLayout.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 202,
+      "nonEmptyLines": 185,
+      "functions": [
+        {
+          "name": "LibrarianLayout",
+          "startLine": 6,
+          "endLine": 202,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LibrarianLayout",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LibrarianLayout",
+          "callee": "useAuth",
+          "lineNumber": 7
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "useNavigate",
+          "lineNumber": 8
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "useLocation",
+          "lineNumber": 9
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "logout",
+          "lineNumber": 13
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "navigate",
+          "lineNumber": 14
+        },
+        {
+          "caller": "getPageTitle",
+          "callee": "p.startsWith",
+          "lineNumber": 30
+        },
+        {
+          "caller": "getPageTitle",
+          "callee": "p.startsWith",
+          "lineNumber": 31
+        },
+        {
+          "caller": "getPageTitle",
+          "callee": "p.startsWith",
+          "lineNumber": 32
+        },
+        {
+          "caller": "getPageTitle",
+          "callee": "p.startsWith",
+          "lineNumber": 33
+        },
+        {
+          "caller": "getPageTitle",
+          "callee": "p.startsWith",
+          "lineNumber": 34
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "navItems.map",
+          "lineNumber": 70
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "(user?.first_name?.[0] || user?.username?.[0] || 'L').toUpperCase",
+          "lineNumber": 94
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "setMobileOpen",
+          "lineNumber": 122
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "getPageTitle",
+          "lineNumber": 138
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "navItems.map",
+          "lineNumber": 170
+        },
+        {
+          "caller": "LibrarianLayout",
+          "callee": "setMobileOpen",
+          "lineNumber": 175
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/layouts/PublicLayout.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "PublicLayout",
+          "startLine": 6,
+          "endLine": 16,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PublicLayout",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/layouts/StudentLayout.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "StudentLayout",
+          "startLine": 6,
+          "endLine": 16,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "StudentLayout",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/main.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/AboutUs.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 189,
+      "nonEmptyLines": 177,
+      "functions": [
+        {
+          "name": "AboutUs",
+          "startLine": 61,
+          "endLine": 189,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AboutUs",
+          "line": 61,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AboutUs",
+          "callee": "useState",
+          "lineNumber": 62
+        },
+        {
+          "caller": "AboutUs",
+          "callee": "useEffect",
+          "lineNumber": 64
+        },
+        {
+          "caller": "AboutUs",
+          "callee": "getPageContent(\"about\")\n      .then(setContent)\n      .catch",
+          "lineNumber": 65
+        },
+        {
+          "caller": "AboutUs",
+          "callee": "getPageContent(\"about\")\n      .then",
+          "lineNumber": 65
+        },
+        {
+          "caller": "AboutUs",
+          "callee": "getPageContent",
+          "lineNumber": 65
+        },
+        {
+          "caller": "AboutUs",
+          "callee": "window.scrollTo",
+          "lineNumber": 68
+        },
+        {
+          "caller": "AboutUs",
+          "callee": "OBJECTIVES.map",
+          "lineNumber": 125
+        },
+        {
+          "caller": "AboutUs",
+          "callee": "TECH.map",
+          "lineNumber": 154
+        },
+        {
+          "caller": "AboutUs",
+          "callee": "[\"Mobile-first responsive design\", \"Accessibility-first components\", \"Real-time search and filters\", \"Secure authentication system\", \"Fast API responses\"].map",
+          "lineNumber": 171
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/Gallery.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 133,
+      "nonEmptyLines": 125,
+      "functions": [
+        {
+          "name": "Gallery",
+          "startLine": 52,
+          "endLine": 133,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Gallery",
+          "line": 52,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Gallery",
+          "callee": "useState",
+          "lineNumber": 53
+        },
+        {
+          "caller": "Gallery",
+          "callee": "useState",
+          "lineNumber": 54
+        },
+        {
+          "caller": "Gallery",
+          "callee": "useState",
+          "lineNumber": 55
+        },
+        {
+          "caller": "Gallery",
+          "callee": "Object.fromEntries",
+          "lineNumber": 55
+        },
+        {
+          "caller": "Gallery",
+          "callee": "GALLERY_IMAGES.map",
+          "lineNumber": 55
+        },
+        {
+          "caller": "Gallery",
+          "callee": "useEffect",
+          "lineNumber": 57
+        },
+        {
+          "caller": "Gallery",
+          "callee": "getPageContent(\"gallery\").then(setContent).catch",
+          "lineNumber": 58
+        },
+        {
+          "caller": "Gallery",
+          "callee": "getPageContent(\"gallery\").then",
+          "lineNumber": 58
+        },
+        {
+          "caller": "Gallery",
+          "callee": "getPageContent",
+          "lineNumber": 58
+        },
+        {
+          "caller": "Gallery",
+          "callee": "window.scrollTo",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handleError",
+          "callee": "setImgSrcs",
+          "lineNumber": 63
+        },
+        {
+          "caller": "Gallery",
+          "callee": "handleError",
+          "lineNumber": 75
+        },
+        {
+          "caller": "Gallery",
+          "callee": "GALLERY_IMAGES.map",
+          "lineNumber": 95
+        },
+        {
+          "caller": "Gallery",
+          "callee": "setLightbox",
+          "lineNumber": 102
+        },
+        {
+          "caller": "Gallery",
+          "callee": "handleError",
+          "lineNumber": 109
+        },
+        {
+          "caller": "Gallery",
+          "callee": "setLightbox",
+          "lineNumber": 130
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/Home.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 191,
+      "nonEmptyLines": 179,
+      "functions": [
+        {
+          "name": "Home",
+          "startLine": 30,
+          "endLine": 191,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Home",
+          "line": 30,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Home",
+          "callee": "useState",
+          "lineNumber": 31
+        },
+        {
+          "caller": "Home",
+          "callee": "localStorage.getItem",
+          "lineNumber": 32
+        },
+        {
+          "caller": "Home",
+          "callee": "localStorage.getItem",
+          "lineNumber": 33
+        },
+        {
+          "caller": "Home",
+          "callee": "useEffect",
+          "lineNumber": 35
+        },
+        {
+          "caller": "Home",
+          "callee": "getPageContent('home').then(setContent).catch",
+          "lineNumber": 36
+        },
+        {
+          "caller": "Home",
+          "callee": "getPageContent('home').then",
+          "lineNumber": 36
+        },
+        {
+          "caller": "Home",
+          "callee": "getPageContent",
+          "lineNumber": 36
+        },
+        {
+          "caller": "Home",
+          "callee": "STATS.map",
+          "lineNumber": 125
+        },
+        {
+          "caller": "Home",
+          "callee": "CATEGORY_IMGS.map",
+          "lineNumber": 144
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/LibrarianDashboard.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "exports": [
+        {
+          "name": "default",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/ManageBooks.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 681,
+      "nonEmptyLines": 638,
+      "functions": [
+        {
+          "name": "ManageBooks",
+          "startLine": 8,
+          "endLine": 681,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ManageBooks",
+          "line": 8,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ManageBooks",
+          "callee": "useSearchParams",
+          "lineNumber": 9
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "searchParams.get",
+          "lineNumber": 10
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useNavigate",
+          "lineNumber": 11
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useAuth",
+          "lineNumber": 12
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "localStorage.getItem",
+          "lineNumber": 13
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 25
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 26
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useState",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useCallback",
+          "lineNumber": 38
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setLoading",
+          "lineNumber": 39
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "fetch",
+          "lineNumber": 44
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "res.json",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "Array.isArray",
+          "lineNumber": 47
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "allBooks.filter",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "allBooks.filter",
+          "lineNumber": 52
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setBooks",
+          "lineNumber": 53
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "console.error",
+          "lineNumber": 55
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setToast",
+          "lineNumber": 56
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setLoading",
+          "lineNumber": 58
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "useEffect",
+          "lineNumber": 62
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "navigate",
+          "lineNumber": 64
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "loadBooks",
+          "lineNumber": 67
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setConfirmState",
+          "lineNumber": 71
+        },
+        {
+          "caller": "performDelete",
+          "callee": "setConfirmState",
+          "lineNumber": 82
+        },
+        {
+          "caller": "performDelete",
+          "callee": "fetch",
+          "lineNumber": 85
+        },
+        {
+          "caller": "performDelete",
+          "callee": "res.json().catch",
+          "lineNumber": 94
+        },
+        {
+          "caller": "performDelete",
+          "callee": "res.json",
+          "lineNumber": 94
+        },
+        {
+          "caller": "performDelete",
+          "callee": "setBooks",
+          "lineNumber": 98
+        },
+        {
+          "caller": "performDelete",
+          "callee": "prev.filter",
+          "lineNumber": 98
+        },
+        {
+          "caller": "performDelete",
+          "callee": "setToast",
+          "lineNumber": 99
+        },
+        {
+          "caller": "performDelete",
+          "callee": "console.error",
+          "lineNumber": 101
+        },
+        {
+          "caller": "performDelete",
+          "callee": "setToast",
+          "lineNumber": 102
+        },
+        {
+          "caller": "handleEdit",
+          "callee": "setEditingBook",
+          "lineNumber": 107
+        },
+        {
+          "caller": "handleEdit",
+          "callee": "setFormData",
+          "lineNumber": 108
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "e.preventDefault",
+          "lineNumber": 119
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "fetch",
+          "lineNumber": 128
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "JSON.stringify",
+          "lineNumber": 134
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "res.json().catch",
+          "lineNumber": 138
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "res.json",
+          "lineNumber": 138
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "res.json",
+          "lineNumber": 142
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setBooks",
+          "lineNumber": 145
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "prev.map",
+          "lineNumber": 145
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setToast",
+          "lineNumber": 146
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setBooks",
+          "lineNumber": 148
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setToast",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setEditingBook",
+          "lineNumber": 153
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setShowAddModal",
+          "lineNumber": 154
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setFormData",
+          "lineNumber": 155
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "console.error",
+          "lineNumber": 159
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setToast",
+          "lineNumber": 160
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "e.preventDefault",
+          "lineNumber": 165
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "setToast",
+          "lineNumber": 167
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "setImporting",
+          "lineNumber": 171
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "setImportResult",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "importBooksCSV",
+          "lineNumber": 175
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "setImportResult",
+          "lineNumber": 176
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "setToast",
+          "lineNumber": 177
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "loadBooks",
+          "lineNumber": 178
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "console.error",
+          "lineNumber": 180
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "setToast",
+          "lineNumber": 181
+        },
+        {
+          "caller": "handleCSVUpload",
+          "callee": "setImporting",
+          "lineNumber": 183
+        },
+        {
+          "caller": "resetImportModal",
+          "callee": "setShowImportModal",
+          "lineNumber": 188
+        },
+        {
+          "caller": "resetImportModal",
+          "callee": "setSelectedFile",
+          "lineNumber": 189
+        },
+        {
+          "caller": "resetImportModal",
+          "callee": "setImportResult",
+          "lineNumber": 190
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "books.filter",
+          "lineNumber": 194
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "searchQuery.toLowerCase",
+          "lineNumber": 195
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "(b.title || '').toLowerCase().includes",
+          "lineNumber": 197
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "(b.title || '').toLowerCase",
+          "lineNumber": 197
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "(b.authors || '').toLowerCase().includes",
+          "lineNumber": 198
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "(b.authors || '').toLowerCase",
+          "lineNumber": 198
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "(b.categories || '').toLowerCase().includes",
+          "lineNumber": 199
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "(b.categories || '').toLowerCase",
+          "lineNumber": 199
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "Math.max",
+          "lineNumber": 202
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "Math.ceil",
+          "lineNumber": 202
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "filteredBooks.slice",
+          "lineNumber": 203
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "navigate",
+          "lineNumber": 220
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "getTitle",
+          "lineNumber": 229
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setShowImportModal",
+          "lineNumber": 237
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setShowAddModal",
+          "lineNumber": 246
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setSearchQuery",
+          "lineNumber": 265
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setPage",
+          "lineNumber": 265
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "pagedBooks.map",
+          "lineNumber": 301
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "handleEdit",
+          "lineNumber": 320
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "handleDelete",
+          "lineNumber": 326
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "pagedBooks.map",
+          "lineNumber": 342
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "handleEdit",
+          "lineNumber": 379
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "handleDelete",
+          "lineNumber": 385
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "Math.min",
+          "lineNumber": 401
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setPage",
+          "lineNumber": 405
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "Math.max",
+          "lineNumber": 405
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setPage",
+          "lineNumber": 413
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "Math.min",
+          "lineNumber": 413
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setFormData",
+          "lineNumber": 443
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setFormData",
+          "lineNumber": 453
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setFormData",
+          "lineNumber": 462
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setFormData",
+          "lineNumber": 473
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "parseInt",
+          "lineNumber": 473
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setFormData",
+          "lineNumber": 482
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setFormData",
+          "lineNumber": 492
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setShowAddModal",
+          "lineNumber": 499
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setEditingBook",
+          "lineNumber": 499
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setSelectedFile",
+          "lineNumber": 543
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "(selectedFile.size / 1024).toFixed",
+          "lineNumber": 554
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "importResult.row_errors.map",
+          "lineNumber": 641
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setConfirmState",
+          "lineNumber": 668
+        },
+        {
+          "caller": "ManageBooks",
+          "callee": "setToast",
+          "lineNumber": 677
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/MyBorrows.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 264,
+      "nonEmptyLines": 245,
+      "functions": [
+        {
+          "name": "MyBorrows",
+          "startLine": 6,
+          "endLine": 264,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MyBorrows",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MyBorrows",
+          "callee": "useState",
+          "lineNumber": 7
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "useState",
+          "lineNumber": 8
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "useState",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "localStorage.getItem",
+          "lineNumber": 11
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "localStorage.getItem",
+          "lineNumber": 13
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "localStorage.getItem",
+          "lineNumber": 14
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "useCallback",
+          "lineNumber": 16
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setLoading",
+          "lineNumber": 18
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "getMyBorrows",
+          "lineNumber": 20
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setBorrows",
+          "lineNumber": 21
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setError",
+          "lineNumber": 22
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setError",
+          "lineNumber": 24
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setLoading",
+          "lineNumber": 26
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "useEffect",
+          "lineNumber": 30
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setError",
+          "lineNumber": 32
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setLoading",
+          "lineNumber": 33
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then(res => res.ok ? res.json() : null)\n        .then(data => {\n          if (data) {\n            setUserProfile(data);\n            const status = data.profile?.approval_status || data.approval_status || \"approved\";\n            setApprovalStatus(status);\n            localStorage.setItem(\"approval_status\", status);\n          }\n        })\n        .catch",
+          "lineNumber": 38
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then(res => res.ok ? res.json() : null)\n        .then",
+          "lineNumber": 38
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "fetch(`${BASE_URL}/auth/me/`, {\n        headers: { Authorization: `Bearer ${token}` }\n      })\n        .then",
+          "lineNumber": 38
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "fetch",
+          "lineNumber": 38
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "res.json",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setUserProfile",
+          "lineNumber": 44
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setApprovalStatus",
+          "lineNumber": 46
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "localStorage.setItem",
+          "lineNumber": 47
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "loadBorrows",
+          "lineNumber": 53
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "window.confirm",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "returnBook",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "setError",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "loadBorrows",
+          "lineNumber": 64
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "alert",
+          "lineNumber": 65
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "setError",
+          "lineNumber": 67
+        },
+        {
+          "caller": "formatDate",
+          "callee": "new Date(dateString).toLocaleDateString",
+          "lineNumber": 73
+        },
+        {
+          "caller": "getDaysUntilDue",
+          "callee": "Math.ceil",
+          "lineNumber": 95
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "setStatusFilter",
+          "lineNumber": 132
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "borrows.map",
+          "lineNumber": 198
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "getDaysUntilDue",
+          "lineNumber": 199
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "getStatusColor",
+          "lineNumber": 214
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "formatDate",
+          "lineNumber": 220
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "formatDate",
+          "lineNumber": 222
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "formatDate",
+          "lineNumber": 226
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "Math.abs",
+          "lineNumber": 229
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "formatDate",
+          "lineNumber": 235
+        },
+        {
+          "caller": "MyBorrows",
+          "callee": "handleReturn",
+          "lineNumber": 244
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/StudentsList.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 837,
+      "nonEmptyLines": 794,
+      "functions": [
+        {
+          "name": "StudentsList",
+          "startLine": 8,
+          "endLine": 837,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "StudentsList",
+          "line": 8,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StudentsList",
+          "callee": "useAuth",
+          "lineNumber": 9
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "localStorage.getItem",
+          "lineNumber": 10
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useSearchParams",
+          "lineNumber": 11
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "searchParams.get",
+          "lineNumber": 12
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "searchParams.get",
+          "lineNumber": 12
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "searchParams.get",
+          "lineNumber": 12
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useState",
+          "lineNumber": 25
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useEffect",
+          "lineNumber": 27
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setStatusFilter",
+          "lineNumber": 29
+        },
+        {
+          "caller": "handleFilterChange",
+          "callee": "setStatusFilter",
+          "lineNumber": 34
+        },
+        {
+          "caller": "handleFilterChange",
+          "callee": "setSearchParams",
+          "lineNumber": 36
+        },
+        {
+          "caller": "handleFilterChange",
+          "callee": "setSearchParams",
+          "lineNumber": 38
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useCallback",
+          "lineNumber": 42
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setLoading",
+          "lineNumber": 44
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "getStudents",
+          "lineNumber": 45
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setStudents",
+          "lineNumber": 46
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "Array.isArray",
+          "lineNumber": 50
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "data.filter",
+          "lineNumber": 51
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setSelectedStudent",
+          "lineNumber": 53
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setActiveTab",
+          "lineNumber": 54
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "console.error",
+          "lineNumber": 58
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setToast",
+          "lineNumber": 59
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setLoading",
+          "lineNumber": 61
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "useEffect",
+          "lineNumber": 65
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "loadStudents",
+          "lineNumber": 67
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "e.stopPropagation",
+          "lineNumber": 72
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setActionLoading",
+          "lineNumber": 74
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "approveStudent",
+          "lineNumber": 75
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setToast",
+          "lineNumber": 76
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setStudents",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "prev.map",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setSelectedStudent",
+          "lineNumber": 79
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "console.error",
+          "lineNumber": 82
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setToast",
+          "lineNumber": 83
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setActionLoading",
+          "lineNumber": 85
+        },
+        {
+          "caller": "handleReject",
+          "callee": "e.stopPropagation",
+          "lineNumber": 90
+        },
+        {
+          "caller": "handleReject",
+          "callee": "window.prompt",
+          "lineNumber": 91
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setActionLoading",
+          "lineNumber": 93
+        },
+        {
+          "caller": "handleReject",
+          "callee": "rejectStudent",
+          "lineNumber": 94
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setToast",
+          "lineNumber": 95
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setStudents",
+          "lineNumber": 96
+        },
+        {
+          "caller": "handleReject",
+          "callee": "prev.map",
+          "lineNumber": 96
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setSelectedStudent",
+          "lineNumber": 98
+        },
+        {
+          "caller": "handleReject",
+          "callee": "console.error",
+          "lineNumber": 101
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setToast",
+          "lineNumber": 102
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setActionLoading",
+          "lineNumber": 104
+        },
+        {
+          "caller": "loadStudentBorrows",
+          "callee": "setBorrowsLoading",
+          "lineNumber": 110
+        },
+        {
+          "caller": "loadStudentBorrows",
+          "callee": "getStudentBorrows",
+          "lineNumber": 111
+        },
+        {
+          "caller": "loadStudentBorrows",
+          "callee": "setBorrows",
+          "lineNumber": 112
+        },
+        {
+          "caller": "loadStudentBorrows",
+          "callee": "console.error",
+          "lineNumber": 114
+        },
+        {
+          "caller": "loadStudentBorrows",
+          "callee": "setToast",
+          "lineNumber": 115
+        },
+        {
+          "caller": "loadStudentBorrows",
+          "callee": "setBorrows",
+          "lineNumber": 116
+        },
+        {
+          "caller": "loadStudentBorrows",
+          "callee": "setBorrowsLoading",
+          "lineNumber": 118
+        },
+        {
+          "caller": "loadStudentAnalytics",
+          "callee": "setAnalyticsLoading",
+          "lineNumber": 124
+        },
+        {
+          "caller": "loadStudentAnalytics",
+          "callee": "getStudentAnalytics",
+          "lineNumber": 125
+        },
+        {
+          "caller": "loadStudentAnalytics",
+          "callee": "setAnalytics",
+          "lineNumber": 126
+        },
+        {
+          "caller": "loadStudentAnalytics",
+          "callee": "console.error",
+          "lineNumber": 128
+        },
+        {
+          "caller": "loadStudentAnalytics",
+          "callee": "setAnalytics",
+          "lineNumber": 129
+        },
+        {
+          "caller": "loadStudentAnalytics",
+          "callee": "setAnalyticsLoading",
+          "lineNumber": 131
+        },
+        {
+          "caller": "handleStudentClick",
+          "callee": "setSelectedStudent",
+          "lineNumber": 136
+        },
+        {
+          "caller": "handleStudentClick",
+          "callee": "setActiveTab",
+          "lineNumber": 139
+        },
+        {
+          "caller": "handleStudentClick",
+          "callee": "setActiveTab",
+          "lineNumber": 141
+        },
+        {
+          "caller": "handleStudentClick",
+          "callee": "loadStudentBorrows",
+          "lineNumber": 143
+        },
+        {
+          "caller": "handleStudentClick",
+          "callee": "loadStudentAnalytics",
+          "lineNumber": 144
+        },
+        {
+          "caller": "formatDate",
+          "callee": "new Date(dateString).toLocaleDateString",
+          "lineNumber": 150
+        },
+        {
+          "caller": "getBorrowStats",
+          "callee": "studentBorrows.filter",
+          "lineNumber": 175
+        },
+        {
+          "caller": "getBorrowStats",
+          "callee": "studentBorrows.filter",
+          "lineNumber": 176
+        },
+        {
+          "caller": "getBorrowStats",
+          "callee": "studentBorrows.filter",
+          "lineNumber": 177
+        },
+        {
+          "caller": "getBorrowStats",
+          "callee": "studentBorrows.filter",
+          "lineNumber": 178
+        },
+        {
+          "caller": "getBorrowStats",
+          "callee": "studentBorrows.filter",
+          "lineNumber": 179
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "students.filter",
+          "lineNumber": 185
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "students.filter",
+          "lineNumber": 186
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "students.filter",
+          "lineNumber": 187
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "students.filter",
+          "lineNumber": 189
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "searchQuery.toLowerCase().trim",
+          "lineNumber": 195
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "searchQuery.toLowerCase",
+          "lineNumber": 195
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "`${student.first_name || ''} ${student.last_name || ''}`.toLowerCase",
+          "lineNumber": 198
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "(student.username || '').toLowerCase",
+          "lineNumber": 199
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "(student.email || '').toLowerCase",
+          "lineNumber": 200
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "(student.department || student.profile?.department || '').toLowerCase",
+          "lineNumber": 201
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "fullName.includes",
+          "lineNumber": 203
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "username.includes",
+          "lineNumber": 203
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "email.includes",
+          "lineNumber": 203
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "department.includes",
+          "lineNumber": 203
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleFilterChange",
+          "lineNumber": 252
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleFilterChange",
+          "lineNumber": 262
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleFilterChange",
+          "lineNumber": 272
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleFilterChange",
+          "lineNumber": 282
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setSearchQuery",
+          "lineNumber": 301
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "filteredStudents.map",
+          "lineNumber": 311
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleStudentClick",
+          "lineNumber": 316
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "(student.first_name?.[0] || student.username?.[0] || '?').toUpperCase",
+          "lineNumber": 329
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleApprove",
+          "lineNumber": 360
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleReject",
+          "lineNumber": 367
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleApprove",
+          "lineNumber": 429
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleReject",
+          "lineNumber": 436
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setSelectedStudent",
+          "lineNumber": 444
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setActiveTab",
+          "lineNumber": 458
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setActiveTab",
+          "lineNumber": 468
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setActiveTab",
+          "lineNumber": 478
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleApprove",
+          "lineNumber": 507
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "handleReject",
+          "lineNumber": 514
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "selectedStudent.profile.preferred_categories.split(',').map",
+          "lineNumber": 573
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "selectedStudent.profile.preferred_categories.split",
+          "lineNumber": 573
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "cat.trim",
+          "lineNumber": 575
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "(() => {\r\n                              const stats = getBorrowStats(borrows);\r\n                              return (\r\n                                <>\r\n                                  <div className=\"bg-gray-50 p-3 rounded-lg text-center\">\r\n                                    <p className=\"text-2xl font-bold text-gray-800\">{stats.total}</p>\r\n                                    <p className=\"text-xs text-gray-600\">Total</p>\r\n                                  </div>\r\n                                  <div className=\"bg-yellow-50 p-3 rounded-lg text-center\">\r\n                                    <p className=\"text-2xl font-bold text-yellow-800\">{stats.requested}</p>\r\n                                    <p className=\"text-xs text-yellow-600\">Requested</p>\r\n                                  </div>\r\n                              <div className=\"bg-blue-50 p-3 rounded-lg text-center\">\r\n                                <p className=\"text-2xl font-bold text-blue-800\">{stats.approved}</p>\r\n                                <p className=\"text-xs text-blue-600\">Approved</p>\r\n                              </div>\r\n                              <div className=\"bg-green-50 p-3 rounded-lg text-center\">\r\n                                <p className=\"text-2xl font-bold text-green-800\">{stats.borrowed}</p>\r\n                                <p className=\"text-xs text-green-600\">Borrowed</p>\r\n                              </div>\r\n                              <div className=\"bg-gray-50 p-3 rounded-lg text-center\">\r\n                                <p className=\"text-2xl font-bold text-gray-800\">{stats.returned}</p>\r\n                                <p className=\"text-xs text-gray-600\">Returned</p>\r\n                              </div>\r\n                              <div className=\"bg-red-50 p-3 rounded-lg text-center\">\r\n                                <p className=\"text-2xl font-bold text-red-800\">{stats.rejected}</p>\r\n                                <p className=\"text-xs text-red-600\">Rejected</p>\r\n                              </div>\r\n                            </>\r\n                          );\r\n                        })",
+          "lineNumber": 602
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "getBorrowStats",
+          "lineNumber": 603
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "borrows.map",
+          "lineNumber": 649
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "getStatusColor",
+          "lineNumber": 658
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "formatDate",
+          "lineNumber": 665
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "formatDate",
+          "lineNumber": 670
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "formatDate",
+          "lineNumber": 676
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "formatDate",
+          "lineNumber": 682
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "analytics.preferred_categories.map",
+          "lineNumber": 737
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "analytics.category_interactions.map",
+          "lineNumber": 754
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "Math.min",
+          "lineNumber": 765
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "Math.max",
+          "lineNumber": 765
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "analytics.category_interactions.map",
+          "lineNumber": 765
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "analytics.borrowed_books.map",
+          "lineNumber": 781
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "book.categories.split(',').slice(0, 3).map",
+          "lineNumber": 789
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "book.categories.split(',').slice",
+          "lineNumber": 789
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "book.categories.split",
+          "lineNumber": 789
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "cat.trim",
+          "lineNumber": 791
+        },
+        {
+          "caller": "StudentsList",
+          "callee": "setToast",
+          "lineNumber": 832
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminBooks.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 391,
+      "nonEmptyLines": 375,
+      "functions": [
+        {
+          "name": "AdminBooks",
+          "startLine": 5,
+          "endLine": 391,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminBooks",
+          "line": 5,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AdminBooks",
+          "callee": "useState",
+          "lineNumber": 6
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useState",
+          "lineNumber": 7
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useState",
+          "lineNumber": 8
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useState",
+          "lineNumber": 11
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "localStorage.getItem",
+          "lineNumber": 27
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useCallback",
+          "lineNumber": 29
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setLoading",
+          "lineNumber": 31
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "fetchBooks",
+          "lineNumber": 32
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setBooks",
+          "lineNumber": 33
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "Array.isArray",
+          "lineNumber": 33
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "Array.isArray",
+          "lineNumber": 33
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setError",
+          "lineNumber": 34
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setError",
+          "lineNumber": 36
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setLoading",
+          "lineNumber": 38
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useCallback",
+          "lineNumber": 42
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "getCategories",
+          "lineNumber": 44
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setCategories",
+          "lineNumber": 45
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "Array.isArray",
+          "lineNumber": 45
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "Array.isArray",
+          "lineNumber": 45
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "console.error",
+          "lineNumber": 47
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "useEffect",
+          "lineNumber": 51
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "loadBooks",
+          "lineNumber": 52
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "loadCategories",
+          "lineNumber": 53
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "e.preventDefault",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "parseInt",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "parseFloat",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "parseInt",
+          "lineNumber": 64
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "parseInt",
+          "lineNumber": 65
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "parseInt",
+          "lineNumber": 66
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "updateBook",
+          "lineNumber": 71
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "alert",
+          "lineNumber": 72
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "createBook",
+          "lineNumber": 74
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "alert",
+          "lineNumber": 75
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setShowModal",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setEditingBook",
+          "lineNumber": 79
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "resetForm",
+          "lineNumber": 80
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "loadBooks",
+          "lineNumber": 81
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 83
+        },
+        {
+          "caller": "handleEdit",
+          "callee": "setEditingBook",
+          "lineNumber": 88
+        },
+        {
+          "caller": "handleEdit",
+          "callee": "setFormData",
+          "lineNumber": 89
+        },
+        {
+          "caller": "handleEdit",
+          "callee": "setShowModal",
+          "lineNumber": 104
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "window.confirm",
+          "lineNumber": 108
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "deleteBook",
+          "lineNumber": 111
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "alert",
+          "lineNumber": 112
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "loadBooks",
+          "lineNumber": 113
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setError",
+          "lineNumber": 115
+        },
+        {
+          "caller": "resetForm",
+          "callee": "setFormData",
+          "lineNumber": 120
+        },
+        {
+          "caller": "resetForm",
+          "callee": "setEditingBook",
+          "lineNumber": 135
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "resetForm",
+          "lineNumber": 162
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setShowModal",
+          "lineNumber": 163
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "books.map",
+          "lineNumber": 179
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "handleEdit",
+          "lineNumber": 198
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "handleDelete",
+          "lineNumber": 204
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 232
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 242
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 254
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 263
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 273
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 281
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 291
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 301
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 313
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 322
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 334
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 345
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setFormData",
+          "lineNumber": 355
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "categories.map",
+          "lineNumber": 359
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "setShowModal",
+          "lineNumber": 376
+        },
+        {
+          "caller": "AdminBooks",
+          "callee": "resetForm",
+          "lineNumber": 377
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminDashboard.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 985,
+      "nonEmptyLines": 950,
+      "functions": [
+        {
+          "name": "AdminDashboard",
+          "startLine": 22,
+          "endLine": 985,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminDashboard",
+          "line": 22,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 34
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 49
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 60
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 61
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 62
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 63
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 80
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 81
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 82
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 83
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 85
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 86
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useState",
+          "lineNumber": 87
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "localStorage.getItem",
+          "lineNumber": 88
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useCallback",
+          "lineNumber": 90
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setLoading",
+          "lineNumber": 92
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setError",
+          "lineNumber": 93
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "getAdminStats",
+          "lineNumber": 96
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setStats",
+          "lineNumber": 97
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "listPageContents",
+          "lineNumber": 100
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setPageContents",
+          "lineNumber": 101
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "Array.isArray",
+          "lineNumber": 101
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "getAdminStudents",
+          "lineNumber": 103
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setStudents",
+          "lineNumber": 104
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "Array.isArray",
+          "lineNumber": 104
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "getAdminBooks",
+          "lineNumber": 106
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBooks",
+          "lineNumber": 107
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "Array.isArray",
+          "lineNumber": 107
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "getCategories",
+          "lineNumber": 109
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setCategories",
+          "lineNumber": 110
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "Array.isArray",
+          "lineNumber": 110
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "Array.isArray",
+          "lineNumber": 110
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setError",
+          "lineNumber": 113
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setLoading",
+          "lineNumber": 115
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "useEffect",
+          "lineNumber": 119
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setError",
+          "lineNumber": 121
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setLoading",
+          "lineNumber": 122
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "loadData",
+          "lineNumber": 125
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "updatePageContent",
+          "lineNumber": 132
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "setSuccess",
+          "lineNumber": 133
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "createPageContent",
+          "lineNumber": 135
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "setSuccess",
+          "lineNumber": 136
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "setShowPageModal",
+          "lineNumber": 138
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "setEditingPage",
+          "lineNumber": 139
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "setPageForm",
+          "lineNumber": 140
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "loadData",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "setTimeout",
+          "lineNumber": 150
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "setSuccess",
+          "lineNumber": 150
+        },
+        {
+          "caller": "handlePageSubmit",
+          "callee": "setError",
+          "lineNumber": 152
+        },
+        {
+          "caller": "handlePageDelete",
+          "callee": "window.confirm",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handlePageDelete",
+          "callee": "deletePageContent",
+          "lineNumber": 159
+        },
+        {
+          "caller": "handlePageDelete",
+          "callee": "setSuccess",
+          "lineNumber": 160
+        },
+        {
+          "caller": "handlePageDelete",
+          "callee": "loadData",
+          "lineNumber": 161
+        },
+        {
+          "caller": "handlePageDelete",
+          "callee": "setTimeout",
+          "lineNumber": 162
+        },
+        {
+          "caller": "handlePageDelete",
+          "callee": "setSuccess",
+          "lineNumber": 162
+        },
+        {
+          "caller": "handlePageDelete",
+          "callee": "setError",
+          "lineNumber": 164
+        },
+        {
+          "caller": "openPageModal",
+          "callee": "setEditingPage",
+          "lineNumber": 170
+        },
+        {
+          "caller": "openPageModal",
+          "callee": "setPageForm",
+          "lineNumber": 171
+        },
+        {
+          "caller": "openPageModal",
+          "callee": "setEditingPage",
+          "lineNumber": 181
+        },
+        {
+          "caller": "openPageModal",
+          "callee": "setPageForm",
+          "lineNumber": 182
+        },
+        {
+          "caller": "openPageModal",
+          "callee": "setShowPageModal",
+          "lineNumber": 192
+        },
+        {
+          "caller": "handleStudentUpdate",
+          "callee": "updateStudent",
+          "lineNumber": 199
+        },
+        {
+          "caller": "handleStudentUpdate",
+          "callee": "setSuccess",
+          "lineNumber": 200
+        },
+        {
+          "caller": "handleStudentUpdate",
+          "callee": "setShowStudentModal",
+          "lineNumber": 201
+        },
+        {
+          "caller": "handleStudentUpdate",
+          "callee": "setEditingStudent",
+          "lineNumber": 202
+        },
+        {
+          "caller": "handleStudentUpdate",
+          "callee": "loadData",
+          "lineNumber": 203
+        },
+        {
+          "caller": "handleStudentUpdate",
+          "callee": "setTimeout",
+          "lineNumber": 204
+        },
+        {
+          "caller": "handleStudentUpdate",
+          "callee": "setSuccess",
+          "lineNumber": 204
+        },
+        {
+          "caller": "handleStudentUpdate",
+          "callee": "setError",
+          "lineNumber": 206
+        },
+        {
+          "caller": "handleStudentDelete",
+          "callee": "window.confirm",
+          "lineNumber": 211
+        },
+        {
+          "caller": "handleStudentDelete",
+          "callee": "deleteStudent",
+          "lineNumber": 213
+        },
+        {
+          "caller": "handleStudentDelete",
+          "callee": "setSuccess",
+          "lineNumber": 214
+        },
+        {
+          "caller": "handleStudentDelete",
+          "callee": "loadData",
+          "lineNumber": 215
+        },
+        {
+          "caller": "handleStudentDelete",
+          "callee": "setTimeout",
+          "lineNumber": 216
+        },
+        {
+          "caller": "handleStudentDelete",
+          "callee": "setSuccess",
+          "lineNumber": 216
+        },
+        {
+          "caller": "handleStudentDelete",
+          "callee": "setError",
+          "lineNumber": 218
+        },
+        {
+          "caller": "openStudentModal",
+          "callee": "setEditingStudent",
+          "lineNumber": 224
+        },
+        {
+          "caller": "openStudentModal",
+          "callee": "setStudentForm",
+          "lineNumber": 225
+        },
+        {
+          "caller": "openStudentModal",
+          "callee": "setEditingStudent",
+          "lineNumber": 233
+        },
+        {
+          "caller": "openStudentModal",
+          "callee": "setStudentForm",
+          "lineNumber": 234
+        },
+        {
+          "caller": "openStudentModal",
+          "callee": "setShowStudentModal",
+          "lineNumber": 236
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "updateBook",
+          "lineNumber": 243
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "setSuccess",
+          "lineNumber": 244
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "createBook",
+          "lineNumber": 246
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "setSuccess",
+          "lineNumber": 247
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "setShowBookModal",
+          "lineNumber": 249
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "setEditingBook",
+          "lineNumber": 250
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "setBookForm",
+          "lineNumber": 251
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "loadData",
+          "lineNumber": 256
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "setTimeout",
+          "lineNumber": 257
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "setSuccess",
+          "lineNumber": 257
+        },
+        {
+          "caller": "handleBookSubmit",
+          "callee": "setError",
+          "lineNumber": 259
+        },
+        {
+          "caller": "handleBookDelete",
+          "callee": "window.confirm",
+          "lineNumber": 264
+        },
+        {
+          "caller": "handleBookDelete",
+          "callee": "deleteBook",
+          "lineNumber": 266
+        },
+        {
+          "caller": "handleBookDelete",
+          "callee": "setSuccess",
+          "lineNumber": 267
+        },
+        {
+          "caller": "handleBookDelete",
+          "callee": "loadData",
+          "lineNumber": 268
+        },
+        {
+          "caller": "handleBookDelete",
+          "callee": "setTimeout",
+          "lineNumber": 269
+        },
+        {
+          "caller": "handleBookDelete",
+          "callee": "setSuccess",
+          "lineNumber": 269
+        },
+        {
+          "caller": "handleBookDelete",
+          "callee": "setError",
+          "lineNumber": 271
+        },
+        {
+          "caller": "openBookModal",
+          "callee": "setEditingBook",
+          "lineNumber": 277
+        },
+        {
+          "caller": "openBookModal",
+          "callee": "setBookForm",
+          "lineNumber": 278
+        },
+        {
+          "caller": "openBookModal",
+          "callee": "setEditingBook",
+          "lineNumber": 294
+        },
+        {
+          "caller": "openBookModal",
+          "callee": "setBookForm",
+          "lineNumber": 295
+        },
+        {
+          "caller": "openBookModal",
+          "callee": "setShowBookModal",
+          "lineNumber": 301
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "updateCategory",
+          "lineNumber": 308
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "setSuccess",
+          "lineNumber": 309
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "createCategory",
+          "lineNumber": 311
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "setSuccess",
+          "lineNumber": 312
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "setShowCategoryModal",
+          "lineNumber": 314
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "setEditingCategory",
+          "lineNumber": 315
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "setCategoryForm",
+          "lineNumber": 316
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "loadData",
+          "lineNumber": 317
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "setTimeout",
+          "lineNumber": 318
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "setSuccess",
+          "lineNumber": 318
+        },
+        {
+          "caller": "handleCategorySubmit",
+          "callee": "setError",
+          "lineNumber": 320
+        },
+        {
+          "caller": "handleCategoryDelete",
+          "callee": "window.confirm",
+          "lineNumber": 325
+        },
+        {
+          "caller": "handleCategoryDelete",
+          "callee": "deleteCategory",
+          "lineNumber": 327
+        },
+        {
+          "caller": "handleCategoryDelete",
+          "callee": "setSuccess",
+          "lineNumber": 328
+        },
+        {
+          "caller": "handleCategoryDelete",
+          "callee": "loadData",
+          "lineNumber": 329
+        },
+        {
+          "caller": "handleCategoryDelete",
+          "callee": "setTimeout",
+          "lineNumber": 330
+        },
+        {
+          "caller": "handleCategoryDelete",
+          "callee": "setSuccess",
+          "lineNumber": 330
+        },
+        {
+          "caller": "handleCategoryDelete",
+          "callee": "setError",
+          "lineNumber": 332
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "[\n              { id: \"website\", label: \"🌐 Website\", icon: \"🌐\" },\n              { id: \"students\", label: \"👨‍🎓 Students\", icon: \"👨‍🎓\" },\n              { id: \"books\", label: \"📚 Books\", icon: \"📚\" },\n              { id: \"categories\", label: \"📂 Categories\", icon: \"📂\" },\n            ].map",
+          "lineNumber": 430
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setActiveSection",
+          "lineNumber": 438
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "openPageModal",
+          "lineNumber": 457
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "pageContents.map",
+          "lineNumber": 467
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "openPageModal",
+          "lineNumber": 479
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "handlePageDelete",
+          "lineNumber": 485
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "students.map",
+          "lineNumber": 513
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "openStudentModal",
+          "lineNumber": 526
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "handleStudentDelete",
+          "lineNumber": 532
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "openBookModal",
+          "lineNumber": 551
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "books.slice(0, 20).map",
+          "lineNumber": 566
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "books.slice",
+          "lineNumber": 566
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "openBookModal",
+          "lineNumber": 573
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "handleBookDelete",
+          "lineNumber": 579
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setEditingCategory",
+          "lineNumber": 599
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setCategoryForm",
+          "lineNumber": 600
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setShowCategoryModal",
+          "lineNumber": 601
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "categories.map",
+          "lineNumber": 612
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setEditingCategory",
+          "lineNumber": 619
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setCategoryForm",
+          "lineNumber": 620
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setShowCategoryModal",
+          "lineNumber": 621
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "handleCategoryDelete",
+          "lineNumber": 628
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setPageForm",
+          "lineNumber": 653
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setPageForm",
+          "lineNumber": 670
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setPageForm",
+          "lineNumber": 680
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setPageForm",
+          "lineNumber": 690
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setPageForm",
+          "lineNumber": 699
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setPageForm",
+          "lineNumber": 709
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setShowPageModal",
+          "lineNumber": 724
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setEditingPage",
+          "lineNumber": 725
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setPageForm",
+          "lineNumber": 726
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setStudentForm",
+          "lineNumber": 755
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setStudentForm",
+          "lineNumber": 762
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setStudentForm",
+          "lineNumber": 769
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setStudentForm",
+          "lineNumber": 776
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setStudentForm",
+          "lineNumber": 783
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setShowStudentModal",
+          "lineNumber": 796
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setEditingStudent",
+          "lineNumber": 797
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 820
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 828
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 836
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 843
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 850
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 856
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 864
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 871
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 879
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 886
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 893
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 900
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 907
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setShowBookModal",
+          "lineNumber": 920
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setEditingBook",
+          "lineNumber": 921
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setBookForm",
+          "lineNumber": 922
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setCategoryForm",
+          "lineNumber": 949
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setCategoryForm",
+          "lineNumber": 956
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setShowCategoryModal",
+          "lineNumber": 970
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setEditingCategory",
+          "lineNumber": 971
+        },
+        {
+          "caller": "AdminDashboard",
+          "callee": "setCategoryForm",
+          "lineNumber": 972
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminStudents.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 7,
+      "functions": [
+        {
+          "name": "AdminStudents",
+          "startLine": 1,
+          "endLine": 7,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminStudents",
+          "line": 1,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 249,
+      "nonEmptyLines": 231,
+      "functions": [
+        {
+          "name": "LibrarianBorrowing",
+          "startLine": 7,
+          "endLine": 249,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LibrarianBorrowing",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useAuth",
+          "lineNumber": 8
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useState",
+          "lineNumber": 11
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useCallback",
+          "lineNumber": 17
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "localStorage.getItem",
+          "lineNumber": 18
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setLoading",
+          "lineNumber": 22
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "getBorrowRequests",
+          "lineNumber": 23
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setRequests",
+          "lineNumber": 24
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "Array.isArray",
+          "lineNumber": 24
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "console.error",
+          "lineNumber": 26
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setToast",
+          "lineNumber": 27
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setLoading",
+          "lineNumber": 29
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "useEffect",
+          "lineNumber": 33
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "loadRequests",
+          "lineNumber": 34
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "localStorage.getItem",
+          "lineNumber": 38
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setActionLoading",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "approveBorrow",
+          "lineNumber": 41
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setToast",
+          "lineNumber": 42
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setRequests",
+          "lineNumber": 43
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "prev.filter",
+          "lineNumber": 43
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setToast",
+          "lineNumber": 45
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setActionLoading",
+          "lineNumber": 47
+        },
+        {
+          "caller": "handleReject",
+          "callee": "localStorage.getItem",
+          "lineNumber": 53
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setActionLoading",
+          "lineNumber": 54
+        },
+        {
+          "caller": "handleReject",
+          "callee": "rejectBorrow",
+          "lineNumber": 56
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setToast",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setRequests",
+          "lineNumber": 58
+        },
+        {
+          "caller": "handleReject",
+          "callee": "prev.filter",
+          "lineNumber": 58
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setRejectModal",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setRejectReason",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setToast",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setActionLoading",
+          "lineNumber": 64
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "requests.filter",
+          "lineNumber": 68
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "searchQuery.toLowerCase().trim",
+          "lineNumber": 69
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "searchQuery.toLowerCase",
+          "lineNumber": 69
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "(r.student_name || '').toLowerCase",
+          "lineNumber": 71
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "(r.student_id || '').toLowerCase",
+          "lineNumber": 72
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "(r.book_title || '').toLowerCase",
+          "lineNumber": 73
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "sName.includes",
+          "lineNumber": 74
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "sId.includes",
+          "lineNumber": 74
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "bTitle.includes",
+          "lineNumber": 74
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setRejectReason",
+          "lineNumber": 89
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setRejectModal",
+          "lineNumber": 97
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setRejectReason",
+          "lineNumber": 98
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setSearchQuery",
+          "lineNumber": 147
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setSearchQuery",
+          "lineNumber": 153
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "filteredRequests.map",
+          "lineNumber": 186
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "new Date(req.requested_at).toLocaleDateString",
+          "lineNumber": 204
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "handleApprove",
+          "lineNumber": 221
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setRejectModal",
+          "lineNumber": 228
+        },
+        {
+          "caller": "LibrarianBorrowing",
+          "callee": "setToast",
+          "lineNumber": 245
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/librarian/LibrarianReports.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 222,
+      "nonEmptyLines": 206,
+      "functions": [
+        {
+          "name": "LibrarianReports",
+          "startLine": 9,
+          "endLine": 222,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LibrarianReports",
+          "line": 9,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LibrarianReports",
+          "callee": "useAuth",
+          "lineNumber": 10
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "useState",
+          "lineNumber": 11
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "useCallback",
+          "lineNumber": 14
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "localStorage.getItem",
+          "lineNumber": 15
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "setLoading",
+          "lineNumber": 19
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "fetchLibrarianDashboard",
+          "lineNumber": 20
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "setData",
+          "lineNumber": 21
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "console.error",
+          "lineNumber": 23
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "setLoading",
+          "lineNumber": 25
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "useEffect",
+          "lineNumber": 29
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "loadData",
+          "lineNumber": 30
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "(data?.borrow_trends || []).map",
+          "lineNumber": 35
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "String(d.day).slice",
+          "lineNumber": 36
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "String",
+          "lineNumber": 36
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "(data?.top_categories || []).map",
+          "lineNumber": 41
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "data.most_borrowed_books.slice(0, 5).map",
+          "lineNumber": 182
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "data.most_borrowed_books.slice",
+          "lineNumber": 182
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "data.most_viewed_books.slice(0, 5).map",
+          "lineNumber": 203
+        },
+        {
+          "caller": "LibrarianReports",
+          "callee": "data.most_viewed_books.slice",
+          "lineNumber": 203
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/pages/librarian/LibrarianReturns.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 219,
+      "nonEmptyLines": 201,
+      "functions": [
+        {
+          "name": "LibrarianReturns",
+          "startLine": 7,
+          "endLine": 219,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LibrarianReturns",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LibrarianReturns",
+          "callee": "useAuth",
+          "lineNumber": 8
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "useState",
+          "lineNumber": 11
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "useCallback",
+          "lineNumber": 15
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "localStorage.getItem",
+          "lineNumber": 16
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "setLoading",
+          "lineNumber": 20
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "getDepartmentBorrows",
+          "lineNumber": 21
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "(Array.isArray(data) ? data : []).map",
+          "lineNumber": 22
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "Array.isArray",
+          "lineNumber": 22
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "setActiveBorrows",
+          "lineNumber": 27
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "console.error",
+          "lineNumber": 29
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "setToast",
+          "lineNumber": 30
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "setLoading",
+          "lineNumber": 32
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "useEffect",
+          "lineNumber": 36
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "loadBorrows",
+          "lineNumber": 37
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "localStorage.getItem",
+          "lineNumber": 41
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "setActionLoading",
+          "lineNumber": 42
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "returnBook",
+          "lineNumber": 44
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "setToast",
+          "lineNumber": 45
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "setActiveBorrows",
+          "lineNumber": 46
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "prev.map",
+          "lineNumber": 47
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "new Date().toISOString",
+          "lineNumber": 47
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "setToast",
+          "lineNumber": 50
+        },
+        {
+          "caller": "handleReturn",
+          "callee": "setActionLoading",
+          "lineNumber": 52
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "activeBorrows.filter",
+          "lineNumber": 56
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "searchQuery.toLowerCase().trim",
+          "lineNumber": 57
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "searchQuery.toLowerCase",
+          "lineNumber": 57
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "(b.student_name || '').toLowerCase",
+          "lineNumber": 59
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "(b.student_code || '').toLowerCase",
+          "lineNumber": 60
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "(b.book_title || '').toLowerCase",
+          "lineNumber": 61
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "sName.includes",
+          "lineNumber": 62
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "sCode.includes",
+          "lineNumber": 62
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "bTitle.includes",
+          "lineNumber": 62
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "activeBorrows.filter",
+          "lineNumber": 65
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "activeBorrows.filter",
+          "lineNumber": 66
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "setSearchQuery",
+          "lineNumber": 123
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "filteredBorrows.map",
+          "lineNumber": 154
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "new Date(b.borrow_date).toLocaleDateString",
+          "lineNumber": 170
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "new Date(b.due_date).toLocaleDateString",
+          "lineNumber": 174
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "handleReturn",
+          "lineNumber": 194
+        },
+        {
+          "caller": "LibrarianReturns",
+          "callee": "setToast",
+          "lineNumber": 215
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

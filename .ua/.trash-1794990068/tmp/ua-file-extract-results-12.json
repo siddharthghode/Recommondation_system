@@ -1,0 +1,929 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 23,
+  "filesSkipped": [
+    "Demo_csv_files/history.csv",
+    "Demo_csv_files/prog_book.csv"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 23,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 23,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "backend/accounts/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/accounts/apps.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 9,
+      "classes": [
+        {
+          "name": "AccountsConfig",
+          "startLine": 4,
+          "endLine": 5,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AccountsConfig",
+          "startLine": 10,
+          "endLine": 15,
+          "methods": [
+            "ready"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AccountsConfig",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "AccountsConfig",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/accounts/management/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/accounts/management/commands/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/accounts/management/commands/check_redis.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 104,
+      "nonEmptyLines": 94,
+      "functions": [
+        {
+          "name": "mask_redis_url",
+          "startLine": 9,
+          "endLine": 27,
+          "params": [
+            "url"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Command",
+          "startLine": 30,
+          "endLine": 104,
+          "methods": [
+            "handle"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "mask_redis_url",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "Command",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mask_redis_url",
+          "callee": "urlparse",
+          "lineNumber": 14
+        },
+        {
+          "caller": "handle",
+          "callee": "os.getenv",
+          "lineNumber": 34
+        },
+        {
+          "caller": "handle",
+          "callee": "mask_redis_url",
+          "lineNumber": 35
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 37
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.NOTICE",
+          "lineNumber": 37
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 38
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.NOTICE",
+          "lineNumber": 38
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.NOTICE",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 40
+        },
+        {
+          "caller": "handle",
+          "callee": "raw_url.strip",
+          "lineNumber": 42
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 43
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.WARNING",
+          "lineNumber": 44
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 54
+        },
+        {
+          "caller": "handle",
+          "callee": "get_redis_connection",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handle",
+          "callee": "getattr",
+          "lineNumber": 61
+        },
+        {
+          "caller": "handle",
+          "callee": "redis.from_url",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handle",
+          "callee": "time.time",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handle",
+          "callee": "client.ping",
+          "lineNumber": 64
+        },
+        {
+          "caller": "handle",
+          "callee": "time.time",
+          "lineNumber": 65
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 67
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 68
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 71
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.ERROR",
+          "lineNumber": 71
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 74
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.ERROR",
+          "lineNumber": 74
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handle",
+          "callee": "int",
+          "lineNumber": 81
+        },
+        {
+          "caller": "handle",
+          "callee": "time.time",
+          "lineNumber": 81
+        },
+        {
+          "caller": "handle",
+          "callee": "cache.set",
+          "lineNumber": 82
+        },
+        {
+          "caller": "handle",
+          "callee": "cache.get",
+          "lineNumber": 83
+        },
+        {
+          "caller": "handle",
+          "callee": "cache.delete",
+          "lineNumber": 84
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 88
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 92
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 93
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 98
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.ERROR",
+          "lineNumber": 99
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 104
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.ERROR",
+          "lineNumber": 104
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/management/commands/create_admin.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 41,
+      "classes": [
+        {
+          "name": "Command",
+          "startLine": 7,
+          "endLine": 51,
+          "methods": [
+            "handle"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Command",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "handle",
+          "callee": "get_user_model",
+          "lineNumber": 11
+        },
+        {
+          "caller": "handle",
+          "callee": "os.environ.get",
+          "lineNumber": 13
+        },
+        {
+          "caller": "handle",
+          "callee": "os.environ.get",
+          "lineNumber": 14
+        },
+        {
+          "caller": "handle",
+          "callee": "os.environ.get",
+          "lineNumber": 15
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 18
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.WARNING",
+          "lineNumber": 19
+        },
+        {
+          "caller": "handle",
+          "callee": "User.objects.get_or_create",
+          "lineNumber": 25
+        },
+        {
+          "caller": "handle",
+          "callee": "user.set_password",
+          "lineNumber": 41
+        },
+        {
+          "caller": "handle",
+          "callee": "user.save",
+          "lineNumber": 42
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 45
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 46
+        },
+        {
+          "caller": "handle",
+          "callee": "self.stdout.write",
+          "lineNumber": 49
+        },
+        {
+          "caller": "handle",
+          "callee": "self.style.SUCCESS",
+          "lineNumber": 50
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/migrations/0001_initial.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 79,
+      "nonEmptyLines": 73,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 11,
+          "endLine": 79,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/migrations/0002_userprofile_approval_status.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 13,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 6,
+          "endLine": 18,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/migrations/0003_emailotp.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 25,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 6,
+          "endLine": 30,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/migrations/0004_alter_userprofile_approval_status.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 13,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 6,
+          "endLine": 18,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/migrations/0005_notification_notification_type_notification_title.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 18,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 6,
+          "endLine": 23,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/accounts/migrations/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/accounts/services/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/accounts/test_redis_pytest.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "test_mask_redis_url_masks_password",
+          "startLine": 7,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "test_mask_redis_url_handles_local_and_empty",
+          "startLine": 15,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "test_check_redis_command_execution",
+          "startLine": 24,
+          "endLine": 32,
+          "params": []
+        },
+        {
+          "name": "test_check_redis_command_mocked_success",
+          "startLine": 36,
+          "endLine": 47,
+          "params": []
+        },
+        {
+          "name": "test_check_redis_command_mocked_failure",
+          "startLine": 51,
+          "endLine": 61,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_mask_redis_url_masks_password",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "test_mask_redis_url_handles_local_and_empty",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "test_check_redis_command_execution",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "test_check_redis_command_mocked_success",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "test_check_redis_command_mocked_failure",
+          "line": 50,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_mask_redis_url_masks_password",
+          "callee": "mask_redis_url",
+          "lineNumber": 9
+        },
+        {
+          "caller": "test_mask_redis_url_handles_local_and_empty",
+          "callee": "mask_redis_url",
+          "lineNumber": 16
+        },
+        {
+          "caller": "test_mask_redis_url_handles_local_and_empty",
+          "callee": "mask_redis_url",
+          "lineNumber": 17
+        },
+        {
+          "caller": "test_check_redis_command_execution",
+          "callee": "StringIO",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_check_redis_command_execution",
+          "callee": "call_command",
+          "lineNumber": 26
+        },
+        {
+          "caller": "test_check_redis_command_execution",
+          "callee": "out.getvalue",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_check_redis_command_mocked_success",
+          "callee": "MagicMock",
+          "lineNumber": 38
+        },
+        {
+          "caller": "test_check_redis_command_mocked_success",
+          "callee": "StringIO",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_check_redis_command_mocked_success",
+          "callee": "patch",
+          "lineNumber": 42
+        },
+        {
+          "caller": "test_check_redis_command_mocked_success",
+          "callee": "call_command",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_check_redis_command_mocked_success",
+          "callee": "out.getvalue",
+          "lineNumber": 44
+        },
+        {
+          "caller": "test_check_redis_command_mocked_failure",
+          "callee": "MagicMock",
+          "lineNumber": 53
+        },
+        {
+          "caller": "test_check_redis_command_mocked_failure",
+          "callee": "Exception",
+          "lineNumber": 54
+        },
+        {
+          "caller": "test_check_redis_command_mocked_failure",
+          "callee": "StringIO",
+          "lineNumber": 56
+        },
+        {
+          "caller": "test_check_redis_command_mocked_failure",
+          "callee": "patch",
+          "lineNumber": 57
+        },
+        {
+          "caller": "test_check_redis_command_mocked_failure",
+          "callee": "call_command",
+          "lineNumber": 58
+        },
+        {
+          "caller": "test_check_redis_command_mocked_failure",
+          "callee": "out.getvalue",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/analytics/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/analytics/apps.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 3,
+      "classes": [
+        {
+          "name": "AnalyticsConfig",
+          "startLine": 4,
+          "endLine": 5,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AnalyticsConfig",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/analytics/migrations/0001_initial.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 34,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 7,
+          "endLine": 40,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/analytics/migrations/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/book_recommondation/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/book_recommondation/asgi.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/book_recommondation/settings.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 289,
+      "nonEmptyLines": 237,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/book_recommondation/wsgi.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/books/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

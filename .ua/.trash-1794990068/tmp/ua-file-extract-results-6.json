@@ -1,0 +1,99 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 1,
+  "filesSkipped": [
+    "backend/.dockerignore"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 1,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "results": [
+    {
+      "path": "backend/Dockerfile",
+      "language": "dockerfile",
+      "fileCategory": "infra",
+      "totalLines": 23,
+      "nonEmptyLines": 15,
+      "services": [
+        {
+          "name": "python",
+          "image": "python:3.13-slim",
+          "ports": [
+            8000
+          ],
+          "startLine": 1,
+          "endLine": 24
+        }
+      ],
+      "steps": [
+        {
+          "name": "FROM python:3.13-slim",
+          "startLine": 1,
+          "endLine": 1
+        },
+        {
+          "name": "ENV PYTHONDONTWRITEBYTECODE=1 \\",
+          "startLine": 3,
+          "endLine": 3
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "RUN apt-get update && apt-get install -y --no-install-recommends",
+          "startLine": 8,
+          "endLine": 8
+        },
+        {
+          "name": "COPY requirements.txt .",
+          "startLine": 14,
+          "endLine": 14
+        },
+        {
+          "name": "RUN pip install --no-cache-dir -r requirements.txt",
+          "startLine": 15,
+          "endLine": 15
+        },
+        {
+          "name": "COPY . .",
+          "startLine": 17,
+          "endLine": 17
+        },
+        {
+          "name": "RUN chmod +x entrypoint.sh",
+          "startLine": 19,
+          "endLine": 19
+        },
+        {
+          "name": "EXPOSE 8000",
+          "startLine": 21,
+          "endLine": 21
+        },
+        {
+          "name": "ENTRYPOINT [\"/app/entrypoint.sh\"]",
+          "startLine": 23,
+          "endLine": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "serviceCount": 1,
+        "stepCount": 10
+      }
+    }
+  ]
+}

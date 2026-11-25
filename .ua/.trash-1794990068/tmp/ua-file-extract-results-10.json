@@ -1,0 +1,257 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [
+    "backend/pytest.ini",
+    "backend/requirements.txt"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "backend/.env.example",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 58,
+      "nonEmptyLines": 48,
+      "definitions": [
+        {
+          "name": "POSTGRES_DB",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 4,
+          "endLine": 4
+        },
+        {
+          "name": "POSTGRES_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 5,
+          "endLine": 5
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "POSTGRES_HOST",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "POSTGRES_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 8,
+          "endLine": 8
+        },
+        {
+          "name": "DEBUG",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 16,
+          "endLine": 16
+        },
+        {
+          "name": "DJANGO_SECRET_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 20,
+          "endLine": 20
+        },
+        {
+          "name": "DJANGO_ENV",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 23,
+          "endLine": 23
+        },
+        {
+          "name": "ALLOWED_HOSTS",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 27,
+          "endLine": 27
+        },
+        {
+          "name": "CORS_ALLOWED_ORIGINS",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 31,
+          "endLine": 31
+        },
+        {
+          "name": "GOOGLE_CLIENT_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 36,
+          "endLine": 36
+        },
+        {
+          "name": "EMAIL_BACKEND",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 42,
+          "endLine": 42
+        },
+        {
+          "name": "BREVO_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 43,
+          "endLine": 43
+        },
+        {
+          "name": "DEFAULT_FROM_EMAIL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 44,
+          "endLine": 44
+        },
+        {
+          "name": "REDIS_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 53,
+          "endLine": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 15
+      }
+    },
+    {
+      "path": "backend/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 198,
+      "nonEmptyLines": 155,
+      "sections": [
+        {
+          "heading": "Backend — Django REST Framework",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "🚀 Quick Setup",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Option 1: Using Docker Compose (Recommended)",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "Option 2: Local Native Setup (Python Virtual Environment)",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "👥 Demo Users",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "🛠️ Management Commands",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "🧪 Testing",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "🔑 Environment Variables",
+          "level": 2,
+          "line": 94
+        },
+        {
+          "heading": "📦 Django App Architecture",
+          "level": 2,
+          "line": 116
+        },
+        {
+          "heading": "📡 REST API Reference",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "Health Check",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "Authentication & Profiles — `/api/auth/`",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "Books & Recommendations — `/api/books/`",
+          "level": 3,
+          "line": 153
+        },
+        {
+          "heading": "Interactions & Dwell Time",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "Borrow Management — `/api/borrows/`",
+          "level": 3,
+          "line": 172
+        },
+        {
+          "heading": "Analytics & Reports — `/api/analytics/`",
+          "level": 3,
+          "line": 182
+        },
+        {
+          "heading": "🔒 Security Highlights",
+          "level": 2,
+          "line": 193
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "backend/entrypoint.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 23,
+      "nonEmptyLines": 18,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

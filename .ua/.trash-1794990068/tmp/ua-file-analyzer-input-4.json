@@ -1,0 +1,193 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "frontend/src/api/authApi.js",
+      "language": "javascript",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/api/axios.js",
+      "language": "javascript",
+      "sizeLines": 103,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/api/bookApi.js",
+      "language": "javascript",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/api/borrowApi.js",
+      "language": "javascript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/api/index.js",
+      "language": "javascript",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/api/recommendationApi.js",
+      "language": "javascript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/api/reviewApi.js",
+      "language": "javascript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/api/userApi.js",
+      "language": "javascript",
+      "sizeLines": 75,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/BookCard.jsx",
+      "language": "javascript",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/BookDetail.jsx",
+      "language": "javascript",
+      "sizeLines": 438,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ErrorMessage.jsx",
+      "language": "javascript",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/GoogleAuthButton.jsx",
+      "language": "javascript",
+      "sizeLines": 172,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/Loading.jsx",
+      "language": "javascript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/context/AuthContextCore.js",
+      "language": "javascript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/context/AuthProvider.jsx",
+      "language": "javascript",
+      "sizeLines": 165,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/AccountDetails.jsx",
+      "language": "javascript",
+      "sizeLines": 749,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/Books.jsx",
+      "language": "javascript",
+      "sizeLines": 359,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/Login.jsx",
+      "language": "javascript",
+      "sizeLines": 1394,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/Recommendations.jsx",
+      "language": "javascript",
+      "sizeLines": 249,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/api.js",
+      "language": "javascript",
+      "sizeLines": 291,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "frontend/src/api/authApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/axios.js": [],
+    "frontend/src/api/bookApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/borrowApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/index.js": [],
+    "frontend/src/api/recommendationApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/reviewApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/api/userApi.js": [
+      "frontend/src/api/axios.js"
+    ],
+    "frontend/src/components/BookCard.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/BookDetail.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/ErrorMessage.jsx": [],
+    "frontend/src/components/GoogleAuthButton.jsx": [
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/components/Loading.jsx": [],
+    "frontend/src/context/AuthContextCore.js": [],
+    "frontend/src/context/AuthProvider.jsx": [
+      "frontend/src/context/AuthContextCore.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/AccountDetails.jsx": [
+      "frontend/src/components/BookCard.jsx",
+      "frontend/src/components/BookDetail.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Books.jsx": [
+      "frontend/src/components/BookCard.jsx",
+      "frontend/src/components/BookDetail.jsx",
+      "frontend/src/components/ErrorMessage.jsx",
+      "frontend/src/components/Footer.jsx",
+      "frontend/src/components/Loading.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Login.jsx": [
+      "frontend/src/components/GoogleAuthButton.jsx",
+      "frontend/src/context/useAuth.js",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/pages/Recommendations.jsx": [
+      "frontend/src/components/BookCard.jsx",
+      "frontend/src/components/BookDetail.jsx",
+      "frontend/src/services/api.js"
+    ],
+    "frontend/src/services/api.js": [
+      "frontend/src/api/bookApi.js",
+      "frontend/src/api/borrowApi.js",
+      "frontend/src/api/index.js",
+      "frontend/src/api/recommendationApi.js",
+      "frontend/src/api/userApi.js"
+    ]
+  }
+}

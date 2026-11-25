@@ -1,0 +1,56 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": ".env.example",
+      "language": "config",
+      "sizeLines": 90,
+      "fileCategory": "config"
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "language": "markdown",
+      "sizeLines": 279,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "PROJECT_RULES.md",
+      "language": "markdown",
+      "sizeLines": 799,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 355,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docker-compose.yml",
+      "language": "yaml",
+      "sizeLines": 82,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "pytest.ini",
+      "language": "config",
+      "sizeLines": 13,
+      "fileCategory": "config"
+    },
+    {
+      "path": "render.yaml",
+      "language": "yaml",
+      "sizeLines": 57,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    ".env.example": [],
+    "DEPLOYMENT.md": [],
+    "PROJECT_RULES.md": [],
+    "README.md": [],
+    "docker-compose.yml": [],
+    "pytest.ini": [],
+    "render.yaml": []
+  }
+}

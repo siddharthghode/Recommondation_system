@@ -1,0 +1,928 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 21,
+  "filesSkipped": [
+    "backend/data/books_6k.csv",
+    "backend/data/prog_book.csv",
+    "frontend/nginx.conf",
+    "frontend/src/App.css"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 21,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 20,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "results": [
+    {
+      "path": "backend/books/apps.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 3,
+      "classes": [
+        {
+          "name": "BooksConfig",
+          "startLine": 4,
+          "endLine": 5,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BooksConfig",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/books/management/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/books/management/commands/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/books/migrations/0001_initial.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 66,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 9,
+          "endLine": 72,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 13,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 6,
+          "endLine": 18,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 37,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 7,
+          "endLine": 42,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/books/migrations/0004_bookreview.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 28,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 8,
+          "endLine": 33,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/books/migrations/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/borrows/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/borrows/apps.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 3,
+      "classes": [
+        {
+          "name": "BorrowsConfig",
+          "startLine": 4,
+          "endLine": 5,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BorrowsConfig",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/borrows/migrations/0001_initial.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 27,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 8,
+          "endLine": 33,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 15,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 7,
+          "endLine": 20,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/borrows/migrations/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/manage.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 7,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "main",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "main",
+          "callee": "os.environ.setdefault",
+          "lineNumber": 9
+        },
+        {
+          "caller": "main",
+          "callee": "ImportError",
+          "lineNumber": 13
+        },
+        {
+          "caller": "main",
+          "callee": "execute_from_command_line",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/messaging/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/messaging/apps.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 4,
+      "classes": [
+        {
+          "name": "MessagingConfig",
+          "startLine": 4,
+          "endLine": 6,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MessagingConfig",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/messaging/migrations/0001_initial.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 29,
+      "classes": [
+        {
+          "name": "Migration",
+          "startLine": 8,
+          "endLine": 35,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Migration",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/messaging/migrations/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/scripts/enrich_prog_books.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 183,
+      "nonEmptyLines": 154,
+      "functions": [
+        {
+          "name": "clean_description",
+          "startLine": 22,
+          "endLine": 29,
+          "params": [
+            "desc"
+          ]
+        },
+        {
+          "name": "search_openlibrary",
+          "startLine": 31,
+          "endLine": 114,
+          "params": [
+            "title"
+          ]
+        },
+        {
+          "name": "process_item",
+          "startLine": 120,
+          "endLine": 153,
+          "params": [
+            "idx",
+            "row"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "clean_description",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "search_openlibrary",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "process_item",
+          "line": 120,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "clean_description",
+          "callee": "isinstance",
+          "lineNumber": 23
+        },
+        {
+          "caller": "clean_description",
+          "callee": "pd.isna",
+          "lineNumber": 23
+        },
+        {
+          "caller": "clean_description",
+          "callee": "re.sub",
+          "lineNumber": 26
+        },
+        {
+          "caller": "clean_description",
+          "callee": "re.sub(r'\\n{3,}', '\\n\\n', desc).strip",
+          "lineNumber": 28
+        },
+        {
+          "caller": "clean_description",
+          "callee": "re.sub",
+          "lineNumber": 28
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "title.split(':')[0].strip",
+          "lineNumber": 34
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "title.split",
+          "lineNumber": 34
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "re.sub(r'\\(.*?\\)', '', title).strip",
+          "lineNumber": 35
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "re.sub",
+          "lineNumber": 35
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "title.strip",
+          "lineNumber": 36
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "urllib.parse.quote",
+          "lineNumber": 45
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "urllib.request.Request",
+          "lineNumber": 46
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "urllib.request.urlopen",
+          "lineNumber": 47
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "json.loads",
+          "lineNumber": 48
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "resp.read().decode",
+          "lineNumber": 48
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "resp.read",
+          "lineNumber": 48
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "data.get",
+          "lineNumber": 49
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 51
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 52
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 53
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 54
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 54
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 55
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "clean_authors.append",
+          "lineNumber": 68
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "', '.join",
+          "lineNumber": 71
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "time.sleep",
+          "lineNumber": 78
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "urllib.parse.quote",
+          "lineNumber": 82
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "urllib.request.Request",
+          "lineNumber": 83
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "urllib.request.urlopen",
+          "lineNumber": 84
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "json.loads",
+          "lineNumber": 85
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "resp.read().decode",
+          "lineNumber": 85
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "resp.read",
+          "lineNumber": 85
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "data.get",
+          "lineNumber": 86
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 89
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 90
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 91
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 92
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 92
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "clean_authors.append",
+          "lineNumber": 103
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "', '.join",
+          "lineNumber": 106
+        },
+        {
+          "caller": "search_openlibrary",
+          "callee": "d.get",
+          "lineNumber": 109
+        },
+        {
+          "caller": "process_item",
+          "callee": "str(row['Book_title']).strip",
+          "lineNumber": 121
+        },
+        {
+          "caller": "process_item",
+          "callee": "str",
+          "lineNumber": 121
+        },
+        {
+          "caller": "process_item",
+          "callee": "clean_description",
+          "lineNumber": 122
+        },
+        {
+          "caller": "process_item",
+          "callee": "row.get",
+          "lineNumber": 122
+        },
+        {
+          "caller": "process_item",
+          "callee": "search_openlibrary",
+          "lineNumber": 124
+        },
+        {
+          "caller": "process_item",
+          "callee": "info.get",
+          "lineNumber": 131
+        },
+        {
+          "caller": "process_item",
+          "callee": "', '.join",
+          "lineNumber": 134
+        },
+        {
+          "caller": "process_item",
+          "callee": "row.get",
+          "lineNumber": 142
+        },
+        {
+          "caller": "process_item",
+          "callee": "row.get",
+          "lineNumber": 143
+        },
+        {
+          "caller": "process_item",
+          "callee": "row.get",
+          "lineNumber": 149
+        },
+        {
+          "caller": "process_item",
+          "callee": "row.get",
+          "lineNumber": 151
+        },
+        {
+          "caller": "process_item",
+          "callee": "row.get",
+          "lineNumber": 152
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "database/ER_DIAGRAM.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 351,
+      "nonEmptyLines": 298,
+      "sections": [
+        {
+          "heading": "Book Recommendation System - Entity Relationship Diagram",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Database Schema Overview",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Entities and Relationships",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "1. DEPARTMENT",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "2. USER (extends AbstractUser)",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "3. USERPROFILE (Student Profile)",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "4. BOOK",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "5. BOOKINTERACTION",
+          "level": 3,
+          "line": 113
+        },
+        {
+          "heading": "6. BORROW",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "7. NOTIFICATION",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "Complete ER Diagram (ASCII Art)",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "Cardinality Summary",
+          "level": 2,
+          "line": 252
+        },
+        {
+          "heading": "Key Constraints",
+          "level": 2,
+          "line": 267
+        },
+        {
+          "heading": "Primary Keys (PK)",
+          "level": 3,
+          "line": 269
+        },
+        {
+          "heading": "Foreign Keys (FK)",
+          "level": 3,
+          "line": 272
+        },
+        {
+          "heading": "Unique Constraints",
+          "level": 3,
+          "line": 282
+        },
+        {
+          "heading": "Indexes (Auto-created)",
+          "level": 3,
+          "line": 288
+        },
+        {
+          "heading": "Database Statistics",
+          "level": 2,
+          "line": 295
+        },
+        {
+          "heading": "Database Features",
+          "level": 2,
+          "line": 309
+        },
+        {
+          "heading": "1. Authentication & Authorization",
+          "level": 3,
+          "line": 311
+        },
+        {
+          "heading": "2. Book Management",
+          "level": 3,
+          "line": 316
+        },
+        {
+          "heading": "3. Borrow Workflow",
+          "level": 3,
+          "line": 321
+        },
+        {
+          "heading": "4. Analytics & Recommendations",
+          "level": 3,
+          "line": 327
+        },
+        {
+          "heading": "5. Notifications",
+          "level": 3,
+          "line": 332
+        },
+        {
+          "heading": "Notes",
+          "level": 2,
+          "line": 339
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 25
+      }
+    },
+    {
+      "path": "frontend/eslint.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 28,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

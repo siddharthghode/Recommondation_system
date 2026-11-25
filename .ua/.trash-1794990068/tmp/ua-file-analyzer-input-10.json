@@ -1,0 +1,42 @@
+{
+  "projectRoot": "/home/archsid/git/Recommondation_system",
+  "batchFiles": [
+    {
+      "path": "backend/.env.example",
+      "language": "config",
+      "sizeLines": 58,
+      "fileCategory": "config"
+    },
+    {
+      "path": "backend/README.md",
+      "language": "markdown",
+      "sizeLines": 197,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "backend/entrypoint.sh",
+      "language": "shell",
+      "sizeLines": 23,
+      "fileCategory": "script"
+    },
+    {
+      "path": "backend/pytest.ini",
+      "language": "config",
+      "sizeLines": 12,
+      "fileCategory": "config"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "language": "txt",
+      "sizeLines": 19,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "backend/.env.example": [],
+    "backend/README.md": [],
+    "backend/entrypoint.sh": [],
+    "backend/pytest.ini": [],
+    "backend/requirements.txt": []
+  }
+}

@@ -1,0 +1,3887 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 172,
+  "totalBatches": 14,
+  "exportsByPath": {
+    "backend/accounts/__init__.py": [],
+    "backend/accounts/admin.py": [
+      "DepartmentAdmin",
+      "UserAdmin",
+      "UserProfileAdmin",
+      "NotificationAdmin",
+      "EmailOTPAdmin"
+    ],
+    "backend/accounts/apps.py": [
+      "AccountsConfig",
+      "AccountsConfig"
+    ],
+    "backend/accounts/management/__init__.py": [],
+    "backend/accounts/management/commands/__init__.py": [],
+    "backend/accounts/management/commands/check_redis.py": [
+      "mask_redis_url",
+      "Command"
+    ],
+    "backend/accounts/management/commands/clear_users.py": [
+      "Command"
+    ],
+    "backend/accounts/management/commands/create_admin.py": [
+      "Command"
+    ],
+    "backend/accounts/management/commands/seed_demo.py": [
+      "Command"
+    ],
+    "backend/accounts/migrations/0001_initial.py": [
+      "Migration"
+    ],
+    "backend/accounts/migrations/0002_userprofile_approval_status.py": [
+      "Migration"
+    ],
+    "backend/accounts/migrations/0003_emailotp.py": [
+      "Migration"
+    ],
+    "backend/accounts/migrations/0004_alter_userprofile_approval_status.py": [
+      "Migration"
+    ],
+    "backend/accounts/migrations/0005_notification_notification_type_notification_title.py": [
+      "Migration"
+    ],
+    "backend/accounts/migrations/__init__.py": [],
+    "backend/accounts/models.py": [
+      "Department",
+      "User",
+      "UserProfile",
+      "Notification",
+      "EmailOTP"
+    ],
+    "backend/accounts/serializers.py": [
+      "RequestOTPSerializer",
+      "VerifyOTPSerializer",
+      "RegisterSerializer",
+      "LoginSerializer",
+      "UserSerializer",
+      "NotificationSerializer"
+    ],
+    "backend/accounts/services/__init__.py": [],
+    "backend/accounts/services/otp.py": [
+      "generate_otp",
+      "get_otp",
+      "get_otp_status",
+      "send_otp_email",
+      "request_otp",
+      "verify_otp"
+    ],
+    "backend/accounts/signals.py": [
+      "clear_department_cache",
+      "create_user_profile"
+    ],
+    "backend/accounts/test_otp_pytest.py": [
+      "TestPytestOTPAuthentication"
+    ],
+    "backend/accounts/test_redis_pytest.py": [
+      "test_mask_redis_url_masks_password",
+      "test_mask_redis_url_handles_local_and_empty",
+      "test_check_redis_command_execution",
+      "test_check_redis_command_mocked_success",
+      "test_check_redis_command_mocked_failure"
+    ],
+    "backend/accounts/tests.py": [
+      "AccountsDepartmentAuthorizationTests"
+    ],
+    "backend/accounts/urls.py": [],
+    "backend/accounts/views.py": [
+      "DepartmentListView",
+      "GetOTPView",
+      "RequestOTPView",
+      "VerifyOTPView",
+      "PasswordResetView",
+      "RegisterView",
+      "LoginView",
+      "GoogleLoginView",
+      "MeView",
+      "NotificationListView",
+      "MarkNotificationReadView",
+      "MarkAllNotificationsReadView"
+    ],
+    "backend/analytics/__init__.py": [],
+    "backend/analytics/admin.py": [
+      "AnalyticsSnapshotAdmin"
+    ],
+    "backend/analytics/apps.py": [
+      "AnalyticsConfig"
+    ],
+    "backend/analytics/migrations/0001_initial.py": [
+      "Migration"
+    ],
+    "backend/analytics/migrations/__init__.py": [],
+    "backend/analytics/models.py": [
+      "AnalyticsSnapshot"
+    ],
+    "backend/analytics/tests.py": [
+      "AnalyticsDepartmentAuthorizationTests"
+    ],
+    "backend/analytics/urls.py": [],
+    "backend/analytics/views.py": [
+      "LibrarianDashboardView",
+      "StudentsListView",
+      "PendingStudentsView",
+      "ApproveStudentView",
+      "RejectStudentView",
+      "StudentRecommendationsView",
+      "StudentBorrowsView",
+      "StudentAnalyticsView"
+    ],
+    "backend/book_recommondation/__init__.py": [],
+    "backend/book_recommondation/asgi.py": [],
+    "backend/book_recommondation/settings.py": [],
+    "backend/book_recommondation/urls.py": [
+      "health_check"
+    ],
+    "backend/book_recommondation/wsgi.py": [],
+    "backend/books/__init__.py": [],
+    "backend/books/admin.py": [
+      "BookAdmin",
+      "BookInteractionAdmin",
+      "SearchHistoryAdmin",
+      "BookDwellTimeAdmin"
+    ],
+    "backend/books/apps.py": [
+      "BooksConfig"
+    ],
+    "backend/books/cache_utils.py": [
+      "department_list_key",
+      "categories_key",
+      "similar_books_key",
+      "dashboard_key",
+      "recommendation_key",
+      "book_detail_key",
+      "book_list_default_key",
+      "safe_cache_get",
+      "safe_cache_set",
+      "safe_delete_pattern",
+      "invalidate_department_cache",
+      "invalidate_categories_cache",
+      "invalidate_book_cache",
+      "invalidate_catalog_cache",
+      "invalidate_dashboard_cache",
+      "invalidate_user_recommendations"
+    ],
+    "backend/books/management/__init__.py": [],
+    "backend/books/management/commands/__init__.py": [],
+    "backend/books/management/commands/import_books.py": [
+      "to_int",
+      "to_float",
+      "Command"
+    ],
+    "backend/books/management/commands/seed_interactions.py": [
+      "Command"
+    ],
+    "backend/books/migrations/0001_initial.py": [
+      "Migration"
+    ],
+    "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py": [
+      "Migration"
+    ],
+    "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py": [
+      "Migration"
+    ],
+    "backend/books/migrations/0004_bookreview.py": [
+      "Migration"
+    ],
+    "backend/books/migrations/__init__.py": [],
+    "backend/books/models.py": [
+      "Book",
+      "BookInteraction",
+      "SearchHistory",
+      "BookDwellTime",
+      "BookReview"
+    ],
+    "backend/books/serializers.py": [
+      "BookSerializer",
+      "BookInteractionSerializer",
+      "SearchHistorySerializer",
+      "BookDwellTimeSerializer",
+      "BookReviewSerializer"
+    ],
+    "backend/books/services/csv_importer.py": [
+      "_to_int",
+      "_to_float",
+      "_clean_str",
+      "import_books_from_csv",
+      "_do_import_books"
+    ],
+    "backend/books/services/recommender.py": [
+      "_get_department_for_user",
+      "_ids_to_books",
+      "_get_cache_key",
+      "invalidate_user_recommendations",
+      "invalidate_book_similar_cache",
+      "_acquire_stampede_lock",
+      "_release_stampede_lock",
+      "content_based",
+      "_compute_content_based",
+      "interaction_based",
+      "_compute_interaction_based",
+      "hybrid",
+      "_category_fallback",
+      "_author_fallback",
+      "get_similar_books",
+      "_compute_similar_books"
+    ],
+    "backend/books/test_recommender_pytest.py": [
+      "TestPytestRecommenderEngine"
+    ],
+    "backend/books/test_redis_caching_pytest.py": [
+      "clear_cache_before_each_test",
+      "TestCacheMissHitLifecycle",
+      "TestCacheInvalidation",
+      "TestDepartmentAndUserIsolation",
+      "TestRedisFailureGracefulFallback",
+      "TestBookCacheTTL"
+    ],
+    "backend/books/test_reviews_pytest.py": [
+      "TestBookReviewsAndNotifications"
+    ],
+    "backend/books/tests.py": [
+      "BooksDepartmentAuthorizationTests"
+    ],
+    "backend/books/urls.py": [],
+    "backend/books/views.py": [
+      "IsLibrarianOrAdmin",
+      "BookPagination",
+      "_get_user_department",
+      "BookListView",
+      "BookDetailView",
+      "TrackBookView",
+      "InteractionCreateView",
+      "BookDwellTimeView",
+      "RecommendationView",
+      "BookManageView",
+      "SimilarBooksView",
+      "BookCSVImportView",
+      "BookCategoriesView",
+      "BookReviewView"
+    ],
+    "backend/borrows/__init__.py": [],
+    "backend/borrows/admin.py": [
+      "BorrowAdmin"
+    ],
+    "backend/borrows/apps.py": [
+      "BorrowsConfig"
+    ],
+    "backend/borrows/migrations/0001_initial.py": [
+      "Migration"
+    ],
+    "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py": [
+      "Migration"
+    ],
+    "backend/borrows/migrations/__init__.py": [],
+    "backend/borrows/models.py": [
+      "Borrow"
+    ],
+    "backend/borrows/serializers.py": [
+      "BorrowSerializer"
+    ],
+    "backend/borrows/test_borrows_pytest.py": [
+      "TestPytestBorrowingWorkflows"
+    ],
+    "backend/borrows/tests.py": [
+      "BorrowsDepartmentAuthorizationTests"
+    ],
+    "backend/borrows/urls.py": [],
+    "backend/borrows/views.py": [
+      "BorrowRequestView",
+      "MyBorrowsView",
+      "PendingBorrowsView",
+      "ApproveBorrowView",
+      "ReturnBookView",
+      "RejectBorrowView",
+      "DepartmentBorrowsView"
+    ],
+    "backend/conftest.py": [
+      "api_client",
+      "cs_dept",
+      "mech_dept",
+      "super_admin",
+      "cs_librarian",
+      "mech_librarian",
+      "approved_cs_student",
+      "pending_cs_student",
+      "approved_mech_student",
+      "cs_sample_books",
+      "mech_sample_books",
+      "auth_headers"
+    ],
+    "backend/manage.py": [
+      "main"
+    ],
+    "backend/messaging/__init__.py": [],
+    "backend/messaging/admin.py": [
+      "MessageAdmin"
+    ],
+    "backend/messaging/apps.py": [
+      "MessagingConfig"
+    ],
+    "backend/messaging/migrations/0001_initial.py": [
+      "Migration"
+    ],
+    "backend/messaging/migrations/__init__.py": [],
+    "backend/messaging/models.py": [
+      "Message"
+    ],
+    "backend/messaging/serializers.py": [
+      "UserBriefSerializer",
+      "MessageSerializer",
+      "MessageCreateSerializer"
+    ],
+    "backend/messaging/tests.py": [
+      "MessagingAPITests"
+    ],
+    "backend/messaging/urls.py": [],
+    "backend/messaging/views.py": [
+      "MessageViewSet"
+    ],
+    "backend/qa_tests/e2e_student_flow.py": [],
+    "backend/qa_tests/librarian_e2e.py": [],
+    "backend/scripts/enrich_prog_books.py": [
+      "clean_description",
+      "search_openlibrary",
+      "process_item"
+    ],
+    "frontend/eslint.config.js": [],
+    "frontend/nginx.conf": [],
+    "frontend/src/App.jsx": [
+      "App"
+    ],
+    "frontend/src/api/authApi.js": [
+      "login",
+      "register",
+      "googleLogin",
+      "requestOTP",
+      "verifyOTP",
+      "getOTPStatus",
+      "resetPassword",
+      "refreshToken",
+      "getDepartments"
+    ],
+    "frontend/src/api/axios.js": [
+      "BASE_URL",
+      "apiClient"
+    ],
+    "frontend/src/api/bookApi.js": [
+      "fetchBooks",
+      "getBookCategories",
+      "getCategories",
+      "createCategory",
+      "updateCategory",
+      "deleteCategory",
+      "createBook",
+      "updateBook",
+      "deleteBook",
+      "importBooksCSV",
+      "getSimilarBooks"
+    ],
+    "frontend/src/api/borrowApi.js": [
+      "requestBorrow",
+      "returnBook",
+      "getMyBorrows",
+      "getBorrowRequests",
+      "approveBorrow",
+      "rejectBorrow",
+      "getBorrowHistory",
+      "getOverdueBooks",
+      "getDepartmentBorrows"
+    ],
+    "frontend/src/api/index.js": [
+      "apiClient",
+      "BASE_URL"
+    ],
+    "frontend/src/api/recommendationApi.js": [
+      "fetchRecommendations",
+      "trackInteraction",
+      "trackDwellTime"
+    ],
+    "frontend/src/api/reviewApi.js": [
+      "getBookReviews",
+      "submitReview",
+      "updateReview",
+      "deleteReview"
+    ],
+    "frontend/src/api/userApi.js": [
+      "getStudents",
+      "getStudentList",
+      "getPendingStudents",
+      "getStudent",
+      "updateStudent",
+      "deleteStudent",
+      "approveStudent",
+      "rejectStudent",
+      "getStudentBorrows",
+      "getStudentAnalytics",
+      "fetchLibrarianDashboard",
+      "getAdminStats",
+      "getAdminStudents",
+      "getAdminBooks",
+      "sendMessageToStudent",
+      "getNotifications",
+      "markNotificationRead",
+      "markAllNotificationsRead",
+      "getPageContent",
+      "listPageContents",
+      "createPageContent",
+      "updatePageContent",
+      "deletePageContent"
+    ],
+    "frontend/src/components/BookCard.jsx": [
+      "BookCard"
+    ],
+    "frontend/src/components/BookDetail.jsx": [
+      "BookDetail"
+    ],
+    "frontend/src/components/ConfirmModal.jsx": [
+      "ConfirmModal"
+    ],
+    "frontend/src/components/ErrorMessage.jsx": [
+      "ErrorMessage"
+    ],
+    "frontend/src/components/Footer.jsx": [
+      "Footer"
+    ],
+    "frontend/src/components/GoogleAuthButton.jsx": [
+      "GoogleAuthButton"
+    ],
+    "frontend/src/components/Layout.jsx": [
+      "Layout"
+    ],
+    "frontend/src/components/Lightbox.jsx": [
+      "Lightbox"
+    ],
+    "frontend/src/components/Loading.jsx": [
+      "Loading"
+    ],
+    "frontend/src/components/Navbar.jsx": [
+      "Navbar"
+    ],
+    "frontend/src/components/Notifications.jsx": [
+      "Notifications"
+    ],
+    "frontend/src/components/PageTransition.jsx": [
+      "PageTransition"
+    ],
+    "frontend/src/components/ProtectedRoute.jsx": [
+      "ProtectedRoute"
+    ],
+    "frontend/src/components/Toast.jsx": [
+      "Toast"
+    ],
+    "frontend/src/components/dashboard/LibrarianDashboard.jsx": [
+      "LibrarianDashboard"
+    ],
+    "frontend/src/components/navigation/PublicNavbar.jsx": [
+      "PublicNavbar"
+    ],
+    "frontend/src/components/navigation/StudentNavbar.jsx": [
+      "StudentNavbar"
+    ],
+    "frontend/src/context/AuthContext.jsx": [
+      "AuthProvider"
+    ],
+    "frontend/src/context/AuthContextCore.js": [
+      "AuthContext"
+    ],
+    "frontend/src/context/AuthProvider.jsx": [
+      "AuthProvider"
+    ],
+    "frontend/src/context/useAuth.js": [
+      "useAuth"
+    ],
+    "frontend/src/layouts/LibrarianLayout.jsx": [
+      "LibrarianLayout"
+    ],
+    "frontend/src/layouts/PublicLayout.jsx": [
+      "PublicLayout"
+    ],
+    "frontend/src/layouts/StudentLayout.jsx": [
+      "StudentLayout"
+    ],
+    "frontend/src/main.jsx": [],
+    "frontend/src/pages/AboutUs.jsx": [
+      "AboutUs"
+    ],
+    "frontend/src/pages/AccountDetails.jsx": [
+      "AccountDetails"
+    ],
+    "frontend/src/pages/Books.jsx": [
+      "Books"
+    ],
+    "frontend/src/pages/Gallery.jsx": [
+      "Gallery"
+    ],
+    "frontend/src/pages/Home.jsx": [
+      "Home"
+    ],
+    "frontend/src/pages/LibrarianDashboard.jsx": [
+      "default"
+    ],
+    "frontend/src/pages/Login.jsx": [
+      "Login"
+    ],
+    "frontend/src/pages/ManageBooks.jsx": [
+      "ManageBooks"
+    ],
+    "frontend/src/pages/MyBorrows.jsx": [
+      "MyBorrows"
+    ],
+    "frontend/src/pages/Recommendations.jsx": [
+      "Recommendations"
+    ],
+    "frontend/src/pages/StudentsList.jsx": [
+      "StudentsList"
+    ],
+    "frontend/src/pages/admin/AdminBooks.jsx": [
+      "AdminBooks"
+    ],
+    "frontend/src/pages/admin/AdminDashboard.jsx": [
+      "AdminDashboard"
+    ],
+    "frontend/src/pages/admin/AdminStudents.jsx": [
+      "AdminStudents"
+    ],
+    "frontend/src/pages/librarian/LibrarianBorrowing.jsx": [
+      "LibrarianBorrowing"
+    ],
+    "frontend/src/pages/librarian/LibrarianReports.jsx": [
+      "LibrarianReports"
+    ],
+    "frontend/src/pages/librarian/LibrarianReturns.jsx": [
+      "LibrarianReturns"
+    ],
+    "frontend/src/services/api.js": [
+      "fetchRecommendations",
+      "trackInteraction",
+      "trackDwellTime",
+      "getMyBorrows",
+      "returnBook",
+      "getDepartmentBorrows",
+      "requestBorrow",
+      "getBorrowRequests",
+      "approveBorrow",
+      "rejectBorrow",
+      "getStudents",
+      "approveStudent",
+      "rejectStudent",
+      "getStudentBorrows",
+      "getStudentAnalytics",
+      "fetchLibrarianDashboard",
+      "getNotifications",
+      "markNotificationRead",
+      "markAllNotificationsRead",
+      "getBorrowHistory",
+      "getOverdueBooks",
+      "createBook",
+      "updateBook",
+      "deleteBook",
+      "getCategories",
+      "createCategory",
+      "updateCategory",
+      "deleteCategory",
+      "importBooksCSV",
+      "getStudentList",
+      "getPendingStudents",
+      "getStudent",
+      "updateStudent",
+      "deleteStudent",
+      "getAdminStats",
+      "getAdminStudents",
+      "getAdminBooks",
+      "sendMessageToStudent",
+      "getPageContent",
+      "listPageContents",
+      "createPageContent",
+      "updatePageContent",
+      "deletePageContent",
+      "authenticatedFetch",
+      "BASE_URL"
+    ],
+    "frontend/vite.config.js": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "frontend/src/App.jsx",
+          "language": "javascript",
+          "sizeLines": 90,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/ConfirmModal.jsx",
+          "language": "javascript",
+          "sizeLines": 19,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/Footer.jsx",
+          "language": "javascript",
+          "sizeLines": 63,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/Lightbox.jsx",
+          "language": "javascript",
+          "sizeLines": 142,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/Navbar.jsx",
+          "language": "javascript",
+          "sizeLines": 192,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/Notifications.jsx",
+          "language": "javascript",
+          "sizeLines": 162,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/PageTransition.jsx",
+          "language": "javascript",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/ProtectedRoute.jsx",
+          "language": "javascript",
+          "sizeLines": 45,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/Toast.jsx",
+          "language": "javascript",
+          "sizeLines": 19,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/dashboard/LibrarianDashboard.jsx",
+          "language": "javascript",
+          "sizeLines": 517,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/navigation/PublicNavbar.jsx",
+          "language": "javascript",
+          "sizeLines": 229,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/navigation/StudentNavbar.jsx",
+          "language": "javascript",
+          "sizeLines": 171,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/context/AuthContext.jsx",
+          "language": "javascript",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/context/useAuth.js",
+          "language": "javascript",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/layouts/LibrarianLayout.jsx",
+          "language": "javascript",
+          "sizeLines": 202,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/layouts/PublicLayout.jsx",
+          "language": "javascript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/layouts/StudentLayout.jsx",
+          "language": "javascript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/main.jsx",
+          "language": "javascript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/AboutUs.jsx",
+          "language": "javascript",
+          "sizeLines": 189,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/Gallery.jsx",
+          "language": "javascript",
+          "sizeLines": 133,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/Home.jsx",
+          "language": "javascript",
+          "sizeLines": 191,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/LibrarianDashboard.jsx",
+          "language": "javascript",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/ManageBooks.jsx",
+          "language": "javascript",
+          "sizeLines": 681,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/MyBorrows.jsx",
+          "language": "javascript",
+          "sizeLines": 264,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/StudentsList.jsx",
+          "language": "javascript",
+          "sizeLines": 837,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminBooks.jsx",
+          "language": "javascript",
+          "sizeLines": 391,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminDashboard.jsx",
+          "language": "javascript",
+          "sizeLines": 985,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminStudents.jsx",
+          "language": "javascript",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+          "language": "javascript",
+          "sizeLines": 249,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/librarian/LibrarianReports.jsx",
+          "language": "javascript",
+          "sizeLines": 222,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/librarian/LibrarianReturns.jsx",
+          "language": "javascript",
+          "sizeLines": 219,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "frontend/src/App.jsx": [
+          "frontend/src/components/PageTransition.jsx",
+          "frontend/src/components/ProtectedRoute.jsx",
+          "frontend/src/context/AuthContext.jsx",
+          "frontend/src/layouts/LibrarianLayout.jsx",
+          "frontend/src/layouts/PublicLayout.jsx",
+          "frontend/src/layouts/StudentLayout.jsx",
+          "frontend/src/pages/AboutUs.jsx",
+          "frontend/src/pages/AccountDetails.jsx",
+          "frontend/src/pages/Books.jsx",
+          "frontend/src/pages/Gallery.jsx",
+          "frontend/src/pages/Home.jsx",
+          "frontend/src/pages/LibrarianDashboard.jsx",
+          "frontend/src/pages/Login.jsx",
+          "frontend/src/pages/ManageBooks.jsx",
+          "frontend/src/pages/MyBorrows.jsx",
+          "frontend/src/pages/Recommendations.jsx",
+          "frontend/src/pages/StudentsList.jsx",
+          "frontend/src/pages/admin/AdminBooks.jsx",
+          "frontend/src/pages/admin/AdminDashboard.jsx",
+          "frontend/src/pages/admin/AdminStudents.jsx",
+          "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+          "frontend/src/pages/librarian/LibrarianReports.jsx",
+          "frontend/src/pages/librarian/LibrarianReturns.jsx"
+        ],
+        "frontend/src/components/ConfirmModal.jsx": [],
+        "frontend/src/components/Footer.jsx": [],
+        "frontend/src/components/Lightbox.jsx": [],
+        "frontend/src/components/Navbar.jsx": [
+          "frontend/src/components/Notifications.jsx"
+        ],
+        "frontend/src/components/Notifications.jsx": [
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/components/PageTransition.jsx": [],
+        "frontend/src/components/ProtectedRoute.jsx": [
+          "frontend/src/context/useAuth.js"
+        ],
+        "frontend/src/components/Toast.jsx": [],
+        "frontend/src/components/dashboard/LibrarianDashboard.jsx": [
+          "frontend/src/context/useAuth.js",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/components/navigation/PublicNavbar.jsx": [
+          "frontend/src/components/Notifications.jsx",
+          "frontend/src/context/useAuth.js"
+        ],
+        "frontend/src/components/navigation/StudentNavbar.jsx": [
+          "frontend/src/components/Notifications.jsx",
+          "frontend/src/context/useAuth.js"
+        ],
+        "frontend/src/context/AuthContext.jsx": [],
+        "frontend/src/context/useAuth.js": [
+          "frontend/src/context/AuthContextCore.js"
+        ],
+        "frontend/src/layouts/LibrarianLayout.jsx": [
+          "frontend/src/components/Notifications.jsx",
+          "frontend/src/context/useAuth.js"
+        ],
+        "frontend/src/layouts/PublicLayout.jsx": [
+          "frontend/src/components/Footer.jsx",
+          "frontend/src/components/navigation/PublicNavbar.jsx"
+        ],
+        "frontend/src/layouts/StudentLayout.jsx": [
+          "frontend/src/components/Footer.jsx",
+          "frontend/src/components/navigation/StudentNavbar.jsx"
+        ],
+        "frontend/src/main.jsx": [
+          "frontend/src/App.jsx",
+          "frontend/src/index.css"
+        ],
+        "frontend/src/pages/AboutUs.jsx": [
+          "frontend/src/components/Footer.jsx",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/Gallery.jsx": [
+          "frontend/src/components/Footer.jsx",
+          "frontend/src/components/Lightbox.jsx",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/Home.jsx": [
+          "frontend/src/components/Footer.jsx",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/LibrarianDashboard.jsx": [],
+        "frontend/src/pages/ManageBooks.jsx": [
+          "frontend/src/components/ConfirmModal.jsx",
+          "frontend/src/components/Toast.jsx",
+          "frontend/src/context/useAuth.js",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/MyBorrows.jsx": [
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/StudentsList.jsx": [
+          "frontend/src/components/Toast.jsx",
+          "frontend/src/context/useAuth.js",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/admin/AdminBooks.jsx": [
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/admin/AdminDashboard.jsx": [
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/admin/AdminStudents.jsx": [],
+        "frontend/src/pages/librarian/LibrarianBorrowing.jsx": [
+          "frontend/src/components/Toast.jsx",
+          "frontend/src/context/useAuth.js",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/librarian/LibrarianReports.jsx": [
+          "frontend/src/context/useAuth.js",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/librarian/LibrarianReturns.jsx": [
+          "frontend/src/components/Toast.jsx",
+          "frontend/src/context/useAuth.js",
+          "frontend/src/services/api.js"
+        ]
+      },
+      "neighborMap": {
+        "frontend/src/App.jsx": [
+          {
+            "path": "frontend/src/pages/AccountDetails.jsx",
+            "batchIndex": 4,
+            "symbols": [
+              "AccountDetails"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/Books.jsx",
+            "batchIndex": 4,
+            "symbols": [
+              "Books"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/Login.jsx",
+            "batchIndex": 4,
+            "symbols": [
+              "Login"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/Recommendations.jsx",
+            "batchIndex": 4,
+            "symbols": [
+              "Recommendations"
+            ]
+          }
+        ],
+        "frontend/src/components/Footer.jsx": [
+          {
+            "path": "frontend/src/pages/Books.jsx",
+            "batchIndex": 4,
+            "symbols": [
+              "Books"
+            ]
+          }
+        ],
+        "frontend/src/components/Notifications.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/components/dashboard/LibrarianDashboard.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/context/useAuth.js": [
+          {
+            "path": "frontend/src/context/AuthContextCore.js",
+            "batchIndex": 4,
+            "symbols": [
+              "AuthContext"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/Login.jsx",
+            "batchIndex": 4,
+            "symbols": [
+              "Login"
+            ]
+          }
+        ],
+        "frontend/src/main.jsx": [
+          {
+            "path": "frontend/src/index.css",
+            "batchIndex": 14,
+            "symbols": []
+          }
+        ],
+        "frontend/src/pages/AboutUs.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/Gallery.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/Home.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/ManageBooks.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/MyBorrows.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/StudentsList.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/admin/AdminBooks.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/admin/AdminDashboard.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/librarian/LibrarianBorrowing.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/librarian/LibrarianReports.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ],
+        "frontend/src/pages/librarian/LibrarianReturns.jsx": [
+          {
+            "path": "frontend/src/services/api.js",
+            "batchIndex": 4,
+            "symbols": [
+              "fetchRecommendations",
+              "trackInteraction",
+              "trackDwellTime",
+              "getMyBorrows",
+              "returnBook",
+              "getDepartmentBorrows",
+              "requestBorrow",
+              "getBorrowRequests",
+              "approveBorrow",
+              "rejectBorrow",
+              "getStudents",
+              "approveStudent",
+              "rejectStudent",
+              "getStudentBorrows",
+              "getStudentAnalytics",
+              "fetchLibrarianDashboard",
+              "getNotifications",
+              "markNotificationRead",
+              "markAllNotificationsRead",
+              "getBorrowHistory",
+              "getOverdueBooks",
+              "createBook",
+              "updateBook",
+              "deleteBook",
+              "getCategories",
+              "createCategory",
+              "updateCategory",
+              "deleteCategory",
+              "importBooksCSV",
+              "getStudentList",
+              "getPendingStudents",
+              "getStudent",
+              "updateStudent",
+              "deleteStudent",
+              "getAdminStats",
+              "getAdminStudents",
+              "getAdminBooks",
+              "sendMessageToStudent",
+              "getPageContent",
+              "listPageContents",
+              "createPageContent",
+              "updatePageContent",
+              "deletePageContent",
+              "authenticatedFetch",
+              "BASE_URL"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "backend/accounts/admin.py",
+          "language": "python",
+          "sizeLines": 65,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/management/commands/clear_users.py",
+          "language": "python",
+          "sizeLines": 44,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/management/commands/seed_demo.py",
+          "language": "python",
+          "sizeLines": 224,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/models.py",
+          "language": "python",
+          "sizeLines": 138,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/serializers.py",
+          "language": "python",
+          "sizeLines": 278,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/services/otp.py",
+          "language": "python",
+          "sizeLines": 207,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/signals.py",
+          "language": "python",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/test_otp_pytest.py",
+          "language": "python",
+          "sizeLines": 129,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/tests.py",
+          "language": "python",
+          "sizeLines": 349,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/urls.py",
+          "language": "python",
+          "sizeLines": 34,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/views.py",
+          "language": "python",
+          "sizeLines": 453,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/admin.py",
+          "language": "python",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/models.py",
+          "language": "python",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/tests.py",
+          "language": "python",
+          "sizeLines": 272,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/urls.py",
+          "language": "python",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/views.py",
+          "language": "python",
+          "sizeLines": 458,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/book_recommondation/urls.py",
+          "language": "python",
+          "sizeLines": 24,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/admin.py",
+          "language": "python",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/cache_utils.py",
+          "language": "python",
+          "sizeLines": 200,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/management/commands/import_books.py",
+          "language": "python",
+          "sizeLines": 111,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/management/commands/seed_interactions.py",
+          "language": "python",
+          "sizeLines": 81,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "backend/accounts/admin.py": [
+          "backend/accounts/models.py"
+        ],
+        "backend/accounts/management/commands/clear_users.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py",
+          "backend/borrows/models.py"
+        ],
+        "backend/accounts/management/commands/seed_demo.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py",
+          "backend/borrows/models.py"
+        ],
+        "backend/accounts/models.py": [],
+        "backend/accounts/serializers.py": [
+          "backend/accounts/models.py"
+        ],
+        "backend/accounts/services/otp.py": [
+          "backend/accounts/models.py"
+        ],
+        "backend/accounts/signals.py": [
+          "backend/accounts/models.py",
+          "backend/books/cache_utils.py"
+        ],
+        "backend/accounts/test_otp_pytest.py": [
+          "backend/accounts/models.py",
+          "backend/accounts/services/otp.py"
+        ],
+        "backend/accounts/tests.py": [
+          "backend/accounts/models.py",
+          "backend/accounts/services/otp.py"
+        ],
+        "backend/accounts/urls.py": [
+          "backend/accounts/views.py"
+        ],
+        "backend/accounts/views.py": [
+          "backend/accounts/models.py",
+          "backend/accounts/serializers.py",
+          "backend/accounts/services/otp.py",
+          "backend/books/cache_utils.py"
+        ],
+        "backend/analytics/admin.py": [
+          "backend/analytics/models.py"
+        ],
+        "backend/analytics/models.py": [
+          "backend/accounts/models.py"
+        ],
+        "backend/analytics/tests.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py",
+          "backend/borrows/models.py"
+        ],
+        "backend/analytics/urls.py": [
+          "backend/analytics/views.py"
+        ],
+        "backend/analytics/views.py": [
+          "backend/accounts/models.py",
+          "backend/accounts/serializers.py",
+          "backend/books/cache_utils.py",
+          "backend/books/models.py",
+          "backend/books/serializers.py",
+          "backend/books/services/recommender.py",
+          "backend/borrows/models.py",
+          "backend/borrows/serializers.py"
+        ],
+        "backend/book_recommondation/urls.py": [
+          "backend/books/views.py"
+        ],
+        "backend/books/admin.py": [
+          "backend/books/models.py"
+        ],
+        "backend/books/cache_utils.py": [],
+        "backend/books/management/commands/import_books.py": [
+          "backend/books/models.py"
+        ],
+        "backend/books/management/commands/seed_interactions.py": [
+          "backend/books/models.py"
+        ]
+      },
+      "neighborMap": {
+        "backend/accounts/management/commands/clear_users.py": [
+          {
+            "path": "backend/books/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Book",
+              "BookInteraction",
+              "SearchHistory",
+              "BookDwellTime",
+              "BookReview"
+            ]
+          },
+          {
+            "path": "backend/borrows/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Borrow"
+            ]
+          }
+        ],
+        "backend/accounts/management/commands/seed_demo.py": [
+          {
+            "path": "backend/books/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Book",
+              "BookInteraction",
+              "SearchHistory",
+              "BookDwellTime",
+              "BookReview"
+            ]
+          },
+          {
+            "path": "backend/borrows/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Borrow"
+            ]
+          }
+        ],
+        "backend/accounts/models.py": [
+          {
+            "path": "backend/books/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Book",
+              "BookInteraction",
+              "SearchHistory",
+              "BookDwellTime",
+              "BookReview"
+            ]
+          },
+          {
+            "path": "backend/books/services/csv_importer.py",
+            "batchIndex": 3,
+            "symbols": [
+              "_to_int",
+              "_to_float",
+              "_clean_str",
+              "import_books_from_csv",
+              "_do_import_books"
+            ]
+          },
+          {
+            "path": "backend/books/test_redis_caching_pytest.py",
+            "batchIndex": 3,
+            "symbols": [
+              "clear_cache_before_each_test",
+              "TestCacheMissHitLifecycle",
+              "TestCacheInvalidation",
+              "TestDepartmentAndUserIsolation",
+              "TestRedisFailureGracefulFallback",
+              "TestBookCacheTTL"
+            ]
+          },
+          {
+            "path": "backend/books/test_reviews_pytest.py",
+            "batchIndex": 3,
+            "symbols": [
+              "TestBookReviewsAndNotifications"
+            ]
+          },
+          {
+            "path": "backend/books/tests.py",
+            "batchIndex": 3,
+            "symbols": [
+              "BooksDepartmentAuthorizationTests"
+            ]
+          },
+          {
+            "path": "backend/books/views.py",
+            "batchIndex": 3,
+            "symbols": [
+              "IsLibrarianOrAdmin",
+              "BookPagination",
+              "_get_user_department",
+              "BookListView",
+              "BookDetailView",
+              "TrackBookView",
+              "InteractionCreateView",
+              "BookDwellTimeView",
+              "RecommendationView",
+              "BookManageView",
+              "SimilarBooksView",
+              "BookCSVImportView",
+              "BookCategoriesView",
+              "BookReviewView"
+            ]
+          },
+          {
+            "path": "backend/borrows/test_borrows_pytest.py",
+            "batchIndex": 3,
+            "symbols": [
+              "TestPytestBorrowingWorkflows"
+            ]
+          },
+          {
+            "path": "backend/borrows/tests.py",
+            "batchIndex": 3,
+            "symbols": [
+              "BorrowsDepartmentAuthorizationTests"
+            ]
+          },
+          {
+            "path": "backend/borrows/views.py",
+            "batchIndex": 3,
+            "symbols": [
+              "BorrowRequestView",
+              "MyBorrowsView",
+              "PendingBorrowsView",
+              "ApproveBorrowView",
+              "ReturnBookView",
+              "RejectBorrowView",
+              "DepartmentBorrowsView"
+            ]
+          },
+          {
+            "path": "backend/conftest.py",
+            "batchIndex": 3,
+            "symbols": [
+              "api_client",
+              "cs_dept",
+              "mech_dept",
+              "super_admin",
+              "cs_librarian",
+              "mech_librarian",
+              "approved_cs_student",
+              "pending_cs_student",
+              "approved_mech_student",
+              "cs_sample_books",
+              "mech_sample_books",
+              "auth_headers"
+            ]
+          },
+          {
+            "path": "backend/messaging/tests.py",
+            "batchIndex": 5,
+            "symbols": [
+              "MessagingAPITests"
+            ]
+          },
+          {
+            "path": "backend/qa_tests/librarian_e2e.py",
+            "batchIndex": 3,
+            "symbols": []
+          }
+        ],
+        "backend/analytics/tests.py": [
+          {
+            "path": "backend/books/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Book",
+              "BookInteraction",
+              "SearchHistory",
+              "BookDwellTime",
+              "BookReview"
+            ]
+          },
+          {
+            "path": "backend/borrows/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Borrow"
+            ]
+          }
+        ],
+        "backend/analytics/views.py": [
+          {
+            "path": "backend/books/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Book",
+              "BookInteraction",
+              "SearchHistory",
+              "BookDwellTime",
+              "BookReview"
+            ]
+          },
+          {
+            "path": "backend/books/serializers.py",
+            "batchIndex": 3,
+            "symbols": [
+              "BookSerializer",
+              "BookInteractionSerializer",
+              "SearchHistorySerializer",
+              "BookDwellTimeSerializer",
+              "BookReviewSerializer"
+            ]
+          },
+          {
+            "path": "backend/books/services/recommender.py",
+            "batchIndex": 3,
+            "symbols": [
+              "_get_department_for_user",
+              "_ids_to_books",
+              "_get_cache_key",
+              "invalidate_user_recommendations",
+              "invalidate_book_similar_cache",
+              "_acquire_stampede_lock",
+              "_release_stampede_lock",
+              "content_based",
+              "_compute_content_based",
+              "interaction_based",
+              "_compute_interaction_based",
+              "hybrid",
+              "_category_fallback",
+              "_author_fallback",
+              "get_similar_books",
+              "_compute_similar_books"
+            ]
+          },
+          {
+            "path": "backend/borrows/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Borrow"
+            ]
+          },
+          {
+            "path": "backend/borrows/serializers.py",
+            "batchIndex": 3,
+            "symbols": [
+              "BorrowSerializer"
+            ]
+          }
+        ],
+        "backend/book_recommondation/urls.py": [
+          {
+            "path": "backend/books/views.py",
+            "batchIndex": 3,
+            "symbols": [
+              "IsLibrarianOrAdmin",
+              "BookPagination",
+              "_get_user_department",
+              "BookListView",
+              "BookDetailView",
+              "TrackBookView",
+              "InteractionCreateView",
+              "BookDwellTimeView",
+              "RecommendationView",
+              "BookManageView",
+              "SimilarBooksView",
+              "BookCSVImportView",
+              "BookCategoriesView",
+              "BookReviewView"
+            ]
+          }
+        ],
+        "backend/books/admin.py": [
+          {
+            "path": "backend/books/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Book",
+              "BookInteraction",
+              "SearchHistory",
+              "BookDwellTime",
+              "BookReview"
+            ]
+          }
+        ],
+        "backend/books/cache_utils.py": [
+          {
+            "path": "backend/books/services/recommender.py",
+            "batchIndex": 3,
+            "symbols": [
+              "_get_department_for_user",
+              "_ids_to_books",
+              "_get_cache_key",
+              "invalidate_user_recommendations",
+              "invalidate_book_similar_cache",
+              "_acquire_stampede_lock",
+              "_release_stampede_lock",
+              "content_based",
+              "_compute_content_based",
+              "interaction_based",
+              "_compute_interaction_based",
+              "hybrid",
+              "_category_fallback",
+              "_author_fallback",
+              "get_similar_books",
+              "_compute_similar_books"
+            ]
+          },
+          {
+            "path": "backend/books/test_redis_caching_pytest.py",
+            "batchIndex": 3,
+            "symbols": [
+              "clear_cache_before_each_test",
+              "TestCacheMissHitLifecycle",
+              "TestCacheInvalidation",
+              "TestDepartmentAndUserIsolation",
+              "TestRedisFailureGracefulFallback",
+              "TestBookCacheTTL"
+            ]
+          },
+          {
+            "path": "backend/books/views.py",
+            "batchIndex": 3,
+            "symbols": [
+              "IsLibrarianOrAdmin",
+              "BookPagination",
+              "_get_user_department",
+              "BookListView",
+              "BookDetailView",
+              "TrackBookView",
+              "InteractionCreateView",
+              "BookDwellTimeView",
+              "RecommendationView",
+              "BookManageView",
+              "SimilarBooksView",
+              "BookCSVImportView",
+              "BookCategoriesView",
+              "BookReviewView"
+            ]
+          },
+          {
+            "path": "backend/borrows/views.py",
+            "batchIndex": 3,
+            "symbols": [
+              "BorrowRequestView",
+              "MyBorrowsView",
+              "PendingBorrowsView",
+              "ApproveBorrowView",
+              "ReturnBookView",
+              "RejectBorrowView",
+              "DepartmentBorrowsView"
+            ]
+          }
+        ],
+        "backend/books/management/commands/import_books.py": [
+          {
+            "path": "backend/books/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Book",
+              "BookInteraction",
+              "SearchHistory",
+              "BookDwellTime",
+              "BookReview"
+            ]
+          }
+        ],
+        "backend/books/management/commands/seed_interactions.py": [
+          {
+            "path": "backend/books/models.py",
+            "batchIndex": 3,
+            "symbols": [
+              "Book",
+              "BookInteraction",
+              "SearchHistory",
+              "BookDwellTime",
+              "BookReview"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": "backend/books/models.py",
+          "language": "python",
+          "sizeLines": 115,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/serializers.py",
+          "language": "python",
+          "sizeLines": 39,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/services/csv_importer.py",
+          "language": "python",
+          "sizeLines": 350,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/services/recommender.py",
+          "language": "python",
+          "sizeLines": 513,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/test_recommender_pytest.py",
+          "language": "python",
+          "sizeLines": 91,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/test_redis_caching_pytest.py",
+          "language": "python",
+          "sizeLines": 506,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/test_reviews_pytest.py",
+          "language": "python",
+          "sizeLines": 157,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/tests.py",
+          "language": "python",
+          "sizeLines": 674,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/urls.py",
+          "language": "python",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/views.py",
+          "language": "python",
+          "sizeLines": 626,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/admin.py",
+          "language": "python",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/models.py",
+          "language": "python",
+          "sizeLines": 36,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/serializers.py",
+          "language": "python",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/test_borrows_pytest.py",
+          "language": "python",
+          "sizeLines": 150,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/tests.py",
+          "language": "python",
+          "sizeLines": 446,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/urls.py",
+          "language": "python",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/views.py",
+          "language": "python",
+          "sizeLines": 282,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/conftest.py",
+          "language": "python",
+          "sizeLines": 179,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/qa_tests/e2e_student_flow.py",
+          "language": "python",
+          "sizeLines": 124,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/qa_tests/librarian_e2e.py",
+          "language": "python",
+          "sizeLines": 136,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "backend/books/models.py": [
+          "backend/accounts/models.py"
+        ],
+        "backend/books/serializers.py": [
+          "backend/books/models.py"
+        ],
+        "backend/books/services/csv_importer.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py"
+        ],
+        "backend/books/services/recommender.py": [
+          "backend/books/cache_utils.py",
+          "backend/books/models.py"
+        ],
+        "backend/books/test_recommender_pytest.py": [
+          "backend/books/models.py",
+          "backend/books/services/recommender.py"
+        ],
+        "backend/books/test_redis_caching_pytest.py": [
+          "backend/accounts/models.py",
+          "backend/books/cache_utils.py",
+          "backend/books/models.py",
+          "backend/borrows/models.py"
+        ],
+        "backend/books/test_reviews_pytest.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py"
+        ],
+        "backend/books/tests.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py"
+        ],
+        "backend/books/urls.py": [
+          "backend/books/views.py"
+        ],
+        "backend/books/views.py": [
+          "backend/accounts/models.py",
+          "backend/books/cache_utils.py",
+          "backend/books/models.py",
+          "backend/books/serializers.py",
+          "backend/books/services/csv_importer.py",
+          "backend/books/services/recommender.py",
+          "backend/borrows/models.py"
+        ],
+        "backend/borrows/admin.py": [
+          "backend/borrows/models.py"
+        ],
+        "backend/borrows/models.py": [
+          "backend/books/models.py"
+        ],
+        "backend/borrows/serializers.py": [
+          "backend/borrows/models.py"
+        ],
+        "backend/borrows/test_borrows_pytest.py": [
+          "backend/accounts/models.py",
+          "backend/borrows/models.py"
+        ],
+        "backend/borrows/tests.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py",
+          "backend/borrows/models.py"
+        ],
+        "backend/borrows/urls.py": [
+          "backend/borrows/views.py"
+        ],
+        "backend/borrows/views.py": [
+          "backend/accounts/models.py",
+          "backend/books/cache_utils.py",
+          "backend/books/models.py",
+          "backend/borrows/models.py",
+          "backend/borrows/serializers.py"
+        ],
+        "backend/conftest.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py",
+          "backend/borrows/models.py"
+        ],
+        "backend/qa_tests/e2e_student_flow.py": [
+          "backend/books/models.py"
+        ],
+        "backend/qa_tests/librarian_e2e.py": [
+          "backend/accounts/models.py",
+          "backend/books/models.py",
+          "backend/borrows/models.py"
+        ]
+      },
+      "neighborMap": {
+        "backend/books/models.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          },
+          {
+            "path": "backend/accounts/management/commands/clear_users.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Command"
+            ]
+          },
+          {
+            "path": "backend/accounts/management/commands/seed_demo.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Command"
+            ]
+          },
+          {
+            "path": "backend/analytics/tests.py",
+            "batchIndex": 2,
+            "symbols": [
+              "AnalyticsDepartmentAuthorizationTests"
+            ]
+          },
+          {
+            "path": "backend/analytics/views.py",
+            "batchIndex": 2,
+            "symbols": [
+              "LibrarianDashboardView",
+              "StudentsListView",
+              "PendingStudentsView",
+              "ApproveStudentView",
+              "RejectStudentView",
+              "StudentRecommendationsView",
+              "StudentBorrowsView",
+              "StudentAnalyticsView"
+            ]
+          },
+          {
+            "path": "backend/books/admin.py",
+            "batchIndex": 2,
+            "symbols": [
+              "BookAdmin",
+              "BookInteractionAdmin",
+              "SearchHistoryAdmin",
+              "BookDwellTimeAdmin"
+            ]
+          },
+          {
+            "path": "backend/books/management/commands/import_books.py",
+            "batchIndex": 2,
+            "symbols": [
+              "to_int",
+              "to_float",
+              "Command"
+            ]
+          },
+          {
+            "path": "backend/books/management/commands/seed_interactions.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Command"
+            ]
+          }
+        ],
+        "backend/books/serializers.py": [
+          {
+            "path": "backend/analytics/views.py",
+            "batchIndex": 2,
+            "symbols": [
+              "LibrarianDashboardView",
+              "StudentsListView",
+              "PendingStudentsView",
+              "ApproveStudentView",
+              "RejectStudentView",
+              "StudentRecommendationsView",
+              "StudentBorrowsView",
+              "StudentAnalyticsView"
+            ]
+          }
+        ],
+        "backend/books/services/csv_importer.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          }
+        ],
+        "backend/books/services/recommender.py": [
+          {
+            "path": "backend/books/cache_utils.py",
+            "batchIndex": 2,
+            "symbols": [
+              "department_list_key",
+              "categories_key",
+              "similar_books_key",
+              "dashboard_key",
+              "recommendation_key",
+              "book_detail_key",
+              "book_list_default_key",
+              "safe_cache_get",
+              "safe_cache_set",
+              "safe_delete_pattern",
+              "invalidate_department_cache",
+              "invalidate_categories_cache",
+              "invalidate_book_cache",
+              "invalidate_catalog_cache",
+              "invalidate_dashboard_cache",
+              "invalidate_user_recommendations"
+            ]
+          },
+          {
+            "path": "backend/analytics/views.py",
+            "batchIndex": 2,
+            "symbols": [
+              "LibrarianDashboardView",
+              "StudentsListView",
+              "PendingStudentsView",
+              "ApproveStudentView",
+              "RejectStudentView",
+              "StudentRecommendationsView",
+              "StudentBorrowsView",
+              "StudentAnalyticsView"
+            ]
+          }
+        ],
+        "backend/books/test_redis_caching_pytest.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          },
+          {
+            "path": "backend/books/cache_utils.py",
+            "batchIndex": 2,
+            "symbols": [
+              "department_list_key",
+              "categories_key",
+              "similar_books_key",
+              "dashboard_key",
+              "recommendation_key",
+              "book_detail_key",
+              "book_list_default_key",
+              "safe_cache_get",
+              "safe_cache_set",
+              "safe_delete_pattern",
+              "invalidate_department_cache",
+              "invalidate_categories_cache",
+              "invalidate_book_cache",
+              "invalidate_catalog_cache",
+              "invalidate_dashboard_cache",
+              "invalidate_user_recommendations"
+            ]
+          }
+        ],
+        "backend/books/test_reviews_pytest.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          }
+        ],
+        "backend/books/tests.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          }
+        ],
+        "backend/books/views.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          },
+          {
+            "path": "backend/books/cache_utils.py",
+            "batchIndex": 2,
+            "symbols": [
+              "department_list_key",
+              "categories_key",
+              "similar_books_key",
+              "dashboard_key",
+              "recommendation_key",
+              "book_detail_key",
+              "book_list_default_key",
+              "safe_cache_get",
+              "safe_cache_set",
+              "safe_delete_pattern",
+              "invalidate_department_cache",
+              "invalidate_categories_cache",
+              "invalidate_book_cache",
+              "invalidate_catalog_cache",
+              "invalidate_dashboard_cache",
+              "invalidate_user_recommendations"
+            ]
+          },
+          {
+            "path": "backend/book_recommondation/urls.py",
+            "batchIndex": 2,
+            "symbols": [
+              "health_check"
+            ]
+          }
+        ],
+        "backend/borrows/models.py": [
+          {
+            "path": "backend/accounts/management/commands/clear_users.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Command"
+            ]
+          },
+          {
+            "path": "backend/accounts/management/commands/seed_demo.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Command"
+            ]
+          },
+          {
+            "path": "backend/analytics/tests.py",
+            "batchIndex": 2,
+            "symbols": [
+              "AnalyticsDepartmentAuthorizationTests"
+            ]
+          },
+          {
+            "path": "backend/analytics/views.py",
+            "batchIndex": 2,
+            "symbols": [
+              "LibrarianDashboardView",
+              "StudentsListView",
+              "PendingStudentsView",
+              "ApproveStudentView",
+              "RejectStudentView",
+              "StudentRecommendationsView",
+              "StudentBorrowsView",
+              "StudentAnalyticsView"
+            ]
+          }
+        ],
+        "backend/borrows/serializers.py": [
+          {
+            "path": "backend/analytics/views.py",
+            "batchIndex": 2,
+            "symbols": [
+              "LibrarianDashboardView",
+              "StudentsListView",
+              "PendingStudentsView",
+              "ApproveStudentView",
+              "RejectStudentView",
+              "StudentRecommendationsView",
+              "StudentBorrowsView",
+              "StudentAnalyticsView"
+            ]
+          }
+        ],
+        "backend/borrows/test_borrows_pytest.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          }
+        ],
+        "backend/borrows/tests.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          }
+        ],
+        "backend/borrows/views.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          },
+          {
+            "path": "backend/books/cache_utils.py",
+            "batchIndex": 2,
+            "symbols": [
+              "department_list_key",
+              "categories_key",
+              "similar_books_key",
+              "dashboard_key",
+              "recommendation_key",
+              "book_detail_key",
+              "book_list_default_key",
+              "safe_cache_get",
+              "safe_cache_set",
+              "safe_delete_pattern",
+              "invalidate_department_cache",
+              "invalidate_categories_cache",
+              "invalidate_book_cache",
+              "invalidate_catalog_cache",
+              "invalidate_dashboard_cache",
+              "invalidate_user_recommendations"
+            ]
+          }
+        ],
+        "backend/conftest.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          }
+        ],
+        "backend/qa_tests/librarian_e2e.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 4,
+      "files": [
+        {
+          "path": "frontend/src/api/authApi.js",
+          "language": "javascript",
+          "sizeLines": 42,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/api/axios.js",
+          "language": "javascript",
+          "sizeLines": 103,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/api/bookApi.js",
+          "language": "javascript",
+          "sizeLines": 39,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/api/borrowApi.js",
+          "language": "javascript",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/api/index.js",
+          "language": "javascript",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/api/recommendationApi.js",
+          "language": "javascript",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/api/reviewApi.js",
+          "language": "javascript",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/api/userApi.js",
+          "language": "javascript",
+          "sizeLines": 75,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/BookCard.jsx",
+          "language": "javascript",
+          "sizeLines": 89,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/BookDetail.jsx",
+          "language": "javascript",
+          "sizeLines": 438,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/ErrorMessage.jsx",
+          "language": "javascript",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/GoogleAuthButton.jsx",
+          "language": "javascript",
+          "sizeLines": 172,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/components/Loading.jsx",
+          "language": "javascript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/context/AuthContextCore.js",
+          "language": "javascript",
+          "sizeLines": 4,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/context/AuthProvider.jsx",
+          "language": "javascript",
+          "sizeLines": 165,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/AccountDetails.jsx",
+          "language": "javascript",
+          "sizeLines": 749,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/Books.jsx",
+          "language": "javascript",
+          "sizeLines": 359,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/Login.jsx",
+          "language": "javascript",
+          "sizeLines": 1394,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/pages/Recommendations.jsx",
+          "language": "javascript",
+          "sizeLines": 249,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/services/api.js",
+          "language": "javascript",
+          "sizeLines": 291,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "frontend/src/api/authApi.js": [
+          "frontend/src/api/axios.js"
+        ],
+        "frontend/src/api/axios.js": [],
+        "frontend/src/api/bookApi.js": [
+          "frontend/src/api/axios.js"
+        ],
+        "frontend/src/api/borrowApi.js": [
+          "frontend/src/api/axios.js"
+        ],
+        "frontend/src/api/index.js": [],
+        "frontend/src/api/recommendationApi.js": [
+          "frontend/src/api/axios.js"
+        ],
+        "frontend/src/api/reviewApi.js": [
+          "frontend/src/api/axios.js"
+        ],
+        "frontend/src/api/userApi.js": [
+          "frontend/src/api/axios.js"
+        ],
+        "frontend/src/components/BookCard.jsx": [
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/components/BookDetail.jsx": [
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/components/ErrorMessage.jsx": [],
+        "frontend/src/components/GoogleAuthButton.jsx": [
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/components/Loading.jsx": [],
+        "frontend/src/context/AuthContextCore.js": [],
+        "frontend/src/context/AuthProvider.jsx": [
+          "frontend/src/context/AuthContextCore.js",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/AccountDetails.jsx": [
+          "frontend/src/components/BookCard.jsx",
+          "frontend/src/components/BookDetail.jsx",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/Books.jsx": [
+          "frontend/src/components/BookCard.jsx",
+          "frontend/src/components/BookDetail.jsx",
+          "frontend/src/components/ErrorMessage.jsx",
+          "frontend/src/components/Footer.jsx",
+          "frontend/src/components/Loading.jsx",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/Login.jsx": [
+          "frontend/src/components/GoogleAuthButton.jsx",
+          "frontend/src/context/useAuth.js",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/pages/Recommendations.jsx": [
+          "frontend/src/components/BookCard.jsx",
+          "frontend/src/components/BookDetail.jsx",
+          "frontend/src/services/api.js"
+        ],
+        "frontend/src/services/api.js": [
+          "frontend/src/api/bookApi.js",
+          "frontend/src/api/borrowApi.js",
+          "frontend/src/api/index.js",
+          "frontend/src/api/recommendationApi.js",
+          "frontend/src/api/userApi.js"
+        ]
+      },
+      "neighborMap": {
+        "frontend/src/context/AuthContextCore.js": [
+          {
+            "path": "frontend/src/context/useAuth.js",
+            "batchIndex": 1,
+            "symbols": [
+              "useAuth"
+            ]
+          }
+        ],
+        "frontend/src/pages/AccountDetails.jsx": [
+          {
+            "path": "frontend/src/App.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "App"
+            ]
+          }
+        ],
+        "frontend/src/pages/Books.jsx": [
+          {
+            "path": "frontend/src/components/Footer.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "Footer"
+            ]
+          },
+          {
+            "path": "frontend/src/App.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "App"
+            ]
+          }
+        ],
+        "frontend/src/pages/Login.jsx": [
+          {
+            "path": "frontend/src/context/useAuth.js",
+            "batchIndex": 1,
+            "symbols": [
+              "useAuth"
+            ]
+          },
+          {
+            "path": "frontend/src/App.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "App"
+            ]
+          }
+        ],
+        "frontend/src/pages/Recommendations.jsx": [
+          {
+            "path": "frontend/src/App.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "App"
+            ]
+          }
+        ],
+        "frontend/src/services/api.js": [
+          {
+            "path": "frontend/src/components/Notifications.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "Notifications"
+            ]
+          },
+          {
+            "path": "frontend/src/components/dashboard/LibrarianDashboard.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "LibrarianDashboard"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/AboutUs.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "AboutUs"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/Gallery.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "Gallery"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/Home.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "Home"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/ManageBooks.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "ManageBooks"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/MyBorrows.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "MyBorrows"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/StudentsList.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "StudentsList"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/admin/AdminBooks.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "AdminBooks"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/admin/AdminDashboard.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "AdminDashboard"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/librarian/LibrarianBorrowing.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "LibrarianBorrowing"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/librarian/LibrarianReports.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "LibrarianReports"
+            ]
+          },
+          {
+            "path": "frontend/src/pages/librarian/LibrarianReturns.jsx",
+            "batchIndex": 1,
+            "symbols": [
+              "LibrarianReturns"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 5,
+      "files": [
+        {
+          "path": "backend/messaging/admin.py",
+          "language": "python",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/models.py",
+          "language": "python",
+          "sizeLines": 44,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/serializers.py",
+          "language": "python",
+          "sizeLines": 51,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/tests.py",
+          "language": "python",
+          "sizeLines": 177,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/urls.py",
+          "language": "python",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/views.py",
+          "language": "python",
+          "sizeLines": 145,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "backend/messaging/admin.py": [
+          "backend/messaging/models.py"
+        ],
+        "backend/messaging/models.py": [],
+        "backend/messaging/serializers.py": [
+          "backend/messaging/models.py"
+        ],
+        "backend/messaging/tests.py": [
+          "backend/accounts/models.py",
+          "backend/messaging/models.py"
+        ],
+        "backend/messaging/urls.py": [
+          "backend/messaging/views.py"
+        ],
+        "backend/messaging/views.py": [
+          "backend/messaging/models.py",
+          "backend/messaging/serializers.py"
+        ]
+      },
+      "neighborMap": {
+        "backend/messaging/tests.py": [
+          {
+            "path": "backend/accounts/models.py",
+            "batchIndex": 2,
+            "symbols": [
+              "Department",
+              "User",
+              "UserProfile",
+              "Notification",
+              "EmailOTP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 6,
+      "files": [
+        {
+          "path": "backend/.dockerignore",
+          "language": "unknown",
+          "sizeLines": 16,
+          "fileCategory": "infra"
+        },
+        {
+          "path": "backend/Dockerfile",
+          "language": "dockerfile",
+          "sizeLines": 23,
+          "fileCategory": "infra"
+        }
+      ],
+      "batchImportData": {
+        "backend/.dockerignore": [],
+        "backend/Dockerfile": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 7,
+      "files": [
+        {
+          "path": "frontend/.dockerignore",
+          "language": "unknown",
+          "sizeLines": 5,
+          "fileCategory": "infra"
+        },
+        {
+          "path": "frontend/Dockerfile",
+          "language": "dockerfile",
+          "sizeLines": 34,
+          "fileCategory": "infra"
+        }
+      ],
+      "batchImportData": {
+        "frontend/.dockerignore": [],
+        "frontend/Dockerfile": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 8,
+      "files": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "language": "yaml",
+          "sizeLines": 222,
+          "fileCategory": "infra"
+        }
+      ],
+      "batchImportData": {
+        ".github/workflows/ci.yml": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 9,
+      "files": [
+        {
+          "path": ".env.example",
+          "language": "config",
+          "sizeLines": 90,
+          "fileCategory": "config"
+        },
+        {
+          "path": "DEPLOYMENT.md",
+          "language": "markdown",
+          "sizeLines": 279,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "PROJECT_RULES.md",
+          "language": "markdown",
+          "sizeLines": 799,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "README.md",
+          "language": "markdown",
+          "sizeLines": 355,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docker-compose.yml",
+          "language": "yaml",
+          "sizeLines": 82,
+          "fileCategory": "infra"
+        },
+        {
+          "path": "pytest.ini",
+          "language": "config",
+          "sizeLines": 13,
+          "fileCategory": "config"
+        },
+        {
+          "path": "render.yaml",
+          "language": "yaml",
+          "sizeLines": 57,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".env.example": [],
+        "DEPLOYMENT.md": [],
+        "PROJECT_RULES.md": [],
+        "README.md": [],
+        "docker-compose.yml": [],
+        "pytest.ini": [],
+        "render.yaml": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 10,
+      "files": [
+        {
+          "path": "backend/.env.example",
+          "language": "config",
+          "sizeLines": 58,
+          "fileCategory": "config"
+        },
+        {
+          "path": "backend/README.md",
+          "language": "markdown",
+          "sizeLines": 197,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "backend/entrypoint.sh",
+          "language": "shell",
+          "sizeLines": 23,
+          "fileCategory": "script"
+        },
+        {
+          "path": "backend/pytest.ini",
+          "language": "config",
+          "sizeLines": 12,
+          "fileCategory": "config"
+        },
+        {
+          "path": "backend/requirements.txt",
+          "language": "txt",
+          "sizeLines": 19,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "backend/.env.example": [],
+        "backend/README.md": [],
+        "backend/entrypoint.sh": [],
+        "backend/pytest.ini": [],
+        "backend/requirements.txt": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 11,
+      "files": [
+        {
+          "path": "frontend/.env.example",
+          "language": "config",
+          "sizeLines": 5,
+          "fileCategory": "config"
+        },
+        {
+          "path": "frontend/README.md",
+          "language": "markdown",
+          "sizeLines": 142,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "frontend/index.html",
+          "language": "html",
+          "sizeLines": 15,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/package.json",
+          "language": "json",
+          "sizeLines": 35,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "frontend/.env.example": [],
+        "frontend/README.md": [],
+        "frontend/index.html": [],
+        "frontend/package.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 12,
+      "files": [
+        {
+          "path": "Demo_csv_files/history.csv",
+          "language": "csv",
+          "sizeLines": 483,
+          "fileCategory": "data"
+        },
+        {
+          "path": "Demo_csv_files/prog_book.csv",
+          "language": "csv",
+          "sizeLines": 435,
+          "fileCategory": "data"
+        },
+        {
+          "path": "backend/accounts/__init__.py",
+          "language": "python",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/apps.py",
+          "language": "python",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/management/__init__.py",
+          "language": "python",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/management/commands/__init__.py",
+          "language": "python",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/management/commands/check_redis.py",
+          "language": "python",
+          "sizeLines": 104,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/management/commands/create_admin.py",
+          "language": "python",
+          "sizeLines": 51,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/migrations/0001_initial.py",
+          "language": "python",
+          "sizeLines": 79,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/migrations/0002_userprofile_approval_status.py",
+          "language": "python",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/migrations/0003_emailotp.py",
+          "language": "python",
+          "sizeLines": 30,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/migrations/0004_alter_userprofile_approval_status.py",
+          "language": "python",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/migrations/0005_notification_notification_type_notification_title.py",
+          "language": "python",
+          "sizeLines": 23,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/migrations/__init__.py",
+          "language": "python",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/services/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/accounts/test_redis_pytest.py",
+          "language": "python",
+          "sizeLines": 61,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/apps.py",
+          "language": "python",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/migrations/0001_initial.py",
+          "language": "python",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/analytics/migrations/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/book_recommondation/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/book_recommondation/asgi.py",
+          "language": "python",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/book_recommondation/settings.py",
+          "language": "python",
+          "sizeLines": 289,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/book_recommondation/wsgi.py",
+          "language": "python",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "Demo_csv_files/history.csv": [],
+        "Demo_csv_files/prog_book.csv": [],
+        "backend/accounts/__init__.py": [],
+        "backend/accounts/apps.py": [],
+        "backend/accounts/management/__init__.py": [],
+        "backend/accounts/management/commands/__init__.py": [],
+        "backend/accounts/management/commands/check_redis.py": [],
+        "backend/accounts/management/commands/create_admin.py": [],
+        "backend/accounts/migrations/0001_initial.py": [],
+        "backend/accounts/migrations/0002_userprofile_approval_status.py": [],
+        "backend/accounts/migrations/0003_emailotp.py": [],
+        "backend/accounts/migrations/0004_alter_userprofile_approval_status.py": [],
+        "backend/accounts/migrations/0005_notification_notification_type_notification_title.py": [],
+        "backend/accounts/migrations/__init__.py": [],
+        "backend/accounts/services/__init__.py": [],
+        "backend/accounts/test_redis_pytest.py": [
+          "backend/accounts/management/commands/check_redis.py"
+        ],
+        "backend/analytics/__init__.py": [],
+        "backend/analytics/apps.py": [],
+        "backend/analytics/migrations/0001_initial.py": [],
+        "backend/analytics/migrations/__init__.py": [],
+        "backend/book_recommondation/__init__.py": [],
+        "backend/book_recommondation/asgi.py": [],
+        "backend/book_recommondation/settings.py": [],
+        "backend/book_recommondation/wsgi.py": [],
+        "backend/books/__init__.py": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 13,
+      "files": [
+        {
+          "path": "backend/books/apps.py",
+          "language": "python",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/management/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/management/commands/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/migrations/0001_initial.py",
+          "language": "python",
+          "sizeLines": 72,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py",
+          "language": "python",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py",
+          "language": "python",
+          "sizeLines": 42,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/migrations/0004_bookreview.py",
+          "language": "python",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/books/migrations/__init__.py",
+          "language": "python",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/apps.py",
+          "language": "python",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/migrations/0001_initial.py",
+          "language": "python",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py",
+          "language": "python",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/borrows/migrations/__init__.py",
+          "language": "python",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/data/books_6k.csv",
+          "language": "csv",
+          "sizeLines": 6811,
+          "fileCategory": "data"
+        },
+        {
+          "path": "backend/data/prog_book.csv",
+          "language": "csv",
+          "sizeLines": 435,
+          "fileCategory": "data"
+        },
+        {
+          "path": "backend/manage.py",
+          "language": "python",
+          "sizeLines": 23,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/apps.py",
+          "language": "python",
+          "sizeLines": 6,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/migrations/0001_initial.py",
+          "language": "python",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/messaging/migrations/__init__.py",
+          "language": "python",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "backend/scripts/enrich_prog_books.py",
+          "language": "python",
+          "sizeLines": 183,
+          "fileCategory": "code"
+        },
+        {
+          "path": "database/ER_DIAGRAM.md",
+          "language": "markdown",
+          "sizeLines": 351,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "frontend/eslint.config.js",
+          "language": "javascript",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/nginx.conf",
+          "language": "conf",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/App.css",
+          "language": "css",
+          "sizeLines": 42,
+          "fileCategory": "markup"
+        }
+      ],
+      "batchImportData": {
+        "backend/books/apps.py": [],
+        "backend/books/management/__init__.py": [],
+        "backend/books/management/commands/__init__.py": [],
+        "backend/books/migrations/0001_initial.py": [],
+        "backend/books/migrations/0002_alter_bookinteraction_interaction_type.py": [],
+        "backend/books/migrations/0003_alter_book_average_rating_alter_book_quantity_and_more.py": [],
+        "backend/books/migrations/0004_bookreview.py": [],
+        "backend/books/migrations/__init__.py": [],
+        "backend/borrows/__init__.py": [],
+        "backend/borrows/apps.py": [],
+        "backend/borrows/migrations/0001_initial.py": [],
+        "backend/borrows/migrations/0002_borrow_unique_active_or_requested_borrow.py": [],
+        "backend/borrows/migrations/__init__.py": [],
+        "backend/data/books_6k.csv": [],
+        "backend/data/prog_book.csv": [],
+        "backend/manage.py": [],
+        "backend/messaging/__init__.py": [],
+        "backend/messaging/apps.py": [],
+        "backend/messaging/migrations/0001_initial.py": [],
+        "backend/messaging/migrations/__init__.py": [],
+        "backend/scripts/enrich_prog_books.py": [],
+        "database/ER_DIAGRAM.md": [],
+        "frontend/eslint.config.js": [],
+        "frontend/nginx.conf": [],
+        "frontend/src/App.css": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 14,
+      "files": [
+        {
+          "path": "frontend/src/components/Layout.jsx",
+          "language": "javascript",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/src/index.css",
+          "language": "css",
+          "sizeLines": 25,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/vite.config.js",
+          "language": "javascript",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "frontend/src/components/Layout.jsx": [],
+        "frontend/src/index.css": [],
+        "frontend/vite.config.js": []
+      },
+      "neighborMap": {
+        "frontend/src/index.css": [
+          {
+            "path": "frontend/src/main.jsx",
+            "batchIndex": 1,
+            "symbols": []
+          }
+        ]
+      }
+    }
+  ]
+}

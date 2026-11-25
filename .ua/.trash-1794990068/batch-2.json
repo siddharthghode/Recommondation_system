@@ -1,0 +1,2950 @@
+{
+  "nodes": [
+    {
+      "id": "file:backend/accounts/admin.py",
+      "type": "file",
+      "name": "admin.py",
+      "filePath": "backend/accounts/admin.py",
+      "summary": "Django admin configuration registering accounts models with customized list displays and filters.",
+      "tags": [
+        "admin",
+        "backoffice",
+        "configuration"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/accounts/admin.py:DepartmentAdmin",
+      "type": "class",
+      "name": "DepartmentAdmin",
+      "filePath": "backend/accounts/admin.py",
+      "lineRange": [
+        9,
+        11
+      ],
+      "summary": "Class `DepartmentAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/admin.py:UserAdmin",
+      "type": "class",
+      "name": "UserAdmin",
+      "filePath": "backend/accounts/admin.py",
+      "lineRange": [
+        18,
+        32
+      ],
+      "summary": "Class `UserAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/admin.py:UserProfileAdmin",
+      "type": "class",
+      "name": "UserProfileAdmin",
+      "filePath": "backend/accounts/admin.py",
+      "lineRange": [
+        39,
+        43
+      ],
+      "summary": "Class `UserProfileAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/admin.py:NotificationAdmin",
+      "type": "class",
+      "name": "NotificationAdmin",
+      "filePath": "backend/accounts/admin.py",
+      "lineRange": [
+        50,
+        54
+      ],
+      "summary": "Class `NotificationAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/admin.py:EmailOTPAdmin",
+      "type": "class",
+      "name": "EmailOTPAdmin",
+      "filePath": "backend/accounts/admin.py",
+      "lineRange": [
+        61,
+        65
+      ],
+      "summary": "Class `EmailOTPAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/management/commands/clear_users.py",
+      "type": "file",
+      "name": "clear_users.py",
+      "filePath": "backend/accounts/management/commands/clear_users.py",
+      "summary": "Project code file providing core functionality and configuration for clear_users.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/management/commands/clear_users.py:Command",
+      "type": "class",
+      "name": "Command",
+      "filePath": "backend/accounts/management/commands/clear_users.py",
+      "lineRange": [
+        15,
+        44
+      ],
+      "summary": "Class `Command` implementing core behaviors and state for `clear_users.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/management/commands/seed_demo.py",
+      "type": "file",
+      "name": "seed_demo.py",
+      "filePath": "backend/accounts/management/commands/seed_demo.py",
+      "summary": "Project code file providing core functionality and configuration for seed_demo.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/accounts/management/commands/seed_demo.py:Command",
+      "type": "class",
+      "name": "Command",
+      "filePath": "backend/accounts/management/commands/seed_demo.py",
+      "lineRange": [
+        30,
+        224
+      ],
+      "summary": "Class `Command` implementing core behaviors and state for `seed_demo.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/accounts/models.py",
+      "type": "file",
+      "name": "models.py",
+      "filePath": "backend/accounts/models.py",
+      "summary": "Django database models defining the schema and relationships for the accounts domain.",
+      "tags": [
+        "data-model",
+        "database",
+        "orm"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/accounts/models.py:Department",
+      "type": "class",
+      "name": "Department",
+      "filePath": "backend/accounts/models.py",
+      "lineRange": [
+        8,
+        12
+      ],
+      "summary": "Class `Department` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/models.py:User",
+      "type": "class",
+      "name": "User",
+      "filePath": "backend/accounts/models.py",
+      "lineRange": [
+        19,
+        46
+      ],
+      "summary": "Class `User` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/models.py:UserProfile",
+      "type": "class",
+      "name": "UserProfile",
+      "filePath": "backend/accounts/models.py",
+      "lineRange": [
+        52,
+        81
+      ],
+      "summary": "Class `UserProfile` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/models.py:Notification",
+      "type": "class",
+      "name": "Notification",
+      "filePath": "backend/accounts/models.py",
+      "lineRange": [
+        87,
+        115
+      ],
+      "summary": "Class `Notification` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/models.py:EmailOTP",
+      "type": "class",
+      "name": "EmailOTP",
+      "filePath": "backend/accounts/models.py",
+      "lineRange": [
+        121,
+        138
+      ],
+      "summary": "Class `EmailOTP` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/serializers.py",
+      "type": "file",
+      "name": "serializers.py",
+      "filePath": "backend/accounts/serializers.py",
+      "summary": "Django REST framework serializers handling validation and data transformation for accounts entities.",
+      "tags": [
+        "serialization",
+        "validation",
+        "api"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/accounts/serializers.py:RequestOTPSerializer",
+      "type": "class",
+      "name": "RequestOTPSerializer",
+      "filePath": "backend/accounts/serializers.py",
+      "lineRange": [
+        12,
+        16
+      ],
+      "summary": "Class `RequestOTPSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/serializers.py:VerifyOTPSerializer",
+      "type": "class",
+      "name": "VerifyOTPSerializer",
+      "filePath": "backend/accounts/serializers.py",
+      "lineRange": [
+        22,
+        33
+      ],
+      "summary": "Class `VerifyOTPSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/serializers.py:RegisterSerializer",
+      "type": "class",
+      "name": "RegisterSerializer",
+      "filePath": "backend/accounts/serializers.py",
+      "lineRange": [
+        39,
+        197
+      ],
+      "summary": "Class `RegisterSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/accounts/serializers.py:LoginSerializer",
+      "type": "class",
+      "name": "LoginSerializer",
+      "filePath": "backend/accounts/serializers.py",
+      "lineRange": [
+        203,
+        224
+      ],
+      "summary": "Class `LoginSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/serializers.py:UserSerializer",
+      "type": "class",
+      "name": "UserSerializer",
+      "filePath": "backend/accounts/serializers.py",
+      "lineRange": [
+        230,
+        268
+      ],
+      "summary": "Class `UserSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/serializers.py:NotificationSerializer",
+      "type": "class",
+      "name": "NotificationSerializer",
+      "filePath": "backend/accounts/serializers.py",
+      "lineRange": [
+        274,
+        278
+      ],
+      "summary": "Class `NotificationSerializer` implementing core behaviors and state for `serializers.py`.",
+      "tags": [
+        "class",
+        "serialization",
+        "validator"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/services/otp.py",
+      "type": "file",
+      "name": "otp.py",
+      "filePath": "backend/accounts/services/otp.py",
+      "summary": "One-time password service generating and validating email verification codes for secure user activation.",
+      "tags": [
+        "service",
+        "business-logic",
+        "algorithm"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/accounts/services/otp.py:generate_otp",
+      "type": "function",
+      "name": "generate_otp",
+      "filePath": "backend/accounts/services/otp.py",
+      "lineRange": [
+        15,
+        17
+      ],
+      "summary": "Function `generate_otp` handling logic within `otp.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/services/otp.py:get_otp",
+      "type": "function",
+      "name": "get_otp",
+      "filePath": "backend/accounts/services/otp.py",
+      "lineRange": [
+        20,
+        30
+      ],
+      "summary": "Function `get_otp` handling logic within `otp.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "api-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/services/otp.py:get_otp_status",
+      "type": "function",
+      "name": "get_otp_status",
+      "filePath": "backend/accounts/services/otp.py",
+      "lineRange": [
+        33,
+        73
+      ],
+      "summary": "Function `get_otp_status` handling logic within `otp.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "api-handler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/accounts/services/otp.py:send_otp_email",
+      "type": "function",
+      "name": "send_otp_email",
+      "filePath": "backend/accounts/services/otp.py",
+      "lineRange": [
+        76,
+        110
+      ],
+      "summary": "Function `send_otp_email` handling logic within `otp.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/accounts/services/otp.py:request_otp",
+      "type": "function",
+      "name": "request_otp",
+      "filePath": "backend/accounts/services/otp.py",
+      "lineRange": [
+        113,
+        161
+      ],
+      "summary": "Function `request_otp` handling logic within `otp.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/accounts/services/otp.py:verify_otp",
+      "type": "function",
+      "name": "verify_otp",
+      "filePath": "backend/accounts/services/otp.py",
+      "lineRange": [
+        164,
+        207
+      ],
+      "summary": "Function `verify_otp` handling logic within `otp.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/accounts/signals.py",
+      "type": "file",
+      "name": "signals.py",
+      "filePath": "backend/accounts/signals.py",
+      "summary": "Django signal receivers automating profile creation and notification dispatches upon user events.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/signals.py:clear_department_cache",
+      "type": "function",
+      "name": "clear_department_cache",
+      "filePath": "backend/accounts/signals.py",
+      "lineRange": [
+        9,
+        11
+      ],
+      "summary": "Function `clear_department_cache` handling logic within `signals.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/accounts/signals.py:create_user_profile",
+      "type": "function",
+      "name": "create_user_profile",
+      "filePath": "backend/accounts/signals.py",
+      "lineRange": [
+        14,
+        28
+      ],
+      "summary": "Function `create_user_profile` handling logic within `signals.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/test_otp_pytest.py",
+      "type": "file",
+      "name": "test_otp_pytest.py",
+      "filePath": "backend/accounts/test_otp_pytest.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for test_otp_pytest.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/accounts/test_otp_pytest.py:TestPytestOTPAuthentication",
+      "type": "class",
+      "name": "TestPytestOTPAuthentication",
+      "filePath": "backend/accounts/test_otp_pytest.py",
+      "lineRange": [
+        13,
+        128
+      ],
+      "summary": "Class `TestPytestOTPAuthentication` implementing core behaviors and state for `test_otp_pytest.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/accounts/tests.py",
+      "type": "file",
+      "name": "tests.py",
+      "filePath": "backend/accounts/tests.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/accounts/tests.py:AccountsDepartmentAuthorizationTests",
+      "type": "class",
+      "name": "AccountsDepartmentAuthorizationTests",
+      "filePath": "backend/accounts/tests.py",
+      "lineRange": [
+        12,
+        347
+      ],
+      "summary": "Class `AccountsDepartmentAuthorizationTests` implementing core behaviors and state for `tests.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/accounts/urls.py",
+      "type": "file",
+      "name": "urls.py",
+      "filePath": "backend/accounts/urls.py",
+      "summary": "URL routing definitions mapping HTTP route paths to DRF views for the accounts module.",
+      "tags": [
+        "routing",
+        "url-dispatch",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/accounts/views.py",
+      "type": "file",
+      "name": "views.py",
+      "filePath": "backend/accounts/views.py",
+      "summary": "DRF API views and ViewSets implementing business endpoints and query handling for accounts.",
+      "tags": [
+        "api-handler",
+        "views",
+        "controller"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/accounts/views.py:DepartmentListView",
+      "type": "class",
+      "name": "DepartmentListView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        27,
+        39
+      ],
+      "summary": "Class `DepartmentListView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:GetOTPView",
+      "type": "class",
+      "name": "GetOTPView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        45,
+        64
+      ],
+      "summary": "Class `GetOTPView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:RequestOTPView",
+      "type": "class",
+      "name": "RequestOTPView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        70,
+        83
+      ],
+      "summary": "Class `RequestOTPView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:VerifyOTPView",
+      "type": "class",
+      "name": "VerifyOTPView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        89,
+        106
+      ],
+      "summary": "Class `VerifyOTPView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:PasswordResetView",
+      "type": "class",
+      "name": "PasswordResetView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        112,
+        149
+      ],
+      "summary": "Class `PasswordResetView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:RegisterView",
+      "type": "class",
+      "name": "RegisterView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        155,
+        178
+      ],
+      "summary": "Class `RegisterView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:LoginView",
+      "type": "class",
+      "name": "LoginView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        184,
+        206
+      ],
+      "summary": "Class `LoginView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:GoogleLoginView",
+      "type": "class",
+      "name": "GoogleLoginView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        212,
+        354
+      ],
+      "summary": "Class `GoogleLoginView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/accounts/views.py:MeView",
+      "type": "class",
+      "name": "MeView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        361,
+        411
+      ],
+      "summary": "Class `MeView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/accounts/views.py:NotificationListView",
+      "type": "class",
+      "name": "NotificationListView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        417,
+        429
+      ],
+      "summary": "Class `NotificationListView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:MarkNotificationReadView",
+      "type": "class",
+      "name": "MarkNotificationReadView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        432,
+        445
+      ],
+      "summary": "Class `MarkNotificationReadView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/accounts/views.py:MarkAllNotificationsReadView",
+      "type": "class",
+      "name": "MarkAllNotificationsReadView",
+      "filePath": "backend/accounts/views.py",
+      "lineRange": [
+        448,
+        453
+      ],
+      "summary": "Class `MarkAllNotificationsReadView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/analytics/admin.py",
+      "type": "file",
+      "name": "admin.py",
+      "filePath": "backend/analytics/admin.py",
+      "summary": "Django admin configuration registering analytics models with customized list displays and filters.",
+      "tags": [
+        "admin",
+        "backoffice",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/analytics/admin.py:AnalyticsSnapshotAdmin",
+      "type": "class",
+      "name": "AnalyticsSnapshotAdmin",
+      "filePath": "backend/analytics/admin.py",
+      "lineRange": [
+        6,
+        12
+      ],
+      "summary": "Class `AnalyticsSnapshotAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/analytics/models.py",
+      "type": "file",
+      "name": "models.py",
+      "filePath": "backend/analytics/models.py",
+      "summary": "Django database models defining the schema and relationships for the analytics domain.",
+      "tags": [
+        "data-model",
+        "database",
+        "orm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/analytics/models.py:AnalyticsSnapshot",
+      "type": "class",
+      "name": "AnalyticsSnapshot",
+      "filePath": "backend/analytics/models.py",
+      "lineRange": [
+        5,
+        40
+      ],
+      "summary": "Class `AnalyticsSnapshot` implementing core behaviors and state for `models.py`.",
+      "tags": [
+        "class",
+        "data-model",
+        "database"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/analytics/tests.py",
+      "type": "file",
+      "name": "tests.py",
+      "filePath": "backend/analytics/tests.py",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for tests.py.",
+      "tags": [
+        "test",
+        "testing",
+        "unit-test"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/analytics/tests.py:AnalyticsDepartmentAuthorizationTests",
+      "type": "class",
+      "name": "AnalyticsDepartmentAuthorizationTests",
+      "filePath": "backend/analytics/tests.py",
+      "lineRange": [
+        9,
+        272
+      ],
+      "summary": "Class `AnalyticsDepartmentAuthorizationTests` implementing core behaviors and state for `tests.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:backend/analytics/urls.py",
+      "type": "file",
+      "name": "urls.py",
+      "filePath": "backend/analytics/urls.py",
+      "summary": "URL routing definitions mapping HTTP route paths to DRF views for the analytics module.",
+      "tags": [
+        "routing",
+        "url-dispatch",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/analytics/views.py",
+      "type": "file",
+      "name": "views.py",
+      "filePath": "backend/analytics/views.py",
+      "summary": "DRF API views and ViewSets implementing business endpoints and query handling for analytics.",
+      "tags": [
+        "api-handler",
+        "views",
+        "controller"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/analytics/views.py:LibrarianDashboardView",
+      "type": "class",
+      "name": "LibrarianDashboardView",
+      "filePath": "backend/analytics/views.py",
+      "lineRange": [
+        27,
+        205
+      ],
+      "summary": "Class `LibrarianDashboardView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:backend/analytics/views.py:StudentsListView",
+      "type": "class",
+      "name": "StudentsListView",
+      "filePath": "backend/analytics/views.py",
+      "lineRange": [
+        208,
+        231
+      ],
+      "summary": "Class `StudentsListView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/analytics/views.py:PendingStudentsView",
+      "type": "class",
+      "name": "PendingStudentsView",
+      "filePath": "backend/analytics/views.py",
+      "lineRange": [
+        234,
+        256
+      ],
+      "summary": "Class `PendingStudentsView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/analytics/views.py:ApproveStudentView",
+      "type": "class",
+      "name": "ApproveStudentView",
+      "filePath": "backend/analytics/views.py",
+      "lineRange": [
+        259,
+        300
+      ],
+      "summary": "Class `ApproveStudentView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/analytics/views.py:RejectStudentView",
+      "type": "class",
+      "name": "RejectStudentView",
+      "filePath": "backend/analytics/views.py",
+      "lineRange": [
+        303,
+        342
+      ],
+      "summary": "Class `RejectStudentView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/analytics/views.py:StudentRecommendationsView",
+      "type": "class",
+      "name": "StudentRecommendationsView",
+      "filePath": "backend/analytics/views.py",
+      "lineRange": [
+        345,
+        380
+      ],
+      "summary": "Class `StudentRecommendationsView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/analytics/views.py:StudentBorrowsView",
+      "type": "class",
+      "name": "StudentBorrowsView",
+      "filePath": "backend/analytics/views.py",
+      "lineRange": [
+        384,
+        399
+      ],
+      "summary": "Class `StudentBorrowsView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/analytics/views.py:StudentAnalyticsView",
+      "type": "class",
+      "name": "StudentAnalyticsView",
+      "filePath": "backend/analytics/views.py",
+      "lineRange": [
+        402,
+        458
+      ],
+      "summary": "Class `StudentAnalyticsView` implementing core behaviors and state for `views.py`.",
+      "tags": [
+        "class",
+        "api-handler",
+        "viewset"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/book_recommondation/urls.py",
+      "type": "file",
+      "name": "urls.py",
+      "filePath": "backend/book_recommondation/urls.py",
+      "summary": "URL routing definitions mapping HTTP route paths to DRF views for the book_recommondation module.",
+      "tags": [
+        "routing",
+        "url-dispatch",
+        "entry-point"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/book_recommondation/urls.py:health_check",
+      "type": "function",
+      "name": "health_check",
+      "filePath": "backend/book_recommondation/urls.py",
+      "lineRange": [
+        8,
+        9
+      ],
+      "summary": "Function `health_check` handling logic within `urls.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/admin.py",
+      "type": "file",
+      "name": "admin.py",
+      "filePath": "backend/books/admin.py",
+      "summary": "Django admin configuration registering books models with customized list displays and filters.",
+      "tags": [
+        "admin",
+        "backoffice",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/admin.py:BookAdmin",
+      "type": "class",
+      "name": "BookAdmin",
+      "filePath": "backend/books/admin.py",
+      "lineRange": [
+        6,
+        11
+      ],
+      "summary": "Class `BookAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/admin.py:BookInteractionAdmin",
+      "type": "class",
+      "name": "BookInteractionAdmin",
+      "filePath": "backend/books/admin.py",
+      "lineRange": [
+        15,
+        20
+      ],
+      "summary": "Class `BookInteractionAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/admin.py:SearchHistoryAdmin",
+      "type": "class",
+      "name": "SearchHistoryAdmin",
+      "filePath": "backend/books/admin.py",
+      "lineRange": [
+        24,
+        29
+      ],
+      "summary": "Class `SearchHistoryAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/admin.py:BookDwellTimeAdmin",
+      "type": "class",
+      "name": "BookDwellTimeAdmin",
+      "filePath": "backend/books/admin.py",
+      "lineRange": [
+        33,
+        37
+      ],
+      "summary": "Class `BookDwellTimeAdmin` implementing core behaviors and state for `admin.py`.",
+      "tags": [
+        "class",
+        "admin",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/books/cache_utils.py",
+      "type": "file",
+      "name": "cache_utils.py",
+      "filePath": "backend/books/cache_utils.py",
+      "summary": "Redis caching helper module implementing cache key generation, TTL management, and invalidation hooks.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:department_list_key",
+      "type": "function",
+      "name": "department_list_key",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        27,
+        29
+      ],
+      "summary": "Function `department_list_key` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:categories_key",
+      "type": "function",
+      "name": "categories_key",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        32,
+        35
+      ],
+      "summary": "Function `categories_key` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:similar_books_key",
+      "type": "function",
+      "name": "similar_books_key",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        38,
+        41
+      ],
+      "summary": "Function `similar_books_key` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:dashboard_key",
+      "type": "function",
+      "name": "dashboard_key",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        44,
+        46
+      ],
+      "summary": "Function `dashboard_key` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:recommendation_key",
+      "type": "function",
+      "name": "recommendation_key",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        49,
+        52
+      ],
+      "summary": "Function `recommendation_key` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:book_detail_key",
+      "type": "function",
+      "name": "book_detail_key",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        55,
+        57
+      ],
+      "summary": "Function `book_detail_key` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:book_list_default_key",
+      "type": "function",
+      "name": "book_list_default_key",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        60,
+        63
+      ],
+      "summary": "Function `book_list_default_key` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:safe_cache_get",
+      "type": "function",
+      "name": "safe_cache_get",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        70,
+        77
+      ],
+      "summary": "Function `safe_cache_get` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:safe_cache_set",
+      "type": "function",
+      "name": "safe_cache_set",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        80,
+        85
+      ],
+      "summary": "Function `safe_cache_set` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:safe_delete_pattern",
+      "type": "function",
+      "name": "safe_delete_pattern",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        88,
+        99
+      ],
+      "summary": "Function `safe_delete_pattern` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:invalidate_department_cache",
+      "type": "function",
+      "name": "invalidate_department_cache",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        106,
+        111
+      ],
+      "summary": "Function `invalidate_department_cache` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:invalidate_categories_cache",
+      "type": "function",
+      "name": "invalidate_categories_cache",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        114,
+        124
+      ],
+      "summary": "Function `invalidate_categories_cache` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:invalidate_book_cache",
+      "type": "function",
+      "name": "invalidate_book_cache",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        127,
+        144
+      ],
+      "summary": "Function `invalidate_book_cache` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:invalidate_catalog_cache",
+      "type": "function",
+      "name": "invalidate_catalog_cache",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        147,
+        156
+      ],
+      "summary": "Function `invalidate_catalog_cache` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:invalidate_dashboard_cache",
+      "type": "function",
+      "name": "invalidate_dashboard_cache",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        159,
+        173
+      ],
+      "summary": "Function `invalidate_dashboard_cache` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/cache_utils.py:invalidate_user_recommendations",
+      "type": "function",
+      "name": "invalidate_user_recommendations",
+      "filePath": "backend/books/cache_utils.py",
+      "lineRange": [
+        176,
+        200
+      ],
+      "summary": "Function `invalidate_user_recommendations` handling logic within `cache_utils.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/books/management/commands/import_books.py",
+      "type": "file",
+      "name": "import_books.py",
+      "filePath": "backend/books/management/commands/import_books.py",
+      "summary": "Project code file providing core functionality and configuration for import_books.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:backend/books/management/commands/import_books.py:to_int",
+      "type": "function",
+      "name": "to_int",
+      "filePath": "backend/books/management/commands/import_books.py",
+      "lineRange": [
+        9,
+        15
+      ],
+      "summary": "Function `to_int` handling logic within `import_books.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:backend/books/management/commands/import_books.py:to_float",
+      "type": "function",
+      "name": "to_float",
+      "filePath": "backend/books/management/commands/import_books.py",
+      "lineRange": [
+        18,
+        24
+      ],
+      "summary": "Function `to_float` handling logic within `import_books.py`.",
+      "tags": [
+        "function",
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:backend/books/management/commands/import_books.py:Command",
+      "type": "class",
+      "name": "Command",
+      "filePath": "backend/books/management/commands/import_books.py",
+      "lineRange": [
+        27,
+        111
+      ],
+      "summary": "Class `Command` implementing core behaviors and state for `import_books.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/books/management/commands/seed_interactions.py",
+      "type": "file",
+      "name": "seed_interactions.py",
+      "filePath": "backend/books/management/commands/seed_interactions.py",
+      "summary": "Project code file providing core functionality and configuration for seed_interactions.py.",
+      "tags": [
+        "utility",
+        "helper",
+        "module"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:backend/books/management/commands/seed_interactions.py:Command",
+      "type": "class",
+      "name": "Command",
+      "filePath": "backend/books/management/commands/seed_interactions.py",
+      "lineRange": [
+        16,
+        81
+      ],
+      "summary": "Class `Command` implementing core behaviors and state for `seed_interactions.py`.",
+      "tags": [
+        "class",
+        "component",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:DepartmentAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:DepartmentAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:UserAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:UserAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:UserProfileAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:UserProfileAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:NotificationAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:NotificationAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:EmailOTPAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "class:backend/accounts/admin.py:EmailOTPAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/admin.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/management/commands/clear_users.py",
+      "target": "class:backend/accounts/management/commands/clear_users.py:Command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/management/commands/clear_users.py",
+      "target": "class:backend/accounts/management/commands/clear_users.py:Command",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/management/commands/clear_users.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/management/commands/clear_users.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/management/commands/clear_users.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/management/commands/seed_demo.py",
+      "target": "class:backend/accounts/management/commands/seed_demo.py:Command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/management/commands/seed_demo.py",
+      "target": "class:backend/accounts/management/commands/seed_demo.py:Command",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/management/commands/seed_demo.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/management/commands/seed_demo.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/management/commands/seed_demo.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:Department",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:Department",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:User",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:User",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:UserProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:UserProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:Notification",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:Notification",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:EmailOTP",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "class:backend/accounts/models.py:EmailOTP",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:RequestOTPSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:RequestOTPSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:VerifyOTPSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:VerifyOTPSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:RegisterSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:RegisterSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:LoginSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:LoginSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:UserSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:UserSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:NotificationSerializer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "class:backend/accounts/serializers.py:NotificationSerializer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/serializers.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:generate_otp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:generate_otp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:get_otp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:get_otp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:get_otp_status",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:get_otp_status",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:send_otp_email",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:send_otp_email",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:request_otp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:request_otp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:verify_otp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "function:backend/accounts/services/otp.py:verify_otp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/signals.py",
+      "target": "function:backend/accounts/signals.py:clear_department_cache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/signals.py",
+      "target": "function:backend/accounts/signals.py:clear_department_cache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/signals.py",
+      "target": "function:backend/accounts/signals.py:create_user_profile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/signals.py",
+      "target": "function:backend/accounts/signals.py:create_user_profile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/signals.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/signals.py",
+      "target": "file:backend/books/cache_utils.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/test_otp_pytest.py",
+      "target": "class:backend/accounts/test_otp_pytest.py:TestPytestOTPAuthentication",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/test_otp_pytest.py",
+      "target": "class:backend/accounts/test_otp_pytest.py:TestPytestOTPAuthentication",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/test_otp_pytest.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/test_otp_pytest.py",
+      "target": "file:backend/accounts/services/otp.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/accounts/test_otp_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "file:backend/accounts/test_otp_pytest.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/accounts/tests.py",
+      "target": "class:backend/accounts/tests.py:AccountsDepartmentAuthorizationTests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/tests.py",
+      "target": "class:backend/accounts/tests.py:AccountsDepartmentAuthorizationTests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/tests.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/tests.py",
+      "target": "file:backend/accounts/services/otp.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/accounts/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/accounts/services/otp.py",
+      "target": "file:backend/accounts/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/accounts/urls.py",
+      "target": "file:backend/accounts/views.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:DepartmentListView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:DepartmentListView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:GetOTPView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:GetOTPView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:RequestOTPView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:RequestOTPView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:VerifyOTPView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:VerifyOTPView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:PasswordResetView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:PasswordResetView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:RegisterView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:RegisterView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:LoginView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:LoginView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:GoogleLoginView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:GoogleLoginView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:MeView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:MeView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:NotificationListView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:NotificationListView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:MarkNotificationReadView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:MarkNotificationReadView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:MarkAllNotificationsReadView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "class:backend/accounts/views.py:MarkAllNotificationsReadView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "file:backend/accounts/serializers.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "file:backend/accounts/services/otp.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/views.py",
+      "target": "file:backend/books/cache_utils.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/admin.py",
+      "target": "class:backend/analytics/admin.py:AnalyticsSnapshotAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/admin.py",
+      "target": "class:backend/analytics/admin.py:AnalyticsSnapshotAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/admin.py",
+      "target": "file:backend/analytics/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/models.py",
+      "target": "class:backend/analytics/models.py:AnalyticsSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/models.py",
+      "target": "class:backend/analytics/models.py:AnalyticsSnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/models.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/tests.py",
+      "target": "class:backend/analytics/tests.py:AnalyticsDepartmentAuthorizationTests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/tests.py",
+      "target": "class:backend/analytics/tests.py:AnalyticsDepartmentAuthorizationTests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/tests.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/tests.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/tests.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/accounts/models.py",
+      "target": "file:backend/analytics/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/books/models.py",
+      "target": "file:backend/analytics/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/borrows/models.py",
+      "target": "file:backend/analytics/tests.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:backend/analytics/urls.py",
+      "target": "file:backend/analytics/views.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:LibrarianDashboardView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:LibrarianDashboardView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:StudentsListView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:StudentsListView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:PendingStudentsView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:PendingStudentsView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:ApproveStudentView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:ApproveStudentView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:RejectStudentView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:RejectStudentView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:StudentRecommendationsView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:StudentRecommendationsView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:StudentBorrowsView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:StudentBorrowsView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:StudentAnalyticsView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "class:backend/analytics/views.py:StudentAnalyticsView",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "file:backend/accounts/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "file:backend/accounts/serializers.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "file:backend/books/cache_utils.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "file:backend/books/serializers.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "file:backend/books/services/recommender.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "file:backend/borrows/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/analytics/views.py",
+      "target": "file:backend/borrows/serializers.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/book_recommondation/urls.py",
+      "target": "function:backend/book_recommondation/urls.py:health_check",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/book_recommondation/urls.py",
+      "target": "function:backend/book_recommondation/urls.py:health_check",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/book_recommondation/urls.py",
+      "target": "file:backend/books/views.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "class:backend/books/admin.py:BookAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "class:backend/books/admin.py:BookAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "class:backend/books/admin.py:BookInteractionAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "class:backend/books/admin.py:BookInteractionAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "class:backend/books/admin.py:SearchHistoryAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "class:backend/books/admin.py:SearchHistoryAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "class:backend/books/admin.py:BookDwellTimeAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "class:backend/books/admin.py:BookDwellTimeAdmin",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/admin.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:department_list_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:department_list_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:categories_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:categories_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:similar_books_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:similar_books_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:dashboard_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:dashboard_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:recommendation_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:recommendation_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:book_detail_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:book_detail_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:book_list_default_key",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:book_list_default_key",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:safe_cache_get",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:safe_cache_get",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:safe_cache_set",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:safe_cache_set",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:safe_delete_pattern",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:safe_delete_pattern",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_department_cache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_department_cache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_categories_cache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_categories_cache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_book_cache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_book_cache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_catalog_cache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_catalog_cache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_dashboard_cache",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_dashboard_cache",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_user_recommendations",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/cache_utils.py",
+      "target": "function:backend/books/cache_utils.py:invalidate_user_recommendations",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/management/commands/import_books.py",
+      "target": "function:backend/books/management/commands/import_books.py:to_int",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/management/commands/import_books.py",
+      "target": "function:backend/books/management/commands/import_books.py:to_int",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/management/commands/import_books.py",
+      "target": "function:backend/books/management/commands/import_books.py:to_float",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/management/commands/import_books.py",
+      "target": "function:backend/books/management/commands/import_books.py:to_float",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/management/commands/import_books.py",
+      "target": "class:backend/books/management/commands/import_books.py:Command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/management/commands/import_books.py",
+      "target": "class:backend/books/management/commands/import_books.py:Command",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/management/commands/import_books.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:backend/books/management/commands/seed_interactions.py",
+      "target": "class:backend/books/management/commands/seed_interactions.py:Command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:backend/books/management/commands/seed_interactions.py",
+      "target": "class:backend/books/management/commands/seed_interactions.py:Command",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:backend/books/management/commands/seed_interactions.py",
+      "target": "file:backend/books/models.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "nodes": [
+    {
+      "id": "config:backend/.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": "backend/.env.example",
+      "summary": "Environment variable template specifying required secret keys, URLs, and credentials.",
+      "tags": [
+        "configuration",
+        "settings",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:backend/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "backend/README.md",
+      "summary": "Comprehensive project documentation detailing features, architecture, installation, and deployment steps.",
+      "tags": [
+        "documentation",
+        "guide",
+        "specification"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:backend/entrypoint.sh",
+      "type": "file",
+      "name": "entrypoint.sh",
+      "filePath": "backend/entrypoint.sh",
+      "summary": "Docker container startup script running database migrations and launching Gunicorn.",
+      "tags": [
+        "script",
+        "automation",
+        "shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:backend/pytest.ini",
+      "type": "config",
+      "name": "pytest.ini",
+      "filePath": "backend/pytest.ini",
+      "summary": "Pytest automated test suite verifying correctness, assertions, and edge cases for pytest.ini.",
+      "tags": [
+        "configuration",
+        "settings",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:backend/requirements.txt",
+      "type": "document",
+      "name": "requirements.txt",
+      "filePath": "backend/requirements.txt",
+      "summary": "Project docs file providing core functionality and configuration for requirements.txt.",
+      "tags": [
+        "documentation",
+        "guide",
+        "specification"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:backend/pytest.ini",
+      "target": "file:backend/conftest.py",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

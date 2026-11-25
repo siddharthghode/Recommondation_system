@@ -1,0 +1,193 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [
+    "frontend/index.html"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "frontend/.env.example",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "definitions": [
+        {
+          "name": "VITE_API_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 2,
+          "endLine": 2
+        },
+        {
+          "name": "VITE_GOOGLE_CLIENT_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 5,
+          "endLine": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "frontend/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 142,
+      "nonEmptyLines": 105,
+      "sections": [
+        {
+          "heading": "Frontend — React + Vite",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "🚀 Quick Setup",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Option 1: Using Docker Compose (Recommended)",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "Option 2: Local Development (Vite Dev Server)",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "🛠️ Available Scripts",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "⚙️ Configuration & Environment",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "Environment Variables (`.env`):",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "🔐 Route Matrix & Access Control",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "👥 Demo Logins",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "🧩 Key Components",
+          "level": 2,
+          "line": 100
+        },
+        {
+          "heading": "📡 API Service Layer (`src/services/api.js`)",
+          "level": 2,
+          "line": 114
+        },
+        {
+          "heading": "🔧 Troubleshooting",
+          "level": 2,
+          "line": 124
+        },
+        {
+          "heading": "1. API requests fail in local development",
+          "level": 3,
+          "line": 126
+        },
+        {
+          "heading": "2. Clearing stale login session",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "3. Reinstalling dependencies",
+          "level": 3,
+          "line": 137
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "frontend/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 35,
+      "nonEmptyLines": 35,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    }
+  ]
+}
