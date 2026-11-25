@@ -2,6 +2,17 @@
 
 Modern, responsive Single Page Application (SPA) built with React 19, Vite, Tailwind CSS 4, Framer Motion, and Recharts for the University Library Management and Recommendation System.
 
+> For full-stack setup instructions and software install links, see the [root README](../README.md).
+
+---
+
+## 📋 Prerequisites
+
+- **Option 1 (Docker)**: [Docker](https://docs.docker.com/get-docker/) + Docker Compose v2 (no local Node.js installation required).
+- **Option 2 (Local Development)**:
+  - **Node.js 22 LTS+** (includes `npm`) — verify with `node --version && npm --version`
+  - **Backend API** running on `http://localhost:8000` (see [backend/README.md](../backend/README.md))
+
 ---
 
 ## 🚀 Quick Setup
@@ -21,8 +32,9 @@ cd frontend
 # 1. Install dependencies
 npm install
 
-# 2. Copy environment template (optional)
-cp .env.example .env
+# 2. Configure environment variables (optional)
+# Note: vite.config.js sets envDir: '../', so Vite reads VITE_* variables
+# from the root .env file (copied from ../.env.example), not frontend/.env.
 
 # 3. Start development server with hot module replacement
 npm run dev
@@ -51,7 +63,7 @@ The frontend connects to the backend API via `src/services/api.js`:
 export const BASE_URL = import.meta.env.VITE_API_URL || "/api";
 ```
 
-### Environment Variables (`.env`):
+### Environment Variables (root `.env`):
 | Variable | Default | Purpose |
 |---|---|---|
 | `VITE_API_URL` | `/api` | Base API URL prefix (proxied to backend in both dev and prod) |

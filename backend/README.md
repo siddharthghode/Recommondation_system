@@ -2,6 +2,18 @@
 
 A high-performance Django REST Framework API powering role-based access control, strict department catalog scoping, student verification workflows, atomic borrow transactions, dwell-time analytics, and machine learning book recommendations.
 
+> For full-stack setup instructions and software install links, see the [root README](../README.md).
+
+---
+
+## 📋 Prerequisites
+
+- **Option 1 (Docker)**: [Docker](https://docs.docker.com/get-docker/) + Docker Compose v2 (no local Python, PostgreSQL, or Redis installation required).
+- **Option 2 (Local Native)**:
+  - **Python 3.11+** (tested on **3.13**)
+  - **PostgreSQL 16** running locally on port `5432`
+  - **Redis 7** running locally on port `6379` (optional if relying on fallback, recommended for caching/sessions)
+
 ---
 
 ## 🚀 Quick Setup
@@ -21,24 +33,29 @@ cd backend
 
 # 1. Create and activate virtual environment
 python3 -m venv bookenv
-source bookenv/bin/activate          # Windows: bookenv\Scripts\activate
+source bookenv/bin/activate          # Windows CMD: bookenv\Scripts\activate.bat | PowerShell: .\bookenv\Scripts\Activate.ps1
 
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Create .env file (optional, defaults are provided)
+# 3. Create .env file (settings.py checks backend/.env first, then root .env)
 cp .env.example .env
 
-# 4. Apply database migrations
+# 4. In .env, switch Docker hostnames to local addresses:
+#    POSTGRES_HOST=localhost
+#    REDIS_URL=redis://127.0.0.1:6379/1
+#    And ensure your local PostgreSQL database (library_recommondation) exists.
+
+# 5. Apply database migrations
 python manage.py migrate
 
-# 5. Import book catalogue (~6.8k books)
+# 6. Import book catalogue (~6.8k books)
 python manage.py import_books        # reads backend/data/books_6k.csv
 
-# 6. Seed demo departments, users, borrow history & ML interactions
+# 7. Seed demo departments, users, borrow history & ML interactions
 python manage.py seed_demo
 
-# 7. Start Django development server
+# 8. Start Django development server
 python manage.py runserver 0.0.0.0:8000
 ```
 
@@ -93,14 +110,14 @@ pytest -q
 
 ## 🔑 Environment Variables
 
-Configure `backend/.env` or root `.env`:
+Configure `backend/.env` or root `.env` (defaults below match `.env.example` and `backend/.env.example`):
 
 | Variable | Default (Local) | Default (Docker) | Description |
 |---|---|---|---|
-| `POSTGRES_DB` | `library_db` | `library_db` | PostgreSQL database name |
-| `POSTGRES_USER` | `library_user` | `library_user` | PostgreSQL username |
-| `POSTGRES_PASSWORD` | `StrongPass@123` | `StrongPass@123` | PostgreSQL password |
-| `POSTGRES_HOST` | `127.0.0.1` | `db` | Database hostname |
+| `POSTGRES_DB` | `library_recommondation` | `library_recommondation` | PostgreSQL database name |
+| `POSTGRES_USER` | `postgres` | `postgres` | PostgreSQL username |
+| `POSTGRES_PASSWORD` | `pass@123` | `pass@123` | PostgreSQL password (local dev default only) |
+| `POSTGRES_HOST` | `localhost` | `db` | Database hostname |
 | `POSTGRES_PORT` | `5432` | `5432` | Database port |
 | `DEBUG` | `True` | `False` | Django debug mode |
 | `DJANGO_SECRET_KEY` | *(dev insecure key)* | *(docker key)* | Cryptographic key (**required in production**) |

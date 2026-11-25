@@ -7,19 +7,46 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://postgresql.org)
 [![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)](https://redis.io)
 [![Docker](https://img.shields.io/badge/Docker-Compose%20v2-2496ED?logo=docker&logoColor=white)](https://docker.com)
-[![Tests](https://img.shields.io/badge/Tests-155%20Passing-success)](file:///home/sidhharth/sppu/git/Recommondation_system/pytest.ini)
+[![Tests](https://img.shields.io/badge/Tests-155%20Passing-success)](./pytest.ini)
 
 A production-ready, full-stack university library management system featuring role-based access control, strict department-level catalog isolation, student registration approval workflows, email OTP verification, Google OAuth, librarian CSV catalog imports, an intelligent machine learning recommendation engine, high-performance Redis in-memory caching, atomic inventory management, in-app notifications, and containerized Docker deployment.
 
 ---
 
+## 📋 Prerequisites (Software to Install First)
+
+Before running the commands below, install **Git** to clone the repository:
+- **Git**: [git-scm.com/downloads](https://git-scm.com/downloads) — verify with `git --version`
+
+Then choose **one** of the two setup paths below based on what you prefer to install:
+
+### Option A: Docker Setup (Recommended — Fewest Installs)
+With Docker, you **do not** need to install Python, Node.js, PostgreSQL, or Redis on your computer. Everything runs inside isolated containers.
+- **Windows / macOS**: Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose v2; keep Docker Desktop running before running commands).
+- **Linux**: Install [Docker Engine](https://docs.docker.com/engine/install/) and the [Docker Compose plugin](https://docs.docker.com/compose/install/).
+
+Verify Docker is ready:
+```bash
+docker --version
+docker compose version
+```
+
+### Option B: Local Native Setup (Without Docker)
+If you want to run the backend, frontend, database, and cache directly on your machine, install:
+- **Python 3.11+** (tested on **3.13**) — [python.org/downloads](https://www.python.org/downloads/) (`python3 --version` or `python --version` on Windows)
+- **Node.js 22 LTS+** (includes `npm`) — [nodejs.org](https://nodejs.org/) (`node --version && npm --version`)
+- **PostgreSQL 16** — [postgresql.org/download](https://www.postgresql.org/download/) (running locally on port `5432`)
+- **Redis 7** — [redis.io/docs/latest/operate/oss_and_stack/install/install-redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/) (running locally on port `6379`; optional if using Django's graceful fallback, recommended for caching/sessions)
+
+---
+
 ## ⚡ Quick Start (Fastest Setup)
 
-Choose between **Docker** (recommended — zero host dependencies) or **Local Development** (Python + Node.js).
+Choose between **Option A (Docker)** or **Option B (Local Native)**.
 
 ### Option A: 🐳 Docker Compose (Recommended)
 
-Run the entire stack (PostgreSQL + Redis 7 + Django API + React Nginx) with Docker:
+Run the entire stack (PostgreSQL 16 + Redis 7 + Django API + React Nginx) with Docker:
 
 ```bash
 # 1. Clone the repository
@@ -27,29 +54,48 @@ git clone https://github.com/siddharthghode/Recommondation_system.git
 cd Recommondation_system
 
 # 2. Create environment file from template
-cp .env.example .env
+cp .env.example .env                # Windows PowerShell: Copy-Item .env.example .env
 
-# 3. Build and launch all containers in background
+# 3. Build and launch all containers in background (first build takes a few minutes)
 docker compose up --build -d
 
-# 4. Populate catalog & demo data (admin, librarian, students, 6.8k books)
+# 4. Populate catalog & demo data (admin, librarian, students, ~6.8k books)
 docker compose exec backend python manage.py import_books
 docker compose exec backend python manage.py seed_demo
 ```
 
+Once finished, open [`http://localhost`](http://localhost) in your browser.
+
 ### Option B: 💻 Local Native Setup (Without Docker)
 
-If you prefer running natively on your host machine:
+#### 1. Clone & Configure Environment
+```bash
+git clone https://github.com/siddharthghode/Recommondation_system.git
+cd Recommondation_system
+cp .env.example .env                # Windows PowerShell: Copy-Item .env.example .env
+```
 
-#### 1. Backend (Django)
+Edit `.env` in the project root so the backend connects to your **local** PostgreSQL and Redis instead of Docker containers:
+```env
+POSTGRES_HOST=localhost
+REDIS_URL=redis://127.0.0.1:6379/1
+```
+
+Make sure PostgreSQL is running locally and create the database (`library_recommondation`) matching your `.env`:
+```bash
+# Example using psql (adjust user/password if your local Postgres differs)
+psql -U postgres -c "CREATE DATABASE library_recommondation;"
+```
+
+#### 2. Backend (Django)
 ```bash
 cd backend
 
 # Create & activate virtual environment
 python3 -m venv bookenv
-source bookenv/bin/activate          # Windows: bookenv\Scripts\activate
+source bookenv/bin/activate          # Windows CMD: bookenv\Scripts\activate.bat | PowerShell: .\bookenv\Scripts\Activate.ps1
 
-# Install dependencies
+# Install Python dependencies
 pip install -r requirements.txt
 
 # Apply database migrations
@@ -63,8 +109,8 @@ python manage.py seed_demo
 python manage.py runserver 0.0.0.0:8000
 ```
 
-#### 2. Frontend (React + Vite)
-In a new terminal:
+#### 3. Frontend (React + Vite)
+In a new terminal from the project root:
 ```bash
 cd frontend
 
@@ -209,9 +255,10 @@ Recommondation_system/
 │   │   ├── components/         # Reusable UI components (Navbar, Modals, BookCards)
 │   │   ├── pages/              # Views (Home, Catalog, Recommendations, ManageBooks)
 │   │   └── services/           # Centralized API service layer (api.js)
-│   ├── Dockerfile              # Multi-stage Node 20 builder -> Nginx Alpine runtime
+│   ├── Dockerfile              # Multi-stage Node 22 builder -> Nginx Alpine runtime
 │   ├── nginx.conf              # Nginx SPA routing and /api/ reverse proxy
 │   ├── package.json            # Frontend dependencies and npm scripts
+│   ├── README.md               # Frontend development guide
 │   └── vite.config.js          # Vite build & proxy configuration
 ├── docker-compose.yml          # Docker Compose definition (db, redis, backend, frontend)
 ├── DEPLOYMENT.md               # Production deployment, SSL/TLS, and server sizing guide
@@ -343,11 +390,19 @@ python manage.py check_redis
 ```
 If Redis is temporarily offline, Django gracefully falls back without crashing because `IGNORE_EXCEPTIONS=True` is enabled in `CACHES['default']['OPTIONS']`.
 
+### 5. Local setup fails with `could not translate host name "db"`
+`POSTGRES_HOST=db` is only for Docker Compose. When running `python manage.py ...` directly on your machine (Option B), set `POSTGRES_HOST=localhost` and `REDIS_URL=redis://127.0.0.1:6379/1` in `.env`, and make sure your local PostgreSQL service is running.
+
+### 6. Docker errors on Windows/macOS or Linux permissions
+- **Windows / macOS**: Make sure **Docker Desktop** is open and shows "Engine running" before running `docker compose` commands.
+- **Linux (`permission denied` on `/var/run/docker.sock`)**: Run with `sudo docker compose ...` or add your user to the `docker` group (`sudo usermod -aG docker $USER` and log out/back in).
+
 ---
 
 ## 🚢 Production Deployment
 
-For complete instructions on deploying to Ubuntu Linux, configuring Nginx with SSL/HTTPS certificates via Let's Encrypt / Certbot, domain configuration, and automated PostgreSQL backups, refer to the [DEPLOYMENT.md](file:///home/sidhharth/sppu/git/Recommondation_system/DEPLOYMENT.md) guide.
+For complete instructions on deploying to Ubuntu Linux, configuring Nginx with SSL/HTTPS certificates via Let's Encrypt / Certbot, domain configuration, and automated PostgreSQL backups, refer to the [DEPLOYMENT.md](./DEPLOYMENT.md) guide.
+For component-specific developer guides, see [backend/README.md](./backend/README.md) and [frontend/README.md](./frontend/README.md).
 
 ---
 

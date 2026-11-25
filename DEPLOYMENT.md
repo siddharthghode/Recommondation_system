@@ -255,20 +255,22 @@ If you wish to terminate SSL at the host level:
 
 ## 8. Database Backups & Maintenance
 
+> Replace `postgres` and `library_recommondation` below if you changed `POSTGRES_USER` or `POSTGRES_DB` in `.env`.
+
 ### 1. Create a Database Backup
 ```bash
-docker compose exec db pg_dump -U library_user -d library_db > backup_$(date +%Y%m%d_%H%M%S).sql
+docker compose exec db pg_dump -U postgres -d library_recommondation > backup_$(date +%Y%m%d_%H%M%S).sql
 ```
 
 ### 2. Restore Database from Backup
 ```bash
-cat backup_20260822_120000.sql | docker compose exec -T db psql -U library_user -d library_db
+cat backup_20260822_120000.sql | docker compose exec -T db psql -U postgres -d library_recommondation
 ```
 
 ### 3. Automated Daily Cron Backup
 Add a cron job (`crontab -e`):
 ```bash
-0 2 * * * cd /root/Recommondation_system && docker compose exec db pg_dump -U library_user -d library_db > /root/backups/db_$(date +\%F).sql 2>&1
+0 2 * * * cd /root/Recommondation_system && docker compose exec db pg_dump -U postgres -d library_recommondation > /root/backups/db_$(date +\%F).sql 2>&1
 ```
 
 ---
